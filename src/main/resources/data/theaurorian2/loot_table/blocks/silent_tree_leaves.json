@@ -1,0 +1,136 @@
+﻿{
+    "pools":  [
+                  {
+                      "bonus_rolls":  0,
+                      "rolls":  1,
+                      "entries":  [
+                                      {
+                                          "type":  "minecraft:alternatives",
+                                          "children":  [
+                                                           {
+                                                               "conditions":  [
+                                                                                  {
+                                                                                      "condition":  "minecraft:any_of",
+                                                                                      "terms":  [
+                                                                                                    {
+                                                                                                        "condition":  "minecraft:match_tool",
+                                                                                                        "predicate":  {
+                                                                                                                          "items":  "minecraft:shears"
+                                                                                                                      }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "condition":  "minecraft:match_tool",
+                                                                                                        "predicate":  {
+                                                                                                                          "predicates":  {
+                                                                                                                                             "minecraft:enchantments":  [
+                                                                                                                                                                            {
+                                                                                                                                                                                "enchantments":  "minecraft:silk_touch",
+                                                                                                                                                                                "levels":  {
+                                                                                                                                                                                               "min":  1
+                                                                                                                                                                                           }
+                                                                                                                                                                            }
+                                                                                                                                                                        ]
+                                                                                                                                         }
+                                                                                                                      }
+                                                                                                    }
+                                                                                                ]
+                                                                                  }
+                                                                              ],
+                                                               "name":  "theaurorian2:silent_tree_leaves",
+                                                               "type":  "minecraft:item"
+                                                           },
+                                                           {
+                                                               "conditions":  [
+                                                                                  {
+                                                                                      "condition":  "minecraft:survives_explosion"
+                                                                                  },
+                                                                                  {
+                                                                                      "chances":  [
+                                                                                                      0.05,
+                                                                                                      0.0625,
+                                                                                                      0.083333336,
+                                                                                                      0.1
+                                                                                                  ],
+                                                                                      "condition":  "minecraft:table_bonus",
+                                                                                      "enchantment":  "minecraft:fortune"
+                                                                                  }
+                                                                              ],
+                                                               "name":  "theaurorian2:silent_tree_sapling",
+                                                               "type":  "minecraft:item"
+                                                           }
+                                                       ]
+                                      }
+                                  ]
+                  },
+                  {
+                      "entries":  [
+                                      {
+                                          "conditions":  [
+                                                             {
+                                                                 "chances":  [
+                                                                                 0.02,
+                                                                                 0.022222223,
+                                                                                 0.025,
+                                                                                 0.033333335,
+                                                                                 0.1
+                                                                             ],
+                                                                 "condition":  "minecraft:table_bonus",
+                                                                 "enchantment":  "minecraft:fortune"
+                                                             }
+                                                         ],
+                                          "name":  "minecraft:stick",
+                                          "functions":  [
+                                                            {
+                                                                "function":  "minecraft:set_count",
+                                                                "add":  false,
+                                                                "count":  {
+                                                                              "min":  1,
+                                                                              "type":  "minecraft:uniform",
+                                                                              "max":  2
+                                                                          }
+                                                            },
+                                                            {
+                                                                "function":  "minecraft:explosion_decay"
+                                                            }
+                                                        ],
+                                          "type":  "minecraft:item"
+                                      }
+                                  ],
+                      "bonus_rolls":  0,
+                      "rolls":  1,
+                      "conditions":  [
+                                         {
+                                             "condition":  "minecraft:inverted",
+                                             "term":  {
+                                                          "condition":  "minecraft:any_of",
+                                                          "terms":  [
+                                                                        {
+                                                                            "condition":  "minecraft:match_tool",
+                                                                            "predicate":  {
+                                                                                              "items":  "minecraft:shears"
+                                                                                          }
+                                                                        },
+                                                                        {
+                                                                            "condition":  "minecraft:match_tool",
+                                                                            "predicate":  {
+                                                                                              "predicates":  {
+                                                                                                                 "minecraft:enchantments":  [
+                                                                                                                                                {
+                                                                                                                                                    "enchantments":  "minecraft:silk_touch",
+                                                                                                                                                    "levels":  {
+                                                                                                                                                                   "min":  1
+                                                                                                                                                               }
+                                                                                                                                                }
+                                                                                                                                            ]
+                                                                                                             }
+                                                                                          }
+                                                                        }
+                                                                    ]
+                                                      }
+                                         }
+                                     ]
+                  }
+              ],
+    "type":  "minecraft:block",
+    "random_sequence":  "theaurorian2:blocks/silent_tree_leaves"
+}

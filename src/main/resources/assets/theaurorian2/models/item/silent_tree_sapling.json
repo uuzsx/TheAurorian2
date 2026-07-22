@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "theaurorian2:block/silent_tree_sapling"
+                 },
+    "parent":  "minecraft:item/generated"
+}

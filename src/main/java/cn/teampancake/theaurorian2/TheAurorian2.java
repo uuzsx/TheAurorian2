@@ -3,6 +3,8 @@ package cn.teampancake.theaurorian2;
 import com.mojang.logging.LogUtils;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModCreativeTabs;
+import cn.teampancake.theaurorian2.common.registry.ModFeatures;
+import cn.teampancake.theaurorian2.common.registry.ModParticles;
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -17,6 +19,8 @@ public final class TheAurorian2 {
 
     public TheAurorian2(IEventBus modEventBus, ModContainer modContainer) {
         ModBlocks.register(modEventBus);
+        ModFeatures.register(modEventBus);
+        ModParticles.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         LOGGER.info("Initializing The Aurorian 2");
     }

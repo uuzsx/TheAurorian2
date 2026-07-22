@@ -1,11 +1,102 @@
-{
-  "type": "minecraft:overworld",
-  "generator": {
-    "type": "minecraft:noise",
-    "biome_source": {
-      "type": "minecraft:fixed",
-      "biome": "theaurorian2:aurorian_plains"
-    },
-    "settings": "theaurorian2:the_aurorian"
-  }
+﻿{
+    "generator":  {
+                      "biome_source":  {
+                                           "biomes":  [
+                                                          {
+                                                              "parameters":  {
+                                                                                 "weirdness":  [
+                                                                                                   -2,
+                                                                                                   2
+                                                                                               ],
+                                                                                 "depth":  [
+                                                                                               -2,
+                                                                                               2
+                                                                                           ],
+                                                                                 "temperature":  [
+                                                                                                     -2,
+                                                                                                     2
+                                                                                                 ],
+                                                                                 "humidity":  [
+                                                                                                  -2,
+                                                                                                  0.2
+                                                                                              ],
+                                                                                 "continentalness":  [
+                                                                                                         -2,
+                                                                                                         2
+                                                                                                     ],
+                                                                                 "erosion":  [
+                                                                                                 -2,
+                                                                                                 2
+                                                                                             ],
+                                                                                 "offset":  0
+                                                                             },
+                                                              "biome":  "theaurorian2:aurorian_plains"
+                                                          },
+                                                          {
+                                                              "parameters":  {
+                                                                                 "weirdness":  [
+                                                                                                   -2,
+                                                                                                   0
+                                                                                               ],
+                                                                                 "depth":  [
+                                                                                               -2,
+                                                                                               2
+                                                                                           ],
+                                                                                 "temperature":  [
+                                                                                                     -2,
+                                                                                                     2
+                                                                                                 ],
+                                                                                 "humidity":  [
+                                                                                                  0.2,
+                                                                                                  2
+                                                                                              ],
+                                                                                 "continentalness":  [
+                                                                                                         -2,
+                                                                                                         2
+                                                                                                     ],
+                                                                                 "erosion":  [
+                                                                                                 -2,
+                                                                                                 2
+                                                                                             ],
+                                                                                 "offset":  0
+                                                                             },
+                                                              "biome":  "theaurorian2:silent_wood_forest"
+                                                          },
+                                                          {
+                                                              "parameters":  {
+                                                                                 "weirdness":  [
+                                                                                                   0,
+                                                                                                   2
+                                                                                               ],
+                                                                                 "depth":  [
+                                                                                               -2,
+                                                                                               2
+                                                                                           ],
+                                                                                 "temperature":  [
+                                                                                                     -2,
+                                                                                                     2
+                                                                                                 ],
+                                                                                 "humidity":  [
+                                                                                                  0.2,
+                                                                                                  2
+                                                                                              ],
+                                                                                 "continentalness":  [
+                                                                                                         -2,
+                                                                                                         2
+                                                                                                     ],
+                                                                                 "erosion":  [
+                                                                                                 -2,
+                                                                                                 2
+                                                                                             ],
+                                                                                 "offset":  0
+                                                                             },
+                                                              "biome":  "theaurorian2:curtain_tree_forest"
+                                                          }
+                                                      ],
+                                           "type":  "minecraft:multi_noise"
+                                       },
+                      "type":  "minecraft:noise",
+                      "settings":  "theaurorian2:the_aurorian"
+                  },
+    "type":  "minecraft:overworld"
 }

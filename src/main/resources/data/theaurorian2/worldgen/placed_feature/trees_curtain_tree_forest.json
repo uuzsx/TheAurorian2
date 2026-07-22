@@ -1,0 +1,47 @@
+﻿{
+    "feature":  "theaurorian2:trees_curtain_tree_forest",
+    "placement":  [
+                      {
+                          "count":  {
+                                        "distribution":  [
+                                                             {
+                                                                 "weight":  9,
+                                                                 "data":  2
+                                                             },
+                                                             {
+                                                                 "weight":  1,
+                                                                 "data":  3
+                                                             }
+                                                         ],
+                                        "type":  "minecraft:weighted_list"
+                                    },
+                          "type":  "minecraft:count"
+                      },
+                      {
+                          "type":  "minecraft:in_square"
+                      },
+                      {
+                          "type":  "minecraft:surface_water_depth_filter",
+                          "max_water_depth":  0
+                      },
+                      {
+                          "type":  "minecraft:heightmap",
+                          "heightmap":  "OCEAN_FLOOR"
+                      },
+                      {
+                          "type":  "minecraft:biome"
+                      },
+                      {
+                          "predicate":  {
+                                            "state":  {
+                                                          "Properties":  {
+                                                                             "stage":  "0"
+                                                                         },
+                                                          "Name":  "theaurorian2:curtain_tree_sapling"
+                                                      },
+                                            "type":  "minecraft:would_survive"
+                                        },
+                          "type":  "minecraft:block_predicate_filter"
+                      }
+                  ]
+}

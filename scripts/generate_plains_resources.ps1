@@ -62,17 +62,19 @@ function State($name, $weight, $properties=$null) {
 }
 $grassProvider=@{type='minecraft:weighted_state_provider';entries=@((State 'aurorian_grass' 31),(State 'aurorian_grass_light' 1))}
 $tallGrassProvider=@{type='minecraft:simple_state_provider';state=@{Name='theaurorian2:tall_aurorian_grass';Properties=@{half='lower'}}}
+# Both noise branches yield 50% moon frost flowers and 1/6 for each other flower.
 $flowerProvider=@{
     type='minecraft:noise_threshold_provider'
-    default_state=@{Name='theaurorian2:petunia_plant'}
-    high_chance=0.33333334
+    default_state=@{Name='theaurorian2:moon_frost_flower'}
+    high_chance=0.5
     high_states=@(
         @{Name='theaurorian2:nebula_blossom_cluster'},
-        @{Name='theaurorian2:moon_frost_flower'},
         @{Name='theaurorian2:void_candle_flower'},
         @{Name='theaurorian2:petunia_plant'}
     )
     low_states=@(
+        @{Name='theaurorian2:moon_frost_flower'},
+        @{Name='theaurorian2:moon_frost_flower'},
         @{Name='theaurorian2:moon_frost_flower'},
         @{Name='theaurorian2:void_candle_flower'},
         @{Name='theaurorian2:nebula_blossom_cluster'},

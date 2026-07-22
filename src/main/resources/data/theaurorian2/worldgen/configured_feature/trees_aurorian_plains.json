@@ -1,0 +1,22 @@
+﻿{
+    "config":  {
+                   "features":  [
+                                    {
+                                        "feature":  {
+                                                        "feature":  "theaurorian2:curtain_tree",
+                                                        "placement":  [
+
+                                                                      ]
+                                                    },
+                                        "chance":  0.5
+                                    }
+                                ],
+                   "default":  {
+                                   "feature":  "theaurorian2:silent_tree",
+                                   "placement":  [
+
+                                                 ]
+                               }
+               },
+    "type":  "minecraft:random_selector"
+}

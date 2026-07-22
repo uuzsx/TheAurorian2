@@ -1,0 +1,46 @@
+﻿{
+    "config":  {
+                   "to_place":  {
+                                    "entries":  [
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "facing":  "north"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:silent_wood_stick"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "facing":  "east"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:silent_wood_stick"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "facing":  "south"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:silent_wood_stick"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "facing":  "west"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:silent_wood_stick"
+                                                                 }
+                                                    }
+                                                ],
+                                    "type":  "minecraft:weighted_state_provider"
+                                }
+               },
+    "type":  "minecraft:simple_block"
+}

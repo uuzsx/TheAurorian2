@@ -1,0 +1,170 @@
+﻿{
+    "config":  {
+                   "to_place":  {
+                                    "entries":  [
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "0",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "1",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "2",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "3",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "4",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "5",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "6",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "7",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "8",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "9",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "10",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "11",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "12",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "13",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "14",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    },
+                                                    {
+                                                        "weight":  1,
+                                                        "data":  {
+                                                                     "Properties":  {
+                                                                                        "level":  "15",
+                                                                                        "half":  "lower"
+                                                                                    },
+                                                                     "Name":  "theaurorian2:tall_wick_grass"
+                                                                 }
+                                                    }
+                                                ],
+                                    "type":  "minecraft:weighted_state_provider"
+                                }
+               },
+    "type":  "minecraft:simple_block"
+}

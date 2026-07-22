@@ -2,9 +2,14 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.block.AurorianGrassBlock;
+import cn.teampancake.theaurorian2.common.block.BlueberryBushBlock;
+import cn.teampancake.theaurorian2.common.block.GroundBranchBlock;
+import cn.teampancake.theaurorian2.common.block.LogMushroomBlock;
+import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.food.Foods;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -14,8 +19,11 @@ import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.RedStoneOreBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SandBlock;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.TallGrassBlock;
+import net.minecraft.world.level.block.TintedParticleLeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -53,6 +61,38 @@ public final class ModBlocks {
     public static final DeferredBlock<BushBlock> NEBULA_BLOSSOM_CLUSTER = plant("nebula_blossom_cluster");
     public static final DeferredBlock<BushBlock> MOON_FROST_FLOWER = plant("moon_frost_flower");
     public static final DeferredBlock<BushBlock> VOID_CANDLE_FLOWER = plant("void_candle_flower");
+    public static final DeferredBlock<TallWickGrassBlock> TALL_WICK_GRASS = BLOCKS.registerBlock(
+            "tall_wick_grass", TallWickGrassBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SUNFLOWER)
+                    .lightLevel(state -> state.getValue(TallWickGrassBlock.LEVEL)));
+    public static final DeferredBlock<LogMushroomBlock> INDIGO_MUSHROOM = BLOCKS.registerBlock(
+            "indigo_mushroom", LogMushroomBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM));
+    public static final DeferredBlock<BlueberryBushBlock> BLUEBERRY_BUSH = BLOCKS.registerBlock(
+            "blueberry_bush", BlueberryBushBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<GroundBranchBlock> SILENT_WOOD_STICK = BLOCKS.registerBlock(
+            "silent_wood_stick", GroundBranchBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DEAD_BUSH).noOcclusion());
+
+    public static final DeferredBlock<RotatedPillarBlock> SILENT_TREE_LOG = BLOCKS.registerBlock(
+            "silent_tree_log", RotatedPillarBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG));
+    public static final DeferredBlock<TintedParticleLeavesBlock> SILENT_TREE_LEAVES = BLOCKS.registerBlock(
+            "silent_tree_leaves", properties -> new TintedParticleLeavesBlock(0.01F, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES));
+    public static final DeferredBlock<SaplingBlock> SILENT_TREE_SAPLING = BLOCKS.registerBlock(
+            "silent_tree_sapling", properties -> new SaplingBlock(ModTreeGrowers.SILENT_TREE, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<RotatedPillarBlock> CURTAIN_TREE_LOG = BLOCKS.registerBlock(
+            "curtain_tree_log", RotatedPillarBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LOG));
+    public static final DeferredBlock<TintedParticleLeavesBlock> CURTAIN_TREE_LEAVES = BLOCKS.registerBlock(
+            "curtain_tree_leaves", properties -> new TintedParticleLeavesBlock(0.01F, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LEAVES));
+    public static final DeferredBlock<SaplingBlock> CURTAIN_TREE_SAPLING = BLOCKS.registerBlock(
+            "curtain_tree_sapling", properties -> new SaplingBlock(ModTreeGrowers.CURTAIN_TREE, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_SAPLING));
 
     public static final DeferredBlock<DropExperienceBlock> AURORIAN_COAL_ORE = ore("aurorian_coal_ore", Blocks.COAL_ORE, UniformInt.of(0, 2));
     public static final DeferredBlock<DropExperienceBlock> AURORIAN_IRON_ORE = ore("aurorian_iron_ore", Blocks.IRON_ORE, ConstantInt.ZERO);
@@ -85,11 +125,16 @@ public final class ModBlocks {
     public static final DeferredItem<Item> RAW_MOONSTONE = ITEMS.registerSimpleItem("raw_moonstone");
     public static final DeferredItem<Item> RAW_CERULEAN = ITEMS.registerSimpleItem("raw_cerulean");
     public static final DeferredItem<Item> CRYSTAL = ITEMS.registerSimpleItem("crystal");
+    public static final DeferredItem<BlockItem> BLUEBERRY = ITEMS.registerItem(
+            "blueberry",
+            properties -> new BlockItem(
+                    BLUEBERRY_BUSH.get(), properties.useItemDescriptionPrefix().food(Foods.SWEET_BERRIES)));
 
     static {
         BLOCKS.getEntries().stream()
                 .filter(block -> block != AURORIAN_STONE && block != AURORIAN_EROSIVE
-                        && block != AURORIAN_DIRT && block != AURORIAN_GRASS_BLOCK && block != MOON_SAND_RIVER)
+                        && block != AURORIAN_DIRT && block != AURORIAN_GRASS_BLOCK
+                        && block != MOON_SAND_RIVER && block != BLUEBERRY_BUSH)
                 .forEach(block -> ITEMS.registerSimpleBlockItem(block));
     }
 

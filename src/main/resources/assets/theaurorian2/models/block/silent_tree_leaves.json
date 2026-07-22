@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "all":  "theaurorian2:block/silent_tree_leaves"
+                 },
+    "parent":  "minecraft:block/leaves"
+}

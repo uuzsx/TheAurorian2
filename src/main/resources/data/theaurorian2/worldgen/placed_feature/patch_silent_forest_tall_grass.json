@@ -1,0 +1,51 @@
+﻿{
+    "feature":  "theaurorian2:patch_tall_aurorian_grass",
+    "placement":  [
+                      {
+                          "noise_level":  -0.8,
+                          "above_noise":  7,
+                          "type":  "minecraft:noise_threshold_count",
+                          "below_noise":  0
+                      },
+                      {
+                          "type":  "minecraft:rarity_filter",
+                          "chance":  32
+                      },
+                      {
+                          "type":  "minecraft:in_square"
+                      },
+                      {
+                          "type":  "minecraft:heightmap",
+                          "heightmap":  "MOTION_BLOCKING"
+                      },
+                      {
+                          "type":  "minecraft:biome"
+                      },
+                      {
+                          "count":  48,
+                          "type":  "minecraft:count"
+                      },
+                      {
+                          "xz_spread":  {
+                                            "plateau":  0,
+                                            "min":  -7,
+                                            "type":  "minecraft:trapezoid",
+                                            "max":  7
+                                        },
+                          "type":  "minecraft:random_offset",
+                          "y_spread":  {
+                                           "plateau":  0,
+                                           "min":  -3,
+                                           "type":  "minecraft:trapezoid",
+                                           "max":  3
+                                       }
+                      },
+                      {
+                          "predicate":  {
+                                            "tag":  "minecraft:air",
+                                            "type":  "minecraft:matching_block_tag"
+                                        },
+                          "type":  "minecraft:block_predicate_filter"
+                      }
+                  ]
+}

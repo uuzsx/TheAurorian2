@@ -7,6 +7,12 @@
                                                            "Name":  "theaurorian2:moon_frost_flower"
                                                        },
                                                        {
+                                                           "Name":  "theaurorian2:moon_frost_flower"
+                                                       },
+                                                       {
+                                                           "Name":  "theaurorian2:moon_frost_flower"
+                                                       },
+                                                       {
                                                            "Name":  "theaurorian2:void_candle_flower"
                                                        },
                                                        {
@@ -17,10 +23,10 @@
                                                        }
                                                    ],
                                     "type":  "minecraft:noise_threshold_provider",
-                                    "high_chance":  0.33333334,
+                                    "high_chance":  0.5,
                                     "scale":  0.005,
                                     "default_state":  {
-                                                          "Name":  "theaurorian2:petunia_plant"
+                                                          "Name":  "theaurorian2:moon_frost_flower"
                                                       },
                                     "noise":  {
                                                   "amplitudes":  [
@@ -32,9 +38,6 @@
                                     "high_states":  [
                                                         {
                                                             "Name":  "theaurorian2:nebula_blossom_cluster"
-                                                        },
-                                                        {
-                                                            "Name":  "theaurorian2:moon_frost_flower"
                                                         },
                                                         {
                                                             "Name":  "theaurorian2:void_candle_flower"

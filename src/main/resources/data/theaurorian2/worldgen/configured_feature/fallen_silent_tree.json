@@ -1,0 +1,37 @@
+﻿{
+    "config":  {
+                   "stump_decorators":  [
+
+                                        ],
+                   "log_length":  {
+                                      "min_inclusive":  4,
+                                      "type":  "minecraft:uniform",
+                                      "max_inclusive":  7
+                                  },
+                   "log_decorators":  [
+                                          {
+                                              "block_provider":  {
+                                                                     "state":  {
+                                                                                   "Name":  "theaurorian2:indigo_mushroom"
+                                                                               },
+                                                                     "type":  "minecraft:simple_state_provider"
+                                                                 },
+                                              "directions":  [
+                                                                 "up"
+                                                             ],
+                                              "probability":  0.1,
+                                              "type":  "minecraft:attached_to_logs"
+                                          }
+                                      ],
+                   "trunk_provider":  {
+                                          "state":  {
+                                                        "Properties":  {
+                                                                           "axis":  "y"
+                                                                       },
+                                                        "Name":  "theaurorian2:silent_tree_log"
+                                                    },
+                                          "type":  "minecraft:simple_state_provider"
+                                      }
+               },
+    "type":  "theaurorian2:fallen_log"
+}
