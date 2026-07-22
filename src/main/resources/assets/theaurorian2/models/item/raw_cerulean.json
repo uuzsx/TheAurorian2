@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "theaurorian2:item/raw_cerulean"
+                 },
+    "parent":  "minecraft:item/generated"
+}

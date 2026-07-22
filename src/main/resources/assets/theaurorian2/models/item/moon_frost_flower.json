@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "theaurorian2:block/moon_frost_flower"
+                 },
+    "parent":  "minecraft:item/generated"
+}

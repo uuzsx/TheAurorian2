@@ -1,0 +1,15 @@
+﻿{
+    "replace":  false,
+    "values":  [
+                   "theaurorian2:aurorian_iron_ore",
+                   "theaurorian2:aurorian_copper_ore",
+                   "theaurorian2:aurorian_lapis_ore",
+                   "theaurorian2:moonstone_ore",
+                   "theaurorian2:cerulean_ore",
+                   "theaurorian2:erosive_aurorian_iron_ore",
+                   "theaurorian2:erosive_aurorian_copper_ore",
+                   "theaurorian2:erosive_aurorian_lapis_ore",
+                   "theaurorian2:erosive_moonstone_ore",
+                   "theaurorian2:erosive_cerulean_ore"
+               ]
+}

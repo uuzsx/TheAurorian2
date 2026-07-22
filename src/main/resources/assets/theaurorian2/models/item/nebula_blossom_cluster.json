@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "theaurorian2:block/nebula_blossom_cluster"
+                 },
+    "parent":  "minecraft:item/generated"
+}

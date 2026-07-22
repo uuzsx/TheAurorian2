@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "all":  "theaurorian2:block/aurorian_lapis_ore"
+                 },
+    "parent":  "minecraft:block/cube_all"
+}

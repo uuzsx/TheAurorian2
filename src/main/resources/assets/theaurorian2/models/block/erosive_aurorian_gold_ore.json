@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "all":  "theaurorian2:block/erosive_aurorian_gold_ore"
+                 },
+    "parent":  "minecraft:block/cube_all"
+}

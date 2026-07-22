@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "theaurorian2:item/crystal"
+                 },
+    "parent":  "minecraft:item/generated"
+}

@@ -1,0 +1,27 @@
+﻿{
+    "feature":  "theaurorian2:ore_lapis",
+    "placement":  [
+                      {
+                          "count":  2,
+                          "type":  "minecraft:count"
+                      },
+                      {
+                          "type":  "minecraft:in_square"
+                      },
+                      {
+                          "height":  {
+                                         "min_inclusive":  {
+                                                               "absolute":  -32
+                                                           },
+                                         "type":  "minecraft:trapezoid",
+                                         "max_inclusive":  {
+                                                               "absolute":  32
+                                                           }
+                                     },
+                          "type":  "minecraft:height_range"
+                      },
+                      {
+                          "type":  "minecraft:biome"
+                      }
+                  ]
+}

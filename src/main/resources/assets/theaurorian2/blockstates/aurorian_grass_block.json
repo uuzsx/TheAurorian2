@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "snowy=false": { "model": "theaurorian2:block/aurorian_grass_block" },
+    "snowy=true": { "model": "theaurorian2:block/aurorian_grass_block" }
+  }
+}

@@ -1,0 +1,15 @@
+﻿{
+    "replace":  false,
+    "values":  [
+                   "theaurorian2:aurorian_gold_ore",
+                   "theaurorian2:aurorian_redstone_ore",
+                   "theaurorian2:aurorian_diamond_ore",
+                   "theaurorian2:aurorian_emerald_ore",
+                   "theaurorian2:geode_ore",
+                   "theaurorian2:erosive_aurorian_gold_ore",
+                   "theaurorian2:erosive_aurorian_redstone_ore",
+                   "theaurorian2:erosive_aurorian_diamond_ore",
+                   "theaurorian2:erosive_aurorian_emerald_ore",
+                   "theaurorian2:erosive_geode_ore"
+               ]
+}

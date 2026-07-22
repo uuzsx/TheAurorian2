@@ -1,0 +1,27 @@
+﻿{
+    "feature":  "theaurorian2:ore_copper",
+    "placement":  [
+                      {
+                          "count":  16,
+                          "type":  "minecraft:count"
+                      },
+                      {
+                          "type":  "minecraft:in_square"
+                      },
+                      {
+                          "height":  {
+                                         "min_inclusive":  {
+                                                               "absolute":  -16
+                                                           },
+                                         "type":  "minecraft:trapezoid",
+                                         "max_inclusive":  {
+                                                               "absolute":  112
+                                                           }
+                                     },
+                          "type":  "minecraft:height_range"
+                      },
+                      {
+                          "type":  "minecraft:biome"
+                      }
+                  ]
+}

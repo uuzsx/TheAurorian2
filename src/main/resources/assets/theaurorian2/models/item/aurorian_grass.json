@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "theaurorian2:block/aurorian_grass"
+                 },
+    "parent":  "minecraft:item/generated"
+}

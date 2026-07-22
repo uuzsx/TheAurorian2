@@ -1,0 +1,27 @@
+﻿{
+    "feature":  "theaurorian2:ore_redstone",
+    "placement":  [
+                      {
+                          "count":  4,
+                          "type":  "minecraft:count"
+                      },
+                      {
+                          "type":  "minecraft:in_square"
+                      },
+                      {
+                          "height":  {
+                                         "min_inclusive":  {
+                                                               "above_bottom":  0
+                                                           },
+                                         "type":  "minecraft:uniform",
+                                         "max_inclusive":  {
+                                                               "absolute":  15
+                                                           }
+                                     },
+                          "type":  "minecraft:height_range"
+                      },
+                      {
+                          "type":  "minecraft:biome"
+                      }
+                  ]
+}

@@ -1,0 +1,49 @@
+﻿{
+    "config":  {
+                   "to_place":  {
+                                    "seed":  2345,
+                                    "low_states":  [
+                                                       {
+                                                           "Name":  "theaurorian2:moon_frost_flower"
+                                                       },
+                                                       {
+                                                           "Name":  "theaurorian2:void_candle_flower"
+                                                       },
+                                                       {
+                                                           "Name":  "theaurorian2:nebula_blossom_cluster"
+                                                       },
+                                                       {
+                                                           "Name":  "theaurorian2:petunia_plant"
+                                                       }
+                                                   ],
+                                    "type":  "minecraft:noise_threshold_provider",
+                                    "high_chance":  0.33333334,
+                                    "scale":  0.005,
+                                    "default_state":  {
+                                                          "Name":  "theaurorian2:petunia_plant"
+                                                      },
+                                    "noise":  {
+                                                  "amplitudes":  [
+                                                                     1
+                                                                 ],
+                                                  "firstOctave":  0
+                                              },
+                                    "threshold":  -0.8,
+                                    "high_states":  [
+                                                        {
+                                                            "Name":  "theaurorian2:nebula_blossom_cluster"
+                                                        },
+                                                        {
+                                                            "Name":  "theaurorian2:moon_frost_flower"
+                                                        },
+                                                        {
+                                                            "Name":  "theaurorian2:void_candle_flower"
+                                                        },
+                                                        {
+                                                            "Name":  "theaurorian2:petunia_plant"
+                                                        }
+                                                    ]
+                                }
+               },
+    "type":  "minecraft:simple_block"
+}
