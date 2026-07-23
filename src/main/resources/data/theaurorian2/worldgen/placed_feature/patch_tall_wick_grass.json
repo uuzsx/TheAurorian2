@@ -36,8 +36,22 @@
                       },
                       {
                           "predicate":  {
-                                            "tag":  "minecraft:air",
-                                            "type":  "minecraft:matching_block_tag"
+                                            "type":  "minecraft:all_of",
+                                            "predicates":  [
+                                                               {
+                                                                   "tag":  "minecraft:air",
+                                                                   "type":  "minecraft:matching_block_tag"
+                                                               },
+                                                               {
+                                                                   "blocks":  "theaurorian2:aurorian_grass_block",
+                                                                   "offset":  [
+                                                                                  0,
+                                                                                  -1,
+                                                                                  0
+                                                                              ],
+                                                                   "type":  "minecraft:matching_blocks"
+                                                               }
+                                                           ]
                                         },
                           "type":  "minecraft:block_predicate_filter"
                       }

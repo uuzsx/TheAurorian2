@@ -50,5 +50,16 @@
     "block.theaurorian2.indigo_mushroom":  "\u6df1\u84dd\u8611\u83c7",
     "block.theaurorian2.blueberry_bush":  "蓝莓灌木",
     "item.theaurorian2.blueberry":  "蓝莓",
-    "block.theaurorian2.silent_wood_stick":  "谧木棍"
+    "block.theaurorian2.silent_wood_stick":  "谧木棍",
+    "generator.theaurorian2.aurorian":  "极光",
+    "block.theaurorian2.lavender_plant":  "薰衣草",
+    "block.theaurorian2.tall_lavender_plant":  "高薰衣草",
+    "biome.theaurorian2.lavender_plains":  "薰衣草平原",
+    "block.theaurorian2.light_aurorian_grass_block":  "发光极光草方块",
+    "block.theaurorian2.tall_aurorian_grass_light":  "发光极光高草",
+    "biome.theaurorian2.aurorian_sky_islands":  "极光空岛群",
+    "block.theaurorian2.moon_dew":  "月露",
+    "fluid_type.theaurorian2.moon_dew":  "月露",
+    "item.theaurorian2.moon_dew_bucket":  "月露桶",
+    "biome.theaurorian2.waste_stone_crater":  "废石群系"
 }

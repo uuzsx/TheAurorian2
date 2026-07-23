@@ -1,3 +1,12 @@
 {
-  "model": { "type": "minecraft:model", "model": "theaurorian2:block/aurorian_grass_block" }
+  "model": {
+    "type": "minecraft:model",
+    "model": "theaurorian2:block/aurorian_grass_block",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -1
+      }
+    ]
+  }
 }

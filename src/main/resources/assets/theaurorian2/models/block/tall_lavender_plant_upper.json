@@ -1,0 +1,7 @@
+﻿{
+    "render_type":  "minecraft:cutout",
+    "parent":  "minecraft:block/tinted_cross",
+    "textures":  {
+                     "cross":  "theaurorian2:block/tall_lavender_plant_upper"
+                 }
+}

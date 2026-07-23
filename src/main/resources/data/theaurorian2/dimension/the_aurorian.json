@@ -6,7 +6,7 @@
                                                               "parameters":  {
                                                                                  "weirdness":  [
                                                                                                    -2,
-                                                                                                   2
+                                                                                                   0.6
                                                                                                ],
                                                                                  "depth":  [
                                                                                                -2,
@@ -31,6 +31,36 @@
                                                                                  "offset":  0
                                                                              },
                                                               "biome":  "theaurorian2:aurorian_plains"
+                                                          },
+                                                          {
+                                                              "parameters":  {
+                                                                                 "weirdness":  [
+                                                                                                   0.6,
+                                                                                                   0.9
+                                                                                               ],
+                                                                                 "depth":  [
+                                                                                               -2,
+                                                                                               2
+                                                                                           ],
+                                                                                 "temperature":  [
+                                                                                                     -2,
+                                                                                                     2
+                                                                                                 ],
+                                                                                 "humidity":  [
+                                                                                                  -2,
+                                                                                                  0.2
+                                                                                              ],
+                                                                                 "continentalness":  [
+                                                                                                         -2,
+                                                                                                         2
+                                                                                                     ],
+                                                                                 "erosion":  [
+                                                                                                 -2,
+                                                                                                 2
+                                                                                             ],
+                                                                                 "offset":  0
+                                                                             },
+                                                              "biome":  "theaurorian2:lavender_plains"
                                                           },
                                                           {
                                                               "parameters":  {
@@ -66,7 +96,7 @@
                                                               "parameters":  {
                                                                                  "weirdness":  [
                                                                                                    0,
-                                                                                                   2
+                                                                                                   0.9
                                                                                                ],
                                                                                  "depth":  [
                                                                                                -2,
@@ -91,6 +121,36 @@
                                                                                  "offset":  0
                                                                              },
                                                               "biome":  "theaurorian2:curtain_tree_forest"
+                                                          },
+                                                          {
+                                                              "parameters":  {
+                                                                                 "weirdness":  [
+                                                                                                   0.9,
+                                                                                                   2
+                                                                                               ],
+                                                                                 "depth":  [
+                                                                                               -2,
+                                                                                               2
+                                                                                           ],
+                                                                                 "temperature":  [
+                                                                                                     -2,
+                                                                                                     2
+                                                                                                 ],
+                                                                                 "humidity":  [
+                                                                                                  -2,
+                                                                                                  2
+                                                                                              ],
+                                                                                 "continentalness":  [
+                                                                                                         -2,
+                                                                                                         2
+                                                                                                     ],
+                                                                                 "erosion":  [
+                                                                                                 -2,
+                                                                                                 2
+                                                                                             ],
+                                                                                 "offset":  0
+                                                                             },
+                                                              "biome":  "theaurorian2:aurorian_sky_islands"
                                                           }
                                                       ],
                                            "type":  "minecraft:multi_noise"

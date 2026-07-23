@@ -20,7 +20,7 @@ public final class LogMushroomBlock extends BushBlock {
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.is(BlockTags.LOGS) || super.mayPlaceOn(state, level, pos);
+        return state.is(BlockTags.LOGS);
     }
 
     @Override

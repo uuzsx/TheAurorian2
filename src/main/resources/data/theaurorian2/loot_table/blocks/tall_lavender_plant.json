@@ -1,0 +1,30 @@
+﻿{
+    "pools":  [
+                  {
+                      "entries":  [
+                                      {
+                                          "conditions":  [
+                                                             {
+                                                                 "properties":  {
+                                                                                    "half":  "lower"
+                                                                                },
+                                                                 "condition":  "minecraft:block_state_property",
+                                                                 "block":  "theaurorian2:tall_lavender_plant"
+                                                             }
+                                                         ],
+                                          "name":  "theaurorian2:tall_lavender_plant",
+                                          "type":  "minecraft:item"
+                                      }
+                                  ],
+                      "bonus_rolls":  0,
+                      "rolls":  1,
+                      "conditions":  [
+                                         {
+                                             "condition":  "minecraft:survives_explosion"
+                                         }
+                                     ]
+                  }
+              ],
+    "type":  "minecraft:block",
+    "random_sequence":  "theaurorian2:blocks/tall_lavender_plant"
+}

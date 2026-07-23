@@ -1,9 +1,11 @@
 package cn.teampancake.theaurorian2.common.block;
 
+import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
@@ -26,6 +28,11 @@ public final class TallWickGrassBlock extends DoublePlantBlock {
     @Override
     public MapCodec<TallWickGrassBlock> codec() {
         return CODEC;
+    }
+
+    @Override
+    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.is(ModBlocks.AURORIAN_GRASS_BLOCK.get());
     }
 
     @Override

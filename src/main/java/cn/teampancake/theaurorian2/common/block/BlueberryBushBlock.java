@@ -12,6 +12,7 @@ import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
@@ -25,6 +26,11 @@ public final class BlueberryBushBlock extends SweetBerryBushBlock {
 
     public BlueberryBushBlock(BlockBehaviour.Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.is(ModBlocks.AURORIAN_GRASS_BLOCK.get());
     }
 
     @Override

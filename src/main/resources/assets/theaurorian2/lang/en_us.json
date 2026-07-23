@@ -50,5 +50,16 @@
     "block.theaurorian2.indigo_mushroom":  "Indigo Mushroom",
     "block.theaurorian2.blueberry_bush":  "Blueberry Bush",
     "item.theaurorian2.blueberry":  "Blueberry",
-    "block.theaurorian2.silent_wood_stick":  "Silent Wood Stick"
+    "block.theaurorian2.silent_wood_stick":  "Silent Wood Stick",
+    "generator.theaurorian2.aurorian":  "Aurorian",
+    "block.theaurorian2.lavender_plant":  "Lavender",
+    "block.theaurorian2.tall_lavender_plant":  "Tall Lavender",
+    "biome.theaurorian2.lavender_plains":  "Lavender Plains",
+    "block.theaurorian2.light_aurorian_grass_block":  "Luminous Aurorian Grass Block",
+    "block.theaurorian2.tall_aurorian_grass_light":  "Tall Luminous Aurorian Grass",
+    "biome.theaurorian2.aurorian_sky_islands":  "Aurorian Sky Islands",
+    "block.theaurorian2.moon_dew":  "Moon Dew",
+    "fluid_type.theaurorian2.moon_dew":  "Moon Dew",
+    "item.theaurorian2.moon_dew_bucket":  "Moon Dew Bucket",
+    "biome.theaurorian2.waste_stone_crater":  "Waste Stone Crater"
 }

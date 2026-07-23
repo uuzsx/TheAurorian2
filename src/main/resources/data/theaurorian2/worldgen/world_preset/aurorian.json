@@ -1,0 +1,97 @@
+{
+  "dimensions": {
+    "minecraft:overworld": {
+      "type": "minecraft:overworld",
+      "generator": {
+        "type": "minecraft:noise",
+        "settings": "theaurorian2:the_aurorian",
+        "biome_source": {
+          "type": "minecraft:multi_noise",
+          "biomes": [
+            {
+              "biome": "theaurorian2:aurorian_plains",
+              "parameters": {
+                "temperature": [-2, 2],
+                "humidity": [-2, 0.2],
+                "continentalness": [-2, 2],
+                "erosion": [-2, 2],
+                "weirdness": [-2, 0.6],
+                "depth": [-2, 2],
+                "offset": 0
+              }
+            },
+            {
+              "biome": "theaurorian2:lavender_plains",
+              "parameters": {
+                "temperature": [-2, 2],
+                "humidity": [-2, 0.2],
+                "continentalness": [-2, 2],
+                "erosion": [-2, 2],
+                "weirdness": [0.6, 0.9],
+                "depth": [-2, 2],
+                "offset": 0
+              }
+            },
+            {
+              "biome": "theaurorian2:silent_wood_forest",
+              "parameters": {
+                "temperature": [-2, 2],
+                "humidity": [0.2, 2],
+                "continentalness": [-2, 2],
+                "erosion": [-2, 2],
+                "weirdness": [-2, 0],
+                "depth": [-2, 2],
+                "offset": 0
+              }
+            },
+            {
+              "biome": "theaurorian2:curtain_tree_forest",
+              "parameters": {
+                "temperature": [-2, 2],
+                "humidity": [0.2, 2],
+                "continentalness": [-2, 2],
+                "erosion": [-2, 2],
+                "weirdness": [0, 0.9],
+                "depth": [-2, 2],
+                "offset": 0
+              }
+            },
+            {
+              "biome": "theaurorian2:aurorian_sky_islands",
+              "parameters": {
+                "temperature": [-2, 2],
+                "humidity": [-2, 2],
+                "continentalness": [-2, 2],
+                "erosion": [-2, 2],
+                "weirdness": [0.9, 2],
+                "depth": [-2, 2],
+                "offset": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    "minecraft:the_nether": {
+      "type": "minecraft:the_nether",
+      "generator": {
+        "type": "minecraft:noise",
+        "settings": "minecraft:nether",
+        "biome_source": {
+          "type": "minecraft:multi_noise",
+          "preset": "minecraft:nether"
+        }
+      }
+    },
+    "minecraft:the_end": {
+      "type": "minecraft:the_end",
+      "generator": {
+        "type": "minecraft:noise",
+        "settings": "minecraft:end",
+        "biome_source": {
+          "type": "minecraft:the_end"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "theaurorian2:aurorian_sky_island_group",
+  "biomes": "#theaurorian2:has_structure/aurorian_sky_island_group",
+  "spawn_overrides": {},
+  "step": "underground_decoration",
+  "terrain_adaptation": "none"
+}

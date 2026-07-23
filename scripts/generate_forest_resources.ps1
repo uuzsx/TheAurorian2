@@ -411,12 +411,14 @@ $smallFlowers = @(
     'theaurorian2:petunia_plant',
     'theaurorian2:nebula_blossom_cluster',
     'theaurorian2:moon_frost_flower',
-    'theaurorian2:void_candle_flower'
+    'theaurorian2:void_candle_flower',
+    'theaurorian2:lavender_plant'
 )
 $treeReplaceables = @(
     'theaurorian2:aurorian_grass',
     'theaurorian2:aurorian_grass_light',
     'theaurorian2:tall_aurorian_grass',
+    'theaurorian2:tall_lavender_plant',
     'theaurorian2:tall_wick_grass',
     'theaurorian2:indigo_mushroom',
     'theaurorian2:blueberry_bush',
@@ -427,7 +429,7 @@ Write-Tag 'block' 'logs_that_burn' @('theaurorian2:silent_tree_log', 'theauroria
 Write-Tag 'block' 'leaves' @('theaurorian2:silent_tree_leaves', 'theaurorian2:curtain_tree_leaves')
 Write-Tag 'block' 'saplings' @('theaurorian2:silent_tree_sapling', 'theaurorian2:curtain_tree_sapling')
 Write-Tag 'block' 'small_flowers' $smallFlowers
-Write-Tag 'block' 'flowers' @('theaurorian2:tall_wick_grass')
+Write-Tag 'block' 'flowers' @('theaurorian2:tall_wick_grass', 'theaurorian2:tall_lavender_plant')
 Write-Tag 'block' 'replaceable_by_trees' $treeReplaceables
 Write-Tag 'block' 'mineable/axe' @('theaurorian2:silent_tree_log', 'theaurorian2:curtain_tree_log')
 Write-Tag 'block' 'mineable/hoe' @('theaurorian2:silent_tree_leaves', 'theaurorian2:curtain_tree_leaves')
@@ -436,7 +438,7 @@ Write-Tag 'item' 'logs_that_burn' @('theaurorian2:silent_tree_log', 'theaurorian
 Write-Tag 'item' 'leaves' @('theaurorian2:silent_tree_leaves', 'theaurorian2:curtain_tree_leaves')
 Write-Tag 'item' 'saplings' @('theaurorian2:silent_tree_sapling', 'theaurorian2:curtain_tree_sapling')
 Write-Tag 'item' 'small_flowers' $smallFlowers
-Write-Tag 'item' 'flowers' @('theaurorian2:tall_wick_grass')
+Write-Tag 'item' 'flowers' @('theaurorian2:tall_wick_grass', 'theaurorian2:tall_lavender_plant')
 
 # Natural generation and saplings share the original forked, cloud-crown tree feature.
 Write-Json (Join-Path $data 'worldgen/configured_feature/silent_tree.json') @{
@@ -728,7 +730,20 @@ Write-Json (Join-Path $data 'worldgen/placed_feature/patch_tall_wick_grass.json'
             xz_spread = @{type = 'minecraft:trapezoid'; min = -3; max = 3; plateau = 0}
             y_spread = @{type = 'minecraft:trapezoid'; min = -2; max = 2; plateau = 0}
         },
-        @{type = 'minecraft:block_predicate_filter'; predicate = @{type = 'minecraft:matching_block_tag'; tag = 'minecraft:air'}}
+        @{
+            type = 'minecraft:block_predicate_filter'
+            predicate = @{
+                type = 'minecraft:all_of'
+                predicates = @(
+                    @{type = 'minecraft:matching_block_tag'; tag = 'minecraft:air'},
+                    @{
+                        type = 'minecraft:matching_blocks'
+                        blocks = 'theaurorian2:aurorian_grass_block'
+                        offset = @(0, -1, 0)
+                    }
+                )
+            }
+        }
     )
 }
 
@@ -744,6 +759,19 @@ $plainsFeatures[9] = @(
 )
 $plainsBiome.features = $plainsFeatures
 Write-Json $plainsBiomePath $plainsBiome
+
+# Like vanilla sunflower plains, lavender plains keep plains generation and add a dominant flower patch.
+$lavenderBiome = Get-Content -Raw -LiteralPath $plainsBiomePath | ConvertFrom-Json
+$lavenderFeatures = @($lavenderBiome.features)
+$lavenderFeatures[9] = @(
+    'theaurorian2:trees_aurorian_plains',
+    'theaurorian2:patch_tall_aurorian_grass',
+    'theaurorian2:patch_lavender',
+    'theaurorian2:patch_aurorian_flowers',
+    'theaurorian2:patch_aurorian_grass'
+)
+$lavenderBiome.features = $lavenderFeatures
+Write-Json (Join-Path $data 'worldgen/biome/lavender_plains.json') $lavenderBiome
 
 # Inherit the plains environment and underground generation, replacing only vegetation.
 $forestBiome = Get-Content -Raw -LiteralPath (Join-Path $data 'worldgen/biome/aurorian_plains.json') | ConvertFrom-Json
@@ -790,18 +818,50 @@ function Biome-Entry($biome, $humidity, $weirdness) {
         }
     }
 }
+$aurorianGenerator = @{
+    type = 'minecraft:noise'
+    biome_source = @{
+        type = 'minecraft:multi_noise'
+        biomes = @(
+            (Biome-Entry 'theaurorian2:aurorian_plains' @(-2.0, 0.2) @(-2.0, 0.6)),
+            (Biome-Entry 'theaurorian2:lavender_plains' @(-2.0, 0.2) @(0.6, 2.0)),
+            (Biome-Entry 'theaurorian2:silent_wood_forest' @(0.2, 2.0) @(-2.0, 0.0)),
+            (Biome-Entry 'theaurorian2:curtain_tree_forest' @(0.2, 2.0) @(0.0, 2.0))
+        )
+    }
+    settings = 'theaurorian2:the_aurorian'
+}
 Write-Json (Join-Path $data 'dimension/the_aurorian.json') @{
     type = 'minecraft:overworld'
-    generator = @{
-        type = 'minecraft:noise'
-        biome_source = @{
-            type = 'minecraft:multi_noise'
-            biomes = @(
-                (Biome-Entry 'theaurorian2:aurorian_plains' @(-2.0, 0.2) $allClimate),
-                (Biome-Entry 'theaurorian2:silent_wood_forest' @(0.2, 2.0) @(-2.0, 0.0)),
-                (Biome-Entry 'theaurorian2:curtain_tree_forest' @(0.2, 2.0) @(0.0, 2.0))
-            )
+    generator = $aurorianGenerator
+}
+
+# This preset exposes Aurorian generation through the vanilla "World Type" control.
+Write-Json (Join-Path $data 'worldgen/world_preset/aurorian.json') @{
+    dimensions = @{
+        'minecraft:overworld' = @{
+            type = 'minecraft:overworld'
+            generator = $aurorianGenerator
         }
-        settings = 'theaurorian2:the_aurorian'
+        'minecraft:the_end' = @{
+            type = 'minecraft:the_end'
+            generator = @{
+                type = 'minecraft:noise'
+                biome_source = @{type = 'minecraft:the_end'}
+                settings = 'minecraft:end'
+            }
+        }
+        'minecraft:the_nether' = @{
+            type = 'minecraft:the_nether'
+            generator = @{
+                type = 'minecraft:noise'
+                biome_source = @{type = 'minecraft:multi_noise'; preset = 'minecraft:nether'}
+                settings = 'minecraft:nether'
+            }
+        }
     }
+}
+Write-Json (Join-Path $root 'src/main/resources/data/minecraft/tags/worldgen/world_preset/normal.json') @{
+    replace = $false
+    values = @('theaurorian2:aurorian')
 }
