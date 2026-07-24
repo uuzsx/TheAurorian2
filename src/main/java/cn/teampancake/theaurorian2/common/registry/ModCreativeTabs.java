@@ -19,8 +19,10 @@ public final class ModCreativeTabs {
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.theaurorian2.the_aurorian_2"))
                     .icon(() -> new ItemStack(ModBlocks.AURORIAN_GRASS_BLOCK.get()))
-                    .displayItems((parameters, output) ->
-                            ModBlocks.ITEMS.getEntries().forEach(item -> output.accept(item.get())))
+                    .displayItems((parameters, output) -> {
+                        ModBlocks.ITEMS.getEntries().forEach(item -> output.accept(item.get()));
+                        ModItems.ITEMS.getEntries().forEach(item -> output.accept(item.get()));
+                    })
                     .build());
 
     private ModCreativeTabs() {

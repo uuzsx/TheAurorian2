@@ -1,0 +1,15 @@
+{
+  "feature": "theaurorian2:fallen_cursed_frost_tree",
+  "placement": [
+    {
+      "predicate": {
+        "state": {
+          "Properties": { "stage": "0" },
+          "Name": "theaurorian2:cursed_frost_tree_sapling"
+        },
+        "type": "minecraft:would_survive"
+      },
+      "type": "minecraft:block_predicate_filter"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "theaurorian2:pebble"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "theaurorian2:blocks/pebble"
+}

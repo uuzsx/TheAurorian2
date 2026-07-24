@@ -2,6 +2,7 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.worldgen.feature.CurtainTreeFeature;
+import cn.teampancake.theaurorian2.common.worldgen.feature.CursedFrostTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.FallenLogFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.SilentTreeFeature;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,6 +20,8 @@ public final class ModFeatures {
             FEATURES.register("curtain_tree", CurtainTreeFeature::new);
     public static final DeferredHolder<Feature<?>, SilentTreeFeature> SILENT_TREE =
             FEATURES.register("silent_tree", SilentTreeFeature::new);
+    public static final DeferredHolder<Feature<?>, CursedFrostTreeFeature> CURSED_FROST_TREE =
+            FEATURES.register("cursed_frost_tree", CursedFrostTreeFeature::new);
     public static final DeferredHolder<Feature<?>, FallenLogFeature> FALLEN_LOG =
             FEATURES.register("fallen_log", FallenLogFeature::new);
 

@@ -8,14 +8,17 @@ import cn.teampancake.theaurorian2.common.block.AurorianTallGrassBlock;
 import cn.teampancake.theaurorian2.common.block.BlueberryBushBlock;
 import cn.teampancake.theaurorian2.common.block.ColoredParticleLeavesBlock;
 import cn.teampancake.theaurorian2.common.block.GroundBranchBlock;
+import cn.teampancake.theaurorian2.common.block.GroundMushroomBlock;
 import cn.teampancake.theaurorian2.common.block.LogMushroomBlock;
 import cn.teampancake.theaurorian2.common.block.LuminousAurorianDoublePlantBlock;
 import cn.teampancake.theaurorian2.common.block.LuminousAurorianGrassBlock;
+import cn.teampancake.theaurorian2.common.block.PebbleBlock;
 import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.food.Foods;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -29,6 +32,7 @@ import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -44,6 +48,8 @@ public final class ModBlocks {
             "aurorian_stone", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE));
     public static final DeferredBlock<Block> AURORIAN_EROSIVE = BLOCKS.registerSimpleBlock(
             "aurorian_erosive", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE));
+    public static final DeferredBlock<Block> AURORIAN_COBBLESTONE = BLOCKS.registerSimpleBlock(
+            "aurorian_cobblestone", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLESTONE));
     public static final DeferredBlock<Block> AURORIAN_DIRT = BLOCKS.registerSimpleBlock(
             "aurorian_dirt", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT));
     public static final DeferredBlock<AurorianGrassBlock> AURORIAN_GRASS_BLOCK = BLOCKS.registerBlock(
@@ -55,6 +61,8 @@ public final class ModBlocks {
     public static final DeferredBlock<SandBlock> MOON_SAND_RIVER = BLOCKS.registerBlock(
             "moon_sand_river", properties -> new SandBlock(new ColorRGBA(0xFFB7A9D6), properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SAND));
+    public static final DeferredBlock<Block> SMOOTH_MOON_SANDSTONE = BLOCKS.registerSimpleBlock(
+            "smooth_moon_sandstone", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_SANDSTONE));
     public static final DeferredBlock<LiquidBlock> MOON_DEW_BLOCK = BLOCKS.registerBlock(
             "moon_dew", properties -> new LiquidBlock(ModFluids.MOON_DEW.get(), properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.WATER));
@@ -92,6 +100,18 @@ public final class ModBlocks {
     public static final DeferredBlock<GroundBranchBlock> SILENT_WOOD_STICK = BLOCKS.registerBlock(
             "silent_wood_stick", GroundBranchBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DEAD_BUSH).noOcclusion());
+    public static final DeferredBlock<PebbleBlock> PEBBLE = BLOCKS.registerBlock(
+            "pebble", PebbleBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DEAD_BUSH)
+                    .strength(0.2F)
+                    .sound(SoundType.STONE)
+                    .noOcclusion());
+    public static final DeferredBlock<GroundMushroomBlock> WHITE_GROUND_MUSHROOM = BLOCKS.registerBlock(
+            "white_ground_mushroom", GroundMushroomBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM).noOcclusion());
+    public static final DeferredBlock<GroundMushroomBlock> BLUE_GROUND_MUSHROOM = BLOCKS.registerBlock(
+            "blue_ground_mushroom", GroundMushroomBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM).noOcclusion());
 
     public static final DeferredBlock<RotatedPillarBlock> SILENT_TREE_LOG = BLOCKS.registerBlock(
             "silent_tree_log", RotatedPillarBlock::new,
@@ -113,6 +133,16 @@ public final class ModBlocks {
     public static final DeferredBlock<SaplingBlock> CURTAIN_TREE_SAPLING = BLOCKS.registerBlock(
             "curtain_tree_sapling", properties -> new SaplingBlock(ModTreeGrowers.CURTAIN_TREE, properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_SAPLING));
+    public static final DeferredBlock<RotatedPillarBlock> CURSED_FROST_TREE_LOG = BLOCKS.registerBlock(
+            "cursed_frost_tree_log", RotatedPillarBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LOG));
+    public static final DeferredBlock<ColoredParticleLeavesBlock> CURSED_FROST_TREE_LEAVES = BLOCKS.registerBlock(
+            "cursed_frost_tree_leaves",
+            properties -> new ColoredParticleLeavesBlock(0.01F, 0xFFE1E9ED, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES));
+    public static final DeferredBlock<SaplingBlock> CURSED_FROST_TREE_SAPLING = BLOCKS.registerBlock(
+            "cursed_frost_tree_sapling", properties -> new SaplingBlock(ModTreeGrowers.CURSED_FROST_TREE, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING));
 
     public static final DeferredBlock<DropExperienceBlock> AURORIAN_COAL_ORE = ore("aurorian_coal_ore", Blocks.COAL_ORE, UniformInt.of(0, 2));
     public static final DeferredBlock<DropExperienceBlock> AURORIAN_IRON_ORE = ore("aurorian_iron_ore", Blocks.IRON_ORE, ConstantInt.ZERO);
@@ -142,6 +172,13 @@ public final class ModBlocks {
     public static final DeferredItem<BlockItem> AURORIAN_DIRT_ITEM = ITEMS.registerSimpleBlockItem(AURORIAN_DIRT);
     public static final DeferredItem<BlockItem> AURORIAN_GRASS_BLOCK_ITEM = ITEMS.registerSimpleBlockItem(AURORIAN_GRASS_BLOCK);
     public static final DeferredItem<BlockItem> MOON_SAND_RIVER_ITEM = ITEMS.registerSimpleBlockItem(MOON_SAND_RIVER);
+    public static final DeferredItem<BlockItem> PEBBLE_ITEM = ITEMS.registerSimpleBlockItem(PEBBLE);
+    public static final DeferredItem<Item> WHITE_GROUND_MUSHROOM_ITEM = ITEMS.registerItem(
+            "white_ground_mushroom",
+            properties -> new Item(properties.food(groundMushroomFood())));
+    public static final DeferredItem<Item> BLUE_GROUND_MUSHROOM_ITEM = ITEMS.registerItem(
+            "blue_ground_mushroom",
+            properties -> new Item(properties.food(groundMushroomFood())));
     public static final DeferredItem<Item> RAW_MOONSTONE = ITEMS.registerSimpleItem("raw_moonstone");
     public static final DeferredItem<Item> RAW_CERULEAN = ITEMS.registerSimpleItem("raw_cerulean");
     public static final DeferredItem<Item> CRYSTAL = ITEMS.registerSimpleItem("crystal");
@@ -159,7 +196,8 @@ public final class ModBlocks {
                 .filter(block -> block != AURORIAN_STONE && block != AURORIAN_EROSIVE
                         && block != AURORIAN_DIRT && block != AURORIAN_GRASS_BLOCK
                         && block != MOON_SAND_RIVER && block != MOON_DEW_BLOCK
-                        && block != BLUEBERRY_BUSH)
+                        && block != BLUEBERRY_BUSH && block != PEBBLE
+                        && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM)
                 .forEach(block -> ITEMS.registerSimpleBlockItem(block));
     }
 
@@ -179,6 +217,10 @@ public final class ModBlocks {
     private static DeferredBlock<AurorianPlantBlock> plant(String name) {
         return BLOCKS.registerBlock(name, AurorianPlantBlock::new,
                 () -> BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+    }
+
+    private static FoodProperties groundMushroomFood() {
+        return new FoodProperties.Builder().nutrition(3).saturationModifier(0.2F).build();
     }
 
     public static void register(IEventBus modEventBus) {

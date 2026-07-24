@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "all": "theaurorian2:block/cursed_frost_tree_leaves"
+  },
+  "parent": "minecraft:block/leaves"
+}

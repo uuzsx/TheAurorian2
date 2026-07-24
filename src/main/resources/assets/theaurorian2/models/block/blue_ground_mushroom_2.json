@@ -1,0 +1,17 @@
+{
+  "loader": "neoforge:obj",
+  "model": "theaurorian2:models/block/blue_ground_mushroom_2.obj",
+  "mtl_override": "theaurorian2:models/block/blue_ground_mushroom_2.mtl",
+  "automatic_culling": false,
+  "shade_quads": true,
+  "flip_v": true,
+  "emissive_ambient": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "texture": "theaurorian2:block/blue_ground_mushroom_2",
+    "particle": "theaurorian2:block/blue_ground_mushroom_2"
+  },
+  "transform": {
+    "translation": [0.5, 0.0, 0.5]
+  }
+}

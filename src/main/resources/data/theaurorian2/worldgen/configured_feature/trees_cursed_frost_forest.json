@@ -1,0 +1,15 @@
+{
+  "config": {
+    "features": [
+      {
+        "feature": "theaurorian2:fallen_cursed_frost_tree",
+        "chance": 0.08
+      }
+    ],
+    "default": {
+      "feature": "theaurorian2:cursed_frost_tree",
+      "placement": []
+    }
+  },
+  "type": "minecraft:random_selector"
+}

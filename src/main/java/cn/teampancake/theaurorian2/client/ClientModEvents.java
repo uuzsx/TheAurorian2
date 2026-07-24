@@ -4,7 +4,10 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.client.color.AurorianGrassTintSource;
 import cn.teampancake.theaurorian2.client.particle.WickParticle;
 import cn.teampancake.theaurorian2.client.resource.AurorianGrassColorReloadListener;
+import cn.teampancake.theaurorian2.client.renderer.DamageNumberRenderer;
+import cn.teampancake.theaurorian2.client.renderer.TrainingDummyRenderer;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
+import cn.teampancake.theaurorian2.common.registry.ModEntities;
 import cn.teampancake.theaurorian2.common.registry.ModFluidTypes;
 import cn.teampancake.theaurorian2.common.registry.ModFluids;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
@@ -20,6 +23,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterFluidModelsEvent;
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -30,6 +34,12 @@ import org.joml.Vector4f;
 public final class ClientModEvents {
 
     private ClientModEvents() {
+    }
+
+    @SubscribeEvent
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.TRAINING_DUMMY.get(), TrainingDummyRenderer::new);
+        event.registerEntityRenderer(ModEntities.DAMAGE_NUMBER.get(), DamageNumberRenderer::new);
     }
 
     @SubscribeEvent

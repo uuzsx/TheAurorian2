@@ -3,6 +3,8 @@
     "values":  [
                    "theaurorian2:aurorian_stone",
                    "theaurorian2:aurorian_erosive",
+                   "theaurorian2:aurorian_cobblestone",
+                   "theaurorian2:smooth_moon_sandstone",
                    "theaurorian2:aurorian_coal_ore",
                    "theaurorian2:aurorian_iron_ore",
                    "theaurorian2:aurorian_copper_ore",
