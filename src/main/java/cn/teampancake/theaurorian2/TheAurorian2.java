@@ -10,6 +10,7 @@ import cn.teampancake.theaurorian2.common.registry.ModFluids;
 import cn.teampancake.theaurorian2.common.registry.ModItems;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
 import cn.teampancake.theaurorian2.common.registry.ModStructures;
+import cn.teampancake.theaurorian2.common.registry.ModTreeDecorators;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.bus.api.IEventBus;
@@ -31,6 +32,7 @@ public final class TheAurorian2 {
         ModBlocks.register(modEventBus);
         ModEntities.register(modEventBus);
         ModItems.register(modEventBus);
+        ModTreeDecorators.register(modEventBus);
         ModFeatures.register(modEventBus);
         ModStructures.register(modEventBus);
         ModParticles.register(modEventBus);

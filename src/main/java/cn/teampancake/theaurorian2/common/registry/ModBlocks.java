@@ -14,6 +14,7 @@ import cn.teampancake.theaurorian2.common.block.LuminousAurorianDoublePlantBlock
 import cn.teampancake.theaurorian2.common.block.LuminousAurorianGrassBlock;
 import cn.teampancake.theaurorian2.common.block.PebbleBlock;
 import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
+import cn.teampancake.theaurorian2.common.block.WallMushroomBlock;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -112,6 +113,24 @@ public final class ModBlocks {
     public static final DeferredBlock<GroundMushroomBlock> BLUE_GROUND_MUSHROOM = BLOCKS.registerBlock(
             "blue_ground_mushroom", GroundMushroomBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM).noOcclusion());
+    public static final DeferredBlock<WallMushroomBlock> BROWN_MUSHROOM = BLOCKS.registerBlock(
+            "brown_mushroom", WallMushroomBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)
+                    .strength(0.1F)
+                    .noCollision()
+                    .noOcclusion());
+    public static final DeferredBlock<WallMushroomBlock> DARK_BROWN_MUSHROOM = BLOCKS.registerBlock(
+            "dark_brown_mushroom", WallMushroomBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)
+                    .strength(0.1F)
+                    .noCollision()
+                    .noOcclusion());
+    public static final DeferredBlock<WallMushroomBlock> RED_MUSHROOM = BLOCKS.registerBlock(
+            "red_mushroom", WallMushroomBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.RED_MUSHROOM)
+                    .strength(0.1F)
+                    .noCollision()
+                    .noOcclusion());
 
     public static final DeferredBlock<RotatedPillarBlock> SILENT_TREE_LOG = BLOCKS.registerBlock(
             "silent_tree_log", RotatedPillarBlock::new,

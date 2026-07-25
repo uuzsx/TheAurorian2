@@ -1,10 +1,14 @@
 package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import cn.teampancake.theaurorian2.common.worldgen.feature.AncientCurtainTreeFeature;
+import cn.teampancake.theaurorian2.common.worldgen.feature.AncientSilentTreeFeature;
+import cn.teampancake.theaurorian2.common.worldgen.feature.AncientStumpFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.CurtainTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.CursedFrostTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.FallenLogFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.SilentTreeFeature;
+import cn.teampancake.theaurorian2.common.worldgen.feature.WallMushroomPatchFeature;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.neoforged.bus.api.IEventBus;
@@ -22,6 +26,14 @@ public final class ModFeatures {
             FEATURES.register("silent_tree", SilentTreeFeature::new);
     public static final DeferredHolder<Feature<?>, CursedFrostTreeFeature> CURSED_FROST_TREE =
             FEATURES.register("cursed_frost_tree", CursedFrostTreeFeature::new);
+    public static final DeferredHolder<Feature<?>, AncientSilentTreeFeature> ANCIENT_SILENT_TREE =
+            FEATURES.register("ancient_silent_tree", AncientSilentTreeFeature::new);
+    public static final DeferredHolder<Feature<?>, AncientCurtainTreeFeature> ANCIENT_CURTAIN_TREE =
+            FEATURES.register("ancient_curtain_tree", AncientCurtainTreeFeature::new);
+    public static final DeferredHolder<Feature<?>, AncientStumpFeature> ANCIENT_STUMP =
+            FEATURES.register("ancient_stump", AncientStumpFeature::new);
+    public static final DeferredHolder<Feature<?>, WallMushroomPatchFeature> WALL_MUSHROOM_PATCH =
+            FEATURES.register("wall_mushroom_patch", WallMushroomPatchFeature::new);
     public static final DeferredHolder<Feature<?>, FallenLogFeature> FALLEN_LOG =
             FEATURES.register("fallen_log", FallenLogFeature::new);
 

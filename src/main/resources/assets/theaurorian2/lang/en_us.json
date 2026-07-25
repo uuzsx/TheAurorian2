@@ -96,5 +96,8 @@
     "entity.theaurorian2.training_dummy": "Training Dummy",
     "gui.theaurorian2.training_dummy.dps": "DPS: %s",
     "gui.theaurorian2.training_dummy.total_damage": "Total Damage: %s",
-    "gui.theaurorian2.training_dummy.last_hit_damage": "Last Hit Damage: %s"
+    "gui.theaurorian2.training_dummy.last_hit_damage": "Last Hit Damage: %s",
+    "block.theaurorian2.brown_mushroom": "Brown Mushroom",
+    "block.theaurorian2.dark_brown_mushroom": "Dark Brown Mushroom",
+    "block.theaurorian2.red_mushroom": "Red Mushroom"
 }
