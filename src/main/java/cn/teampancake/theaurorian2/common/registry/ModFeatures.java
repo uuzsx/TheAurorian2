@@ -4,6 +4,7 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.worldgen.feature.AncientCurtainTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.AncientSilentTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.AncientStumpFeature;
+import cn.teampancake.theaurorian2.common.worldgen.feature.AurorianSeagrassFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.CurtainTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.CursedFrostTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.FallenLogFeature;
@@ -36,6 +37,8 @@ public final class ModFeatures {
             FEATURES.register("wall_mushroom_patch", WallMushroomPatchFeature::new);
     public static final DeferredHolder<Feature<?>, FallenLogFeature> FALLEN_LOG =
             FEATURES.register("fallen_log", FallenLogFeature::new);
+    public static final DeferredHolder<Feature<?>, AurorianSeagrassFeature> AURORIAN_SEAGRASS =
+            FEATURES.register("aurorian_seagrass", AurorianSeagrassFeature::new);
 
     private ModFeatures() {
     }

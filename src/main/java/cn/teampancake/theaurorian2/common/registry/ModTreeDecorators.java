@@ -1,6 +1,7 @@
 package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import cn.teampancake.theaurorian2.common.worldgen.feature.AurorianTrunkVineDecorator;
 import cn.teampancake.theaurorian2.common.worldgen.feature.TrunkMushroomDecorator;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
@@ -16,6 +17,9 @@ public final class ModTreeDecorators {
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<TrunkMushroomDecorator>>
             TRUNK_MUSHROOMS = TREE_DECORATORS.register(
                     "trunk_mushrooms", () -> new TreeDecoratorType<>(TrunkMushroomDecorator.CODEC));
+    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<AurorianTrunkVineDecorator>>
+            TRUNK_VINES = TREE_DECORATORS.register(
+                    "trunk_vines", () -> new TreeDecoratorType<>(AurorianTrunkVineDecorator.CODEC));
 
     private ModTreeDecorators() {
     }

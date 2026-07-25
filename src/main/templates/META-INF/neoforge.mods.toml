@@ -8,6 +8,9 @@ authors="${mod_authors}"
 logoFile="the_aurorian_2_logo.png"
 description='''${mod_description}'''
 
+[[mixins]]
+    config="theaurorian2.mixins.json"
+
 [[dependencies.${mod_id}]]
     modId="neoforge"
     type="required"

@@ -5,6 +5,7 @@
     "block.theaurorian2.aurorian_cobblestone":  "Aurorian Cobblestone",
     "block.theaurorian2.pebble":  "Pebble",
     "block.theaurorian2.aurorian_dirt":  "Aurorian Dirt",
+    "block.theaurorian2.aurorian_clay":  "Aurorian Clay",
     "block.theaurorian2.aurorian_grass_block":  "Aurorian Grass Block",
     "block.theaurorian2.moon_sand_river":  "River Moon Sand",
     "biome.theaurorian2.aurorian_plains":  "Aurorian Plains",
@@ -99,5 +100,10 @@
     "gui.theaurorian2.training_dummy.last_hit_damage": "Last Hit Damage: %s",
     "block.theaurorian2.brown_mushroom": "Brown Mushroom",
     "block.theaurorian2.dark_brown_mushroom": "Dark Brown Mushroom",
-    "block.theaurorian2.red_mushroom": "Red Mushroom"
+    "block.theaurorian2.red_mushroom": "Red Mushroom",
+    "block.theaurorian2.aurorian_water_grass": "Aurorian Water Grass",
+    "block.theaurorian2.tall_aurorian_water_grass": "Tall Aurorian Water Grass",
+    "block.theaurorian2.aurorian_vine": "Aurorian Vine",
+    "block.theaurorian2.aurorian_twisting_vines": "Aurorian Twisting Vines",
+    "block.theaurorian2.aurorian_twisting_vines_plant": "Aurorian Twisting Vines"
 }

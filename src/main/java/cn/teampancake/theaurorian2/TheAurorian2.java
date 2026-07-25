@@ -11,12 +11,14 @@ import cn.teampancake.theaurorian2.common.registry.ModItems;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
 import cn.teampancake.theaurorian2.common.registry.ModStructures;
 import cn.teampancake.theaurorian2.common.registry.ModTreeDecorators;
+import cn.teampancake.theaurorian2.common.world.AurorianBlessingCycle;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.transfer.fluid.DispenseFluidContainer;
 import org.slf4j.Logger;
 
@@ -37,6 +39,7 @@ public final class TheAurorian2 {
         ModStructures.register(modEventBus);
         ModParticles.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
+        NeoForge.EVENT_BUS.addListener(AurorianBlessingCycle::onServerTick);
         modEventBus.addListener(this::commonSetup);
         LOGGER.info("Initializing The Aurorian 2");
     }

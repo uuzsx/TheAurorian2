@@ -474,9 +474,9 @@
                                                                                     "type":  "minecraft:condition",
                                                                                     "if_true":  {
                                                                                                     "type":  "minecraft:biome",
-                                                                                                    "biome_is":  [
-                                                                                                                       "theaurorian2:aurorian_beach"
-                                                                                                                   ]
+                                                                  "biome_is":  [
+                                                                                     "theaurorian2:aurorian_beach"
+                                                                                 ]
                                                                                                 },
                                                                                     "then_run":  {
                                                                                                      "type":  "minecraft:sequence",

@@ -123,26 +123,6 @@
       ],
       "modifier": "multiply"
     },
-    "minecraft:visual/fog_color": {
-      "keyframes": [
-        {
-          "ticks": 133,
-          "value": "#8fdee8"
-        },
-        {
-          "ticks": 11867,
-          "value": "#8fdee8"
-        },
-        {
-          "ticks": 13670,
-          "value": "#031238"
-        },
-        {
-          "ticks": 22330,
-          "value": "#031238"
-        }
-      ]
-    },
     "minecraft:visual/moon_angle": {
       "ease": {
         "cubic_bezier": [
@@ -160,26 +140,6 @@
         {
           "ticks": 6000,
           "value": 180.0
-        }
-      ]
-    },
-    "minecraft:visual/sky_color": {
-      "keyframes": [
-        {
-          "ticks": 133,
-          "value": "#80e3ec"
-        },
-        {
-          "ticks": 11867,
-          "value": "#80e3ec"
-        },
-        {
-          "ticks": 13670,
-          "value": "#010e34"
-        },
-        {
-          "ticks": 22330,
-          "value": "#010e34"
         }
       ]
     },

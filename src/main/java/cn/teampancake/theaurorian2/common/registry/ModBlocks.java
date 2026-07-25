@@ -5,6 +5,9 @@ import cn.teampancake.theaurorian2.common.block.AurorianDoublePlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianGrassBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianTallGrassBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianTwistingVinesBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianTwistingVinesPlantBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.block.BlueberryBushBlock;
 import cn.teampancake.theaurorian2.common.block.ColoredParticleLeavesBlock;
 import cn.teampancake.theaurorian2.common.block.GroundBranchBlock;
@@ -14,6 +17,7 @@ import cn.teampancake.theaurorian2.common.block.LuminousAurorianDoublePlantBlock
 import cn.teampancake.theaurorian2.common.block.LuminousAurorianGrassBlock;
 import cn.teampancake.theaurorian2.common.block.PebbleBlock;
 import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
+import cn.teampancake.theaurorian2.common.block.TallAurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.block.WallMushroomBlock;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.BlockItem;
@@ -34,6 +38,7 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -53,6 +58,8 @@ public final class ModBlocks {
             "aurorian_cobblestone", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLESTONE));
     public static final DeferredBlock<Block> AURORIAN_DIRT = BLOCKS.registerSimpleBlock(
             "aurorian_dirt", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT));
+    public static final DeferredBlock<Block> AURORIAN_CLAY = BLOCKS.registerSimpleBlock(
+            "aurorian_clay", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CLAY));
     public static final DeferredBlock<AurorianGrassBlock> AURORIAN_GRASS_BLOCK = BLOCKS.registerBlock(
             "aurorian_grass_block", AurorianGrassBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK));
@@ -80,6 +87,12 @@ public final class ModBlocks {
     public static final DeferredBlock<LuminousAurorianDoublePlantBlock> TALL_AURORIAN_GRASS_LIGHT = BLOCKS.registerBlock(
             "tall_aurorian_grass_light", LuminousAurorianDoublePlantBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS).lightLevel(state -> 2));
+    public static final DeferredBlock<AurorianWaterGrassBlock> AURORIAN_WATER_GRASS = BLOCKS.registerBlock(
+            "aurorian_water_grass", AurorianWaterGrassBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SEAGRASS));
+    public static final DeferredBlock<TallAurorianWaterGrassBlock> TALL_AURORIAN_WATER_GRASS = BLOCKS.registerBlock(
+            "tall_aurorian_water_grass", TallAurorianWaterGrassBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_SEAGRASS));
     public static final DeferredBlock<AurorianPlantBlock> PETUNIA_PLANT = plant("petunia_plant");
     public static final DeferredBlock<AurorianPlantBlock> NEBULA_BLOSSOM_CLUSTER = plant("nebula_blossom_cluster");
     public static final DeferredBlock<AurorianPlantBlock> MOON_FROST_FLOWER = plant("moon_frost_flower");
@@ -131,6 +144,15 @@ public final class ModBlocks {
                     .strength(0.1F)
                     .noCollision()
                     .noOcclusion());
+    public static final DeferredBlock<VineBlock> AURORIAN_VINE = BLOCKS.registerBlock(
+            "aurorian_vine", VineBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.VINE));
+    public static final DeferredBlock<AurorianTwistingVinesBlock> AURORIAN_TWISTING_VINES = BLOCKS.registerBlock(
+            "aurorian_twisting_vines", AurorianTwistingVinesBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.TWISTING_VINES));
+    public static final DeferredBlock<AurorianTwistingVinesPlantBlock> AURORIAN_TWISTING_VINES_PLANT = BLOCKS.registerBlock(
+            "aurorian_twisting_vines_plant", AurorianTwistingVinesPlantBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT));
 
     public static final DeferredBlock<RotatedPillarBlock> SILENT_TREE_LOG = BLOCKS.registerBlock(
             "silent_tree_log", RotatedPillarBlock::new,
@@ -216,7 +238,9 @@ public final class ModBlocks {
                         && block != AURORIAN_DIRT && block != AURORIAN_GRASS_BLOCK
                         && block != MOON_SAND_RIVER && block != MOON_DEW_BLOCK
                         && block != BLUEBERRY_BUSH && block != PEBBLE
-                        && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM)
+                        && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM
+                        && block != AURORIAN_TWISTING_VINES_PLANT
+                        && block != TALL_AURORIAN_WATER_GRASS)
                 .forEach(block -> ITEMS.registerSimpleBlockItem(block));
     }
 

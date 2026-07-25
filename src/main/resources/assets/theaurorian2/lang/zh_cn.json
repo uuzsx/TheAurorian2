@@ -5,6 +5,7 @@
     "block.theaurorian2.aurorian_cobblestone":  "极光石圆石",
     "block.theaurorian2.pebble":  "小石子",
     "block.theaurorian2.aurorian_dirt":  "极光泥土",
+    "block.theaurorian2.aurorian_clay":  "极光黏土",
     "block.theaurorian2.aurorian_grass_block":  "极光草方块",
     "block.theaurorian2.moon_sand_river":  "河床月沙",
     "biome.theaurorian2.aurorian_plains":  "极光平原",
@@ -99,5 +100,10 @@
     "gui.theaurorian2.training_dummy.last_hit_damage": "最后一击伤害：%s",
     "block.theaurorian2.brown_mushroom": "棕色蘑菇",
     "block.theaurorian2.dark_brown_mushroom": "深棕色蘑菇",
-    "block.theaurorian2.red_mushroom": "红色蘑菇"
+    "block.theaurorian2.red_mushroom": "红色蘑菇",
+    "block.theaurorian2.aurorian_water_grass": "极光水草",
+    "block.theaurorian2.tall_aurorian_water_grass": "高极光水草",
+    "block.theaurorian2.aurorian_vine": "极光藤蔓",
+    "block.theaurorian2.aurorian_twisting_vines": "极光缠绕藤",
+    "block.theaurorian2.aurorian_twisting_vines_plant": "极光缠绕藤"
 }
