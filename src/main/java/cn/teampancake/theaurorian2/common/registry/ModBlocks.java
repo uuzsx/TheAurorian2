@@ -8,6 +8,7 @@ import cn.teampancake.theaurorian2.common.block.AurorianTallGrassBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianTwistingVinesBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianTwistingVinesPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWaterGrassBlock;
+import cn.teampancake.theaurorian2.common.block.AstrologyTableBlock;
 import cn.teampancake.theaurorian2.common.block.BlueberryBushBlock;
 import cn.teampancake.theaurorian2.common.block.ColoredParticleLeavesBlock;
 import cn.teampancake.theaurorian2.common.block.GroundBranchBlock;
@@ -19,6 +20,7 @@ import cn.teampancake.theaurorian2.common.block.PebbleBlock;
 import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
 import cn.teampancake.theaurorian2.common.block.TallAurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.block.WallMushroomBlock;
+import cn.teampancake.theaurorian2.common.item.AstrologyTableItem;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -153,6 +155,12 @@ public final class ModBlocks {
     public static final DeferredBlock<AurorianTwistingVinesPlantBlock> AURORIAN_TWISTING_VINES_PLANT = BLOCKS.registerBlock(
             "aurorian_twisting_vines_plant", AurorianTwistingVinesPlantBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT));
+    public static final DeferredBlock<AstrologyTableBlock> ASTROLOGY_TABLE = BLOCKS.registerBlock(
+            "astrology_table", AstrologyTableBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                    .strength(6.0F)
+                    .lightLevel(state -> 7)
+                    .noOcclusion());
 
     public static final DeferredBlock<RotatedPillarBlock> SILENT_TREE_LOG = BLOCKS.registerBlock(
             "silent_tree_log", RotatedPillarBlock::new,
@@ -231,6 +239,8 @@ public final class ModBlocks {
             "blueberry",
             properties -> new BlockItem(
                     BLUEBERRY_BUSH.get(), properties.useItemDescriptionPrefix().food(Foods.SWEET_BERRIES)));
+    public static final DeferredItem<AstrologyTableItem> ASTROLOGY_TABLE_ITEM = ITEMS.registerItem(
+            "astrology_table", properties -> new AstrologyTableItem(ASTROLOGY_TABLE.get(), properties));
 
     static {
         BLOCKS.getEntries().stream()
@@ -239,6 +249,7 @@ public final class ModBlocks {
                         && block != MOON_SAND_RIVER && block != MOON_DEW_BLOCK
                         && block != BLUEBERRY_BUSH && block != PEBBLE
                         && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM
+                        && block != ASTROLOGY_TABLE
                         && block != AURORIAN_TWISTING_VINES_PLANT
                         && block != TALL_AURORIAN_WATER_GRASS)
                 .forEach(block -> ITEMS.registerSimpleBlockItem(block));

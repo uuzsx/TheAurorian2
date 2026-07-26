@@ -1,6 +1,8 @@
 package cn.teampancake.theaurorian2.common.world;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -12,10 +14,37 @@ import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 public final class AurorianBlessingCycle {
 
+    public enum Blessing {
+        EXPLORATION("exploration"),
+        COMBAT("combat"),
+        PROTECTION("protection"),
+        MINING("mining"),
+        GROWTH("growth");
+
+        private final String textureName;
+
+        Blessing(String textureName) {
+            this.textureName = textureName;
+        }
+
+        public int slot() {
+            return this.ordinal();
+        }
+
+        public String textureName() {
+            return this.textureName;
+        }
+
+        public static Blessing fromSlot(int slot) {
+            Blessing[] blessings = values();
+            return blessings[Math.floorMod(slot, blessings.length)];
+        }
+    }
+
     private static final ResourceKey<WorldClock> BLESSING_CLOCK = ResourceKey.create(
             Registries.WORLD_CLOCK, TheAurorian2.id("aurorian_blessing"));
     private static final long DAY_TICKS = 24_000L;
-    private static final long CYCLE_DAYS = 5L;
+    private static final long CYCLE_DAYS = Blessing.values().length;
     private static final long CYCLE_TICKS = DAY_TICKS * CYCLE_DAYS;
     private static final long PREPARE_NEXT_DAY_TICK = 18_000L;
 
@@ -51,6 +80,22 @@ public final class AurorianBlessingCycle {
         if (currentTicks != expectedTicks) {
             server.clockManager().setTotalTicks(blessingClock, expectedTicks);
         }
+    }
+
+    public static List<Blessing> forecast(MinecraftServer server, int forecastDays) {
+        if (forecastDays < 1) {
+            throw new IllegalArgumentException("Forecast length must be positive");
+        }
+
+        Holder<WorldClock> overworldClock = server.registryAccess().getOrThrow(WorldClocks.OVERWORLD);
+        long currentWorldDay = Math.floorDiv(server.clockManager().getTotalTicks(overworldClock), DAY_TICKS);
+        long worldSeed = server.overworld().getSeed();
+        List<Blessing> forecast = new ArrayList<>(forecastDays);
+        for (int daysAhead = 1; daysAhead <= forecastDays; daysAhead++) {
+            forecast.add(Blessing.fromSlot(blessingSlot(worldSeed, currentWorldDay + daysAhead)));
+        }
+
+        return List.copyOf(forecast);
     }
 
     private static int blessingSlot(long worldSeed, long worldDay) {

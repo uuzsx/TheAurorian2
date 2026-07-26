@@ -2,12 +2,14 @@ package cn.teampancake.theaurorian2;
 
 import com.mojang.logging.LogUtils;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
+import cn.teampancake.theaurorian2.common.registry.ModBlockEntities;
 import cn.teampancake.theaurorian2.common.registry.ModCreativeTabs;
 import cn.teampancake.theaurorian2.common.registry.ModEntities;
 import cn.teampancake.theaurorian2.common.registry.ModFeatures;
 import cn.teampancake.theaurorian2.common.registry.ModFluidTypes;
 import cn.teampancake.theaurorian2.common.registry.ModFluids;
 import cn.teampancake.theaurorian2.common.registry.ModItems;
+import cn.teampancake.theaurorian2.common.network.ModNetworking;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
 import cn.teampancake.theaurorian2.common.registry.ModStructures;
 import cn.teampancake.theaurorian2.common.registry.ModTreeDecorators;
@@ -32,6 +34,7 @@ public final class TheAurorian2 {
         ModFluidTypes.register(modEventBus);
         ModFluids.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModEntities.register(modEventBus);
         ModItems.register(modEventBus);
         ModTreeDecorators.register(modEventBus);
@@ -39,6 +42,7 @@ public final class TheAurorian2 {
         ModStructures.register(modEventBus);
         ModParticles.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
+        modEventBus.addListener(ModNetworking::registerPayloadHandlers);
         NeoForge.EVENT_BUS.addListener(AurorianBlessingCycle::onServerTick);
         modEventBus.addListener(this::commonSetup);
         LOGGER.info("Initializing The Aurorian 2");

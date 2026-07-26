@@ -105,5 +105,10 @@
     "block.theaurorian2.tall_aurorian_water_grass": "高极光水草",
     "block.theaurorian2.aurorian_vine": "极光藤蔓",
     "block.theaurorian2.aurorian_twisting_vines": "极光缠绕藤",
-    "block.theaurorian2.aurorian_twisting_vines_plant": "极光缠绕藤"
+    "block.theaurorian2.aurorian_twisting_vines_plant": "极光缠绕藤",
+    "block.theaurorian2.astrology_table": "占星仪",
+    "item.theaurorian2.astrology_table": "占星仪",
+    "gui.theaurorian2.astrology_forecast": "极光赐福预报",
+    "key.category.theaurorian2.main": "极光",
+    "key.theaurorian2.toggle_night_hud": "显示/隐藏极光夜 HUD"
 }

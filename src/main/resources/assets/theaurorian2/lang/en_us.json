@@ -105,5 +105,10 @@
     "block.theaurorian2.tall_aurorian_water_grass": "Tall Aurorian Water Grass",
     "block.theaurorian2.aurorian_vine": "Aurorian Vine",
     "block.theaurorian2.aurorian_twisting_vines": "Aurorian Twisting Vines",
-    "block.theaurorian2.aurorian_twisting_vines_plant": "Aurorian Twisting Vines"
+    "block.theaurorian2.aurorian_twisting_vines_plant": "Aurorian Twisting Vines",
+    "block.theaurorian2.astrology_table": "Astrology Table",
+    "item.theaurorian2.astrology_table": "Astrology Table",
+    "gui.theaurorian2.astrology_forecast": "Aurorian Blessing Forecast",
+    "key.category.theaurorian2.main": "The Aurorian 2",
+    "key.theaurorian2.toggle_night_hud": "Show/Hide Aurorian Night HUD"
 }
