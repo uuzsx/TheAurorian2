@@ -1,14 +1,18 @@
 package cn.teampancake.theaurorian2;
 
 import com.mojang.logging.LogUtils;
+import cn.teampancake.theaurorian2.common.enchantment.EnchantmentTooltips;
+import cn.teampancake.theaurorian2.common.entity.TrainingDummyCommands;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModBlockEntities;
 import cn.teampancake.theaurorian2.common.registry.ModCreativeTabs;
 import cn.teampancake.theaurorian2.common.registry.ModEntities;
+import cn.teampancake.theaurorian2.common.registry.ModEnchantmentEffectTypes;
 import cn.teampancake.theaurorian2.common.registry.ModFeatures;
 import cn.teampancake.theaurorian2.common.registry.ModFluidTypes;
 import cn.teampancake.theaurorian2.common.registry.ModFluids;
 import cn.teampancake.theaurorian2.common.registry.ModItems;
+import cn.teampancake.theaurorian2.common.registry.ModMobEffects;
 import cn.teampancake.theaurorian2.common.network.ModNetworking;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
 import cn.teampancake.theaurorian2.common.registry.ModStructures;
@@ -26,6 +30,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.transfer.fluid.DispenseFluidContainer;
 import org.slf4j.Logger;
@@ -44,6 +49,8 @@ public final class TheAurorian2 {
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModMobEffects.register(modEventBus);
+        ModEnchantmentEffectTypes.register(modEventBus);
         ModItems.register(modEventBus);
         ModTreeDecorators.register(modEventBus);
         ModFeatures.register(modEventBus);
@@ -51,8 +58,11 @@ public final class TheAurorian2 {
         ModParticles.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         modEventBus.addListener(ModNetworking::registerPayloadHandlers);
+        NeoForge.EVENT_BUS.addListener(EnchantmentTooltips::onItemTooltip);
+        NeoForge.EVENT_BUS.addListener(TrainingDummyCommands::register);
         NeoForge.EVENT_BUS.addListener(AurorianBlessingCycle::onServerTick);
         NeoForge.EVENT_BUS.addListener(this::onFluidPlaceBlock);
+        NeoForge.EVENT_BUS.addListener(this::onBlockToolModification);
         modEventBus.addListener(this::commonSetup);
         LOGGER.info("Initializing The Aurorian 2");
     }
@@ -67,6 +77,12 @@ public final class TheAurorian2 {
                 && level.dimensionTypeRegistration().is(AURORIAN_DIMENSION_TYPE)
                 && (event.getNewState().is(Blocks.STONE) || event.getNewState().is(Blocks.COBBLESTONE))) {
             event.setNewState(ModBlocks.AURORIAN_STONE.get().defaultBlockState());
+        }
+    }
+
+    private void onBlockToolModification(BlockEvent.BlockToolModificationEvent event) {
+        if (event.getItemAbility() == ItemAbilities.AXE_STRIP) {
+            ModBlocks.getStrippedState(event.getState()).ifPresent(event::setFinalState);
         }
     }
 

@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "type":  "minecraft:model",
+                  "model":  "theaurorian2:block/stripped_silent_tree_wood"
+              }
+}

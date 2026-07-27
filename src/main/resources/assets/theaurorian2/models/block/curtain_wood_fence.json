@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_inventory",
+  "textures": {
+    "texture": "theaurorian2:block/curtain_tree_planks"
+  }
+}

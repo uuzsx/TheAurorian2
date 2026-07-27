@@ -1,0 +1,39 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.theaurorian2.freeze_aspect"
+  },
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "victim",
+        "effect": {
+          "type": "theaurorian2:freeze_aspect",
+          "placeholder": 0
+        },
+        "enchanted": "attacker",
+        "requirements": {
+          "condition": "minecraft:damage_source_properties",
+          "predicate": {
+            "is_direct": true
+          }
+        }
+      }
+    ]
+  },
+  "exclusive_set": "#theaurorian2:exclusive_set/freeze_aspect",
+  "max_cost": {
+    "base": 60,
+    "per_level_above_first": 10
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 20
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#theaurorian2:enchantable/freeze_aspect",
+  "weight": 2
+}

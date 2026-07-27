@@ -6,6 +6,7 @@ import cn.teampancake.theaurorian2.client.hud.AurorianNightHud;
 import cn.teampancake.theaurorian2.client.particle.WickParticle;
 import cn.teampancake.theaurorian2.client.resource.AurorianGrassColorReloadListener;
 import cn.teampancake.theaurorian2.client.renderer.DamageNumberRenderer;
+import cn.teampancake.theaurorian2.client.renderer.AurorianChestRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AstrologyTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.TrainingDummyRenderer;
 import cn.teampancake.theaurorian2.client.screen.AstrologyForecastScreen;
@@ -50,6 +51,7 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntities.TRAINING_DUMMY.get(), TrainingDummyRenderer::new);
         event.registerEntityRenderer(ModEntities.DAMAGE_NUMBER.get(), DamageNumberRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ASTROLOGY_TABLE.get(), AstrologyTableRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_CHEST.get(), AurorianChestRenderer::new);
     }
 
     @SubscribeEvent

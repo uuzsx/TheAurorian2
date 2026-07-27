@@ -1,0 +1,14 @@
+{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "building",
+    "key":  {
+                "#":  "theaurorian2:silent_tree_planks"
+            },
+    "pattern":  [
+                    "###"
+                ],
+    "result":  {
+                   "count":  6,
+                   "id":  "theaurorian2:silent_wood_slab"
+               }
+}

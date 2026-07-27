@@ -2,6 +2,8 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.block.entity.AstrologyTableBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.AurorianChestBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.AurorianFurnaceBlockEntity;
 import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -20,6 +22,18 @@ public final class ModBlockEntities {
                     () -> new BlockEntityType<>(
                             AstrologyTableBlockEntity::new,
                             Set.of(ModBlocks.ASTROLOGY_TABLE.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianFurnaceBlockEntity>> AURORIAN_FURNACE =
+            BLOCK_ENTITY_TYPES.register(
+                    "aurorian_furnace",
+                    () -> new BlockEntityType<>(
+                            AurorianFurnaceBlockEntity::new,
+                            Set.of(ModBlocks.AURORIAN_FURNACE.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianChestBlockEntity>> AURORIAN_CHEST =
+            BLOCK_ENTITY_TYPES.register(
+                    "aurorian_chest",
+                    () -> new BlockEntityType<>(
+                            AurorianChestBlockEntity::new,
+                            Set.of(ModBlocks.AURORIAN_CHEST.get())));
 
     private ModBlockEntities() {
     }

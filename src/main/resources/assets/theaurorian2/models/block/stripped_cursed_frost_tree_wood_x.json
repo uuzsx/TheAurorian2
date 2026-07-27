@@ -1,0 +1,7 @@
+{
+    "parent":  "minecraft:block/cube_column_uv_locked_x",
+    "textures":  {
+                     "end":  "theaurorian2:block/stripped_cursed_frost_tree_log",
+                     "side":  "theaurorian2:block/stripped_cursed_frost_tree_log"
+                 }
+}

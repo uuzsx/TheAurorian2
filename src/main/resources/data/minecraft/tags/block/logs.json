@@ -1,8 +1,6 @@
 ﻿{
     "replace":  false,
     "values":  [
-                   "theaurorian2:silent_tree_log",
-                   "theaurorian2:curtain_tree_log",
-                   "theaurorian2:cursed_frost_tree_log"
+                   "#theaurorian2:aurorian_logs"
                ]
 }

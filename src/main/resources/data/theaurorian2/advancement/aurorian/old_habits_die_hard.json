@@ -1,0 +1,29 @@
+{
+  "parent": "theaurorian2:aurorian/a_new_path",
+  "criteria": {
+    "aurorian_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#theaurorian2:aurorian_logs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.theaurorian2.aurorian.old_habits_die_hard.description"
+    },
+    "frame": "task",
+    "icon": {
+      "id": "theaurorian2:silent_tree_log"
+    },
+    "title": {
+      "translate": "advancements.theaurorian2.aurorian.old_habits_die_hard.title"
+    }
+  },
+  "requirements": [["aurorian_wood"]],
+  "sends_telemetry_event": false
+}

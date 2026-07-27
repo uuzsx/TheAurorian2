@@ -58,8 +58,37 @@ public final class TrainingDummyEntity extends LivingEntity implements GeoEntity
     public static AttributeSupplier.Builder createAttributes() {
         return LivingEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 1024.0)
+                .add(Attributes.ARMOR, 0.0)
+                .add(Attributes.ARMOR_TOUGHNESS, 0.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.0);
+    }
+
+    public void setTestArmor(double armor) {
+        var attribute = this.getAttribute(Attributes.ARMOR);
+        if (attribute != null) {
+            attribute.setBaseValue(armor);
+        }
+    }
+
+    public void setTestArmorToughness(double toughness) {
+        var attribute = this.getAttribute(Attributes.ARMOR_TOUGHNESS);
+        if (attribute != null) {
+            attribute.setBaseValue(toughness);
+        }
+    }
+
+    public double getTestArmor() {
+        return this.getAttributeValue(Attributes.ARMOR);
+    }
+
+    public double getTestArmorToughness() {
+        return this.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+    }
+
+    public void resetTestDefenses() {
+        this.setTestArmor(0.0);
+        this.setTestArmorToughness(0.0);
     }
 
     @Override

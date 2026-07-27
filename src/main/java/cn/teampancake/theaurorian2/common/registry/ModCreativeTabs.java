@@ -1,10 +1,16 @@
 package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import java.util.stream.IntStream;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -37,6 +43,10 @@ public final class ModCreativeTabs {
                     .icon(() -> new ItemStack(ModBlocks.ASTROLOGY_TABLE_ITEM.get()))
                     .displayItems((parameters, output) -> {
                         output.accept(ModBlocks.ASTROLOGY_TABLE_ITEM.get());
+                        output.accept(ModBlocks.AURORIAN_CRAFTING_TABLE.get());
+                        output.accept(ModBlocks.AURORIAN_FURNACE.get());
+                        output.accept(ModBlocks.AURORIAN_CHEST.get());
+                        output.accept(ModBlocks.SILENT_WOOD_LADDER.get());
                         output.accept(ModBlocks.MOON_DEW_BUCKET.get());
                         output.accept(ModBlocks.AURORIAN_FLOWER_POT.get());
                         output.accept(ModItems.TRAINING_DUMMY.get());
@@ -48,7 +58,7 @@ public final class ModCreativeTabs {
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.theaurorian2.equipment"))
                     .icon(() -> new ItemStack(ModItems.DIAMOND_ARCHER_CHESTPLATE.get()))
-                    .displayItems((parameters, output) -> addEquipment(output))
+                    .displayItems(ModCreativeTabs::addEquipment)
                     .build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FOOD = TABS.register(
@@ -56,11 +66,7 @@ public final class ModCreativeTabs {
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.theaurorian2.food"))
                     .icon(() -> new ItemStack(ModBlocks.BLUEBERRY.get()))
-                    .displayItems((parameters, output) -> {
-                        output.accept(ModBlocks.BLUEBERRY.get());
-                        output.accept(ModBlocks.WHITE_GROUND_MUSHROOM_ITEM.get());
-                        output.accept(ModBlocks.BLUE_GROUND_MUSHROOM_ITEM.get());
-                    })
+                    .displayItems(ModCreativeTabs::addFood)
                     .build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> INGREDIENTS = TABS.register(
@@ -92,9 +98,25 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.AURORIAN_BRICK_SLAB.get());
         output.accept(ModBlocks.AURORIAN_BRICK_WALL.get());
         output.accept(ModBlocks.AURORIAN_TERRACOTTA.get());
-        output.accept(ModBlocks.SILENT_TREE_LOG.get());
-        output.accept(ModBlocks.CURTAIN_TREE_LOG.get());
-        output.accept(ModBlocks.CURSED_FROST_TREE_LOG.get());
+        addWoodSet(output, ModBlocks.SILENT_WOOD);
+        addWoodSet(output, ModBlocks.CURTAIN_WOOD);
+        addWoodSet(output, ModBlocks.CURSED_FROST_WOOD);
+    }
+
+    private static void addWoodSet(CreativeModeTab.Output output, ModBlocks.WoodSet wood) {
+        output.accept(wood.log().get());
+        output.accept(wood.strippedLog().get());
+        output.accept(wood.wood().get());
+        output.accept(wood.strippedWood().get());
+        output.accept(wood.planks().get());
+        output.accept(wood.stairs().get());
+        output.accept(wood.slab().get());
+        output.accept(wood.fence().get());
+        output.accept(wood.fenceGate().get());
+        output.accept(wood.door().get());
+        output.accept(wood.trapdoor().get());
+        output.accept(wood.pressurePlate().get());
+        output.accept(wood.button().get());
     }
 
     private static void addNaturalBlocks(CreativeModeTab.Output output) {
@@ -170,7 +192,8 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.AURORIAN_TWISTING_VINES.get());
     }
 
-    private static void addEquipment(CreativeModeTab.Output output) {
+    private static void addEquipment(
+            CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         output.accept(ModItems.DIAMOND_ARCHER_HELMET.get());
         output.accept(ModItems.DIAMOND_ARCHER_CHESTPLATE.get());
         output.accept(ModItems.DIAMOND_ARCHER_LEGGINGS.get());
@@ -187,6 +210,77 @@ public final class ModCreativeTabs {
         output.accept(ModItems.NETHERITE_ARCHER_CHESTPLATE.get());
         output.accept(ModItems.NETHERITE_ARCHER_LEGGINGS.get());
         output.accept(ModItems.NETHERITE_ARCHER_BOOTS.get());
+
+        parameters.holders().lookup(Registries.ENCHANTMENT).ifPresent(enchantments -> {
+            addEnchantmentBooks(output, enchantments, ModEnchantments.IMPALE);
+            addEnchantmentBooks(output, enchantments, ModEnchantments.OVERLOAD);
+            addEnchantmentBooks(output, enchantments, ModEnchantments.SOUL_SLASH);
+            addEnchantmentBooks(output, enchantments, ModEnchantments.NIGHT_WALKER);
+            addEnchantmentBooks(output, enchantments, ModEnchantments.FREEZE_ASPECT);
+        });
+    }
+
+    private static void addFood(
+            CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+        output.accept(ModBlocks.BLUEBERRY.get());
+        output.accept(ModBlocks.WHITE_GROUND_MUSHROOM_ITEM.get());
+        output.accept(ModBlocks.BLUE_GROUND_MUSHROOM_ITEM.get());
+
+        output.accept(ModItems.TEA_CUP.get());
+        output.accept(ModItems.LAVENDER_TEA.get());
+        output.accept(ModItems.SILK_BERRY_TEA.get());
+        output.accept(ModItems.LAVENDER_SEEDY_TEA.get());
+        output.accept(ModItems.PETUNIA_TEA.get());
+        output.accept(ModItems.BEPSI.get());
+        output.accept(ModItems.AURORIAN_SPECIALTY_DRINK.get());
+        output.accept(ModItems.MOONLIT_BLUEBERRY_SPECIALTY_DRINK.get());
+        output.accept(ModItems.SLEEPING_BLACK_TEA.get());
+        output.accept(ModItems.WEEPING_WILLOW_SAP.get());
+
+        output.accept(ModItems.AURORIAN_BEEF.get());
+        output.accept(ModItems.AURORIAN_PORK.get());
+        output.accept(ModItems.AURORIAN_MUTTON.get());
+        output.accept(ModItems.AURORIAN_RABBIT.get());
+        output.accept(ModItems.COOKED_AURORIAN_BEEF.get());
+        output.accept(ModItems.COOKED_AURORIAN_PORK.get());
+        output.accept(ModItems.COOKED_AURORIAN_MUTTON.get());
+        output.accept(ModItems.COOKED_AURORIAN_RABBIT.get());
+        output.accept(ModItems.SILK_BERRY_JAM.get());
+        output.accept(ModItems.SILK_BERRY_JAM_SANDWICH.get());
+        output.accept(ModItems.AURORIAN_SLIMEBALL.get());
+        output.accept(ModItems.SILK_SHROOM_STEW.get());
+        output.accept(ModItems.LAVENDER_BREAD.get());
+        output.accept(ModItems.SOULLESS_FLESH.get());
+        output.accept(ModItems.MOON_FISH.get());
+        output.accept(ModItems.AURORIAN_WINGED_FISH.get());
+        output.accept(ModItems.COOKED_MOON_FISH.get());
+        output.accept(ModItems.COOKED_AURORIAN_WINGED_FISH.get());
+        output.accept(ModItems.SILK_BERRY.get());
+        output.accept(ModItems.CANDY.get());
+        output.accept(ModItems.CANDY_CANE.get());
+        output.accept(ModItems.GINGERBREAD_MAN.get());
+        output.accept(ModItems.AURORIAN_BACON.get());
+        output.accept(ModItems.STRANGE_MEAT.get());
+        output.accept(ModItems.LAVENDER_SALAD.get());
+        output.accept(ModItems.FAKE_ALGAL_PIT_FISH.get());
+        output.accept(ModItems.SASHIMI.get());
+        output.accept(ModItems.SILENT_WOOD_FRUIT.get());
+        output.accept(ModItems.GOLDEN_SILENT_WOOD_FRUIT.get());
+        output.accept(ModItems.KEBAB_WITH_MUSHROOM.get());
+        output.accept(ModItems.AURORIAN_WINTER_ROOT.get());
+        output.accept(ModItems.ROASTED_AURORIAN_WINTER_ROOT.get());
+        output.accept(ModItems.DARK_STONE_SHRIMP.get());
+        output.accept(ModItems.WHITE_CHOCOLATE.get());
+    }
+
+    private static void addEnchantmentBooks(
+            CreativeModeTab.Output output,
+            HolderLookup<Enchantment> enchantments,
+            ResourceKey<Enchantment> key) {
+        enchantments.get(key).ifPresent(enchantment -> IntStream
+                .rangeClosed(enchantment.value().getMinLevel(), enchantment.value().getMaxLevel())
+                .mapToObj(level -> EnchantmentHelper.createBook(new EnchantmentInstance(enchantment, level)))
+                .forEach(output::accept));
     }
 
     public static void register(IEventBus modEventBus) {

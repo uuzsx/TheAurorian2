@@ -1,0 +1,16 @@
+{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "misc",
+    "key":  {
+                "#":  "theaurorian2:aurorian_cobblestone"
+            },
+    "pattern":  [
+                    "###",
+                    "# #",
+                    "###"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "theaurorian2:aurorian_furnace"
+               }
+}

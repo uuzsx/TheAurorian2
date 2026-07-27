@@ -1,0 +1,48 @@
+{
+  "parent": "theaurorian2:aurorian/root",
+  "criteria": {
+    "entered_dimension": {
+      "conditions": {
+        "to": "theaurorian2:the_aurorian"
+      },
+      "trigger": "minecraft:changed_dimension"
+    },
+    "in_aurorian_biome": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "#theaurorian2:is_aurorian"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.theaurorian2.aurorian.a_new_path.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "theaurorian2:aurorian_grass_block"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.theaurorian2.aurorian.a_new_path.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_dimension",
+      "in_aurorian_biome"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

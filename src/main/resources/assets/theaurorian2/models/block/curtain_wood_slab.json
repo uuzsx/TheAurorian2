@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "theaurorian2:block/curtain_tree_planks",
+    "side": "theaurorian2:block/curtain_tree_planks",
+    "top": "theaurorian2:block/curtain_tree_planks"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "theaurorian2:block/aurorian_crafting_table"
+    },
+    "facing=east": {
+      "model": "theaurorian2:block/aurorian_crafting_table",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "theaurorian2:block/aurorian_crafting_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "theaurorian2:block/aurorian_crafting_table",
+      "y": 270
+    }
+  }
+}

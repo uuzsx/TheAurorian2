@@ -12,6 +12,9 @@ import cn.teampancake.theaurorian2.common.block.AurorianTwistingVinesPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWaterSurfacePlantBlock;
 import cn.teampancake.theaurorian2.common.block.AstrologyTableBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianChestBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianCraftingTableBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianFurnaceBlock;
 import cn.teampancake.theaurorian2.common.block.BlueberryBushBlock;
 import cn.teampancake.theaurorian2.common.block.ColoredParticleLeavesBlock;
 import cn.teampancake.theaurorian2.common.block.ColdAurorianPlantBlock;
@@ -28,6 +31,7 @@ import cn.teampancake.theaurorian2.common.block.WallMushroomBlock;
 import cn.teampancake.theaurorian2.common.item.AstrologyTableItem;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PlaceOnWaterBlockItem;
 import net.minecraft.world.food.Foods;
@@ -37,6 +41,12 @@ import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.AzaleaBlock;
 import net.minecraft.world.level.block.CarpetBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -45,6 +55,7 @@ import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SporeBlossomBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Items;
@@ -57,10 +68,15 @@ import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.Optional;
 
 public final class ModBlocks {
 
@@ -277,6 +293,38 @@ public final class ModBlocks {
             "cursed_frost_tree_sapling", properties -> new SaplingBlock(ModTreeGrowers.CURSED_FROST_TREE, properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING));
 
+    public static final WoodSet SILENT_WOOD = woodSet(
+            "silent_tree", "silent_wood", SILENT_TREE_LOG,
+            Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG, Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD,
+            Blocks.OAK_PLANKS, Blocks.OAK_STAIRS, Blocks.OAK_SLAB, Blocks.OAK_FENCE,
+            Blocks.OAK_FENCE_GATE, Blocks.OAK_DOOR, Blocks.OAK_TRAPDOOR,
+            Blocks.OAK_PRESSURE_PLATE, Blocks.OAK_BUTTON, BlockSetType.OAK, WoodType.OAK);
+    public static final WoodSet CURTAIN_WOOD = woodSet(
+            "curtain_tree", "curtain_wood", CURTAIN_TREE_LOG,
+            Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG, Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD,
+            Blocks.BIRCH_PLANKS, Blocks.BIRCH_STAIRS, Blocks.BIRCH_SLAB, Blocks.BIRCH_FENCE,
+            Blocks.BIRCH_FENCE_GATE, Blocks.BIRCH_DOOR, Blocks.BIRCH_TRAPDOOR,
+            Blocks.BIRCH_PRESSURE_PLATE, Blocks.BIRCH_BUTTON, BlockSetType.BIRCH, WoodType.BIRCH);
+    public static final WoodSet CURSED_FROST_WOOD = woodSet(
+            "cursed_frost_tree", "cursed_frost_wood", CURSED_FROST_TREE_LOG,
+            Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG, Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD,
+            Blocks.SPRUCE_PLANKS, Blocks.SPRUCE_STAIRS, Blocks.SPRUCE_SLAB, Blocks.SPRUCE_FENCE,
+            Blocks.SPRUCE_FENCE_GATE, Blocks.SPRUCE_DOOR, Blocks.SPRUCE_TRAPDOOR,
+            Blocks.SPRUCE_PRESSURE_PLATE, Blocks.SPRUCE_BUTTON, BlockSetType.SPRUCE, WoodType.SPRUCE);
+
+    public static final DeferredBlock<LadderBlock> SILENT_WOOD_LADDER = BLOCKS.registerBlock(
+            "silent_wood_ladder", LadderBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER));
+    public static final DeferredBlock<AurorianCraftingTableBlock> AURORIAN_CRAFTING_TABLE = BLOCKS.registerBlock(
+            "aurorian_crafting_table", AurorianCraftingTableBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE));
+    public static final DeferredBlock<AurorianFurnaceBlock> AURORIAN_FURNACE = BLOCKS.registerBlock(
+            "aurorian_furnace", AurorianFurnaceBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE));
+    public static final DeferredBlock<AurorianChestBlock> AURORIAN_CHEST = BLOCKS.registerBlock(
+            "aurorian_chest", AurorianChestBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST));
+
     public static final DeferredBlock<DropExperienceBlock> AURORIAN_COAL_ORE = ore("aurorian_coal_ore", Blocks.COAL_ORE, UniformInt.of(0, 2));
     public static final DeferredBlock<DropExperienceBlock> AURORIAN_IRON_ORE = ore("aurorian_iron_ore", Blocks.IRON_ORE, ConstantInt.ZERO);
     public static final DeferredBlock<DropExperienceBlock> AURORIAN_COPPER_ORE = ore("aurorian_copper_ore", Blocks.COPPER_ORE, ConstantInt.ZERO);
@@ -333,6 +381,12 @@ public final class ModBlocks {
                     BLUEBERRY_BUSH.get(), properties.useItemDescriptionPrefix().food(Foods.SWEET_BERRIES)));
     public static final DeferredItem<AstrologyTableItem> ASTROLOGY_TABLE_ITEM = ITEMS.registerItem(
             "astrology_table", properties -> new AstrologyTableItem(ASTROLOGY_TABLE.get(), properties));
+    public static final DeferredItem<DoubleHighBlockItem> SILENT_WOOD_DOOR_ITEM = doorItem(
+            "silent_wood_door", SILENT_WOOD.door());
+    public static final DeferredItem<DoubleHighBlockItem> CURTAIN_WOOD_DOOR_ITEM = doorItem(
+            "curtain_wood_door", CURTAIN_WOOD.door());
+    public static final DeferredItem<DoubleHighBlockItem> CURSED_FROST_WOOD_DOOR_ITEM = doorItem(
+            "cursed_frost_wood_door", CURSED_FROST_WOOD.door());
 
     static {
         BLOCKS.getEntries().stream()
@@ -343,6 +397,8 @@ public final class ModBlocks {
                         && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM
                         && block != AURORIAN_LILY_PAD && block != AURORIAN_WATER_MUSHROOM
                         && block != ASTROLOGY_TABLE
+                        && block != SILENT_WOOD.door() && block != CURTAIN_WOOD.door()
+                        && block != CURSED_FROST_WOOD.door()
                         && block != AURORIAN_TWISTING_VINES_PLANT
                         && block != DEW_CAVE_VINES_PLANT
                         && block != TALL_AURORIAN_WATER_GRASS)
@@ -360,6 +416,109 @@ public final class ModBlocks {
     private static DeferredBlock<RedStoneOreBlock> redstoneOre(String name, Block vanillaOre) {
         return BLOCKS.registerBlock(name, RedStoneOreBlock::new,
                 () -> BlockBehaviour.Properties.ofFullCopy(vanillaOre));
+    }
+
+    private static WoodSet woodSet(
+            String treeName,
+            String woodName,
+            DeferredBlock<RotatedPillarBlock> log,
+            Block vanillaLog,
+            Block vanillaStrippedLog,
+            Block vanillaWood,
+            Block vanillaStrippedWood,
+            Block vanillaPlanks,
+            Block vanillaStairs,
+            Block vanillaSlab,
+            Block vanillaFence,
+            Block vanillaFenceGate,
+            Block vanillaDoor,
+            Block vanillaTrapdoor,
+            Block vanillaPressurePlate,
+            Block vanillaButton,
+            BlockSetType blockSetType,
+            WoodType woodType) {
+        DeferredBlock<RotatedPillarBlock> strippedLog = BLOCKS.registerBlock(
+                "stripped_" + treeName + "_log", RotatedPillarBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaStrippedLog));
+        DeferredBlock<RotatedPillarBlock> wood = BLOCKS.registerBlock(
+                treeName + "_wood", RotatedPillarBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaWood));
+        DeferredBlock<RotatedPillarBlock> strippedWood = BLOCKS.registerBlock(
+                "stripped_" + treeName + "_wood", RotatedPillarBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaStrippedWood));
+        DeferredBlock<Block> planks = BLOCKS.registerSimpleBlock(
+                treeName + "_planks", () -> BlockBehaviour.Properties.ofFullCopy(vanillaPlanks));
+        DeferredBlock<StairBlock> stairs = BLOCKS.registerBlock(
+                woodName + "_stairs",
+                properties -> new StairBlock(planks.get().defaultBlockState(), properties),
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaStairs));
+        DeferredBlock<SlabBlock> slab = BLOCKS.registerBlock(
+                woodName + "_slab", SlabBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaSlab));
+        DeferredBlock<FenceBlock> fence = BLOCKS.registerBlock(
+                woodName + "_fence", FenceBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaFence));
+        DeferredBlock<FenceGateBlock> fenceGate = BLOCKS.registerBlock(
+                woodName + "_fence_gate", properties -> new FenceGateBlock(woodType, properties),
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaFenceGate));
+        DeferredBlock<DoorBlock> door = BLOCKS.registerBlock(
+                woodName + "_door", properties -> new DoorBlock(blockSetType, properties),
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaDoor));
+        DeferredBlock<TrapDoorBlock> trapdoor = BLOCKS.registerBlock(
+                woodName + "_trapdoor", properties -> new TrapDoorBlock(blockSetType, properties),
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaTrapdoor));
+        DeferredBlock<PressurePlateBlock> pressurePlate = BLOCKS.registerBlock(
+                woodName + "_pressure_plate", properties -> new PressurePlateBlock(blockSetType, properties),
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaPressurePlate));
+        DeferredBlock<ButtonBlock> button = BLOCKS.registerBlock(
+                woodName + "_button", properties -> new ButtonBlock(blockSetType, 30, properties),
+                () -> BlockBehaviour.Properties.ofFullCopy(vanillaButton));
+        return new WoodSet(
+                log, strippedLog, wood, strippedWood, planks, stairs, slab, fence,
+                fenceGate, door, trapdoor, pressurePlate, button);
+    }
+
+    private static DeferredItem<DoubleHighBlockItem> doorItem(
+            String name, DeferredBlock<DoorBlock> door) {
+        return ITEMS.registerItem(
+                name, properties -> new DoubleHighBlockItem(door.get(), properties.useBlockDescriptionPrefix()));
+    }
+
+    public static Optional<BlockState> getStrippedState(BlockState state) {
+        return SILENT_WOOD.getStrippedState(state)
+                .or(() -> CURTAIN_WOOD.getStrippedState(state))
+                .or(() -> CURSED_FROST_WOOD.getStrippedState(state));
+    }
+
+    public record WoodSet(
+            DeferredBlock<RotatedPillarBlock> log,
+            DeferredBlock<RotatedPillarBlock> strippedLog,
+            DeferredBlock<RotatedPillarBlock> wood,
+            DeferredBlock<RotatedPillarBlock> strippedWood,
+            DeferredBlock<Block> planks,
+            DeferredBlock<StairBlock> stairs,
+            DeferredBlock<SlabBlock> slab,
+            DeferredBlock<FenceBlock> fence,
+            DeferredBlock<FenceGateBlock> fenceGate,
+            DeferredBlock<DoorBlock> door,
+            DeferredBlock<TrapDoorBlock> trapdoor,
+            DeferredBlock<PressurePlateBlock> pressurePlate,
+            DeferredBlock<ButtonBlock> button) {
+
+        private Optional<BlockState> getStrippedState(BlockState state) {
+            if (state.is(this.log.get())) {
+                return Optional.of(copyAxis(state, this.strippedLog.get()));
+            }
+            if (state.is(this.wood.get())) {
+                return Optional.of(copyAxis(state, this.strippedWood.get()));
+            }
+            return Optional.empty();
+        }
+
+        private static BlockState copyAxis(BlockState source, RotatedPillarBlock target) {
+            return target.defaultBlockState().setValue(
+                    RotatedPillarBlock.AXIS, source.getValue(RotatedPillarBlock.AXIS));
+        }
     }
 
     private static DeferredBlock<AurorianPlantBlock> plant(String name) {
