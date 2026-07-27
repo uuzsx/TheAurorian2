@@ -15,12 +15,18 @@ import cn.teampancake.theaurorian2.common.registry.ModStructures;
 import cn.teampancake.theaurorian2.common.registry.ModTreeDecorators;
 import cn.teampancake.theaurorian2.common.world.AurorianBlessingCycle;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.transfer.fluid.DispenseFluidContainer;
 import org.slf4j.Logger;
 
@@ -29,6 +35,8 @@ public final class TheAurorian2 {
 
     public static final String MOD_ID = "theaurorian2";
     public static final Logger LOGGER = LogUtils.getLogger();
+    private static final ResourceKey<DimensionType> AURORIAN_DIMENSION_TYPE = ResourceKey.create(
+            Registries.DIMENSION_TYPE, id("the_aurorian"));
 
     public TheAurorian2(IEventBus modEventBus, ModContainer modContainer) {
         ModFluidTypes.register(modEventBus);
@@ -44,6 +52,7 @@ public final class TheAurorian2 {
         ModCreativeTabs.register(modEventBus);
         modEventBus.addListener(ModNetworking::registerPayloadHandlers);
         NeoForge.EVENT_BUS.addListener(AurorianBlessingCycle::onServerTick);
+        NeoForge.EVENT_BUS.addListener(this::onFluidPlaceBlock);
         modEventBus.addListener(this::commonSetup);
         LOGGER.info("Initializing The Aurorian 2");
     }
@@ -51,6 +60,14 @@ public final class TheAurorian2 {
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> DispenserBlock.registerBehavior(
                 ModBlocks.MOON_DEW_BUCKET.get(), DispenseFluidContainer.getInstance()));
+    }
+
+    private void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
+        if (event.getLevel() instanceof Level level
+                && level.dimensionTypeRegistration().is(AURORIAN_DIMENSION_TYPE)
+                && (event.getNewState().is(Blocks.STONE) || event.getNewState().is(Blocks.COBBLESTONE))) {
+            event.setNewState(ModBlocks.AURORIAN_STONE.get().defaultBlockState());
+        }
     }
 
     public static Identifier id(String path) {

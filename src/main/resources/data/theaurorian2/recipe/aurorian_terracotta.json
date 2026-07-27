@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": "theaurorian2:aurorian_clay",
+  "result": { "id": "theaurorian2:aurorian_terracotta" }
+}

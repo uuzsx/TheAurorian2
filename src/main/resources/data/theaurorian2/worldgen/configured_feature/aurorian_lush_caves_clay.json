@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:random_boolean_selector",
+  "config": {
+    "feature_false": {
+      "feature": "theaurorian2:aurorian_clay_pool",
+      "placement": []
+    },
+    "feature_true": {
+      "feature": "theaurorian2:aurorian_clay_patch",
+      "placement": []
+    }
+  }
+}

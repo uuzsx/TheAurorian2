@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:block",
+  "pools": [{
+    "bonus_rolls": 0.0,
+    "entries": [{ "type": "minecraft:item", "name": "theaurorian2:luminous_moss_block" }],
+    "rolls": 1.0
+  }]
+}

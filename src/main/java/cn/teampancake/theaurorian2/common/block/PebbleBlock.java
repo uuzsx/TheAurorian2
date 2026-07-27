@@ -3,6 +3,8 @@ package cn.teampancake.theaurorian2.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -76,6 +78,7 @@ public final class PebbleBlock extends Block {
             if (!player.addItem(pebble)) {
                 player.drop(pebble, false);
             }
+            playPickupSound(level, player);
             level.removeBlock(pos, false);
         }
         return InteractionResult.SUCCESS;
@@ -83,7 +86,25 @@ public final class PebbleBlock extends Block {
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP);
+        BlockPos belowPos = pos.below();
+        BlockState belowState = level.getBlockState(belowPos);
+        return !belowState.is(Blocks.ICE)
+                && !belowState.is(Blocks.PACKED_ICE)
+                && !belowState.is(Blocks.BLUE_ICE)
+                && !belowState.is(Blocks.FROSTED_ICE)
+                && belowState.isFaceSturdy(level, belowPos, Direction.UP);
+    }
+
+    private static void playPickupSound(Level level, Player player) {
+        level.playSound(
+                null,
+                player.getX(),
+                player.getY(),
+                player.getZ(),
+                SoundEvents.ITEM_PICKUP,
+                SoundSource.PLAYERS,
+                0.2F,
+                ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);
     }
 
     @Override

@@ -9,6 +9,7 @@
   ],
   "downfall": 0.4,
   "effects": {
+    "grass_color": "#b8d4ff",
     "water_color": "#3f76e4"
   },
   "features": [
@@ -55,14 +56,14 @@
     [],
     [
       "theaurorian2:trees_cursed_frost_forest",
-      "theaurorian2:patch_blueberry_bush",
-      "theaurorian2:patch_forest_branches",
-      "theaurorian2:patch_tall_wick_grass",
-      "theaurorian2:patch_silent_forest_tall_grass",
-      "theaurorian2:patch_silent_forest_flowers",
-      "theaurorian2:patch_silent_forest_grass"
+      "theaurorian2:patch_tall_aurorian_grass_snowy_forest",
+      "theaurorian2:patch_aurorian_snowy_flowers",
+      "theaurorian2:patch_aurorian_snowy_grass",
+      "theaurorian2:patch_blueberry_rare"
     ],
-    []
+    [
+      "minecraft:freeze_top_layer"
+    ]
   ],
   "has_precipitation": true,
   "spawn_costs": {},
@@ -76,5 +77,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.3
+  "temperature": -0.5
 }

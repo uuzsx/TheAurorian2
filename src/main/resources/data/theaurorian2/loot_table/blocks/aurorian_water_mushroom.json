@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "theaurorian2:aurorian_water_mushroom"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "theaurorian2:blocks/aurorian_water_mushroom"
+}

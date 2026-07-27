@@ -2,6 +2,7 @@ package cn.teampancake.theaurorian2.client.screen;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.world.AurorianBlessingCycle;
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
@@ -10,6 +11,7 @@ import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.FormattedCharSequence;
 
 public final class AstrologyForecastScreen extends Screen {
 
@@ -25,6 +27,12 @@ public final class AstrologyForecastScreen extends Screen {
     private static final int CORNER_WIDTH = 36;
     private static final int CORNER_HEIGHT = 28;
     private static final int EDGE_INSET = 4;
+    private static final int TEXT_AREA_LEFT = 7;
+    private static final int TEXT_AREA_TOP = 122;
+    private static final int TEXT_AREA_WIDTH = 128;
+    private static final int TEXT_AREA_HEIGHT = 48;
+    private static final int TEXT_LINE_SPACING = 12;
+    private static final int TEXT_COLOR = 0xFFA05D49;
 
     private final List<AurorianBlessingCycle.Blessing> forecast;
     private int currentPage;
@@ -93,6 +101,28 @@ public final class AstrologyForecastScreen extends Screen {
     }
 
     @Override
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+        super.extractRenderState(graphics, mouseX, mouseY, partialTick);
+        AurorianBlessingCycle.Blessing blessing = this.forecast.get(this.currentPage);
+        List<FormattedCharSequence> renderedLines = new ArrayList<>();
+        String translationPrefix = "gui.theaurorian2.astrology_forecast."
+                + blessing.textureName() + ".line";
+
+        for (int line = 1; line <= lineCount(blessing); line++) {
+            Component text = Component.translatable(translationPrefix + line);
+            renderedLines.addAll(this.font.split(text, TEXT_AREA_WIDTH));
+        }
+
+        int textHeight = this.font.lineHeight + (renderedLines.size() - 1) * TEXT_LINE_SPACING;
+        int textY = this.pageTop() + TEXT_AREA_TOP + (TEXT_AREA_HEIGHT - textHeight) / 2;
+        for (FormattedCharSequence text : renderedLines) {
+            int textX = this.pageLeft() + TEXT_AREA_LEFT + (TEXT_AREA_WIDTH - this.font.width(text)) / 2;
+            graphics.text(this.font, text, textX, textY, TEXT_COLOR, false);
+            textY += TEXT_LINE_SPACING;
+        }
+    }
+
+    @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         if (event.button() == 0 && this.isInsidePage(event.x(), event.y())) {
             int left = this.pageLeft();
@@ -142,6 +172,14 @@ public final class AstrologyForecastScreen extends Screen {
                 && mouseX <= this.pageLeft() + PAGE_WIDTH
                 && mouseY >= this.pageTop()
                 && mouseY <= this.pageTop() + PAGE_HEIGHT;
+    }
+
+    private static int lineCount(AurorianBlessingCycle.Blessing blessing) {
+        return switch (blessing) {
+            case PROTECTION -> 2;
+            case MINING -> 4;
+            default -> 3;
+        };
     }
 
     private int pageLeft() {

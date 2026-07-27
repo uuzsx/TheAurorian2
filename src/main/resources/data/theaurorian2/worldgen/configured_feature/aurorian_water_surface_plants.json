@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:randomized_int_state_provider",
+      "property": "level",
+      "source": {
+        "type": "minecraft:weighted_state_provider",
+        "entries": [
+          {
+            "data": {
+              "Name": "theaurorian2:aurorian_lily_pad",
+              "Properties": {
+                "level": "0"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "Name": "theaurorian2:aurorian_water_mushroom",
+              "Properties": {
+                "level": "0"
+              }
+            },
+            "weight": 1
+          }
+        ]
+      },
+      "values": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 0,
+        "max_inclusive": 15
+      }
+    }
+  }
+}

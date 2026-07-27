@@ -9,6 +9,7 @@
                 ],
     "downfall":  0.4,
     "effects":  {
+                    "grass_color":  "#ddeeff",
                     "water_color":  "#3f76e4"
                 },
     "features":  [
@@ -78,7 +79,8 @@
                          "theaurorian2:patch_tall_wick_grass",
                          "theaurorian2:patch_silent_forest_tall_grass",
                          "theaurorian2:patch_silent_forest_flowers",
-                         "theaurorian2:patch_silent_forest_grass"
+                         "theaurorian2:patch_silent_forest_grass",
+                         "theaurorian2:aurorian_seagrass_lakes"
                      ],
                      [
 

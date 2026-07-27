@@ -4,8 +4,8 @@
     {
       "count": {
         "distribution": [
-          { "weight": 3, "data": 1 },
-          { "weight": 7, "data": 2 }
+          { "weight": 9, "data": 10 },
+          { "weight": 1, "data": 11 }
         ],
         "type": "minecraft:weighted_list"
       },

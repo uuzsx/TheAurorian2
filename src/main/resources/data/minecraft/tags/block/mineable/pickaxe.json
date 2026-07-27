@@ -26,6 +26,13 @@
                    "theaurorian2:erosive_moonstone_ore",
                    "theaurorian2:erosive_cerulean_ore",
                    "theaurorian2:erosive_geode_ore",
-                   "theaurorian2:astrology_table"
+                   "theaurorian2:astrology_table",
+                   "theaurorian2:aurorian_dripstone_block",
+                   "theaurorian2:aurorian_pointed_dripstone",
+                   "theaurorian2:aurorian_bricks",
+                   "theaurorian2:aurorian_brick_stairs",
+                   "theaurorian2:aurorian_brick_slab",
+                   "theaurorian2:aurorian_brick_wall",
+                   "theaurorian2:aurorian_terracotta"
                ]
 }
