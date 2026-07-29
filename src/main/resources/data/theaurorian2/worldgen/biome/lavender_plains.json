@@ -57,7 +57,11 @@
                          "theaurorian2:ore_geode",
                          "theaurorian2:ore_geode_medium",
                          "theaurorian2:ore_geode_large",
-                         "theaurorian2:ore_geode_buried"
+                         "theaurorian2:ore_geode_buried",
+      "minecraft:underwater_magma",
+      "theaurorian2:disk_moon_sand",
+      "theaurorian2:disk_aurorian_clay",
+      "theaurorian2:disk_aurorian_gravel"
                      ],
                      [
 
@@ -70,7 +74,8 @@
                          "theaurorian2:patch_tall_aurorian_grass",
                          "theaurorian2:patch_lavender",
                          "theaurorian2:patch_aurorian_flowers",
-                         "theaurorian2:patch_aurorian_grass"
+                         "theaurorian2:patch_aurorian_grass",
+                         "theaurorian2:aurorian_seagrass_lakes"
                      ],
                      [
 

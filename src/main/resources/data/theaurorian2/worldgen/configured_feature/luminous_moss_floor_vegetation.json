@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        { "data": { "Name": "theaurorian2:flowering_star_azalea" }, "weight": 4 },
+        { "data": { "Name": "theaurorian2:star_azalea" }, "weight": 7 },
+        { "data": { "Name": "theaurorian2:luminous_moss_carpet" }, "weight": 25 },
+        { "data": { "Name": "theaurorian2:luminous_moss_carpet" }, "weight": 60 }
+      ]
+    }
+  }
+}

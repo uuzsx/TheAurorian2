@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [{
+    "rolls": 1,
+    "bonus_rolls": 0,
+    "entries": [{
+      "type": "minecraft:item",
+      "name": "theaurorian2:frost_tears_flower",
+      "conditions": [{
+        "condition": "minecraft:block_state_property",
+        "block": "theaurorian2:frost_tears_flower",
+        "properties": { "half": "lower" }
+      }]
+    }],
+    "conditions": [{ "condition": "minecraft:survives_explosion" }]
+  }],
+  "random_sequence": "theaurorian2:blocks/frost_tears_flower"
+}

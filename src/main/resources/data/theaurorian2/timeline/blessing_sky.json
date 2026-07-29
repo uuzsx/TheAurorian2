@@ -1,0 +1,54 @@
+{
+  "clock": "theaurorian2:aurorian_blessing",
+  "period_ticks": 120000,
+  "tracks": {
+    "minecraft:visual/fog_color": {
+      "keyframes": [
+        { "ticks": 133, "value": "#8fdee8" },
+        { "ticks": 11867, "value": "#8fdee8" },
+        { "ticks": 13670, "value": "#031238" },
+        { "ticks": 22330, "value": "#031238" },
+        { "ticks": 24133, "value": "#8d88c7" },
+        { "ticks": 35867, "value": "#8d88c7" },
+        { "ticks": 37670, "value": "#031238" },
+        { "ticks": 46330, "value": "#031238" },
+        { "ticks": 48133, "value": "#e9aab7" },
+        { "ticks": 59867, "value": "#e9aab7" },
+        { "ticks": 61670, "value": "#031238" },
+        { "ticks": 70330, "value": "#031238" },
+        { "ticks": 72133, "value": "#cdd5b3" },
+        { "ticks": 83867, "value": "#cdd5b3" },
+        { "ticks": 85670, "value": "#031238" },
+        { "ticks": 94330, "value": "#031238" },
+        { "ticks": 96133, "value": "#80c99b" },
+        { "ticks": 107867, "value": "#80c99b" },
+        { "ticks": 109670, "value": "#031238" },
+        { "ticks": 118330, "value": "#031238" }
+      ]
+    },
+    "minecraft:visual/sky_color": {
+      "keyframes": [
+        { "ticks": 133, "value": "#80e3ec" },
+        { "ticks": 11867, "value": "#80e3ec" },
+        { "ticks": 13670, "value": "#010e34" },
+        { "ticks": 22330, "value": "#010e34" },
+        { "ticks": 24133, "value": "#756fcc" },
+        { "ticks": 35867, "value": "#756fcc" },
+        { "ticks": 37670, "value": "#010e34" },
+        { "ticks": 46330, "value": "#010e34" },
+        { "ticks": 48133, "value": "#f49cae" },
+        { "ticks": 59867, "value": "#f49cae" },
+        { "ticks": 61670, "value": "#010e34" },
+        { "ticks": 70330, "value": "#010e34" },
+        { "ticks": 72133, "value": "#d7dfa6" },
+        { "ticks": 83867, "value": "#d7dfa6" },
+        { "ticks": 85670, "value": "#010e34" },
+        { "ticks": 94330, "value": "#010e34" },
+        { "ticks": 96133, "value": "#65c98a" },
+        { "ticks": 107867, "value": "#65c98a" },
+        { "ticks": 109670, "value": "#010e34" },
+        { "ticks": 118330, "value": "#010e34" }
+      ]
+    }
+  }
+}

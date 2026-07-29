@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "theaurorian2:block/curtain_tree_wood_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "theaurorian2:block/curtain_tree_wood"
+    },
+    "axis=z": {
+      "model": "theaurorian2:block/curtain_tree_wood_horizontal",
+      "x": 90
+    }
+  }
+}

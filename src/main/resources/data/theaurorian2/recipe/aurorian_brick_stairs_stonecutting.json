@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "theaurorian2:aurorian_bricks",
+  "result": { "id": "theaurorian2:aurorian_brick_stairs" }
+}

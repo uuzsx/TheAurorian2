@@ -1,0 +1,29 @@
+{
+  "parent": "theaurorian2:aurorian/old_habits_die_hard",
+  "criteria": {
+    "aurorian_crafting_table": {
+      "conditions": {
+        "items": [
+          {
+            "items": "theaurorian2:aurorian_crafting_table"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.theaurorian2.aurorian.back_to_basics.description"
+    },
+    "frame": "task",
+    "icon": {
+      "id": "theaurorian2:aurorian_crafting_table"
+    },
+    "title": {
+      "translate": "advancements.theaurorian2.aurorian.back_to_basics.title"
+    }
+  },
+  "requirements": [["aurorian_crafting_table"]],
+  "sends_telemetry_event": false
+}

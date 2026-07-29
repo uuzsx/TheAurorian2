@@ -1,0 +1,9 @@
+{
+    "replace":  false,
+    "values":  [
+                   "theaurorian2:silent_tree_log",
+                   "theaurorian2:stripped_silent_tree_log",
+                   "theaurorian2:silent_tree_wood",
+                   "theaurorian2:stripped_silent_tree_wood"
+               ]
+}

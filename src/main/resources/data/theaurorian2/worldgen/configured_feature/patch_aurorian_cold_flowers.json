@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        { "data": { "Name": "theaurorian2:dreamscape_pistil", "Properties": { "facing": "north", "half": "lower" } }, "weight": 1 },
+        { "data": { "Name": "theaurorian2:dreamscape_pistil", "Properties": { "facing": "east", "half": "lower" } }, "weight": 1 },
+        { "data": { "Name": "theaurorian2:dreamscape_pistil", "Properties": { "facing": "south", "half": "lower" } }, "weight": 1 },
+        { "data": { "Name": "theaurorian2:dreamscape_pistil", "Properties": { "facing": "west", "half": "lower" } }, "weight": 1 },
+        { "data": { "Name": "theaurorian2:frost_tears_flower", "Properties": { "facing": "north", "half": "lower" } }, "weight": 1 },
+        { "data": { "Name": "theaurorian2:frost_tears_flower", "Properties": { "facing": "east", "half": "lower" } }, "weight": 1 },
+        { "data": { "Name": "theaurorian2:frost_tears_flower", "Properties": { "facing": "south", "half": "lower" } }, "weight": 1 },
+        { "data": { "Name": "theaurorian2:frost_tears_flower", "Properties": { "facing": "west", "half": "lower" } }, "weight": 1 },
+        { "data": { "Name": "theaurorian2:crisped_mallow" }, "weight": 4 },
+        { "data": { "Name": "theaurorian2:frost_snow_grass" }, "weight": 4 },
+        { "data": { "Name": "theaurorian2:ice_calendula" }, "weight": 4 },
+        { "data": { "Name": "theaurorian2:winter_root" }, "weight": 4 }
+      ]
+    }
+  }
+}

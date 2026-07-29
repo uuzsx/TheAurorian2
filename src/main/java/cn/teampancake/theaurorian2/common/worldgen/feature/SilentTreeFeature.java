@@ -22,6 +22,7 @@ public final class SilentTreeFeature extends Feature<NoneFeatureConfiguration> {
                 origin, height, random, ModBlocks.SILENT_TREE_LOG.get());
         return CustomTreeFeatureSupport.place(
                 context.level(), origin, plan.logs(), plan.leaves(),
-                ModBlocks.SILENT_TREE_LEAVES.get(), ModBlocks.SILENT_TREE_SAPLING.get());
+                ModBlocks.SILENT_TREE_LEAVES.get(), ModBlocks.SILENT_TREE_SAPLING.get(),
+                ModBlocks.FRUITING_SILENT_TREE_LEAVES.get(), 0.05F, random);
     }
 }

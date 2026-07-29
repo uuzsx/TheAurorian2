@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "theaurorian2:block/cursed_frost_tree_log_y" },
+    "axis=x": { "model": "theaurorian2:block/cursed_frost_tree_log_x" },
+    "axis=z": { "model": "theaurorian2:block/cursed_frost_tree_log_z" }
+  }
+}

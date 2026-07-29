@@ -8,6 +8,9 @@ authors="${mod_authors}"
 logoFile="the_aurorian_2_logo.png"
 description='''${mod_description}'''
 
+[[mixins]]
+    config="theaurorian2.mixins.json"
+
 [[dependencies.${mod_id}]]
     modId="neoforge"
     type="required"
@@ -20,4 +23,11 @@ description='''${mod_description}'''
     type="required"
     versionRange="${minecraft_version_range}"
     ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="geckolib"
+    type="required"
+    versionRange="[${geckolib_version},6)"
+    ordering="AFTER"
     side="BOTH"

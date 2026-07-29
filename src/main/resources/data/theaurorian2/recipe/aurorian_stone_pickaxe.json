@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": { "#": "theaurorian2:silent_wood_stick", "X": "theaurorian2:aurorian_cobblestone" },
+  "pattern": ["XXX", " # ", " # "],
+  "result": { "id": "theaurorian2:aurorian_stone_pickaxe" }
+}

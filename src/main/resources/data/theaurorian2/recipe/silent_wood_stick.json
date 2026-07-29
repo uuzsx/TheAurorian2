@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "aurorian_sticks",
+  "key": { "#": "#theaurorian2:aurorian_planks" },
+  "pattern": ["#", "#"],
+  "result": { "count": 4, "id": "theaurorian2:silent_wood_stick" }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "theaurorian2:item/wood_table_item_base",
+  "textures": {
+    "0": "theaurorian2:block/curtain_wood_table",
+    "particle": "theaurorian2:block/curtain_wood_table"
+  }
+}

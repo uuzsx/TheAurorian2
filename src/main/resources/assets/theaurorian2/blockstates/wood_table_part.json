@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "part=1,variant=0": { "model": "theaurorian2:block/silent_wood_table_part" },
+    "part=2,variant=0": { "model": "theaurorian2:block/silent_wood_table_part" },
+    "part=3,variant=0": { "model": "theaurorian2:block/silent_wood_table_part" },
+    "part=1,variant=1": { "model": "theaurorian2:block/curtain_wood_table_part" },
+    "part=2,variant=1": { "model": "theaurorian2:block/curtain_wood_table_part" },
+    "part=3,variant=1": { "model": "theaurorian2:block/curtain_wood_table_part" },
+    "part=1,variant=2": { "model": "theaurorian2:block/cursed_frost_wood_table_part" },
+    "part=2,variant=2": { "model": "theaurorian2:block/cursed_frost_wood_table_part" },
+    "part=3,variant=2": { "model": "theaurorian2:block/cursed_frost_wood_table_part" }
+  }
+}

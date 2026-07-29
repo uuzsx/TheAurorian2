@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": { "#": "theaurorian2:aurorian_brick" },
+  "pattern": ["# #", " # "],
+  "result": { "id": "theaurorian2:aurorian_flower_pot" }
+}

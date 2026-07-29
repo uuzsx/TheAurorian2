@@ -78,7 +78,7 @@
                                                                  "enchantment":  "minecraft:fortune"
                                                              }
                                                          ],
-                                          "name":  "minecraft:stick",
+                                          "name":  "theaurorian2:silent_wood_stick",
                                           "functions":  [
                                                             {
                                                                 "function":  "minecraft:set_count",

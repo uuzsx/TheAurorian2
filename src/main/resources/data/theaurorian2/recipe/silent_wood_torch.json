@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:coal",
+    "S": "theaurorian2:silent_wood_stick"
+  },
+  "pattern": [
+    "C",
+    "S"
+  ],
+  "result": {
+    "count": 4,
+    "id": "theaurorian2:silent_wood_torch"
+  }
+}

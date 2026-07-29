@@ -1,0 +1,36 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "theaurorian2:block/fireplace" }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "theaurorian2:block/fireplace", "y": 90 }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "theaurorian2:block/fireplace", "y": 180 }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "theaurorian2:block/fireplace", "y": 270 }
+    },
+    {
+      "when": { "facing": "north", "lit": "true" },
+      "apply": { "model": "theaurorian2:block/fireplace_fire" }
+    },
+    {
+      "when": { "facing": "east", "lit": "true" },
+      "apply": { "model": "theaurorian2:block/fireplace_fire", "y": 90 }
+    },
+    {
+      "when": { "facing": "south", "lit": "true" },
+      "apply": { "model": "theaurorian2:block/fireplace_fire", "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "lit": "true" },
+      "apply": { "model": "theaurorian2:block/fireplace_fire", "y": 270 }
+    }
+  ]
+}

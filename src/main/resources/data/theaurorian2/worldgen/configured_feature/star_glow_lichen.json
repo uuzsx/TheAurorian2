@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:multiface_growth",
+  "config": {
+    "block": "theaurorian2:star_glow_lichen",
+    "can_be_placed_on": [
+      "theaurorian2:aurorian_stone",
+      "theaurorian2:aurorian_erosive",
+      "theaurorian2:aurorian_dripstone_block",
+      "theaurorian2:aurorian_clay"
+    ],
+    "can_place_on_ceiling": true,
+    "can_place_on_floor": false,
+    "can_place_on_wall": true,
+    "chance_of_spreading": 0.5,
+    "search_range": 20
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#theaurorian2:vanilla_equipment_sticks",
+    "X": "minecraft:flint",
+    "Y": "minecraft:feather"
+  },
+  "pattern": [
+    "X",
+    "#",
+    "Y"
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:arrow"
+  }
+}

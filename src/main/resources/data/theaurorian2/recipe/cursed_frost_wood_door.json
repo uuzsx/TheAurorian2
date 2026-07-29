@@ -1,0 +1,16 @@
+{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "building",
+    "key":  {
+                "#":  "theaurorian2:cursed_frost_tree_planks"
+            },
+    "pattern":  [
+                    "##",
+                    "##",
+                    "##"
+                ],
+    "result":  {
+                   "count":  3,
+                   "id":  "theaurorian2:cursed_frost_wood_door"
+               }
+}

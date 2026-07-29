@@ -1,0 +1,10 @@
+{
+    "model":  {
+                  "type":  "minecraft:special",
+                  "base":  "theaurorian2:item/aurorian_chest",
+                  "model":  {
+                                "type":  "minecraft:chest",
+                                "texture":  "theaurorian2:silent_wood"
+                            }
+              }
+}

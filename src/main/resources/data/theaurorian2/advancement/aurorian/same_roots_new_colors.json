@@ -1,0 +1,40 @@
+{
+  "parent": "theaurorian2:aurorian/back_to_basics",
+  "criteria": {
+    "iron_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_ingot"
+          }
+        ],
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "#theaurorian2:is_aurorian"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.theaurorian2.aurorian.same_roots_new_colors.description"
+    },
+    "frame": "task",
+    "icon": {
+      "id": "minecraft:iron_ingot"
+    },
+    "title": {
+      "translate": "advancements.theaurorian2.aurorian.same_roots_new_colors.title"
+    }
+  },
+  "requirements": [["iron_ingot"]],
+  "sends_telemetry_event": false
+}

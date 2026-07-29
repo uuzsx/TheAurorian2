@@ -1,0 +1,7 @@
+{
+  "parent": "theaurorian2:block/wood_table_base",
+  "textures": {
+    "0": "theaurorian2:block/silent_wood_table",
+    "particle": "theaurorian2:block/silent_tree_planks"
+  }
+}

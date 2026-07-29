@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "theaurorian2:item/training_dummy",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

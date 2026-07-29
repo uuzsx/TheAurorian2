@@ -1,162 +1,49 @@
-﻿{
-    "generator":  {
-                      "biome_source":  {
-                                           "biomes":  [
-                                                          {
-                                                              "parameters":  {
-                                                                                 "weirdness":  [
-                                                                                                   -2,
-                                                                                                   0.6
-                                                                                               ],
-                                                                                 "depth":  [
-                                                                                               -2,
-                                                                                               2
-                                                                                           ],
-                                                                                 "temperature":  [
-                                                                                                     -2,
-                                                                                                     2
-                                                                                                 ],
-                                                                                 "humidity":  [
-                                                                                                  -2,
-                                                                                                  0.2
-                                                                                              ],
-                                                                                 "continentalness":  [
-                                                                                                         -2,
-                                                                                                         2
-                                                                                                     ],
-                                                                                 "erosion":  [
-                                                                                                 -2,
-                                                                                                 2
-                                                                                             ],
-                                                                                 "offset":  0
-                                                                             },
-                                                              "biome":  "theaurorian2:aurorian_plains"
-                                                          },
-                                                          {
-                                                              "parameters":  {
-                                                                                 "weirdness":  [
-                                                                                                   0.6,
-                                                                                                   0.9
-                                                                                               ],
-                                                                                 "depth":  [
-                                                                                               -2,
-                                                                                               2
-                                                                                           ],
-                                                                                 "temperature":  [
-                                                                                                     -2,
-                                                                                                     2
-                                                                                                 ],
-                                                                                 "humidity":  [
-                                                                                                  -2,
-                                                                                                  0.2
-                                                                                              ],
-                                                                                 "continentalness":  [
-                                                                                                         -2,
-                                                                                                         2
-                                                                                                     ],
-                                                                                 "erosion":  [
-                                                                                                 -2,
-                                                                                                 2
-                                                                                             ],
-                                                                                 "offset":  0
-                                                                             },
-                                                              "biome":  "theaurorian2:lavender_plains"
-                                                          },
-                                                          {
-                                                              "parameters":  {
-                                                                                 "weirdness":  [
-                                                                                                   -2,
-                                                                                                   0
-                                                                                               ],
-                                                                                 "depth":  [
-                                                                                               -2,
-                                                                                               2
-                                                                                           ],
-                                                                                 "temperature":  [
-                                                                                                     -2,
-                                                                                                     2
-                                                                                                 ],
-                                                                                 "humidity":  [
-                                                                                                  0.2,
-                                                                                                  2
-                                                                                              ],
-                                                                                 "continentalness":  [
-                                                                                                         -2,
-                                                                                                         2
-                                                                                                     ],
-                                                                                 "erosion":  [
-                                                                                                 -2,
-                                                                                                 2
-                                                                                             ],
-                                                                                 "offset":  0
-                                                                             },
-                                                              "biome":  "theaurorian2:silent_wood_forest"
-                                                          },
-                                                          {
-                                                              "parameters":  {
-                                                                                 "weirdness":  [
-                                                                                                   0,
-                                                                                                   0.9
-                                                                                               ],
-                                                                                 "depth":  [
-                                                                                               -2,
-                                                                                               2
-                                                                                           ],
-                                                                                 "temperature":  [
-                                                                                                     -2,
-                                                                                                     2
-                                                                                                 ],
-                                                                                 "humidity":  [
-                                                                                                  0.2,
-                                                                                                  2
-                                                                                              ],
-                                                                                 "continentalness":  [
-                                                                                                         -2,
-                                                                                                         2
-                                                                                                     ],
-                                                                                 "erosion":  [
-                                                                                                 -2,
-                                                                                                 2
-                                                                                             ],
-                                                                                 "offset":  0
-                                                                             },
-                                                              "biome":  "theaurorian2:curtain_tree_forest"
-                                                          },
-                                                          {
-                                                              "parameters":  {
-                                                                                 "weirdness":  [
-                                                                                                   0.9,
-                                                                                                   2
-                                                                                               ],
-                                                                                 "depth":  [
-                                                                                               -2,
-                                                                                               2
-                                                                                           ],
-                                                                                 "temperature":  [
-                                                                                                     -2,
-                                                                                                     2
-                                                                                                 ],
-                                                                                 "humidity":  [
-                                                                                                  -2,
-                                                                                                  2
-                                                                                              ],
-                                                                                 "continentalness":  [
-                                                                                                         -2,
-                                                                                                         2
-                                                                                                     ],
-                                                                                 "erosion":  [
-                                                                                                 -2,
-                                                                                                 2
-                                                                                             ],
-                                                                                 "offset":  0
-                                                                             },
-                                                              "biome":  "theaurorian2:aurorian_sky_islands"
-                                                          }
-                                                      ],
-                                           "type":  "minecraft:multi_noise"
-                                       },
-                      "type":  "minecraft:noise",
-                      "settings":  "theaurorian2:the_aurorian"
-                  },
-    "type":  "minecraft:overworld"
+{
+  "generator": {
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {"biome":"theaurorian2:aurorian_plains","parameters":{"temperature":[-0.6,2],"humidity":[-2,0.2],"continentalness":[-0.11,2],"erosion":[-2,2],"weirdness":[-2,0.6],"depth":[-2,2],"offset":0.0001}},
+        {"biome":"theaurorian2:lavender_plains","parameters":{"temperature":[-0.6,2],"humidity":[-2,0.2],"continentalness":[-0.11,2],"erosion":[-2,2],"weirdness":[0.6,0.9],"depth":[-2,2],"offset":0.0001}},
+        {"biome":"theaurorian2:silent_wood_forest","parameters":{"temperature":[-0.6,2],"humidity":[0.2,2],"continentalness":[-0.11,2],"erosion":[-2,2],"weirdness":[-2,0],"depth":[-2,2],"offset":0.0001}},
+        {"biome":"theaurorian2:curtain_tree_forest","parameters":{"temperature":[-0.6,2],"humidity":[0.2,2],"continentalness":[-0.11,2],"erosion":[-2,2],"weirdness":[0,0.9],"depth":[-2,2],"offset":0.0001}},
+
+        {"biome":"theaurorian2:aurorian_snowy_mountains","parameters":{"temperature":[-2,-0.6],"humidity":[-2,2],"continentalness":[0.3,2],"erosion":[-2,-0.45],"weirdness":[-1,-0.55],"depth":[-2,2],"offset":0.0001}},
+        {"biome":"theaurorian2:aurorian_snowy_mountains","parameters":{"temperature":[-2,-0.6],"humidity":[-2,2],"continentalness":[0.3,2],"erosion":[-2,-0.45],"weirdness":[0.55,0.9],"depth":[-2,2],"offset":0.0001}},
+
+        {"biome":"theaurorian2:aurorian_snowy_plains","parameters":{"temperature":[-2,-0.6],"humidity":[-2,0.2],"continentalness":[-0.19,0.3],"erosion":[-2,2],"weirdness":[-2,0.9],"depth":[-2,2],"offset":0.0001}},
+        {"biome":"theaurorian2:aurorian_snowy_plains","parameters":{"temperature":[-2,-0.6],"humidity":[-2,0.2],"continentalness":[0.3,2],"erosion":[-0.45,2],"weirdness":[-2,0.9],"depth":[-2,2],"offset":0.0001}},
+        {"biome":"theaurorian2:aurorian_snowy_plains","parameters":{"temperature":[-2,-0.6],"humidity":[-2,0.2],"continentalness":[0.3,2],"erosion":[-2,-0.45],"weirdness":[-0.55,0.55],"depth":[-2,2],"offset":0.0001}},
+        {"biome":"theaurorian2:cursed_frost_forest","parameters":{"temperature":[-2,-0.6],"humidity":[0.2,2],"continentalness":[-0.19,0.3],"erosion":[-2,2],"weirdness":[-2,0.9],"depth":[-2,2],"offset":0.0001}},
+        {"biome":"theaurorian2:cursed_frost_forest","parameters":{"temperature":[-2,-0.6],"humidity":[0.2,2],"continentalness":[0.3,2],"erosion":[-0.45,2],"weirdness":[-2,0.9],"depth":[-2,2],"offset":0.0001}},
+        {"biome":"theaurorian2:cursed_frost_forest","parameters":{"temperature":[-2,-0.6],"humidity":[0.2,2],"continentalness":[0.3,2],"erosion":[-2,-0.45],"weirdness":[-0.55,0.55],"depth":[-2,2],"offset":0.0001}},
+
+        {"biome":"theaurorian2:aurorian_ocean","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-2,-0.19],"erosion":[-2,2],"weirdness":[-2,0.9],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_frozen_ocean","parameters":{"temperature":[-2,-0.6],"humidity":[-2,2],"continentalness":[-2,-0.19],"erosion":[-2,2],"weirdness":[-2,0.9],"depth":[-2,2],"offset":0}},
+
+        {"biome":"theaurorian2:aurorian_beach","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,-0.11],"erosion":[0.05,0.45],"weirdness":[-1,-0.93333334],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_beach","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,-0.11],"erosion":[0.55,1],"weirdness":[-1,-0.93333334],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_beach","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,-0.11],"erosion":[0.05,0.45],"weirdness":[-0.4,-0.26666668],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_beach","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,-0.11],"erosion":[0.55,1],"weirdness":[-0.4,-0.26666668],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_beach","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,-0.11],"erosion":[-0.2225,0.45],"weirdness":[-0.26666668,-0.05],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_beach","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,-0.11],"erosion":[0.55,1],"weirdness":[-0.26666668,-0.05],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_beach","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,-0.11],"erosion":[-0.2225,0.45],"weirdness":[0.05,0.26666668],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_beach","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,-0.11],"erosion":[0.55,1],"weirdness":[0.05,0.26666668],"depth":[-2,2],"offset":0}},
+
+        {"biome":"theaurorian2:aurorian_river","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,0.03],"erosion":[-1,-0.375],"weirdness":[-0.05,0.05],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_river","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,1],"erosion":[-0.375,0.55],"weirdness":[-0.05,0.05],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_river","parameters":{"temperature":[-0.6,2],"humidity":[-2,2],"continentalness":[-0.19,-0.11],"erosion":[0.55,1],"weirdness":[-0.05,0.05],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_frozen_river","parameters":{"temperature":[-2,-0.6],"humidity":[-2,2],"continentalness":[-0.19,0.03],"erosion":[-1,-0.375],"weirdness":[-0.05,0.05],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_frozen_river","parameters":{"temperature":[-2,-0.6],"humidity":[-2,2],"continentalness":[-0.19,1],"erosion":[-0.375,0.55],"weirdness":[-0.05,0.05],"depth":[-2,2],"offset":0}},
+        {"biome":"theaurorian2:aurorian_frozen_river","parameters":{"temperature":[-2,-0.6],"humidity":[-2,2],"continentalness":[-0.19,-0.11],"erosion":[0.55,1],"weirdness":[-0.05,0.05],"depth":[-2,2],"offset":0}},
+
+        {"biome":"theaurorian2:aurorian_dripstone_caves","parameters":{"temperature":[-2,2],"humidity":[-2,2],"continentalness":[0.8,1],"erosion":[-2,2],"weirdness":[-2,2],"depth":[0.2,0.9],"offset":0}},
+        {"biome":"theaurorian2:aurorian_lush_caves","parameters":{"temperature":[-2,2],"humidity":[0.7,1],"continentalness":[-2,2],"erosion":[-2,2],"weirdness":[-2,2],"depth":[0.2,0.9],"offset":0}},
+        {"biome":"theaurorian2:aurorian_sky_islands","parameters":{"temperature":[-2,2],"humidity":[-2,2],"continentalness":[-2,2],"erosion":[-2,2],"weirdness":[0.9,2],"depth":[-2,2],"offset":0.0001}}
+      ]
+    },
+    "settings": "theaurorian2:the_aurorian",
+    "type": "minecraft:noise"
+  },
+  "type": "theaurorian2:the_aurorian"
 }

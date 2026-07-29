@@ -1,0 +1,16 @@
+{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "building",
+    "key":  {
+                "#":  "theaurorian2:curtain_tree_planks",
+                "S":  "theaurorian2:silent_wood_stick"
+            },
+    "pattern":  [
+                    "#S#",
+                    "#S#"
+                ],
+    "result":  {
+                   "count":  3,
+                   "id":  "theaurorian2:curtain_wood_fence"
+               }
+}

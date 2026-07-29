@@ -31,6 +31,11 @@ public final class AurorianGrassTintSource implements BlockTintSource {
     }
 
     private static int getBiomeColor(Biome biome, double x, double z) {
+        var grassColorOverride = biome.getModifiedSpecialEffects().grassColorOverride();
+        if (grassColorOverride.isPresent()) {
+            return grassColorOverride.get();
+        }
+
         Biome.ClimateSettings climate = biome.getModifiedClimateSettings();
         return AurorianGrassColor.get(climate.temperature(), climate.downfall());
     }

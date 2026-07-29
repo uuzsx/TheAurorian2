@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:spring_feature",
+  "config": {
+    "hole_count": 1,
+    "requires_block_below": true,
+    "rock_count": 4,
+    "state": {
+      "Name": "minecraft:water",
+      "Properties": {
+        "falling": "true"
+      }
+    },
+    "valid_blocks": [
+      "theaurorian2:aurorian_stone",
+      "theaurorian2:aurorian_erosive",
+      "theaurorian2:aurorian_cobblestone",
+      "theaurorian2:aurorian_dirt",
+      "theaurorian2:aurorian_clay",
+      "theaurorian2:aurorian_dripstone_block",
+      "theaurorian2:luminous_moss_block"
+    ]
+  }
+}

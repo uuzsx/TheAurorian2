@@ -1,0 +1,12 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#theaurorian2:is_aurorian",
+  "features": [
+    "theaurorian2:ore_aurorian_andesite",
+    "theaurorian2:ore_aurorian_diorite_lower",
+    "theaurorian2:ore_aurorian_diorite_upper",
+    "theaurorian2:ore_aurorian_granite_lower",
+    "theaurorian2:ore_aurorian_granite_upper"
+  ],
+  "step": "underground_ores"
+}

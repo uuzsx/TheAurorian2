@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_torch_wall",
+  "textures": {
+    "torch": "theaurorian2:block/silent_wood_torch"
+  }
+}

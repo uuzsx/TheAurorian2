@@ -1,0 +1,8 @@
+{
+    "replace":  false,
+    "values":  [
+                   "theaurorian2:silent_wood_fence_gate",
+                   "theaurorian2:curtain_wood_fence_gate",
+                   "theaurorian2:cursed_frost_wood_fence_gate"
+               ]
+}

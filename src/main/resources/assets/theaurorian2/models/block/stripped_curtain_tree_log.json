@@ -1,0 +1,7 @@
+{
+    "parent":  "minecraft:block/cube_column",
+    "textures":  {
+                     "end":  "theaurorian2:block/stripped_curtain_tree_log_top",
+                     "side":  "theaurorian2:block/stripped_curtain_tree_log"
+                 }
+}

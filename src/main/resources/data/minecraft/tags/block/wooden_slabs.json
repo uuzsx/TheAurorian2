@@ -1,0 +1,8 @@
+{
+    "replace":  false,
+    "values":  [
+                   "theaurorian2:silent_wood_slab",
+                   "theaurorian2:curtain_wood_slab",
+                   "theaurorian2:cursed_frost_wood_slab"
+               ]
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=east": { "model": "theaurorian2:block/frost_tears_flower", "y": 90 },
+    "facing=north": { "model": "theaurorian2:block/frost_tears_flower" },
+    "facing=south": { "model": "theaurorian2:block/frost_tears_flower", "y": 180 },
+    "facing=west": { "model": "theaurorian2:block/frost_tears_flower", "y": 270 }
+  }
+}

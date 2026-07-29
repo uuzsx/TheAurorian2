@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "theaurorian2:block/aurorian_lily_pad"
+      }
+    }
+  ]
+}

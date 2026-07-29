@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:block",
+  "pools": [{
+    "bonus_rolls": 0.0,
+    "entries": [{ "type": "minecraft:item", "name": "theaurorian2:mist_spore_blossom" }],
+    "rolls": 1.0
+  }]
+}

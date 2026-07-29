@@ -5,9 +5,11 @@ import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -27,7 +29,28 @@ final class CustomTreeFeatureSupport {
             Set<BlockPos> plannedLeaves,
             Block leavesBlock,
             Block saplingBlock) {
-        if (origin.getY() <= level.getMinY() || !level.getBlockState(origin.below()).is(BlockTags.DIRT)) {
+        return place(level, origin, logs, plannedLeaves, leavesBlock, saplingBlock, null, 0.0F, null);
+    }
+
+    static boolean place(
+            WorldGenLevel level,
+            BlockPos origin,
+            Map<BlockPos, BlockState> logs,
+            Set<BlockPos> plannedLeaves,
+            Block leavesBlock,
+            Block saplingBlock,
+            Block fruitingLeavesBlock,
+            float fruitingLeafChance,
+            RandomSource random) {
+        if (origin.getY() <= level.getMinY()) {
+            return false;
+        }
+        int trunkBaseY = logs.keySet().stream().mapToInt(BlockPos::getY).min().orElse(origin.getY());
+        Set<BlockPos> trunkBases = logs.keySet().stream()
+                .filter(pos -> pos.getY() == trunkBaseY)
+                .collect(Collectors.toSet());
+        if (trunkBases.isEmpty()
+                || trunkBases.stream().anyMatch(pos -> !level.getBlockState(pos.below()).is(BlockTags.DIRT))) {
             return false;
         }
         for (BlockPos pos : logs.keySet()) {
@@ -41,14 +64,20 @@ final class CustomTreeFeatureSupport {
             }
         }
 
-        level.setBlock(origin.below(), ModBlocks.AURORIAN_DIRT.get().defaultBlockState(), UPDATE_FLAGS);
+        trunkBases.forEach(pos -> level.setBlock(
+                pos.below(), ModBlocks.AURORIAN_DIRT.get().defaultBlockState(), UPDATE_FLAGS));
         logs.forEach((pos, state) -> level.setBlock(pos, state, UPDATE_FLAGS));
 
         Map<BlockPos, Integer> leafDistances = calculateLeafDistances(logs.keySet(), plannedLeaves);
         BlockState leaves = leavesBlock.defaultBlockState();
         leafDistances.forEach((pos, distance) -> {
             if (!logs.containsKey(pos) && canReplace(level.getBlockState(pos), saplingBlock)) {
-                level.setBlock(pos, leaves.setValue(LeavesBlock.DISTANCE, distance), UPDATE_FLAGS);
+                BlockState selectedLeaves = fruitingLeavesBlock != null
+                        && random != null
+                        && random.nextFloat() < fruitingLeafChance
+                        ? fruitingLeavesBlock.defaultBlockState()
+                        : leaves;
+                level.setBlock(pos, selectedLeaves.setValue(LeavesBlock.DISTANCE, distance), UPDATE_FLAGS);
             }
         });
         return !leafDistances.isEmpty();

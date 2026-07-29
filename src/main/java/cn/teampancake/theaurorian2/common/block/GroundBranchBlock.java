@@ -3,6 +3,8 @@ package cn.teampancake.theaurorian2.common.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -55,6 +57,15 @@ public final class GroundBranchBlock extends Block {
             if (!player.addItem(branch)) {
                 player.drop(branch, false);
             }
+            level.playSound(
+                    null,
+                    player.getX(),
+                    player.getY(),
+                    player.getZ(),
+                    SoundEvents.ITEM_PICKUP,
+                    SoundSource.PLAYERS,
+                    0.2F,
+                    ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);
             level.removeBlock(pos, false);
         }
         return InteractionResult.SUCCESS;

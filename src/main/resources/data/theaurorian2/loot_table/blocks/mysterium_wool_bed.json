@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "theaurorian2:mysterium_wool_bed",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "part": "head"
+              }
+            }
+          ],
+          "name": "theaurorian2:mysterium_wool_bed"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "theaurorian2:blocks/mysterium_wool_bed"
+}

@@ -3,6 +3,11 @@
     "values":  [
                    "theaurorian2:aurorian_stone",
                    "theaurorian2:aurorian_erosive",
+                   "theaurorian2:aurorian_andesite",
+                   "theaurorian2:aurorian_diorite",
+                   "theaurorian2:aurorian_granite",
+                   "theaurorian2:aurorian_cobblestone",
+                   "theaurorian2:smooth_moon_sandstone",
                    "theaurorian2:aurorian_coal_ore",
                    "theaurorian2:aurorian_iron_ore",
                    "theaurorian2:aurorian_copper_ore",
@@ -23,6 +28,16 @@
                    "theaurorian2:erosive_aurorian_emerald_ore",
                    "theaurorian2:erosive_moonstone_ore",
                    "theaurorian2:erosive_cerulean_ore",
-                   "theaurorian2:erosive_geode_ore"
+                   "theaurorian2:erosive_geode_ore",
+                   "theaurorian2:astrology_table",
+                   "theaurorian2:aurorian_dripstone_block",
+                   "theaurorian2:aurorian_pointed_dripstone",
+                   "theaurorian2:aurorian_bricks",
+                   "theaurorian2:aurorian_brick_stairs",
+                   "theaurorian2:aurorian_brick_slab",
+                   "theaurorian2:aurorian_brick_wall",
+                   "theaurorian2:aurorian_terracotta",
+                   "theaurorian2:aurorian_furnace",
+                   "theaurorian2:fireplace"
                ]
 }

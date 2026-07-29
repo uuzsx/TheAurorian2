@@ -1,0 +1,7 @@
+{
+    "parent":  "minecraft:block/cube_column_uv_locked_z",
+    "textures":  {
+                     "end":  "theaurorian2:block/stripped_silent_tree_log_top",
+                     "side":  "theaurorian2:block/stripped_silent_tree_log"
+                 }
+}

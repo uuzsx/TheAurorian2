@@ -1,0 +1,13 @@
+{
+    "variants":  {
+                     "axis=y":  {
+                                    "model":  "theaurorian2:block/stripped_silent_tree_wood_y"
+                                },
+                     "axis=x":  {
+                                    "model":  "theaurorian2:block/stripped_silent_tree_wood_x"
+                                },
+                     "axis=z":  {
+                                    "model":  "theaurorian2:block/stripped_silent_tree_wood_z"
+                                }
+                 }
+}

@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "theaurorian2:aurorian_ocean",
+    "theaurorian2:aurorian_frozen_ocean",
+    "theaurorian2:aurorian_beach",
+    "theaurorian2:aurorian_plains",
+    "theaurorian2:aurorian_snowy_plains",
+    "theaurorian2:aurorian_snowy_mountains",
+    "theaurorian2:aurorian_river",
+    "theaurorian2:aurorian_frozen_river",
+    "theaurorian2:cursed_frost_forest",
+    "theaurorian2:curtain_tree_forest",
+    "theaurorian2:lavender_plains",
+    "theaurorian2:silent_wood_forest",
+    "theaurorian2:waste_stone_crater"
+  ]
+}

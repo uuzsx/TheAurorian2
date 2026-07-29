@@ -1,0 +1,14 @@
+{
+    "type":  "minecraft:crafting_shaped",
+    "category":  "redstone",
+    "key":  {
+                "#":  "theaurorian2:silent_tree_planks"
+            },
+    "pattern":  [
+                    "##"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "theaurorian2:silent_wood_pressure_plate"
+               }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#theaurorian2:vanilla_equipment_sticks",
+    "X": "#minecraft:wooden_tool_materials"
+  },
+  "pattern": [
+    "XX",
+    " #",
+    " #"
+  ],
+  "result": {
+    "id": "minecraft:wooden_hoe"
+  }
+}

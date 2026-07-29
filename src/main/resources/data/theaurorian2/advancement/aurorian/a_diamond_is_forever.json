@@ -1,0 +1,40 @@
+{
+  "parent": "theaurorian2:aurorian/same_roots_new_colors",
+  "criteria": {
+    "diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond"
+          }
+        ],
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "#theaurorian2:is_aurorian"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.theaurorian2.aurorian.a_diamond_is_forever.description"
+    },
+    "frame": "task",
+    "icon": {
+      "id": "minecraft:diamond"
+    },
+    "title": {
+      "translate": "advancements.theaurorian2.aurorian.a_diamond_is_forever.title"
+    }
+  },
+  "requirements": [["diamond"]],
+  "sends_telemetry_event": false
+}

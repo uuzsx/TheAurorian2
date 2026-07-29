@@ -1,0 +1,9 @@
+{
+    "replace":  false,
+    "values":  [
+                   "theaurorian2:curtain_tree_log",
+                   "theaurorian2:stripped_curtain_tree_log",
+                   "theaurorian2:curtain_tree_wood",
+                   "theaurorian2:stripped_curtain_tree_wood"
+               ]
+}

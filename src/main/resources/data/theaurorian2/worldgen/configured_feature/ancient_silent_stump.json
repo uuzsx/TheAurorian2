@@ -1,0 +1,11 @@
+{
+  "type": "theaurorian2:ancient_stump",
+  "config": {
+    "state": {
+      "Name": "theaurorian2:silent_tree_log",
+      "Properties": {
+        "axis": "y"
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+    "replace":  false,
+    "values":  [
+                   "#theaurorian2:silent_tree_logs",
+                   "#theaurorian2:curtain_tree_logs",
+                   "#theaurorian2:cursed_frost_tree_logs"
+               ]
+}
