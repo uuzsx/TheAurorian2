@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "theaurorian2:item/knight_armor_helmet",
+    "model": { "type": "geckolib:geckolib" }
+  }
+}

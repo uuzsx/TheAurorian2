@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#theaurorian2:has_aurorian_grass_rock",
+  "features": "theaurorian2:aurorian_grass_rock",
+  "step": "vegetal_decoration"
+}

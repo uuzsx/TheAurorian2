@@ -8,6 +8,7 @@ import cn.teampancake.theaurorian2.client.resource.AurorianGrassColorReloadListe
 import cn.teampancake.theaurorian2.client.renderer.DamageNumberRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianChestRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianFurnaceRenderer;
+import cn.teampancake.theaurorian2.client.renderer.AurorianGrassRockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AstrologyTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.TrainingDummyRenderer;
@@ -55,6 +56,8 @@ public final class ClientModEvents {
         event.registerBlockEntityRenderer(ModBlockEntities.ASTROLOGY_TABLE.get(), AstrologyTableRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_CHEST.get(), AurorianChestRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_FURNACE.get(), AurorianFurnaceRenderer::new);
+        event.registerBlockEntityRenderer(
+                ModBlockEntities.AURORIAN_GRASS_ROCK.get(), AurorianGrassRockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_TABLE.get(), AurorianTableRenderer::new);
     }
 

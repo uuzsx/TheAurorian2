@@ -2,6 +2,7 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.block.entity.AstrologyTableBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.AurorianGrassRockBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianChestBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianFurnaceBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.FireplaceBlockEntity;
@@ -24,6 +25,12 @@ public final class ModBlockEntities {
                     () -> new BlockEntityType<>(
                             AstrologyTableBlockEntity::new,
                             Set.of(ModBlocks.ASTROLOGY_TABLE.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianGrassRockBlockEntity>>
+            AURORIAN_GRASS_ROCK = BLOCK_ENTITY_TYPES.register(
+                    "aurorian_grass_rock",
+                    () -> new BlockEntityType<>(
+                            AurorianGrassRockBlockEntity::new,
+                            Set.of(ModBlocks.AURORIAN_GRASS_ROCK.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianFurnaceBlockEntity>> AURORIAN_FURNACE =
             BLOCK_ENTITY_TYPES.register(
                     "aurorian_furnace",

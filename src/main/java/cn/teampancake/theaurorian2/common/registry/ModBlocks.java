@@ -5,6 +5,7 @@ import cn.teampancake.theaurorian2.common.block.AurorianDoublePlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCaveVinesBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCaveVinesPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianGrassBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianGrassRockBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianTallGrassBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianTableBlock;
@@ -34,6 +35,7 @@ import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
 import cn.teampancake.theaurorian2.common.block.TallAurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.block.WallMushroomBlock;
 import cn.teampancake.theaurorian2.common.item.AstrologyTableItem;
+import cn.teampancake.theaurorian2.common.item.AurorianGrassRockItem;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BedItem;
@@ -240,6 +242,12 @@ public final class ModBlocks {
                     .strength(0.2F)
                     .sound(SoundType.STONE)
                     .noOcclusion());
+    public static final DeferredBlock<AurorianGrassRockBlock> AURORIAN_GRASS_ROCK = BLOCKS.registerBlock(
+            "aurorian_grass_rock", AurorianGrassRockBlock::new,
+            () -> BlockBehaviour.Properties.of()
+                    .strength(0.2F)
+                    .sound(SoundType.STONE)
+                    .noOcclusion());
     public static final DeferredBlock<GroundMushroomBlock> WHITE_GROUND_MUSHROOM = BLOCKS.registerBlock(
             "white_ground_mushroom", GroundMushroomBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM).noOcclusion());
@@ -406,6 +414,9 @@ public final class ModBlocks {
     public static final DeferredItem<BlockItem> AURORIAN_GRASS_BLOCK_ITEM = ITEMS.registerSimpleBlockItem(AURORIAN_GRASS_BLOCK);
     public static final DeferredItem<BlockItem> MOON_SAND_RIVER_ITEM = ITEMS.registerSimpleBlockItem(MOON_SAND_RIVER);
     public static final DeferredItem<BlockItem> PEBBLE_ITEM = ITEMS.registerSimpleBlockItem(PEBBLE);
+    public static final DeferredItem<AurorianGrassRockItem> AURORIAN_GRASS_ROCK_ITEM = ITEMS.registerItem(
+            "aurorian_grass_rock",
+            properties -> new AurorianGrassRockItem(AURORIAN_GRASS_ROCK.get(), properties));
     public static final DeferredItem<Item> WHITE_GROUND_MUSHROOM_ITEM = ITEMS.registerItem(
             "white_ground_mushroom",
             properties -> new Item(properties.food(groundMushroomFood())));
@@ -453,7 +464,7 @@ public final class ModBlocks {
                 .filter(block -> block != AURORIAN_STONE && block != AURORIAN_EROSIVE
                         && block != AURORIAN_DIRT && block != AURORIAN_GRASS_BLOCK
                         && block != MOON_SAND_RIVER && block != MOON_DEW_BLOCK
-                        && block != BLUEBERRY_BUSH && block != PEBBLE
+                        && block != BLUEBERRY_BUSH && block != PEBBLE && block != AURORIAN_GRASS_ROCK
                         && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM
                         && block != AURORIAN_LILY_PAD && block != AURORIAN_WATER_MUSHROOM
                         && block != ASTROLOGY_TABLE

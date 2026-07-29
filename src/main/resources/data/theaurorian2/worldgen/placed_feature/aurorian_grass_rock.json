@@ -1,0 +1,53 @@
+{
+  "feature": "theaurorian2:aurorian_grass_rock",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 6
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING_NO_LEAVES"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:would_survive",
+            "state": {
+              "Name": "theaurorian2:aurorian_grass_rock"
+            }
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "theaurorian2:aurorian_grass_block",
+            "offset": [0, -1, 0]
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "theaurorian2:aurorian_grass_block",
+            "offset": [1, -1, 0]
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "theaurorian2:aurorian_grass_block",
+            "offset": [0, -1, 1]
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "theaurorian2:aurorian_grass_block",
+            "offset": [1, -1, 1]
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

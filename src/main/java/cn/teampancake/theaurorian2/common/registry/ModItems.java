@@ -2,6 +2,7 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.item.ArcherArmorItem;
+import cn.teampancake.theaurorian2.common.item.KnightArmorItem;
 import cn.teampancake.theaurorian2.common.item.TrainingDummyItem;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -140,48 +141,80 @@ public final class ModItems {
     public static final DeferredItem<Item> WHITE_CHOCOLATE = alwaysEdibleFood(
             "white_chocolate", 0, 0.0F);
 
-    public static final DeferredItem<ArcherArmorItem> DIAMOND_ARCHER_HELMET =
-            archerArmor("diamond_archer_helmet", ArmorType.HELMET, "diamond_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> DIAMOND_ARCHER_CHESTPLATE =
-            archerArmor("diamond_archer_chestplate", ArmorType.CHESTPLATE, "diamond_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> DIAMOND_ARCHER_LEGGINGS =
-            archerArmor("diamond_archer_leggings", ArmorType.LEGGINGS, "diamond_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> DIAMOND_ARCHER_BOOTS =
-            archerArmor("diamond_archer_boots", ArmorType.BOOTS, "diamond_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> STARLIGHT_RANGER_HELMET =
+            archerArmor("starlight_ranger_helmet", ArmorType.HELMET, "diamond_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> STARLIGHT_RANGER_CHESTPLATE =
+            archerArmor("starlight_ranger_chestplate", ArmorType.CHESTPLATE, "diamond_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> STARLIGHT_RANGER_LEGGINGS =
+            archerArmor("starlight_ranger_leggings", ArmorType.LEGGINGS, "diamond_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> STARLIGHT_RANGER_BOOTS =
+            archerArmor("starlight_ranger_boots", ArmorType.BOOTS, "diamond_archer_armor");
 
-    public static final DeferredItem<ArcherArmorItem> GOLDEN_ARCHER_HELMET =
-            archerArmor("golden_archer_helmet", ArmorType.HELMET, "golden_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> GOLDEN_ARCHER_CHESTPLATE =
-            archerArmor("golden_archer_chestplate", ArmorType.CHESTPLATE, "golden_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> GOLDEN_ARCHER_LEGGINGS =
-            archerArmor("golden_archer_leggings", ArmorType.LEGGINGS, "golden_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> GOLDEN_ARCHER_BOOTS =
-            archerArmor("golden_archer_boots", ArmorType.BOOTS, "golden_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> DAWNLIGHT_RANGER_HELMET =
+            archerArmor("dawnlight_ranger_helmet", ArmorType.HELMET, "golden_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> DAWNLIGHT_RANGER_CHESTPLATE =
+            archerArmor("dawnlight_ranger_chestplate", ArmorType.CHESTPLATE, "golden_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> DAWNLIGHT_RANGER_LEGGINGS =
+            archerArmor("dawnlight_ranger_leggings", ArmorType.LEGGINGS, "golden_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> DAWNLIGHT_RANGER_BOOTS =
+            archerArmor("dawnlight_ranger_boots", ArmorType.BOOTS, "golden_archer_armor");
 
-    public static final DeferredItem<ArcherArmorItem> IRON_ARCHER_HELMET =
-            archerArmor("iron_archer_helmet", ArmorType.HELMET, "iron_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> IRON_ARCHER_CHESTPLATE =
-            archerArmor("iron_archer_chestplate", ArmorType.CHESTPLATE, "iron_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> IRON_ARCHER_LEGGINGS =
-            archerArmor("iron_archer_leggings", ArmorType.LEGGINGS, "iron_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> IRON_ARCHER_BOOTS =
-            archerArmor("iron_archer_boots", ArmorType.BOOTS, "iron_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> FORESTSHADE_RANGER_HELMET =
+            archerArmor("forestshade_ranger_helmet", ArmorType.HELMET, "iron_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> FORESTSHADE_RANGER_CHESTPLATE =
+            archerArmor("forestshade_ranger_chestplate", ArmorType.CHESTPLATE, "iron_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> FORESTSHADE_RANGER_LEGGINGS =
+            archerArmor("forestshade_ranger_leggings", ArmorType.LEGGINGS, "iron_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> FORESTSHADE_RANGER_BOOTS =
+            archerArmor("forestshade_ranger_boots", ArmorType.BOOTS, "iron_archer_armor");
 
-    public static final DeferredItem<ArcherArmorItem> NETHERITE_ARCHER_HELMET =
-            archerArmor("netherite_archer_helmet", ArmorType.HELMET, "netherite_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> NETHERITE_ARCHER_CHESTPLATE =
-            archerArmor("netherite_archer_chestplate", ArmorType.CHESTPLATE, "netherite_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> NETHERITE_ARCHER_LEGGINGS =
-            archerArmor("netherite_archer_leggings", ArmorType.LEGGINGS, "netherite_archer_armor");
-    public static final DeferredItem<ArcherArmorItem> NETHERITE_ARCHER_BOOTS =
-            archerArmor("netherite_archer_boots", ArmorType.BOOTS, "netherite_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> DUSKFLAME_RANGER_HELMET =
+            archerArmor("duskflame_ranger_helmet", ArmorType.HELMET, "netherite_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> DUSKFLAME_RANGER_CHESTPLATE =
+            archerArmor("duskflame_ranger_chestplate", ArmorType.CHESTPLATE, "netherite_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> DUSKFLAME_RANGER_LEGGINGS =
+            archerArmor("duskflame_ranger_leggings", ArmorType.LEGGINGS, "netherite_archer_armor");
+    public static final DeferredItem<ArcherArmorItem> DUSKFLAME_RANGER_BOOTS =
+            archerArmor("duskflame_ranger_boots", ArmorType.BOOTS, "netherite_archer_armor");
+
+    public static final DeferredItem<KnightArmorItem> STARFORGED_KNIGHT_HELMET =
+            knightArmor("starforged_knight_helmet", ArmorType.HELMET, "starforged_knight_armor");
+    public static final DeferredItem<KnightArmorItem> STARFORGED_KNIGHT_CHESTPLATE =
+            knightArmor("starforged_knight_chestplate", ArmorType.CHESTPLATE, "starforged_knight_armor");
+    public static final DeferredItem<KnightArmorItem> STARFORGED_KNIGHT_LEGGINGS =
+            knightArmor("starforged_knight_leggings", ArmorType.LEGGINGS, "starforged_knight_armor");
+    public static final DeferredItem<KnightArmorItem> STARFORGED_KNIGHT_BOOTS =
+            knightArmor("starforged_knight_boots", ArmorType.BOOTS, "starforged_knight_armor");
+
+    public static final DeferredItem<KnightArmorItem> DAWNFORGED_KNIGHT_HELMET =
+            knightArmor("dawnforged_knight_helmet", ArmorType.HELMET, "dawnforged_knight_armor");
+    public static final DeferredItem<KnightArmorItem> DAWNFORGED_KNIGHT_CHESTPLATE =
+            knightArmor("dawnforged_knight_chestplate", ArmorType.CHESTPLATE, "dawnforged_knight_armor");
+    public static final DeferredItem<KnightArmorItem> DAWNFORGED_KNIGHT_LEGGINGS =
+            knightArmor("dawnforged_knight_leggings", ArmorType.LEGGINGS, "dawnforged_knight_armor");
+    public static final DeferredItem<KnightArmorItem> DAWNFORGED_KNIGHT_BOOTS =
+            knightArmor("dawnforged_knight_boots", ArmorType.BOOTS, "dawnforged_knight_armor");
+
+    public static final DeferredItem<KnightArmorItem> MOONFORGED_KNIGHT_HELMET =
+            knightArmor("moonforged_knight_helmet", ArmorType.HELMET, "moonforged_knight_armor");
+    public static final DeferredItem<KnightArmorItem> MOONFORGED_KNIGHT_CHESTPLATE =
+            knightArmor("moonforged_knight_chestplate", ArmorType.CHESTPLATE, "moonforged_knight_armor");
+    public static final DeferredItem<KnightArmorItem> MOONFORGED_KNIGHT_LEGGINGS =
+            knightArmor("moonforged_knight_leggings", ArmorType.LEGGINGS, "moonforged_knight_armor");
+    public static final DeferredItem<KnightArmorItem> MOONFORGED_KNIGHT_BOOTS =
+            knightArmor("moonforged_knight_boots", ArmorType.BOOTS, "moonforged_knight_armor");
 
     private ModItems() {
     }
 
     private static DeferredItem<ArcherArmorItem> archerArmor(String name, ArmorType type, String textureName) {
         return ITEMS.registerItem(name, properties -> new ArcherArmorItem(
-                properties.humanoidArmor(ArmorMaterials.LEATHER, type), textureName));
+                properties.humanoidArmor(ArmorMaterials.LEATHER, type), textureName, type));
+    }
+
+    private static DeferredItem<KnightArmorItem> knightArmor(String name, ArmorType type, String textureName) {
+        return ITEMS.registerItem(name, properties -> new KnightArmorItem(
+                properties.humanoidArmor(ArmorMaterials.IRON, type), textureName, type));
     }
 
     private static DeferredItem<Item> vanillaFood(String name, FoodProperties food) {

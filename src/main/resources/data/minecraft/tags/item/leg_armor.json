@@ -1,9 +1,12 @@
 {
   "replace": false,
   "values": [
-    "theaurorian2:diamond_archer_leggings",
-    "theaurorian2:golden_archer_leggings",
-    "theaurorian2:iron_archer_leggings",
-    "theaurorian2:netherite_archer_leggings"
+    "theaurorian2:starlight_ranger_leggings",
+    "theaurorian2:dawnlight_ranger_leggings",
+    "theaurorian2:forestshade_ranger_leggings",
+    "theaurorian2:duskflame_ranger_leggings",
+    "theaurorian2:starforged_knight_leggings",
+    "theaurorian2:dawnforged_knight_leggings",
+    "theaurorian2:moonforged_knight_leggings"
   ]
 }

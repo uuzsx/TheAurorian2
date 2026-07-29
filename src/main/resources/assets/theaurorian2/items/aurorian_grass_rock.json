@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "theaurorian2:block/aurorian_grass_rock",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

@@ -1,1 +1,10 @@
-{ "parent": "theaurorian2:block/dreamscape_pistil" }
+{
+  "parent": "theaurorian2:block/dreamscape_pistil",
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, -1, 0],
+      "scale": [0.625, 0.625, 0.625]
+    }
+  }
+}
