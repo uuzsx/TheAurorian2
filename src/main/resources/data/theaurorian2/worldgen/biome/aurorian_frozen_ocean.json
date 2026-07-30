@@ -58,7 +58,10 @@
     ],
     [],
     [],
-    [],
+    [
+      "theaurorian2:patch_aurorian_snowy_flowers",
+      "theaurorian2:patch_aurorian_snowy_grass"
+    ],
     [
       "minecraft:freeze_top_layer"
     ]

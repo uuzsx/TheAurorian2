@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "theaurorian2:item/archer_armor_leggings",
+    "model": { "type": "geckolib:geckolib" }
+  }
+}

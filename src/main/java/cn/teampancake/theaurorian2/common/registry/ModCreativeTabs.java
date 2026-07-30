@@ -63,7 +63,7 @@ public final class ModCreativeTabs {
             "equipment",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.theaurorian2.equipment"))
-                    .icon(() -> new ItemStack(ModItems.DIAMOND_ARCHER_CHESTPLATE.get()))
+                    .icon(() -> new ItemStack(ModItems.STARLIGHT_RANGER_CHESTPLATE.get()))
                     .displayItems(ModCreativeTabs::addEquipment)
                     .build());
 
@@ -133,6 +133,7 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.AURORIAN_GRANITE.get());
         output.accept(ModBlocks.AURORIAN_GRASS_BLOCK.get());
         output.accept(ModBlocks.LIGHT_AURORIAN_GRASS_BLOCK.get());
+        output.accept(ModBlocks.AURORIAN_GRASS_ROCK_ITEM.get());
         output.accept(ModBlocks.MOON_SAND_RIVER.get());
         output.accept(ModBlocks.AURORIAN_DRIPSTONE_BLOCK.get());
         output.accept(ModBlocks.AURORIAN_POINTED_DRIPSTONE.get());
@@ -215,22 +216,41 @@ public final class ModCreativeTabs {
         output.accept(ModItems.AURORIAN_STONE_SHOVEL.get());
         output.accept(ModItems.AURORIAN_STONE_HOE.get());
 
-        output.accept(ModItems.DIAMOND_ARCHER_HELMET.get());
-        output.accept(ModItems.DIAMOND_ARCHER_CHESTPLATE.get());
-        output.accept(ModItems.DIAMOND_ARCHER_LEGGINGS.get());
-        output.accept(ModItems.DIAMOND_ARCHER_BOOTS.get());
-        output.accept(ModItems.GOLDEN_ARCHER_HELMET.get());
-        output.accept(ModItems.GOLDEN_ARCHER_CHESTPLATE.get());
-        output.accept(ModItems.GOLDEN_ARCHER_LEGGINGS.get());
-        output.accept(ModItems.GOLDEN_ARCHER_BOOTS.get());
-        output.accept(ModItems.IRON_ARCHER_HELMET.get());
-        output.accept(ModItems.IRON_ARCHER_CHESTPLATE.get());
-        output.accept(ModItems.IRON_ARCHER_LEGGINGS.get());
-        output.accept(ModItems.IRON_ARCHER_BOOTS.get());
-        output.accept(ModItems.NETHERITE_ARCHER_HELMET.get());
-        output.accept(ModItems.NETHERITE_ARCHER_CHESTPLATE.get());
-        output.accept(ModItems.NETHERITE_ARCHER_LEGGINGS.get());
-        output.accept(ModItems.NETHERITE_ARCHER_BOOTS.get());
+        output.accept(ModItems.STARLIGHT_RANGER_HELMET.get());
+        output.accept(ModItems.STARLIGHT_RANGER_CHESTPLATE.get());
+        output.accept(ModItems.STARLIGHT_RANGER_LEGGINGS.get());
+        output.accept(ModItems.STARLIGHT_RANGER_BOOTS.get());
+        output.accept(ModItems.DAWNLIGHT_RANGER_HELMET.get());
+        output.accept(ModItems.DAWNLIGHT_RANGER_CHESTPLATE.get());
+        output.accept(ModItems.DAWNLIGHT_RANGER_LEGGINGS.get());
+        output.accept(ModItems.DAWNLIGHT_RANGER_BOOTS.get());
+        output.accept(ModItems.FORESTSHADE_RANGER_HELMET.get());
+        output.accept(ModItems.FORESTSHADE_RANGER_CHESTPLATE.get());
+        output.accept(ModItems.FORESTSHADE_RANGER_LEGGINGS.get());
+        output.accept(ModItems.FORESTSHADE_RANGER_BOOTS.get());
+        output.accept(ModItems.DUSKFLAME_RANGER_HELMET.get());
+        output.accept(ModItems.DUSKFLAME_RANGER_CHESTPLATE.get());
+        output.accept(ModItems.DUSKFLAME_RANGER_LEGGINGS.get());
+        output.accept(ModItems.DUSKFLAME_RANGER_BOOTS.get());
+
+        output.accept(ModItems.STARFORGED_KNIGHT_GREATSWORD.get());
+        output.accept(ModItems.STARFORGED_KNIGHT_SPEAR.get());
+        output.accept(ModItems.STARFORGED_KNIGHT_HELMET.get());
+        output.accept(ModItems.STARFORGED_KNIGHT_CHESTPLATE.get());
+        output.accept(ModItems.STARFORGED_KNIGHT_LEGGINGS.get());
+        output.accept(ModItems.STARFORGED_KNIGHT_BOOTS.get());
+        output.accept(ModItems.DAWNFORGED_KNIGHT_GREATSWORD.get());
+        output.accept(ModItems.DAWNFORGED_KNIGHT_SPEAR.get());
+        output.accept(ModItems.DAWNFORGED_KNIGHT_HELMET.get());
+        output.accept(ModItems.DAWNFORGED_KNIGHT_CHESTPLATE.get());
+        output.accept(ModItems.DAWNFORGED_KNIGHT_LEGGINGS.get());
+        output.accept(ModItems.DAWNFORGED_KNIGHT_BOOTS.get());
+        output.accept(ModItems.MOONFORGED_KNIGHT_GREATSWORD.get());
+        output.accept(ModItems.MOONFORGED_KNIGHT_SPEAR.get());
+        output.accept(ModItems.MOONFORGED_KNIGHT_HELMET.get());
+        output.accept(ModItems.MOONFORGED_KNIGHT_CHESTPLATE.get());
+        output.accept(ModItems.MOONFORGED_KNIGHT_LEGGINGS.get());
+        output.accept(ModItems.MOONFORGED_KNIGHT_BOOTS.get());
 
         parameters.holders().lookup(Registries.ENCHANTMENT).ifPresent(enchantments -> {
             addEnchantmentBooks(output, enchantments, ModEnchantments.IMPALE);

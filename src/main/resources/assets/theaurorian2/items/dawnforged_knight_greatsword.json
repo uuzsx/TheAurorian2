@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "theaurorian2:item/knight_greatsword",
+    "model": { "type": "geckolib:geckolib" }
+  }
+}

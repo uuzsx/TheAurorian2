@@ -1,0 +1,17 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:special",
+      "base": "theaurorian2:item/knight_spear",
+      "model": { "type": "geckolib:geckolib" }
+    },
+    "on_true": {
+      "type": "minecraft:special",
+      "base": "theaurorian2:item/knight_spear_stage_one",
+      "model": { "type": "geckolib:geckolib" }
+    },
+    "property": "minecraft:using_item"
+  },
+  "swap_animation_scale": 1.95
+}

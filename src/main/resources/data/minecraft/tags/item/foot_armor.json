@@ -1,9 +1,12 @@
 {
   "replace": false,
   "values": [
-    "theaurorian2:diamond_archer_boots",
-    "theaurorian2:golden_archer_boots",
-    "theaurorian2:iron_archer_boots",
-    "theaurorian2:netherite_archer_boots"
+    "theaurorian2:starlight_ranger_boots",
+    "theaurorian2:dawnlight_ranger_boots",
+    "theaurorian2:forestshade_ranger_boots",
+    "theaurorian2:duskflame_ranger_boots",
+    "theaurorian2:starforged_knight_boots",
+    "theaurorian2:dawnforged_knight_boots",
+    "theaurorian2:moonforged_knight_boots"
   ]
 }

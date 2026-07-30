@@ -1,1 +1,10 @@
-{ "parent": "theaurorian2:block/frost_tears_flower" }
+{
+  "parent": "theaurorian2:block/frost_tears_flower",
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, -4, 0],
+      "scale": [0.625, 0.625, 0.625]
+    }
+  }
+}

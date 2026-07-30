@@ -13,11 +13,21 @@ public final class ModToolMaterials {
             Registries.ITEM, TheAurorian2.id("aurorian_planks"));
     private static final TagKey<Item> AURORIAN_STONE_TOOL_MATERIALS = TagKey.create(
             Registries.ITEM, TheAurorian2.id("aurorian_stone_tool_materials"));
+    private static final TagKey<Item> KNIGHT_GREATSWORD_REPAIR_MATERIALS = TagKey.create(
+            Registries.ITEM, TheAurorian2.id("knight_greatsword_repair_materials"));
+    private static final TagKey<Item> KNIGHT_SPEAR_REPAIR_MATERIALS = TagKey.create(
+            Registries.ITEM, TheAurorian2.id("knight_spear_repair_materials"));
 
     public static final ToolMaterial WOOD = new ToolMaterial(
             BlockTags.INCORRECT_FOR_WOODEN_TOOL, 59, 2.0F, 0.0F, 15, AURORIAN_PLANKS);
     public static final ToolMaterial STONE = new ToolMaterial(
             BlockTags.INCORRECT_FOR_STONE_TOOL, 131, 4.0F, 1.0F, 5, AURORIAN_STONE_TOOL_MATERIALS);
+    public static final ToolMaterial KNIGHT_GREATSWORD = new ToolMaterial(
+            BlockTags.INCORRECT_FOR_IRON_TOOL, 512, 6.0F, 0.0F, 14,
+            KNIGHT_GREATSWORD_REPAIR_MATERIALS);
+    public static final ToolMaterial KNIGHT_SPEAR = new ToolMaterial(
+            BlockTags.INCORRECT_FOR_IRON_TOOL, 512, 6.0F, 3.0F, 14,
+            KNIGHT_SPEAR_REPAIR_MATERIALS);
 
     private ModToolMaterials() {
     }

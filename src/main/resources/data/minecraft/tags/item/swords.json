@@ -1,4 +1,10 @@
 {
   "replace": false,
-  "values": ["theaurorian2:silent_wood_sword", "theaurorian2:aurorian_stone_sword"]
+  "values": [
+    "theaurorian2:silent_wood_sword",
+    "theaurorian2:aurorian_stone_sword",
+    "theaurorian2:starforged_knight_greatsword",
+    "theaurorian2:dawnforged_knight_greatsword",
+    "theaurorian2:moonforged_knight_greatsword"
+  ]
 }

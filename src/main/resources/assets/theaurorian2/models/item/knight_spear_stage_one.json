@@ -1,0 +1,15 @@
+{
+  "parent": "theaurorian2:item/knight_spear",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [-66, 90, 7],
+      "translation": [-1.25, 3.25, 6.5],
+      "scale": [0.4, 0.52, 0.4]
+    },
+    "firstperson_lefthand": {
+      "rotation": [-66, 90, 7],
+      "translation": [-1.25, 3.25, 6.5],
+      "scale": [0.4, 0.52, 0.4]
+    }
+  }
+}

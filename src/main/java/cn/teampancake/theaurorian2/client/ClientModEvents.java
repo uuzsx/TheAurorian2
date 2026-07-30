@@ -8,6 +8,7 @@ import cn.teampancake.theaurorian2.client.resource.AurorianGrassColorReloadListe
 import cn.teampancake.theaurorian2.client.renderer.DamageNumberRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianChestRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianFurnaceRenderer;
+import cn.teampancake.theaurorian2.client.renderer.AurorianGrassRockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AstrologyTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.TrainingDummyRenderer;
@@ -18,14 +19,20 @@ import cn.teampancake.theaurorian2.common.registry.ModBlockEntities;
 import cn.teampancake.theaurorian2.common.registry.ModEntities;
 import cn.teampancake.theaurorian2.common.registry.ModFluidTypes;
 import cn.teampancake.theaurorian2.common.registry.ModFluids;
+import cn.teampancake.theaurorian2.common.registry.ModItems;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
+import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.List;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -36,6 +43,7 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.fluid.FluidTintSources;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
@@ -55,6 +63,8 @@ public final class ClientModEvents {
         event.registerBlockEntityRenderer(ModBlockEntities.ASTROLOGY_TABLE.get(), AstrologyTableRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_CHEST.get(), AurorianChestRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_FURNACE.get(), AurorianFurnaceRenderer::new);
+        event.registerBlockEntityRenderer(
+                ModBlockEntities.AURORIAN_GRASS_ROCK.get(), AurorianGrassRockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_TABLE.get(), AurorianTableRenderer::new);
     }
 
@@ -89,6 +99,52 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public boolean applyForgeHandTransform(
+                    PoseStack poseStack,
+                    LocalPlayer player,
+                    HumanoidArm arm,
+                    ItemStack itemInHand,
+                    float partialTick,
+                    float equipProcess,
+                    float swingProcess) {
+                  InteractionHand hand = player.getMainArm() == arm
+                          ? InteractionHand.MAIN_HAND
+                          : InteractionHand.OFF_HAND;
+                  int direction = arm == HumanoidArm.RIGHT ? 1 : -1;
+                  if (player.isUsingItem() && player.getUsedItemHand() == hand) {
+                      poseStack.translate(direction * 0.56F, -0.52F - equipProcess * 0.6F, -0.72F);
+                      return true;
+                  }
+
+                  if (hand == InteractionHand.MAIN_HAND
+                          && player.swinging
+                          && player.swingingArm == hand
+                          && swingProcess > 0.0F) {
+                      poseStack.translate(direction * 0.56F, -0.52F - equipProcess * 0.6F, -0.72F);
+                      float thrustOut = smoothProgress(progress(swingProcess, 0.06F, 0.22F));
+                      float thrustReturn = smoothProgress(progress(swingProcess, 0.48F, 1.0F));
+                      float thrust = thrustOut * (1.0F - thrustReturn);
+                      poseStack.translate(0.0F, 0.0F, -0.5F * thrust);
+                      return true;
+                  }
+
+                  return false;
+              }
+
+              private float progress(float value, float start, float end) {
+                  return Math.clamp((value - start) / (end - start), 0.0F, 1.0F);
+              }
+
+              private float smoothProgress(float progress) {
+                  return progress * progress * (3.0F - 2.0F * progress);
+              }
+          },
+                ModItems.STARFORGED_KNIGHT_SPEAR.get(),
+                ModItems.DAWNFORGED_KNIGHT_SPEAR.get(),
+                ModItems.MOONFORGED_KNIGHT_SPEAR.get());
+
         event.registerFluidType(new IClientFluidTypeExtensions() {
             @Override
             public void modifyFogColor(

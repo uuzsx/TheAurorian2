@@ -17,6 +17,7 @@ import cn.teampancake.theaurorian2.common.registry.ModItems;
 import cn.teampancake.theaurorian2.common.registry.ModMobEffects;
 import cn.teampancake.theaurorian2.common.network.ModNetworking;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
+import cn.teampancake.theaurorian2.common.registry.ModStats;
 import cn.teampancake.theaurorian2.common.registry.ModStructures;
 import cn.teampancake.theaurorian2.common.registry.ModTreeDecorators;
 import cn.teampancake.theaurorian2.common.world.AurorianBlessingCycle;
@@ -60,6 +61,7 @@ public final class TheAurorian2 {
         ModFeatures.register(modEventBus);
         ModStructures.register(modEventBus);
         ModParticles.register(modEventBus);
+        ModStats.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         modEventBus.addListener(ModNetworking::registerPayloadHandlers);
         NeoForge.EVENT_BUS.addListener(EnchantmentTooltips::onItemTooltip);
@@ -76,6 +78,7 @@ public final class TheAurorian2 {
         event.enqueueWork(() -> {
             DispenserBlock.registerBehavior(
                     ModBlocks.MOON_DEW_BUCKET.get(), DispenseFluidContainer.getInstance());
+            ModStats.bootstrap();
             registerFlammableWood();
         });
     }

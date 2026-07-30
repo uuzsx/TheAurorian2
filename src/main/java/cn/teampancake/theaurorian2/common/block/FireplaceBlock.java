@@ -3,6 +3,7 @@ package cn.teampancake.theaurorian2.common.block;
 import cn.teampancake.theaurorian2.common.block.entity.FireplaceBlockEntity;
 import cn.teampancake.theaurorian2.common.registry.ModBlockEntities;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
+import cn.teampancake.theaurorian2.common.registry.ModStats;
 import com.mojang.serialization.MapCodec;
 import java.util.EnumMap;
 import java.util.Map;
@@ -12,7 +13,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -184,7 +184,7 @@ public final class FireplaceBlock extends AbstractFurnaceBlock {
     protected void openContainer(Level level, BlockPos pos, Player player) {
         if (level.getBlockEntity(pos) instanceof FireplaceBlockEntity fireplace) {
             player.openMenu(fireplace);
-            player.awardStat(Stats.INTERACT_WITH_SMOKER);
+            player.awardStat(ModStats.INTERACT_WITH_FIREPLACE.get());
         }
     }
 

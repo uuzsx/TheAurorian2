@@ -2,8 +2,8 @@ package cn.teampancake.theaurorian2.common.block;
 
 import cn.teampancake.theaurorian2.common.block.entity.AurorianFurnaceBlockEntity;
 import cn.teampancake.theaurorian2.common.registry.ModBlockEntities;
+import cn.teampancake.theaurorian2.common.registry.ModStats;
 import net.minecraft.core.BlockPos;
-import net.minecraft.stats.Stats;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -41,7 +41,7 @@ public final class AurorianFurnaceBlock extends FurnaceBlock {
     protected void openContainer(Level level, BlockPos pos, Player player) {
         if (level.getBlockEntity(pos) instanceof AurorianFurnaceBlockEntity furnace) {
             player.openMenu(furnace);
-            player.awardStat(Stats.INTERACT_WITH_FURNACE);
+            player.awardStat(ModStats.INTERACT_WITH_AURORIAN_FURNACE.get());
         }
     }
 }
