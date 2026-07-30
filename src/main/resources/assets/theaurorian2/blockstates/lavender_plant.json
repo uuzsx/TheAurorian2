@@ -1,7 +1,1 @@
-﻿{
-    "variants":  {
-                     "":  {
-                              "model":  "theaurorian2:block/lavender_plant"
-                          }
-                 }
-}
+﻿{"variants":{"":{"model":"theaurorian2:block/lavender_plant"}}}

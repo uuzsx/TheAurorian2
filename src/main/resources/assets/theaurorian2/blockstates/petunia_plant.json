@@ -1,7 +1,1 @@
-﻿{
-    "variants":  {
-                     "":  {
-                              "model":  "theaurorian2:block/petunia_plant"
-                          }
-                 }
-}
+﻿{"variants":{"":{"model":"theaurorian2:block/petunia_plant"}}}

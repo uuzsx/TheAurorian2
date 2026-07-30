@@ -1,7 +1,1 @@
-﻿{
-    "variants":  {
-                     "":  {
-                              "model":  "theaurorian2:block/nebula_blossom_cluster"
-                          }
-                 }
-}
+﻿{"variants":{"":{"model":"theaurorian2:block/nebula_blossom_cluster"}}}

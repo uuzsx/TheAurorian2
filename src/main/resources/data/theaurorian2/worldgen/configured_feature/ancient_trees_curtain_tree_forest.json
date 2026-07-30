@@ -1,18 +1,9 @@
 {
-    "config": {
-        "features": [
-            {
-                "feature": {
-                    "feature": "theaurorian2:ancient_silent_tree",
-                    "placement": []
-                },
-                "chance": 0.1
-            }
-        ],
-        "default": {
-            "feature": "theaurorian2:ancient_curtain_tree",
-            "placement": []
-        }
-    },
-    "type": "minecraft:random_selector"
+  "config": {
+    "features": [
+      {"feature":{"feature":"theaurorian2:ancient_silent_tree","placement":[]},"chance":0.1}
+    ],
+    "default": {"feature":"theaurorian2:ancient_curtain_tree","placement":[]}
+  },
+  "type": "minecraft:random_selector"
 }

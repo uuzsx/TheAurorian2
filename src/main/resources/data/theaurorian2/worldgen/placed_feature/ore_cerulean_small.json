@@ -1,27 +1,12 @@
 ﻿{
-    "feature":  "theaurorian2:ore_cerulean",
-    "placement":  [
-                      {
-                          "count":  3,
-                          "type":  "minecraft:count"
-                      },
-                      {
-                          "type":  "minecraft:in_square"
-                      },
-                      {
-                          "height":  {
-                                         "min_inclusive":  {
-                                                               "above_bottom":  0
-                                                           },
-                                         "type":  "minecraft:uniform",
-                                         "max_inclusive":  {
-                                                               "absolute":  72
-                                                           }
-                                     },
-                          "type":  "minecraft:height_range"
-                      },
-                      {
-                          "type":  "minecraft:biome"
-                      }
-                  ]
+  "feature": "theaurorian2:ore_cerulean",
+  "placement": [
+    {"count":3,"type":"minecraft:count"},
+    {"type":"minecraft:in_square"},
+    {
+      "height": {"min_inclusive":{"above_bottom":0},"type":"minecraft:uniform","max_inclusive":{"absolute":72}},
+      "type": "minecraft:height_range"
+    },
+    {"type":"minecraft:biome"}
+  ]
 }

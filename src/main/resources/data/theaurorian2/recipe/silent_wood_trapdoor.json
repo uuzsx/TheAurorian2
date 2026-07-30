@@ -1,15 +1,7 @@
 {
-    "type":  "minecraft:crafting_shaped",
-    "category":  "building",
-    "key":  {
-                "#":  "theaurorian2:silent_tree_planks"
-            },
-    "pattern":  [
-                    "###",
-                    "###"
-                ],
-    "result":  {
-                   "count":  2,
-                   "id":  "theaurorian2:silent_wood_trapdoor"
-               }
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {"#":"theaurorian2:silent_tree_planks"},
+  "pattern": ["###","###"],
+  "result": {"count":2,"id":"theaurorian2:silent_wood_trapdoor"}
 }

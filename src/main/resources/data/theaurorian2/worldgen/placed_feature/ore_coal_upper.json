@@ -1,27 +1,12 @@
 ﻿{
-    "feature":  "theaurorian2:ore_coal",
-    "placement":  [
-                      {
-                          "count":  30,
-                          "type":  "minecraft:count"
-                      },
-                      {
-                          "type":  "minecraft:in_square"
-                      },
-                      {
-                          "height":  {
-                                         "min_inclusive":  {
-                                                               "absolute":  136
-                                                           },
-                                         "type":  "minecraft:uniform",
-                                         "max_inclusive":  {
-                                                               "below_top":  0
-                                                           }
-                                     },
-                          "type":  "minecraft:height_range"
-                      },
-                      {
-                          "type":  "minecraft:biome"
-                      }
-                  ]
+  "feature": "theaurorian2:ore_coal",
+  "placement": [
+    {"count":30,"type":"minecraft:count"},
+    {"type":"minecraft:in_square"},
+    {
+      "height": {"min_inclusive":{"absolute":136},"type":"minecraft:uniform","max_inclusive":{"below_top":0}},
+      "type": "minecraft:height_range"
+    },
+    {"type":"minecraft:biome"}
+  ]
 }

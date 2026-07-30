@@ -3,10 +3,7 @@ $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $assets = Join-Path $root 'src/main/resources/assets/theaurorian2'
 $data = Join-Path $root 'src/main/resources/data/theaurorian2'
 
-function Write-Json($path, $value) {
-    New-Item -ItemType Directory -Force -Path (Split-Path $path) | Out-Null
-    $value | ConvertTo-Json -Depth 40 | Set-Content -LiteralPath $path -Encoding utf8
-}
+. (Join-Path $PSScriptRoot 'json_utils.ps1')
 
 $singlePlants = @('aurorian_grass','aurorian_grass_light','petunia_plant','nebula_blossom_cluster','moon_frost_flower','void_candle_flower','lavender_plant')
 foreach ($name in $singlePlants) {

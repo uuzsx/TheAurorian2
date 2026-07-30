@@ -1,21 +1,12 @@
 ﻿{
-    "pools":  [
-                  {
-                      "entries":  [
-                                      {
-                                          "name":  "theaurorian2:indigo_mushroom",
-                                          "type":  "minecraft:item"
-                                      }
-                                  ],
-                      "bonus_rolls":  0,
-                      "rolls":  1,
-                      "conditions":  [
-                                         {
-                                             "condition":  "minecraft:survives_explosion"
-                                         }
-                                     ]
-                  }
-              ],
-    "type":  "minecraft:block",
-    "random_sequence":  "theaurorian2:blocks/indigo_mushroom"
+  "pools": [
+    {
+      "entries": [{"name":"theaurorian2:indigo_mushroom","type":"minecraft:item"}],
+      "bonus_rolls": 0,
+      "rolls": 1,
+      "conditions": [{"condition":"minecraft:survives_explosion"}]
+    }
+  ],
+  "type": "minecraft:block",
+  "random_sequence": "theaurorian2:blocks/indigo_mushroom"
 }

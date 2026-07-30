@@ -1,7 +1,1 @@
-﻿{
-    "variants":  {
-                     "":  {
-                              "model":  "theaurorian2:block/curtain_tree_leaves"
-                          }
-                 }
-}
+﻿{"variants":{"":{"model":"theaurorian2:block/curtain_tree_leaves"}}}

@@ -1,79 +1,24 @@
 {
-    "variants":  {
-                     "facing=north,variant=0":  {
-                                                    "model":  "theaurorian2:block/dark_brown_mushroom_1"
-                                                },
-                     "facing=north,variant=1":  {
-                                                    "model":  "theaurorian2:block/dark_brown_mushroom_2"
-                                                },
-                     "facing=north,variant=2":  {
-                                                    "model":  "theaurorian2:block/dark_brown_mushroom_3"
-                                                },
-                     "facing=north,variant=3":  {
-                                                    "model":  "theaurorian2:block/dark_brown_mushroom_4"
-                                                },
-                     "facing=north,variant=4":  {
-                                                    "model":  "theaurorian2:block/dark_brown_mushroom_5"
-                                                },
-                     "facing=east,variant=0":  {
-                                                   "model":  "theaurorian2:block/dark_brown_mushroom_1",
-                                                   "y":  90
-                                               },
-                     "facing=east,variant=1":  {
-                                                   "model":  "theaurorian2:block/dark_brown_mushroom_2",
-                                                   "y":  90
-                                               },
-                     "facing=east,variant=2":  {
-                                                   "model":  "theaurorian2:block/dark_brown_mushroom_3",
-                                                   "y":  90
-                                               },
-                     "facing=east,variant=3":  {
-                                                   "model":  "theaurorian2:block/dark_brown_mushroom_4",
-                                                   "y":  90
-                                               },
-                     "facing=east,variant=4":  {
-                                                   "model":  "theaurorian2:block/dark_brown_mushroom_5",
-                                                   "y":  90
-                                               },
-                     "facing=south,variant=0":  {
-                                                    "model":  "theaurorian2:block/dark_brown_mushroom_1",
-                                                    "y":  180
-                                                },
-                     "facing=south,variant=1":  {
-                                                    "model":  "theaurorian2:block/dark_brown_mushroom_2",
-                                                    "y":  180
-                                                },
-                     "facing=south,variant=2":  {
-                                                    "model":  "theaurorian2:block/dark_brown_mushroom_3",
-                                                    "y":  180
-                                                },
-                     "facing=south,variant=3":  {
-                                                    "model":  "theaurorian2:block/dark_brown_mushroom_4",
-                                                    "y":  180
-                                                },
-                     "facing=south,variant=4":  {
-                                                    "model":  "theaurorian2:block/dark_brown_mushroom_5",
-                                                    "y":  180
-                                                },
-                     "facing=west,variant=0":  {
-                                                   "model":  "theaurorian2:block/dark_brown_mushroom_1",
-                                                   "y":  270
-                                               },
-                     "facing=west,variant=1":  {
-                                                   "model":  "theaurorian2:block/dark_brown_mushroom_2",
-                                                   "y":  270
-                                               },
-                     "facing=west,variant=2":  {
-                                                   "model":  "theaurorian2:block/dark_brown_mushroom_3",
-                                                   "y":  270
-                                               },
-                     "facing=west,variant=3":  {
-                                                   "model":  "theaurorian2:block/dark_brown_mushroom_4",
-                                                   "y":  270
-                                               },
-                     "facing=west,variant=4":  {
-                                                   "model":  "theaurorian2:block/dark_brown_mushroom_5",
-                                                   "y":  270
-                                               }
-                 }
+  "variants": {
+    "facing=north,variant=0": {"model":"theaurorian2:block/dark_brown_mushroom_1"},
+    "facing=north,variant=1": {"model":"theaurorian2:block/dark_brown_mushroom_2"},
+    "facing=north,variant=2": {"model":"theaurorian2:block/dark_brown_mushroom_3"},
+    "facing=north,variant=3": {"model":"theaurorian2:block/dark_brown_mushroom_4"},
+    "facing=north,variant=4": {"model":"theaurorian2:block/dark_brown_mushroom_5"},
+    "facing=east,variant=0": {"model":"theaurorian2:block/dark_brown_mushroom_1","y":90},
+    "facing=east,variant=1": {"model":"theaurorian2:block/dark_brown_mushroom_2","y":90},
+    "facing=east,variant=2": {"model":"theaurorian2:block/dark_brown_mushroom_3","y":90},
+    "facing=east,variant=3": {"model":"theaurorian2:block/dark_brown_mushroom_4","y":90},
+    "facing=east,variant=4": {"model":"theaurorian2:block/dark_brown_mushroom_5","y":90},
+    "facing=south,variant=0": {"model":"theaurorian2:block/dark_brown_mushroom_1","y":180},
+    "facing=south,variant=1": {"model":"theaurorian2:block/dark_brown_mushroom_2","y":180},
+    "facing=south,variant=2": {"model":"theaurorian2:block/dark_brown_mushroom_3","y":180},
+    "facing=south,variant=3": {"model":"theaurorian2:block/dark_brown_mushroom_4","y":180},
+    "facing=south,variant=4": {"model":"theaurorian2:block/dark_brown_mushroom_5","y":180},
+    "facing=west,variant=0": {"model":"theaurorian2:block/dark_brown_mushroom_1","y":270},
+    "facing=west,variant=1": {"model":"theaurorian2:block/dark_brown_mushroom_2","y":270},
+    "facing=west,variant=2": {"model":"theaurorian2:block/dark_brown_mushroom_3","y":270},
+    "facing=west,variant=3": {"model":"theaurorian2:block/dark_brown_mushroom_4","y":270},
+    "facing=west,variant=4": {"model":"theaurorian2:block/dark_brown_mushroom_5","y":270}
+  }
 }

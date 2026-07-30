@@ -1,350 +1,58 @@
 {
-    "credit":  "Made with Blockbench",
-    "texture_size":  [
-                         64,
-                         64
-                     ],
-    "textures":  {
-                     "0":  "theaurorian2:block/dark_brown_mushroom",
-                     "particle":  "theaurorian2:block/dark_brown_mushroom"
-                 },
-    "elements":  [
-                     {
-                         "from":  [
-                                      2,
-                                      5,
-                                      9
-                                  ],
-                         "to":  [
-                                    10,
-                                    5,
-                                    16
-                                ],
-                         "rotation":  {
-                                          "angle":  0,
-                                          "axis":  "y",
-                                          "origin":  [
-                                                         12,
-                                                         4,
-                                                         11
-                                                     ]
-                                      },
-                         "faces":  {
-                                       "north":  {
-                                                     "uv":  [
-                                                                0,
-                                                                0,
-                                                                2,
-                                                                0
-                                                            ],
-                                                     "texture":  "#0"
-                                                 },
-                                       "east":  {
-                                                    "uv":  [
-                                                               0,
-                                                               0,
-                                                               1.75,
-                                                               0
-                                                           ],
-                                                    "texture":  "#0"
-                                                },
-                                       "south":  {
-                                                     "uv":  [
-                                                                0,
-                                                                0,
-                                                                2,
-                                                                0
-                                                            ],
-                                                     "texture":  "#0"
-                                                 },
-                                       "west":  {
-                                                    "uv":  [
-                                                               0,
-                                                               0,
-                                                               1.75,
-                                                               0
-                                                           ],
-                                                    "texture":  "#0"
-                                                },
-                                       "up":  {
-                                                  "uv":  [
-                                                             5.25,
-                                                             7.25,
-                                                             3.25,
-                                                             5.5
-                                                         ],
-                                                  "texture":  "#0"
-                                              },
-                                       "down":  {
-                                                    "uv":  [
-                                                               5.25,
-                                                               5.5,
-                                                               3.25,
-                                                               7.25
-                                                           ],
-                                                    "texture":  "#0"
-                                                }
-                                   }
-                     },
-                     {
-                         "from":  [
-                                      11,
-                                      7,
-                                      9
-                                  ],
-                         "to":  [
-                                    19,
-                                    7,
-                                    16
-                                ],
-                         "rotation":  {
-                                          "angle":  0,
-                                          "axis":  "y",
-                                          "origin":  [
-                                                         21,
-                                                         6,
-                                                         11
-                                                     ]
-                                      },
-                         "faces":  {
-                                       "north":  {
-                                                     "uv":  [
-                                                                0,
-                                                                0,
-                                                                2,
-                                                                0
-                                                            ],
-                                                     "texture":  "#0"
-                                                 },
-                                       "east":  {
-                                                    "uv":  [
-                                                               0,
-                                                               0,
-                                                               1.75,
-                                                               0
-                                                           ],
-                                                    "texture":  "#0"
-                                                },
-                                       "south":  {
-                                                     "uv":  [
-                                                                0,
-                                                                0,
-                                                                2,
-                                                                0
-                                                            ],
-                                                     "texture":  "#0"
-                                                 },
-                                       "west":  {
-                                                    "uv":  [
-                                                               0,
-                                                               0,
-                                                               1.75,
-                                                               0
-                                                           ],
-                                                    "texture":  "#0"
-                                                },
-                                       "up":  {
-                                                  "uv":  [
-                                                             16,
-                                                             3,
-                                                             14,
-                                                             1.25
-                                                         ],
-                                                  "texture":  "#0"
-                                              },
-                                       "down":  {
-                                                    "uv":  [
-                                                               16,
-                                                               1.25,
-                                                               14,
-                                                               3
-                                                           ],
-                                                    "texture":  "#0"
-                                                }
-                                   }
-                     },
-                     {
-                         "from":  [
-                                      7,
-                                      10,
-                                      9
-                                  ],
-                         "to":  [
-                                    15,
-                                    10,
-                                    16
-                                ],
-                         "rotation":  {
-                                          "angle":  0,
-                                          "axis":  "y",
-                                          "origin":  [
-                                                         17,
-                                                         9,
-                                                         11
-                                                     ]
-                                      },
-                         "faces":  {
-                                       "north":  {
-                                                     "uv":  [
-                                                                10.75,
-                                                                6.75,
-                                                                12.75,
-                                                                6.75
-                                                            ],
-                                                     "texture":  "#0"
-                                                 },
-                                       "east":  {
-                                                    "uv":  [
-                                                               10.75,
-                                                               6.75,
-                                                               12.5,
-                                                               6.75
-                                                           ],
-                                                    "texture":  "#0"
-                                                },
-                                       "south":  {
-                                                     "uv":  [
-                                                                10.75,
-                                                                6.75,
-                                                                12.75,
-                                                                6.75
-                                                            ],
-                                                     "texture":  "#0"
-                                                 },
-                                       "west":  {
-                                                    "uv":  [
-                                                               10.75,
-                                                               6.75,
-                                                               12.5,
-                                                               6.75
-                                                           ],
-                                                    "texture":  "#0"
-                                                },
-                                       "up":  {
-                                                  "uv":  [
-                                                             10.75,
-                                                             3,
-                                                             8.75,
-                                                             1.25
-                                                         ],
-                                                  "texture":  "#0"
-                                              },
-                                       "down":  {
-                                                    "uv":  [
-                                                               10.75,
-                                                               1.25,
-                                                               8.75,
-                                                               3
-                                                           ],
-                                                    "texture":  "#0"
-                                                }
-                                   }
-                     }
-                 ],
-    "display":  {
-                    "thirdperson_righthand":  {
-                                                  "rotation":  [
-                                                                   60,
-                                                                   0,
-                                                                   0
-                                                               ],
-                                                  "translation":  [
-                                                                      0,
-                                                                      3.25,
-                                                                      0.5
-                                                                  ],
-                                                  "scale":  [
-                                                                0.5,
-                                                                0.5,
-                                                                0.5
-                                                            ]
-                                              },
-                    "thirdperson_lefthand":  {
-                                                 "rotation":  [
-                                                                  60,
-                                                                  0,
-                                                                  0
-                                                              ],
-                                                 "translation":  [
-                                                                     0,
-                                                                     3.25,
-                                                                     0.5
-                                                                 ],
-                                                 "scale":  [
-                                                               0.5,
-                                                               0.5,
-                                                               0.5
-                                                           ]
-                                             },
-                    "firstperson_righthand":  {
-                                                  "translation":  [
-                                                                      3.75,
-                                                                      0.25,
-                                                                      -8.25
-                                                                  ]
-                                              },
-                    "firstperson_lefthand":  {
-                                                 "translation":  [
-                                                                     3.75,
-                                                                     0.25,
-                                                                     -8.25
-                                                                 ]
-                                             },
-                    "ground":  {
-                                   "translation":  [
-                                                       0,
-                                                       2,
-                                                       -1.25
-                                                   ],
-                                   "scale":  [
-                                                 0.5,
-                                                 0.5,
-                                                 0.5
-                                             ]
-                               },
-                    "gui":  {
-                                "rotation":  [
-                                                 45,
-                                                 135,
-                                                 0
-                                             ],
-                                "translation":  [
-                                                    -2.5,
-                                                    -1,
-                                                    6
-                                                ],
-                                "scale":  [
-                                              0.7,
-                                              0.7,
-                                              0.7
-                                          ]
-                            },
-                    "head":  {
-                                 "rotation":  [
-                                                  90,
-                                                  0,
-                                                  0
-                                              ]
-                             },
-                    "fixed":  {
-                                  "translation":  [
-                                                      0,
-                                                      0,
-                                                      -6.5
-                                                  ]
-                              },
-                    "on_shelf":  {
-                                     "rotation":  [
-                                                      0,
-                                                      -180,
-                                                      0
-                                                  ],
-                                     "translation":  [
-                                                         0,
-                                                         0,
-                                                         3.25
-                                                     ]
-                                 }
-                },
-    "render_type":  "minecraft:cutout"
+  "credit": "Made with Blockbench",
+  "texture_size": [64,64],
+  "textures": {"0":"theaurorian2:block/dark_brown_mushroom","particle":"theaurorian2:block/dark_brown_mushroom"},
+  "elements": [
+    {
+      "from": [2,5,9],
+      "to": [10,5,16],
+      "rotation": {"angle":0,"axis":"y","origin":[12,4,11]},
+      "faces": {
+        "north": {"uv":[0,0,2,0],"texture":"#0"},
+        "east": {"uv":[0,0,1.75,0],"texture":"#0"},
+        "south": {"uv":[0,0,2,0],"texture":"#0"},
+        "west": {"uv":[0,0,1.75,0],"texture":"#0"},
+        "up": {"uv":[5.25,7.25,3.25,5.5],"texture":"#0"},
+        "down": {"uv":[5.25,5.5,3.25,7.25],"texture":"#0"}
+      }
+    },
+    {
+      "from": [11,7,9],
+      "to": [19,7,16],
+      "rotation": {"angle":0,"axis":"y","origin":[21,6,11]},
+      "faces": {
+        "north": {"uv":[0,0,2,0],"texture":"#0"},
+        "east": {"uv":[0,0,1.75,0],"texture":"#0"},
+        "south": {"uv":[0,0,2,0],"texture":"#0"},
+        "west": {"uv":[0,0,1.75,0],"texture":"#0"},
+        "up": {"uv":[16,3,14,1.25],"texture":"#0"},
+        "down": {"uv":[16,1.25,14,3],"texture":"#0"}
+      }
+    },
+    {
+      "from": [7,10,9],
+      "to": [15,10,16],
+      "rotation": {"angle":0,"axis":"y","origin":[17,9,11]},
+      "faces": {
+        "north": {"uv":[10.75,6.75,12.75,6.75],"texture":"#0"},
+        "east": {"uv":[10.75,6.75,12.5,6.75],"texture":"#0"},
+        "south": {"uv":[10.75,6.75,12.75,6.75],"texture":"#0"},
+        "west": {"uv":[10.75,6.75,12.5,6.75],"texture":"#0"},
+        "up": {"uv":[10.75,3,8.75,1.25],"texture":"#0"},
+        "down": {"uv":[10.75,1.25,8.75,3],"texture":"#0"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {"rotation":[60,0,0],"translation":[0,3.25,0.5],"scale":[0.5,0.5,0.5]},
+    "thirdperson_lefthand": {"rotation":[60,0,0],"translation":[0,3.25,0.5],"scale":[0.5,0.5,0.5]},
+    "firstperson_righthand": {"translation":[3.75,0.25,-8.25]},
+    "firstperson_lefthand": {"translation":[3.75,0.25,-8.25]},
+    "ground": {"translation":[0,2,-1.25],"scale":[0.5,0.5,0.5]},
+    "gui": {"rotation":[45,135,0],"translation":[-2.5,-1,6],"scale":[0.7,0.7,0.7]},
+    "head": {"rotation":[90,0,0]},
+    "fixed": {"translation":[0,0,-6.5]},
+    "on_shelf": {"rotation":[0,-180,0],"translation":[0,0,3.25]}
+  },
+  "render_type": "minecraft:cutout"
 }

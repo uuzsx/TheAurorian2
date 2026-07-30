@@ -1,27 +1,12 @@
 ﻿{
-    "feature":  "theaurorian2:ore_moonstone",
-    "placement":  [
-                      {
-                          "count":  36,
-                          "type":  "minecraft:count"
-                      },
-                      {
-                          "type":  "minecraft:in_square"
-                      },
-                      {
-                          "height":  {
-                                         "min_inclusive":  {
-                                                               "absolute":  80
-                                                           },
-                                         "type":  "minecraft:trapezoid",
-                                         "max_inclusive":  {
-                                                               "absolute":  384
-                                                           }
-                                     },
-                          "type":  "minecraft:height_range"
-                      },
-                      {
-                          "type":  "minecraft:biome"
-                      }
-                  ]
+  "feature": "theaurorian2:ore_moonstone",
+  "placement": [
+    {"count":36,"type":"minecraft:count"},
+    {"type":"minecraft:in_square"},
+    {
+      "height": {"min_inclusive":{"absolute":80},"type":"minecraft:trapezoid","max_inclusive":{"absolute":384}},
+      "type": "minecraft:height_range"
+    },
+    {"type":"minecraft:biome"}
+  ]
 }

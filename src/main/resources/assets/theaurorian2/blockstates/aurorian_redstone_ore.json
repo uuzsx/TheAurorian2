@@ -1,10 +1,6 @@
 ﻿{
-    "variants":  {
-                     "lit=true":  {
-                                      "model":  "theaurorian2:block/aurorian_redstone_ore"
-                                  },
-                     "lit=false":  {
-                                       "model":  "theaurorian2:block/aurorian_redstone_ore"
-                                   }
-                 }
+  "variants": {
+    "lit=true": {"model":"theaurorian2:block/aurorian_redstone_ore"},
+    "lit=false": {"model":"theaurorian2:block/aurorian_redstone_ore"}
+  }
 }

@@ -1,9 +1,3 @@
 ﻿{
-    "textures":  [
-                     "theaurorian2:wick_01",
-                     "theaurorian2:wick_02",
-                     "theaurorian2:wick_03",
-                     "theaurorian2:wick_04",
-                     "theaurorian2:wick_05"
-                 ]
+  "textures": ["theaurorian2:wick_01","theaurorian2:wick_02","theaurorian2:wick_03","theaurorian2:wick_04","theaurorian2:wick_05"]
 }

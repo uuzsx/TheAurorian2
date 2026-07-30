@@ -1,27 +1,17 @@
 ﻿{
-    "config":  {
-                   "targets":  [
-                                   {
-                                       "target":  {
-                                                      "predicate_type":  "minecraft:block_match",
-                                                      "block":  "theaurorian2:aurorian_stone"
-                                                  },
-                                       "state":  {
-                                                     "Name":  "theaurorian2:aurorian_gold_ore"
-                                                 }
-                                   },
-                                   {
-                                       "target":  {
-                                                      "predicate_type":  "minecraft:block_match",
-                                                      "block":  "theaurorian2:aurorian_erosive"
-                                                  },
-                                       "state":  {
-                                                     "Name":  "theaurorian2:erosive_aurorian_gold_ore"
-                                                 }
-                                   }
-                               ],
-                   "size":  9,
-                   "discard_chance_on_air_exposure":  0
-               },
-    "type":  "minecraft:ore"
+  "config": {
+    "targets": [
+      {
+        "target": {"predicate_type":"minecraft:block_match","block":"theaurorian2:aurorian_stone"},
+        "state": {"Name":"theaurorian2:aurorian_gold_ore"}
+      },
+      {
+        "target": {"predicate_type":"minecraft:block_match","block":"theaurorian2:aurorian_erosive"},
+        "state": {"Name":"theaurorian2:erosive_aurorian_gold_ore"}
+      }
+    ],
+    "size": 9,
+    "discard_chance_on_air_exposure": 0
+  },
+  "type": "minecraft:ore"
 }

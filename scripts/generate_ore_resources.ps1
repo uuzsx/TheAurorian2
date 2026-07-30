@@ -3,11 +3,7 @@ $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $assets = Join-Path $root 'src/main/resources/assets/theaurorian2'
 $data = Join-Path $root 'src/main/resources/data/theaurorian2'
 
-function Write-Json($path, $value) {
-    $directory = Split-Path $path
-    New-Item -ItemType Directory -Force -Path $directory | Out-Null
-    $value | ConvertTo-Json -Depth 40 | Set-Content -LiteralPath $path -Encoding utf8
-}
+. (Join-Path $PSScriptRoot 'json_utils.ps1')
 
 $shallow = @('aurorian_coal_ore','aurorian_iron_ore','aurorian_copper_ore','aurorian_gold_ore','aurorian_lapis_ore','aurorian_redstone_ore','aurorian_diamond_ore','aurorian_emerald_ore','moonstone_ore','cerulean_ore','geode_ore')
 $deep = @('erosive_aurorian_iron_ore','erosive_aurorian_copper_ore','erosive_aurorian_gold_ore','erosive_aurorian_lapis_ore','erosive_aurorian_redstone_ore','erosive_aurorian_diamond_ore','erosive_aurorian_emerald_ore','erosive_moonstone_ore','erosive_cerulean_ore','erosive_geode_ore')

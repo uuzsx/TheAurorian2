@@ -1,17 +1,12 @@
 ﻿{
-    "feature":  "theaurorian2:fallen_curtain_tree",
-    "placement":  [
-                      {
-                          "predicate":  {
-                                            "state":  {
-                                                          "Properties":  {
-                                                                             "stage":  "0"
-                                                                         },
-                                                          "Name":  "theaurorian2:curtain_tree_sapling"
-                                                      },
-                                            "type":  "minecraft:would_survive"
-                                        },
-                          "type":  "minecraft:block_predicate_filter"
-                      }
-                  ]
+  "feature": "theaurorian2:fallen_curtain_tree",
+  "placement": [
+    {
+      "predicate": {
+        "state": {"Properties":{"stage":"0"},"Name":"theaurorian2:curtain_tree_sapling"},
+        "type": "minecraft:would_survive"
+      },
+      "type": "minecraft:block_predicate_filter"
+    }
+  ]
 }

@@ -1,10 +1,4 @@
 ﻿{
-    "replace":  false,
-    "values":  [
-                   "theaurorian2:petunia_plant",
-                   "theaurorian2:nebula_blossom_cluster",
-                   "theaurorian2:moon_frost_flower",
-                   "theaurorian2:void_candle_flower",
-                   "theaurorian2:lavender_plant"
-               ]
+  "replace": false,
+  "values": ["theaurorian2:petunia_plant","theaurorian2:nebula_blossom_cluster","theaurorian2:moon_frost_flower","theaurorian2:void_candle_flower","theaurorian2:lavender_plant"]
 }

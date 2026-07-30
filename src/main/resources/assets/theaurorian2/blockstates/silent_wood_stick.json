@@ -1,19 +1,8 @@
 ﻿{
-    "variants":  {
-                     "facing=north":  {
-                                          "model":  "theaurorian2:block/silent_wood_stick",
-                                          "y":  180
-                                      },
-                     "facing=south":  {
-                                          "model":  "theaurorian2:block/silent_wood_stick"
-                                      },
-                     "facing=east":  {
-                                         "model":  "theaurorian2:block/silent_wood_stick",
-                                         "y":  270
-                                     },
-                     "facing=west":  {
-                                         "model":  "theaurorian2:block/silent_wood_stick",
-                                         "y":  90
-                                     }
-                 }
+  "variants": {
+    "facing=north": {"model":"theaurorian2:block/silent_wood_stick","y":180},
+    "facing=south": {"model":"theaurorian2:block/silent_wood_stick"},
+    "facing=east": {"model":"theaurorian2:block/silent_wood_stick","y":270},
+    "facing=west": {"model":"theaurorian2:block/silent_wood_stick","y":90}
+  }
 }

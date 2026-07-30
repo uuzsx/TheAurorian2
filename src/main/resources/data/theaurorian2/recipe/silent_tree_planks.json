@@ -1,11 +1,6 @@
 {
-    "type":  "minecraft:crafting_shapeless",
-    "category":  "building",
-    "ingredients":  [
-                        "#theaurorian2:silent_tree_logs"
-                    ],
-    "result":  {
-                   "count":  4,
-                   "id":  "theaurorian2:silent_tree_planks"
-               }
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": ["#theaurorian2:silent_tree_logs"],
+  "result": {"count":4,"id":"theaurorian2:silent_tree_planks"}
 }

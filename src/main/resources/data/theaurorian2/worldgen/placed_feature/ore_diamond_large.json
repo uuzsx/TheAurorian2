@@ -1,27 +1,16 @@
 ﻿{
-    "feature":  "theaurorian2:ore_diamond_large",
-    "placement":  [
-                      {
-                          "type":  "minecraft:rarity_filter",
-                          "chance":  9
-                      },
-                      {
-                          "type":  "minecraft:in_square"
-                      },
-                      {
-                          "height":  {
-                                         "min_inclusive":  {
-                                                               "above_bottom":  -80
-                                                           },
-                                         "type":  "minecraft:trapezoid",
-                                         "max_inclusive":  {
-                                                               "above_bottom":  80
-                                                           }
-                                     },
-                          "type":  "minecraft:height_range"
-                      },
-                      {
-                          "type":  "minecraft:biome"
-                      }
-                  ]
+  "feature": "theaurorian2:ore_diamond_large",
+  "placement": [
+    {"type":"minecraft:rarity_filter","chance":9},
+    {"type":"minecraft:in_square"},
+    {
+      "height": {
+        "min_inclusive": {"above_bottom":-80},
+        "type": "minecraft:trapezoid",
+        "max_inclusive": {"above_bottom":80}
+      },
+      "type": "minecraft:height_range"
+    },
+    {"type":"minecraft:biome"}
+  ]
 }

@@ -1,10 +1,6 @@
 ﻿{
-    "variants":  {
-                     "half=upper":  {
-                                        "model":  "theaurorian2:block/tall_wick_grass_upper"
-                                    },
-                     "half=lower":  {
-                                        "model":  "theaurorian2:block/tall_wick_grass_lower"
-                                    }
-                 }
+  "variants": {
+    "half=upper": {"model":"theaurorian2:block/tall_wick_grass_upper"},
+    "half=lower": {"model":"theaurorian2:block/tall_wick_grass_lower"}
+  }
 }

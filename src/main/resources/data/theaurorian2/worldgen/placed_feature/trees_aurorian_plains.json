@@ -1,47 +1,20 @@
 ﻿{
-    "feature":  "theaurorian2:trees_aurorian_plains",
-    "placement":  [
-                      {
-                          "count":  {
-                                        "distribution":  [
-                                                             {
-                                                                 "weight":  99,
-                                                                 "data":  0
-                                                             },
-                                                             {
-                                                                 "weight":  1,
-                                                                 "data":  1
-                                                             }
-                                                         ],
-                                        "type":  "minecraft:weighted_list"
-                                    },
-                          "type":  "minecraft:count"
-                      },
-                      {
-                          "type":  "minecraft:in_square"
-                      },
-                      {
-                          "type":  "minecraft:surface_water_depth_filter",
-                          "max_water_depth":  0
-                      },
-                      {
-                          "type":  "minecraft:heightmap",
-                          "heightmap":  "OCEAN_FLOOR"
-                      },
-                      {
-                          "predicate":  {
-                                            "state":  {
-                                                          "Properties":  {
-                                                                             "stage":  "0"
-                                                                         },
-                                                          "Name":  "theaurorian2:silent_tree_sapling"
-                                                      },
-                                            "type":  "minecraft:would_survive"
-                                        },
-                          "type":  "minecraft:block_predicate_filter"
-                      },
-                      {
-                          "type":  "minecraft:biome"
-                      }
-                  ]
+  "feature": "theaurorian2:trees_aurorian_plains",
+  "placement": [
+    {
+      "count": {"distribution":[{"weight":99,"data":0},{"weight":1,"data":1}],"type":"minecraft:weighted_list"},
+      "type": "minecraft:count"
+    },
+    {"type":"minecraft:in_square"},
+    {"type":"minecraft:surface_water_depth_filter","max_water_depth":0},
+    {"type":"minecraft:heightmap","heightmap":"OCEAN_FLOOR"},
+    {
+      "predicate": {
+        "state": {"Properties":{"stage":"0"},"Name":"theaurorian2:silent_tree_sapling"},
+        "type": "minecraft:would_survive"
+      },
+      "type": "minecraft:block_predicate_filter"
+    },
+    {"type":"minecraft:biome"}
+  ]
 }

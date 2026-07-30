@@ -1,27 +1,16 @@
 ﻿{
-    "feature":  "theaurorian2:ore_redstone",
-    "placement":  [
-                      {
-                          "count":  8,
-                          "type":  "minecraft:count"
-                      },
-                      {
-                          "type":  "minecraft:in_square"
-                      },
-                      {
-                          "height":  {
-                                         "min_inclusive":  {
-                                                               "above_bottom":  -32
-                                                           },
-                                         "type":  "minecraft:trapezoid",
-                                         "max_inclusive":  {
-                                                               "above_bottom":  32
-                                                           }
-                                     },
-                          "type":  "minecraft:height_range"
-                      },
-                      {
-                          "type":  "minecraft:biome"
-                      }
-                  ]
+  "feature": "theaurorian2:ore_redstone",
+  "placement": [
+    {"count":8,"type":"minecraft:count"},
+    {"type":"minecraft:in_square"},
+    {
+      "height": {
+        "min_inclusive": {"above_bottom":-32},
+        "type": "minecraft:trapezoid",
+        "max_inclusive": {"above_bottom":32}
+      },
+      "type": "minecraft:height_range"
+    },
+    {"type":"minecraft:biome"}
+  ]
 }

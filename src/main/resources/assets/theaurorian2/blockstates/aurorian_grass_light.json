@@ -1,7 +1,1 @@
-﻿{
-    "variants":  {
-                     "":  {
-                              "model":  "theaurorian2:block/aurorian_grass_light"
-                          }
-                 }
-}
+﻿{"variants":{"":{"model":"theaurorian2:block/aurorian_grass_light"}}}
