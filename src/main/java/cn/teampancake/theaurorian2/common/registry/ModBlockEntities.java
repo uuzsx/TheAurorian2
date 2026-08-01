@@ -7,6 +7,9 @@ import cn.teampancake.theaurorian2.common.block.entity.AurorianChestBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianFurnaceBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.FireplaceBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianTableBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.AurorianHangingSignBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.AurorianSignBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.SilentCampfireBlockEntity;
 import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -58,6 +61,40 @@ public final class ModBlockEntities {
                                     ModBlocks.SILENT_WOOD_TABLE.get(),
                                     ModBlocks.CURTAIN_WOOD_TABLE.get(),
                                     ModBlocks.CURSED_FROST_WOOD_TABLE.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianSignBlockEntity>> AURORIAN_SIGN =
+            BLOCK_ENTITY_TYPES.register(
+                    "aurorian_sign",
+                    () -> new BlockEntityType<>(
+                            AurorianSignBlockEntity::new,
+                            Set.of(
+                                    ModStructureBlocks.SILENT_WOOD_SIGN.get(),
+                                    ModStructureBlocks.SILENT_WOOD_WALL_SIGN.get(),
+                                    ModStructureBlocks.WEEPING_WILLOW_WOOD_SIGN.get(),
+                                    ModStructureBlocks.WEEPING_WILLOW_WOOD_WALL_SIGN.get(),
+                                    ModStructureBlocks.CURTAIN_WOOD_SIGN.get(),
+                                    ModStructureBlocks.CURTAIN_WOOD_WALL_SIGN.get(),
+                                    ModStructureBlocks.CURSED_FROST_WOOD_SIGN.get(),
+                                    ModStructureBlocks.CURSED_FROST_WOOD_WALL_SIGN.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianHangingSignBlockEntity>>
+            AURORIAN_HANGING_SIGN = BLOCK_ENTITY_TYPES.register(
+                    "aurorian_hanging_sign",
+                    () -> new BlockEntityType<>(
+                            AurorianHangingSignBlockEntity::new,
+                            Set.of(
+                                    ModStructureBlocks.SILENT_WOOD_HANGING_SIGN.get(),
+                                    ModStructureBlocks.SILENT_WOOD_WALL_HANGING_SIGN.get(),
+                                    ModStructureBlocks.WEEPING_WILLOW_WOOD_HANGING_SIGN.get(),
+                                    ModStructureBlocks.WEEPING_WILLOW_WOOD_WALL_HANGING_SIGN.get(),
+                                    ModStructureBlocks.CURTAIN_WOOD_HANGING_SIGN.get(),
+                                    ModStructureBlocks.CURTAIN_WOOD_WALL_HANGING_SIGN.get(),
+                                    ModStructureBlocks.CURSED_FROST_WOOD_HANGING_SIGN.get(),
+                                    ModStructureBlocks.CURSED_FROST_WOOD_WALL_HANGING_SIGN.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SilentCampfireBlockEntity>>
+            SILENT_CAMPFIRE = BLOCK_ENTITY_TYPES.register(
+                    "silent_campfire",
+                    () -> new BlockEntityType<>(
+                            SilentCampfireBlockEntity::new,
+                            Set.of(ModStructureBlocks.SILENT_CAMPFIRE.get())));
 
     private ModBlockEntities() {
     }

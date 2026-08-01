@@ -1,0 +1,1 @@
+{"parent":"minecraft:block/template_glass_pane_post","render_type":"minecraft:translucent","textures":{"edge":"theaurorian2:block/moon_glass_pane","pane":"theaurorian2:block/moon_glass"}}

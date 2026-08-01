@@ -1,7 +1,1 @@
-﻿{
-    "render_type":  "minecraft:cutout",
-    "parent":  "minecraft:block/cross",
-    "textures":  {
-                     "cross":  "theaurorian2:block/nebula_blossom_cluster"
-                 }
-}
+{"parent":"minecraft:block/cross","render_type":"minecraft:cutout","textures":{"cross":"theaurorian2:block/nebula_blossom_cluster"}}

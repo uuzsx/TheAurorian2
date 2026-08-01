@@ -21,6 +21,7 @@ import cn.teampancake.theaurorian2.common.registry.ModFluidTypes;
 import cn.teampancake.theaurorian2.common.registry.ModFluids;
 import cn.teampancake.theaurorian2.common.registry.ModItems;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
+import cn.teampancake.theaurorian2.common.registry.ModStructureBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.List;
 import net.minecraft.client.Camera;
@@ -28,6 +29,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.FluidModel;
+import net.minecraft.client.renderer.blockentity.CampfireRenderer;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
+import net.minecraft.client.renderer.blockentity.StandingSignRenderer;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
@@ -36,6 +41,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterFluidModelsEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
@@ -66,6 +72,19 @@ public final class ClientModEvents {
         event.registerBlockEntityRenderer(
                 ModBlockEntities.AURORIAN_GRASS_ROCK.get(), AurorianGrassRockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_TABLE.get(), AurorianTableRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_SIGN.get(), StandingSignRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_HANGING_SIGN.get(), HangingSignRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.SILENT_CAMPFIRE.get(), CampfireRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void clientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            Sheets.addWoodType(ModStructureBlocks.SILENT_WOOD_TYPE);
+            Sheets.addWoodType(ModStructureBlocks.WEEPING_WILLOW_WOOD_TYPE);
+            Sheets.addWoodType(ModStructureBlocks.CURTAIN_WOOD_TYPE);
+            Sheets.addWoodType(ModStructureBlocks.CURSED_FROST_WOOD_TYPE);
+        });
     }
 
     @SubscribeEvent

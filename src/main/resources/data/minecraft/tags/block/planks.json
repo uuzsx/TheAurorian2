@@ -1,8 +1,1 @@
-{
-    "replace":  false,
-    "values":  [
-                   "theaurorian2:silent_tree_planks",
-                   "theaurorian2:curtain_tree_planks",
-                   "theaurorian2:cursed_frost_tree_planks"
-               ]
-}
+{"replace":false,"values":["theaurorian2:cursed_frost_tree_planks","theaurorian2:curtain_tree_planks","theaurorian2:silent_tree_planks","theaurorian2:weeping_willow_planks"]}

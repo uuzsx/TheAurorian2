@@ -1,8 +1,1 @@
-{
-    "replace":  false,
-    "values":  [
-                   "theaurorian2:silent_wood_button",
-                   "theaurorian2:curtain_wood_button",
-                   "theaurorian2:cursed_frost_wood_button"
-               ]
-}
+{"replace":false,"values":["theaurorian2:cursed_frost_wood_button","theaurorian2:curtain_wood_button","theaurorian2:silent_wood_button","theaurorian2:weeping_willow_button"]}

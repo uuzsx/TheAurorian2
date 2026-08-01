@@ -18,6 +18,7 @@ import cn.teampancake.theaurorian2.common.registry.ModMobEffects;
 import cn.teampancake.theaurorian2.common.network.ModNetworking;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
 import cn.teampancake.theaurorian2.common.registry.ModStats;
+import cn.teampancake.theaurorian2.common.registry.ModStructureBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModStructures;
 import cn.teampancake.theaurorian2.common.registry.ModTreeDecorators;
 import cn.teampancake.theaurorian2.common.world.AurorianBlessingCycle;
@@ -94,6 +95,8 @@ public final class TheAurorian2 {
         fire.theaurorian2$setFlammable(ModBlocks.SILENT_TREE_SAPLING.get(), 60, 100);
         fire.theaurorian2$setFlammable(ModBlocks.CURTAIN_TREE_SAPLING.get(), 60, 100);
         fire.theaurorian2$setFlammable(ModBlocks.CURSED_FROST_TREE_SAPLING.get(), 60, 100);
+        registerWeepingWillowWood(fire);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.EQUINOX_FLOWER.get(), 60, 100);
     }
 
     private static void registerFlammableWoodSet(FireBlockAccessor fire, ModBlocks.WoodSet wood) {
@@ -106,6 +109,23 @@ public final class TheAurorian2 {
         fire.theaurorian2$setFlammable(wood.slab().get(), 5, 20);
         fire.theaurorian2$setFlammable(wood.fence().get(), 5, 20);
         fire.theaurorian2$setFlammable(wood.fenceGate().get(), 5, 20);
+    }
+
+    private static void registerWeepingWillowWood(FireBlockAccessor fire) {
+        fire.theaurorian2$setFlammable(ModStructureBlocks.WEEPING_WILLOW_LOG.get(), 5, 5);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.STRIPPED_WEEPING_WILLOW_LOG.get(), 5, 5);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.WEEPING_WILLOW_WOOD.get(), 5, 5);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.STRIPPED_WEEPING_WILLOW_WOOD.get(), 5, 5);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.WEEPING_WILLOW_PLANKS.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.WEEPING_WILLOW_STAIRS.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.WEEPING_WILLOW_SLAB.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.WEEPING_WILLOW_FENCE.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.WEEPING_WILLOW_FENCE_GATE.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.WEEPING_WILLOW_DOOR.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.WEEPING_WILLOW_TRAPDOOR.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.WEEPING_WILLOW_LEAVES.get(), 30, 60);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.VERTICAL_WEEPING_WILLOW_SLAB.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.VERTICAL_WEEPING_WILLOW_STAIRS.get(), 5, 20);
     }
 
     private void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {

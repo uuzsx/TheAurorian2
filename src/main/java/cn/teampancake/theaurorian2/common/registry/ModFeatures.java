@@ -13,6 +13,7 @@ import cn.teampancake.theaurorian2.common.worldgen.feature.CurtainTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.CursedFrostTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.FallenLogFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.SilentTreeFeature;
+import cn.teampancake.theaurorian2.common.worldgen.feature.SmallRuinFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.WallMushroomPatchFeature;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -51,6 +52,8 @@ public final class ModFeatures {
             FEATURES.register("aurorian_large_dripstone", AurorianLargeDripstoneFeature::new);
     public static final DeferredHolder<Feature<?>, AurorianPointedDripstoneFeature> AURORIAN_POINTED_DRIPSTONE =
             FEATURES.register("aurorian_pointed_dripstone", AurorianPointedDripstoneFeature::new);
+    public static final DeferredHolder<Feature<?>, SmallRuinFeature> SMALL_RUIN =
+            FEATURES.register("small_ruin", SmallRuinFeature::new);
 
     private ModFeatures() {
     }

@@ -1,7 +1,1 @@
-﻿{
-    "render_type":  "minecraft:cutout",
-    "parent":  "minecraft:block/tinted_cross",
-    "textures":  {
-                     "cross":  "theaurorian2:block/aurorian_grass"
-                 }
-}
+{"parent":"minecraft:block/cross","render_type":"minecraft:cutout","textures":{"cross":"theaurorian2:block/aurorian_grass"}}

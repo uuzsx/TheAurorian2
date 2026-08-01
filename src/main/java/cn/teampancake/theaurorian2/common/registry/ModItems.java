@@ -335,6 +335,7 @@ public final class ModItems {
     }
 
     public static void register(IEventBus modEventBus) {
+        ModLegacyItems.bootstrap();
         ITEMS.register(modEventBus);
     }
 }

@@ -1,0 +1,1 @@
+{"elements":[{"faces":{"east":{"texture":"#portal"},"west":{"texture":"#portal"}},"from":[6,0,0],"to":[10,16,16]}],"textures":{"particle":"theaurorian2:block/aurorian_portal","portal":"theaurorian2:block/aurorian_portal"}}

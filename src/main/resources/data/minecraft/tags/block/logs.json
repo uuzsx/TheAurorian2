@@ -1,6 +1,1 @@
-﻿{
-    "replace":  false,
-    "values":  [
-                   "#theaurorian2:aurorian_logs"
-               ]
-}
+{"replace":false,"values":["#theaurorian2:aurorian_logs","theaurorian2:stripped_weeping_willow_log","theaurorian2:stripped_weeping_willow_wood","theaurorian2:weeping_willow_log","theaurorian2:weeping_willow_wood"]}

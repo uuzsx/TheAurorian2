@@ -1,0 +1,1 @@
+{"type":"minecraft:block","pools":[{"rolls":1,"bonus_rolls":0,"entries":[{"type":"minecraft:item","name":"theaurorian2:small_filthy_ice_spike"}],"conditions":[{"condition":"minecraft:survives_explosion"}]}],"random_sequence":"theaurorian2:blocks/small_filthy_ice_spike"}

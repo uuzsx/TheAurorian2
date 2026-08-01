@@ -36,27 +36,29 @@ public final class ModCreativeTabs {
                     .displayItems((parameters, output) -> addNaturalBlocks(output))
                     .build());
 
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DECORATIVE_BLOCKS = TABS.register(
+            "decorative_blocks",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.theaurorian2.decorative_blocks"))
+                    .icon(() -> new ItemStack(ModStructureBlocks.RUNE_STONE.get()))
+                    .displayItems((parameters, output) ->
+                            ModStructureBlocks.decorativeBlocks().forEach(block -> output.accept(block.get())))
+                    .build());
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FUNCTIONAL_ITEMS = TABS.register(
             "functional_items",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.theaurorian2.functional_items"))
                     .icon(() -> new ItemStack(ModBlocks.ASTROLOGY_TABLE_ITEM.get()))
-                    .displayItems((parameters, output) -> {
-                        output.accept(ModBlocks.ASTROLOGY_TABLE_ITEM.get());
-                        output.accept(ModBlocks.AURORIAN_CRAFTING_TABLE.get());
-                        output.accept(ModBlocks.AURORIAN_FURNACE.get());
-                        output.accept(ModBlocks.FIREPLACE.get());
-                        output.accept(ModBlocks.SILENT_WOOD_TABLE.get());
-                        output.accept(ModBlocks.CURTAIN_WOOD_TABLE.get());
-                        output.accept(ModBlocks.CURSED_FROST_WOOD_TABLE.get());
-                        output.accept(ModBlocks.AURORIAN_CHEST.get());
-                        output.accept(ModBlocks.SILENT_WOOD_LADDER.get());
-                        output.accept(ModBlocks.MYSTERIUM_WOOL_BED_ITEM.get());
-                        output.accept(ModBlocks.SILENT_WOOD_TORCH_ITEM.get());
-                        output.accept(ModBlocks.MOON_DEW_BUCKET.get());
-                        output.accept(ModBlocks.AURORIAN_FLOWER_POT.get());
-                        output.accept(ModItems.TRAINING_DUMMY.get());
-                    })
+                    .displayItems((parameters, output) -> addFunctionalItems(output))
+                    .build());
+
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TOOLS_AND_UTILITIES = TABS.register(
+            "tools_and_utilities",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.theaurorian2.tools_and_utilities"))
+                    .icon(() -> new ItemStack(ModItems.AURORIAN_STONE_PICKAXE.get()))
+                    .displayItems((parameters, output) -> addToolsAndUtilities(output))
                     .build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EQUIPMENT = TABS.register(
@@ -64,7 +66,7 @@ public final class ModCreativeTabs {
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.theaurorian2.equipment"))
                     .icon(() -> new ItemStack(ModItems.STARLIGHT_RANGER_CHESTPLATE.get()))
-                    .displayItems(ModCreativeTabs::addEquipment)
+                    .displayItems((parameters, output) -> addCombatItems(output))
                     .build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FOOD = TABS.register(
@@ -80,15 +82,7 @@ public final class ModCreativeTabs {
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.theaurorian2.ingredients"))
                     .icon(() -> new ItemStack(ModBlocks.CRYSTAL.get()))
-                    .displayItems((parameters, output) -> {
-                        output.accept(ModBlocks.PEBBLE_ITEM.get());
-                        output.accept(ModBlocks.SILENT_WOOD_STICK.get());
-                        output.accept(ModBlocks.RAW_MOONSTONE.get());
-                        output.accept(ModBlocks.RAW_CERULEAN.get());
-                        output.accept(ModBlocks.CRYSTAL.get());
-                        output.accept(ModBlocks.AURORIAN_CLAY_BALL.get());
-                        output.accept(ModBlocks.AURORIAN_BRICK.get());
-                    })
+                    .displayItems(ModCreativeTabs::addIngredients)
                     .build());
 
     private ModCreativeTabs() {
@@ -98,6 +92,11 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.AURORIAN_STONE.get());
         output.accept(ModBlocks.AURORIAN_EROSIVE.get());
         output.accept(ModBlocks.AURORIAN_COBBLESTONE.get());
+        output.accept(ModBlocks.AURORIAN_COBBLESTONE_STAIRS.get());
+        output.accept(ModBlocks.AURORIAN_COBBLESTONE_SLAB.get());
+        output.accept(ModBlocks.AURORIAN_COBBLESTONE_WALL.get());
+        output.accept(ModBlocks.AURORIAN_PERIDOTITE.get());
+        output.accept(ModBlocks.AURORIAN_PORTAL_FRAME_BRICKS.get());
         output.accept(ModBlocks.SMOOTH_MOON_SANDSTONE.get());
         output.accept(ModBlocks.AURORIAN_BRICKS.get());
         output.accept(ModBlocks.AURORIAN_BRICK_STAIRS.get());
@@ -107,6 +106,7 @@ public final class ModCreativeTabs {
         addWoodSet(output, ModBlocks.SILENT_WOOD);
         addWoodSet(output, ModBlocks.CURTAIN_WOOD);
         addWoodSet(output, ModBlocks.CURSED_FROST_WOOD);
+        ModStructureBlocks.buildingBlocks().forEach(block -> output.accept(block.get()));
     }
 
     private static void addWoodSet(CreativeModeTab.Output output, ModBlocks.WoodSet wood) {
@@ -123,6 +123,37 @@ public final class ModCreativeTabs {
         output.accept(wood.trapdoor().get());
         output.accept(wood.pressurePlate().get());
         output.accept(wood.button().get());
+    }
+
+    private static void addFunctionalItems(CreativeModeTab.Output output) {
+        output.accept(ModBlocks.ASTROLOGY_TABLE_ITEM.get());
+        output.accept(ModBlocks.AURORIAN_CRAFTING_TABLE.get());
+        output.accept(ModBlocks.AURORIAN_FURNACE.get());
+        output.accept(ModBlocks.FIREPLACE.get());
+        output.accept(ModBlocks.SILENT_WOOD_TABLE.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_TABLE.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_TABLE.get());
+        output.accept(ModBlocks.AURORIAN_CHEST.get());
+        output.accept(ModBlocks.SILENT_WOOD_LADDER.get());
+        output.accept(ModBlocks.MYSTERIUM_WOOL_BED_ITEM.get());
+        output.accept(ModBlocks.SILENT_WOOD_TORCH_ITEM.get());
+        output.accept(ModBlocks.AURORIAN_FLOWER_POT.get());
+        output.accept(ModItems.TRAINING_DUMMY.get());
+        ModLegacyItems.forEachFunctional(output::accept);
+        ModStructureBlocks.functionalBlocks().forEach(block -> output.accept(block.get()));
+    }
+
+    private static void addToolsAndUtilities(CreativeModeTab.Output output) {
+        output.accept(ModItems.SILENT_WOOD_PICKAXE.get());
+        output.accept(ModItems.SILENT_WOOD_AXE.get());
+        output.accept(ModItems.SILENT_WOOD_SHOVEL.get());
+        output.accept(ModItems.SILENT_WOOD_HOE.get());
+        output.accept(ModItems.AURORIAN_STONE_PICKAXE.get());
+        output.accept(ModItems.AURORIAN_STONE_AXE.get());
+        output.accept(ModItems.AURORIAN_STONE_SHOVEL.get());
+        output.accept(ModItems.AURORIAN_STONE_HOE.get());
+        output.accept(ModBlocks.MOON_DEW_BUCKET.get());
+        ModLegacyItems.forEachTools(output::accept);
     }
 
     private static void addNaturalBlocks(CreativeModeTab.Output output) {
@@ -144,6 +175,14 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.MIST_SPORE_BLOSSOM.get());
         output.accept(ModBlocks.DEW_CAVE_VINES.get());
         output.accept(ModBlocks.STAR_GLOW_LICHEN.get());
+        output.accept(ModBlocks.CERULEAN_CLUSTER.get());
+        output.accept(ModBlocks.LARGE_CERULEAN_BUD.get());
+        output.accept(ModBlocks.MEDIUM_CERULEAN_BUD.get());
+        output.accept(ModBlocks.SMALL_CERULEAN_BUD.get());
+        output.accept(ModBlocks.MOONSTONE_CLUSTER.get());
+        output.accept(ModBlocks.LARGE_MOONSTONE_BUD.get());
+        output.accept(ModBlocks.MEDIUM_MOONSTONE_BUD.get());
+        output.accept(ModBlocks.SMALL_MOONSTONE_BUD.get());
 
         output.accept(ModBlocks.AURORIAN_COAL_ORE.get());
         output.accept(ModBlocks.AURORIAN_IRON_ORE.get());
@@ -201,20 +240,12 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.RED_MUSHROOM.get());
         output.accept(ModBlocks.AURORIAN_VINE.get());
         output.accept(ModBlocks.AURORIAN_TWISTING_VINES.get());
+        ModStructureBlocks.naturalBlocks().forEach(block -> output.accept(block.get()));
     }
 
-    private static void addEquipment(
-            CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+    private static void addCombatItems(CreativeModeTab.Output output) {
         output.accept(ModItems.SILENT_WOOD_SWORD.get());
-        output.accept(ModItems.SILENT_WOOD_PICKAXE.get());
-        output.accept(ModItems.SILENT_WOOD_AXE.get());
-        output.accept(ModItems.SILENT_WOOD_SHOVEL.get());
-        output.accept(ModItems.SILENT_WOOD_HOE.get());
         output.accept(ModItems.AURORIAN_STONE_SWORD.get());
-        output.accept(ModItems.AURORIAN_STONE_PICKAXE.get());
-        output.accept(ModItems.AURORIAN_STONE_AXE.get());
-        output.accept(ModItems.AURORIAN_STONE_SHOVEL.get());
-        output.accept(ModItems.AURORIAN_STONE_HOE.get());
 
         output.accept(ModItems.STARLIGHT_RANGER_HELMET.get());
         output.accept(ModItems.STARLIGHT_RANGER_CHESTPLATE.get());
@@ -251,7 +282,19 @@ public final class ModCreativeTabs {
         output.accept(ModItems.MOONFORGED_KNIGHT_CHESTPLATE.get());
         output.accept(ModItems.MOONFORGED_KNIGHT_LEGGINGS.get());
         output.accept(ModItems.MOONFORGED_KNIGHT_BOOTS.get());
+        ModLegacyItems.forEachEquipment(output::accept);
+    }
 
+    private static void addIngredients(
+            CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+        output.accept(ModBlocks.PEBBLE_ITEM.get());
+        output.accept(ModBlocks.SILENT_WOOD_STICK.get());
+        output.accept(ModBlocks.RAW_MOONSTONE.get());
+        output.accept(ModBlocks.RAW_CERULEAN.get());
+        output.accept(ModBlocks.CRYSTAL.get());
+        output.accept(ModBlocks.AURORIAN_CLAY_BALL.get());
+        output.accept(ModBlocks.AURORIAN_BRICK.get());
+        ModLegacyItems.forEachIngredients(output::accept);
         parameters.holders().lookup(Registries.ENCHANTMENT).ifPresent(enchantments -> {
             addEnchantmentBooks(output, enchantments, ModEnchantments.IMPALE);
             addEnchantmentBooks(output, enchantments, ModEnchantments.OVERLOAD);
@@ -264,6 +307,7 @@ public final class ModCreativeTabs {
     private static void addFood(
             CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         output.accept(ModBlocks.BLUEBERRY.get());
+        output.accept(ModBlocks.CLOUDBERRY.get());
         output.accept(ModBlocks.WHITE_GROUND_MUSHROOM_ITEM.get());
         output.accept(ModBlocks.BLUE_GROUND_MUSHROOM_ITEM.get());
 
@@ -313,6 +357,7 @@ public final class ModCreativeTabs {
         output.accept(ModItems.ROASTED_AURORIAN_WINTER_ROOT.get());
         output.accept(ModItems.DARK_STONE_SHRIMP.get());
         output.accept(ModItems.WHITE_CHOCOLATE.get());
+        ModLegacyItems.forEachFood(output::accept);
     }
 
     private static void addEnchantmentBooks(
