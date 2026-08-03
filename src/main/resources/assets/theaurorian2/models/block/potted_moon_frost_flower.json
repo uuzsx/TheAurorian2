@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/flower_pot_cross","render_type":"minecraft:cutout","textures":{"plant":"theaurorian2:block/moon_frost_flower"}}
+{"parent":"theaurorian2:block/aurorian_flower_pot_cross","render_type":"minecraft:cutout","textures":{"plant":"theaurorian2:block/moon_frost_flower"}}

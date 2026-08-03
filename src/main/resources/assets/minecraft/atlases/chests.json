@@ -1,0 +1,16 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "theaurorian2:entity/chest/silent_wood"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "theaurorian2:entity/chest/silent_wood_left"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "theaurorian2:entity/chest/silent_wood_right"
+    }
+  ]
+}

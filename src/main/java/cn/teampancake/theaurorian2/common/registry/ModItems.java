@@ -5,6 +5,7 @@ import cn.teampancake.theaurorian2.common.item.ArcherArmorItem;
 import cn.teampancake.theaurorian2.common.item.KnightArmorItem;
 import cn.teampancake.theaurorian2.common.item.KnightGreatswordItem;
 import cn.teampancake.theaurorian2.common.item.KnightSpearItem;
+import cn.teampancake.theaurorian2.common.item.PhantomBlossomRequiemItem;
 import cn.teampancake.theaurorian2.common.item.TrainingDummyItem;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -14,6 +15,8 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.MinecartItem;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ShovelItem;
@@ -33,6 +36,14 @@ public final class ModItems {
 
     public static final DeferredItem<TrainingDummyItem> TRAINING_DUMMY = ITEMS.registerItem(
             "training_dummy", properties -> new TrainingDummyItem(properties.stacksTo(16)));
+    public static final DeferredItem<PhantomBlossomRequiemItem> PHANTOM_BLOSSOM_REQUIEM = ITEMS.registerItem(
+            "phantom_blossom_requiem",
+            properties -> new PhantomBlossomRequiemItem(
+                    properties.stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
+    public static final DeferredItem<MinecartItem> AURORIAN_CHEST_MINECART = ITEMS.registerItem(
+            "aurorian_chest_minecart",
+            properties -> new MinecartItem(
+                    ModEntities.AURORIAN_CHEST_MINECART.get(), properties.stacksTo(1)));
 
     public static final DeferredItem<Item> SILENT_WOOD_SWORD = ITEMS.registerItem(
             "silent_wood_sword",

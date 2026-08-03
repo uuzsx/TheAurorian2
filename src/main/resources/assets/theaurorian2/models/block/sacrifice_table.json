@@ -1,1 +1,13 @@
-{"parent":"theaurorian2:block/geo_generated","texture_size":[64,64],"textures":{"particle":"theaurorian2:block/sacrifice_table"},"display":{"gui":{"rotation":[30,225,0],"translation":[1.25,-2.5,0],"scale":[0.625,0.625,0.625]}}}
+{
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "theaurorian2:block/sacrifice_table"
+  },
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [1.25, -2.5, 0],
+      "scale": [0.625, 0.625, 0.625]
+    }
+  }
+}

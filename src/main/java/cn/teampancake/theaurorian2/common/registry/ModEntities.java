@@ -2,6 +2,7 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.entity.DamageNumberEntity;
+import cn.teampancake.theaurorian2.common.entity.AurorianChestMinecartEntity;
 import cn.teampancake.theaurorian2.common.entity.TrainingDummyEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -38,6 +39,17 @@ public final class ModEntities {
                             .noSave()
                             .noSummon()
                             .noLootTable());
+
+    public static final DeferredHolder<EntityType<?>, EntityType<AurorianChestMinecartEntity>>
+            AURORIAN_CHEST_MINECART = ENTITIES.registerEntityType(
+                    "aurorian_chest_minecart",
+                    AurorianChestMinecartEntity::new,
+                    MobCategory.MISC,
+                    builder -> builder
+                            .noLootTable()
+                            .sized(0.98F, 0.7F)
+                            .passengerAttachments(0.1875F)
+                            .clientTrackingRange(8));
 
     private ModEntities() {
     }

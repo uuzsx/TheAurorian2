@@ -1,21 +1,51 @@
 package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class ModCreativeTabs {
+
+    private static final List<String> STONE_FAMILY_ORDER = List.of(
+            "aurorian_stone",
+            "aurorian_cobblestone",
+            "aurorian_andesite",
+            "aurorian_diorite",
+            "aurorian_granite",
+            "aurorian_peridotite",
+            "aurorian_brick",
+            "moon_sandstone",
+            "aurorian_portal_frame",
+            "aurorian_castle_rune_stone",
+            "cerulean_castle_rune_stone",
+            "crystalline_castle_rune_stone",
+            "moon_castle_rune_stone",
+            "moonsilver_castle_rune_stone",
+            "umbra_castle_rune_stone",
+            "rune_stone",
+            "moon_temple",
+            "dark_stone",
+            "umbra_stone",
+            "void_stone");
 
     public static final DeferredRegister<CreativeModeTab> TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TheAurorian2.MOD_ID);
@@ -34,15 +64,6 @@ public final class ModCreativeTabs {
                     .title(Component.translatable("itemGroup.theaurorian2.natural_blocks"))
                     .icon(() -> new ItemStack(ModBlocks.AURORIAN_GRASS_BLOCK.get()))
                     .displayItems((parameters, output) -> addNaturalBlocks(output))
-                    .build());
-
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DECORATIVE_BLOCKS = TABS.register(
-            "decorative_blocks",
-            () -> CreativeModeTab.builder()
-                    .title(Component.translatable("itemGroup.theaurorian2.decorative_blocks"))
-                    .icon(() -> new ItemStack(ModStructureBlocks.RUNE_STONE.get()))
-                    .displayItems((parameters, output) ->
-                            ModStructureBlocks.decorativeBlocks().forEach(block -> output.accept(block.get())))
                     .build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FUNCTIONAL_ITEMS = TABS.register(
@@ -89,40 +110,264 @@ public final class ModCreativeTabs {
     }
 
     private static void addBuildingBlocks(CreativeModeTab.Output output) {
-        output.accept(ModBlocks.AURORIAN_STONE.get());
-        output.accept(ModBlocks.AURORIAN_EROSIVE.get());
-        output.accept(ModBlocks.AURORIAN_COBBLESTONE.get());
-        output.accept(ModBlocks.AURORIAN_COBBLESTONE_STAIRS.get());
-        output.accept(ModBlocks.AURORIAN_COBBLESTONE_SLAB.get());
-        output.accept(ModBlocks.AURORIAN_COBBLESTONE_WALL.get());
-        output.accept(ModBlocks.AURORIAN_PERIDOTITE.get());
-        output.accept(ModBlocks.AURORIAN_PORTAL_FRAME_BRICKS.get());
-        output.accept(ModBlocks.SMOOTH_MOON_SANDSTONE.get());
-        output.accept(ModBlocks.AURORIAN_BRICKS.get());
-        output.accept(ModBlocks.AURORIAN_BRICK_STAIRS.get());
-        output.accept(ModBlocks.AURORIAN_BRICK_SLAB.get());
-        output.accept(ModBlocks.AURORIAN_BRICK_WALL.get());
-        output.accept(ModBlocks.AURORIAN_TERRACOTTA.get());
-        addWoodSet(output, ModBlocks.SILENT_WOOD);
-        addWoodSet(output, ModBlocks.CURTAIN_WOOD);
-        addWoodSet(output, ModBlocks.CURSED_FROST_WOOD);
-        ModStructureBlocks.buildingBlocks().forEach(block -> output.accept(block.get()));
+        Map<Item, ItemStack> items = new LinkedHashMap<>();
+        addBuildingBlock(items, ModBlocks.AURORIAN_STONE.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_EROSIVE.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_COBBLESTONE.get());
+        addBuildingBlock(items, ModBlocks.MOSSY_AURORIAN_COBBLESTONE.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_COBBLESTONE_STAIRS.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_COBBLESTONE_SLAB.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_COBBLESTONE_WALL.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_PERIDOTITE.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_PORTAL_FRAME_BRICKS.get());
+        addBuildingBlock(items, ModBlocks.SMOOTH_MOON_SANDSTONE.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_BRICKS.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_BRICK_STAIRS.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_BRICK_SLAB.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_BRICK_WALL.get());
+        addBuildingBlock(items, ModBlocks.AURORIAN_TERRACOTTA.get());
+        addWoodSet(items, ModBlocks.SILENT_WOOD);
+        addWoodSet(items, ModBlocks.CURTAIN_WOOD);
+        addWoodSet(items, ModBlocks.CURSED_FROST_WOOD);
+        ModStructureBlocks.buildingBlocks().forEach(block -> addBuildingBlock(items, block.get()));
+        ModStructureBlocks.decorativeBlocks().forEach(block -> addBuildingBlock(items, block.get()));
+
+        List<ItemStack> sortedItems = new ArrayList<>(items.values());
+        sortedItems.sort(Comparator
+                .comparingInt(ModCreativeTabs::buildingSectionOrder)
+                .thenComparingInt(ModCreativeTabs::buildingFamilyOrder)
+                .thenComparingInt(ModCreativeTabs::buildingStyleOrder)
+                .thenComparingInt(ModCreativeTabs::buildingVariantOrder)
+                .thenComparing(
+                        stack -> stack.getHoverName().getString(), String.CASE_INSENSITIVE_ORDER)
+                .thenComparing(ModCreativeTabs::itemPath));
+        sortedItems.forEach(output::accept);
     }
 
-    private static void addWoodSet(CreativeModeTab.Output output, ModBlocks.WoodSet wood) {
-        output.accept(wood.log().get());
-        output.accept(wood.strippedLog().get());
-        output.accept(wood.wood().get());
-        output.accept(wood.strippedWood().get());
-        output.accept(wood.planks().get());
-        output.accept(wood.stairs().get());
-        output.accept(wood.slab().get());
-        output.accept(wood.fence().get());
-        output.accept(wood.fenceGate().get());
-        output.accept(wood.door().get());
-        output.accept(wood.trapdoor().get());
-        output.accept(wood.pressurePlate().get());
-        output.accept(wood.button().get());
+    private static void addWoodSet(Map<Item, ItemStack> items, ModBlocks.WoodSet wood) {
+        addBuildingBlock(items, wood.log().get());
+        addBuildingBlock(items, wood.strippedLog().get());
+        addBuildingBlock(items, wood.wood().get());
+        addBuildingBlock(items, wood.strippedWood().get());
+        addBuildingBlock(items, wood.planks().get());
+        addBuildingBlock(items, wood.stairs().get());
+        addBuildingBlock(items, wood.slab().get());
+        addBuildingBlock(items, wood.fence().get());
+        addBuildingBlock(items, wood.fenceGate().get());
+        addBuildingBlock(items, wood.door().get());
+        addBuildingBlock(items, wood.trapdoor().get());
+        addBuildingBlock(items, wood.pressurePlate().get());
+        addBuildingBlock(items, wood.button().get());
+    }
+
+    private static void addBuildingBlock(Map<Item, ItemStack> items, Block block) {
+        ItemStack stack = new ItemStack(block);
+        if (!stack.isEmpty()) {
+            items.putIfAbsent(stack.getItem(), stack);
+        }
+    }
+
+    private static int buildingSectionOrder(ItemStack stack) {
+        String path = itemPath(stack);
+        if (isWoodBuildingBlock(path)) {
+            return 0;
+        }
+        if (isOtherBuildingBlock(path)) {
+            return 2;
+        }
+        return 1;
+    }
+
+    private static int buildingFamilyOrder(ItemStack stack) {
+        String path = itemPath(stack);
+        int section = buildingSectionOrder(stack);
+        if (section == 0) {
+            if (path.contains("silent_")) {
+                return 0;
+            }
+            if (path.contains("curtain_")) {
+                return 1;
+            }
+            if (path.contains("cursed_frost_")) {
+                return 2;
+            }
+            if (path.contains("weeping_willow_")) {
+                return 3;
+            }
+            return 100;
+        }
+        if (section == 1) {
+            for (int i = 0; i < STONE_FAMILY_ORDER.size(); i++) {
+                if (path.contains(STONE_FAMILY_ORDER.get(i))) {
+                    return i;
+                }
+            }
+            return 100;
+        }
+        if (path.endsWith("_sand")) {
+            return 0;
+        }
+        if (path.contains("_glass")) {
+            return 1;
+        }
+        if (path.contains("_wool")) {
+            return 2;
+        }
+        if (path.contains("terracotta")) {
+            return 3;
+        }
+        if (path.endsWith("_block") || path.endsWith("_gem")) {
+            return 4;
+        }
+        if (path.contains("_crystal")) {
+            return 5;
+        }
+        if (path.endsWith("_bars")) {
+            return 6;
+        }
+        if (path.contains("_lamp")) {
+            return 7;
+        }
+        if (path.contains("_gate")) {
+            return 8;
+        }
+        if (path.contains("pedestal")) {
+            return 9;
+        }
+        if (path.equals("urn")) {
+            return 10;
+        }
+        return 100;
+    }
+
+    private static int buildingStyleOrder(ItemStack stack) {
+        if (buildingSectionOrder(stack) != 1) {
+            return 0;
+        }
+        String path = itemPath(stack);
+        if (path.contains("smooth_")) {
+            return 20;
+        }
+        if (path.contains("chiseled_")) {
+            return 30;
+        }
+        if (path.contains("luminous_")) {
+            return 40;
+        }
+        if (path.contains("transparent_")) {
+            return 50;
+        }
+        if (path.contains("_cracked")) {
+            return 60;
+        }
+        if (path.contains("_roof")) {
+            return 70;
+        }
+        if (path.contains("_fancy")) {
+            return 80;
+        }
+        if (path.contains("_layers")) {
+            return 90;
+        }
+        if (path.contains("_brick")) {
+            return 10;
+        }
+        return 0;
+    }
+
+    private static int buildingVariantOrder(ItemStack stack) {
+        String path = itemPath(stack);
+        if (buildingSectionOrder(stack) == 0) {
+            if (path.endsWith("_log")) {
+                return path.startsWith("stripped_") ? 1 : 0;
+            }
+            if (path.endsWith("_wood")) {
+                return path.startsWith("stripped_") ? 3 : 2;
+            }
+            if (path.endsWith("_planks")) {
+                return 4;
+            }
+            if (path.startsWith("vertical_") && path.endsWith("_stairs")) {
+                return 15;
+            }
+            if (path.startsWith("vertical_") && path.endsWith("_slab")) {
+                return 16;
+            }
+            if (path.endsWith("_stairs")) {
+                return 5;
+            }
+            if (path.endsWith("_slab")) {
+                return 6;
+            }
+            if (path.endsWith("_fence")) {
+                return 9;
+            }
+            if (path.endsWith("_fence_gate")) {
+                return 10;
+            }
+            if (path.endsWith("_trapdoor")) {
+                return 12;
+            }
+            if (path.endsWith("_door")) {
+                return 11;
+            }
+            if (path.endsWith("_pressure_plate")) {
+                return 13;
+            }
+            if (path.endsWith("_button")) {
+                return 14;
+            }
+            return 100;
+        }
+        if (path.startsWith("vertical_") && path.endsWith("_stairs")) {
+            return 5;
+        }
+        if (path.startsWith("vertical_") && path.endsWith("_slab")) {
+            return 6;
+        }
+        if (path.endsWith("_stairs")) {
+            return 2;
+        }
+        if (path.endsWith("_slab")) {
+            return 3;
+        }
+        if (path.endsWith("_wall")) {
+            return 4;
+        }
+        if (path.endsWith("_pillar")) {
+            return 1;
+        }
+        return 0;
+    }
+
+    private static boolean isWoodBuildingBlock(String path) {
+        return path.contains("silent_tree_")
+                || path.contains("silent_wood_")
+                || path.contains("curtain_tree_")
+                || path.contains("curtain_wood_")
+                || path.contains("cursed_frost_tree_")
+                || path.contains("cursed_frost_wood_")
+                || path.contains("weeping_willow_");
+    }
+
+    private static boolean isOtherBuildingBlock(String path) {
+        return path.endsWith("_sand")
+                || path.contains("_glass")
+                || path.contains("terracotta")
+                || path.contains("_wool")
+                || path.endsWith("_block")
+                || path.endsWith("_gem")
+                || path.contains("_crystal")
+                || path.endsWith("_bars")
+                || path.contains("_lamp")
+                || path.contains("_gate")
+                || path.contains("pedestal")
+                || path.equals("urn")
+                || path.contains("barrier");
+    }
+
+    private static String itemPath(ItemStack stack) {
+        return BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath();
     }
 
     private static void addFunctionalItems(CreativeModeTab.Output output) {
@@ -137,6 +382,7 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.SILENT_WOOD_LADDER.get());
         output.accept(ModBlocks.MYSTERIUM_WOOL_BED_ITEM.get());
         output.accept(ModBlocks.SILENT_WOOD_TORCH_ITEM.get());
+        output.accept(ModBlocks.AURORIAN_RAIL.get());
         output.accept(ModBlocks.AURORIAN_FLOWER_POT.get());
         output.accept(ModItems.TRAINING_DUMMY.get());
         ModLegacyItems.forEachFunctional(output::accept);
@@ -153,6 +399,7 @@ public final class ModCreativeTabs {
         output.accept(ModItems.AURORIAN_STONE_SHOVEL.get());
         output.accept(ModItems.AURORIAN_STONE_HOE.get());
         output.accept(ModBlocks.MOON_DEW_BUCKET.get());
+        output.accept(ModItems.AURORIAN_CHEST_MINECART.get());
         ModLegacyItems.forEachTools(output::accept);
     }
 
@@ -244,6 +491,7 @@ public final class ModCreativeTabs {
     }
 
     private static void addCombatItems(CreativeModeTab.Output output) {
+        output.accept(ModItems.PHANTOM_BLOSSOM_REQUIEM.get());
         output.accept(ModItems.SILENT_WOOD_SWORD.get());
         output.accept(ModItems.AURORIAN_STONE_SWORD.get());
 

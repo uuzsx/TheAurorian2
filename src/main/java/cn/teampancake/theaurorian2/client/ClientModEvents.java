@@ -4,13 +4,19 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.client.color.AurorianGrassTintSource;
 import cn.teampancake.theaurorian2.client.hud.AurorianNightHud;
 import cn.teampancake.theaurorian2.client.particle.WickParticle;
+import cn.teampancake.theaurorian2.client.particle.PhantomBloomPetalParticle;
+import cn.teampancake.theaurorian2.client.particle.PhantomButterflyParticle;
+import cn.teampancake.theaurorian2.client.particle.PhantomPetalParticle;
 import cn.teampancake.theaurorian2.client.resource.AurorianGrassColorReloadListener;
 import cn.teampancake.theaurorian2.client.renderer.DamageNumberRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianChestRenderer;
+import cn.teampancake.theaurorian2.client.renderer.AurorianChestMinecartRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianFurnaceRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianGrassRockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AstrologyTableRenderer;
+import cn.teampancake.theaurorian2.client.renderer.CrystallineSwordPedestalRenderer;
+import cn.teampancake.theaurorian2.client.renderer.ModelledBlockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.TrainingDummyRenderer;
 import cn.teampancake.theaurorian2.client.screen.AstrologyForecastScreen;
 import cn.teampancake.theaurorian2.common.network.AstrologyForecastPayload;
@@ -66,7 +72,15 @@ public final class ClientModEvents {
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.TRAINING_DUMMY.get(), TrainingDummyRenderer::new);
         event.registerEntityRenderer(ModEntities.DAMAGE_NUMBER.get(), DamageNumberRenderer::new);
+        event.registerEntityRenderer(
+                ModEntities.AURORIAN_CHEST_MINECART.get(), AurorianChestMinecartRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ASTROLOGY_TABLE.get(), AstrologyTableRenderer::new);
+        event.registerBlockEntityRenderer(
+                ModBlockEntities.SACRIFICE_TABLE.get(),
+                context -> new ModelledBlockRenderer<>(context, TheAurorian2.id("sacrifice_table")));
+        event.registerBlockEntityRenderer(
+                ModBlockEntities.CRYSTALLINE_SWORD_PEDESTAL.get(),
+                CrystallineSwordPedestalRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_CHEST.get(), AurorianChestRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_FURNACE.get(), AurorianFurnaceRenderer::new);
         event.registerBlockEntityRenderer(
@@ -96,6 +110,10 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(ModParticles.WICK.get(), WickParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.PHANTOM_BUTTERFLY_BLUE.get(), PhantomButterflyParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.PHANTOM_BUTTERFLY_PINK.get(), PhantomButterflyParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.PHANTOM_PETAL.get(), PhantomPetalParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.PHANTOM_BLOOM_PETAL.get(), PhantomBloomPetalParticle.Provider::new);
     }
 
     @SubscribeEvent

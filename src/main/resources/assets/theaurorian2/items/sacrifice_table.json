@@ -1,1 +1,7 @@
-{"model":{"type":"minecraft:model","model":"theaurorian2:item/sacrifice_table"}}
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "theaurorian2:block/sacrifice_table",
+    "model": { "type": "geckolib:geckolib" }
+  }
+}

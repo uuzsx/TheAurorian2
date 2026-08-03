@@ -9,11 +9,13 @@
     "ClearAllStatusEffectsConsumeEffectMixin",
     "FireBlockAccessor",
     "FoodDataMixin",
+    "MineshaftCorridorMixin",
     "ServerPlayerNaturalHealingMixin"
   ],
   "client": [
     "ClientInputAccessor",
     "EntityRenderDispatcherMixin",
+    "LivingEntityDeathParticleMixin",
     "ParticleEngineMixin",
     "SkyRendererMixin"
   ]

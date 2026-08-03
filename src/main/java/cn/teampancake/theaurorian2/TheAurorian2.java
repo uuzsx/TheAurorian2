@@ -27,6 +27,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.core.dispenser.MinecartDispenseItemBehavior;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -79,6 +80,9 @@ public final class TheAurorian2 {
         event.enqueueWork(() -> {
             DispenserBlock.registerBehavior(
                     ModBlocks.MOON_DEW_BUCKET.get(), DispenseFluidContainer.getInstance());
+            DispenserBlock.registerBehavior(
+                    ModItems.AURORIAN_CHEST_MINECART.get(),
+                    new MinecartDispenseItemBehavior(ModEntities.AURORIAN_CHEST_MINECART.get()));
             ModStats.bootstrap();
             registerFlammableWood();
         });

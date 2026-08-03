@@ -2,7 +2,9 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.effect.CorruptionData;
+import cn.teampancake.theaurorian2.common.item.PhantomBlossomMark;
 import com.mojang.serialization.Codec;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -23,6 +25,22 @@ public final class ModAttachments {
             ATTACHMENTS.register("crystallization_loss", () -> AttachmentType.builder(() -> 0.0F)
                     .serialize(Codec.FLOAT.fieldOf("value"))
                     .build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<PhantomBlossomMark>> PHANTOM_BLOSSOM_MARK =
+            ATTACHMENTS.register("phantom_blossom_mark", () -> AttachmentType.builder(() -> PhantomBlossomMark.EMPTY)
+                    .build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Long>>
+            PHANTOM_BLOSSOM_SENDOFF_READY_AT = ATTACHMENTS.register(
+                    "phantom_blossom_sendoff_ready_at",
+                    () -> AttachmentType.builder(() -> 0L).build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>>
+            PHANTOM_BLOSSOM_DEATH_EFFECT = ATTACHMENTS.register(
+                    "phantom_blossom_death_effect",
+                    () -> AttachmentType.builder(() -> false)
+                            .sync(ByteBufCodecs.BOOL)
+                            .build());
 
     private ModAttachments() {
     }

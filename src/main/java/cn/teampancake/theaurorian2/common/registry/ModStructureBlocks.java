@@ -7,6 +7,7 @@ import cn.teampancake.theaurorian2.common.block.AurorianPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianStandingSignBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWallHangingSignBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWallSignBlock;
+import cn.teampancake.theaurorian2.common.block.CrystallineSwordPedestalBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyAgeThreeCropBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyFacingBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyHorizontalFacingBlock;
@@ -16,9 +17,11 @@ import cn.teampancake.theaurorian2.common.block.LegacyMoistureBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyPortalBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyVerticalDirectionBlock;
 import cn.teampancake.theaurorian2.common.block.LockedStructureBlock;
+import cn.teampancake.theaurorian2.common.block.SacrificeTableBlock;
 import cn.teampancake.theaurorian2.common.block.SilentCampfireBlock;
 import cn.teampancake.theaurorian2.common.block.VerticalSlabBlock;
 import cn.teampancake.theaurorian2.common.block.VerticalStairBlock;
+import cn.teampancake.theaurorian2.common.item.ModelledBlockItem;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -601,12 +604,13 @@ public final class ModStructureBlocks {
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BLAST_FURNACE).lightLevel(state -> 0));
     public static final DeferredBlock<LegacyHorizontalFacingBlock> RELIC_TABLE = horizontalFunctional(
             "relic_table", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).noOcclusion());
-    public static final DeferredBlock<LegacyHorizontalFacingBlock> SACRIFICE_TABLE = horizontalFunctional(
-            "sacrifice_table", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion());
+    public static final DeferredBlock<SacrificeTableBlock> SACRIFICE_TABLE = modelledFunctional(
+            "sacrifice_table", SacrificeTableBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion());
     public static final DeferredBlock<LegacyHorizontalFacingBlock> SCRAPPER = horizontalFunctional(
             "scrapper", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).noOcclusion());
-    public static final DeferredBlock<LegacyHorizontalFacingBlock> CRYSTALLINE_SWORD_PEDESTAL = decorative(
-            "crystalline_sword_pedestal", LegacyHorizontalFacingBlock::new,
+    public static final DeferredBlock<CrystallineSwordPedestalBlock> CRYSTALLINE_SWORD_PEDESTAL = modelledDecorative(
+            "crystalline_sword_pedestal", CrystallineSwordPedestalBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).noOcclusion());
     public static final DeferredBlock<Block> LASER_CRYSTAL = decorative(
             "laser_crystal", Block::new,
@@ -929,6 +933,22 @@ public final class ModStructureBlocks {
     private static DeferredBlock<LegacyHorizontalFacingBlock> horizontalFunctional(
             String id, Supplier<BlockBehaviour.Properties> properties) {
         return functional(id, LegacyHorizontalFacingBlock::new, properties);
+    }
+
+    private static <T extends Block> DeferredBlock<T> modelledFunctional(
+            String id, Function<BlockBehaviour.Properties, T> factory, Supplier<BlockBehaviour.Properties> properties) {
+        DeferredBlock<T> block = register(id, factory, properties);
+        ModBlocks.ITEMS.registerItem(id, itemProperties -> new ModelledBlockItem(block.get(), itemProperties, id));
+        FUNCTIONAL_BLOCKS.add(block);
+        return block;
+    }
+
+    private static <T extends Block> DeferredBlock<T> modelledDecorative(
+            String id, Function<BlockBehaviour.Properties, T> factory, Supplier<BlockBehaviour.Properties> properties) {
+        DeferredBlock<T> block = register(id, factory, properties);
+        ModBlocks.ITEMS.registerItem(id, itemProperties -> new ModelledBlockItem(block.get(), itemProperties, id));
+        DECORATIVE_BLOCKS.add(block);
+        return block;
     }
 
     private static DeferredBlock<Block> legacyMolten(String id) {

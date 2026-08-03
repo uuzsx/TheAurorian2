@@ -77,6 +77,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.RedStoneOreBlock;
+import net.minecraft.world.level.block.RailBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.SaplingBlock;
@@ -111,6 +112,9 @@ public final class ModBlocks {
             "aurorian_granite", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
     public static final DeferredBlock<Block> AURORIAN_COBBLESTONE = BLOCKS.registerSimpleBlock(
             "aurorian_cobblestone", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLESTONE));
+    public static final DeferredBlock<Block> MOSSY_AURORIAN_COBBLESTONE = BLOCKS.registerSimpleBlock(
+            "mossy_aurorian_cobblestone",
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MOSSY_COBBLESTONE));
     public static final DeferredBlock<StairBlock> AURORIAN_COBBLESTONE_STAIRS = BLOCKS.registerBlock(
             "aurorian_cobblestone_stairs",
             properties -> new StairBlock(AURORIAN_COBBLESTONE.get().defaultBlockState(), properties),
@@ -421,6 +425,9 @@ public final class ModBlocks {
     public static final DeferredBlock<WallTorchBlock> SILENT_WOOD_WALL_TORCH = BLOCKS.registerBlock(
             "silent_wood_wall_torch", properties -> new WallTorchBlock(ParticleTypes.FLAME, properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH));
+    public static final DeferredBlock<RailBlock> AURORIAN_RAIL = BLOCKS.registerBlock(
+            "aurorian_rail", RailBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.RAIL));
 
     public static final DeferredBlock<DropExperienceBlock> AURORIAN_COAL_ORE = ore("aurorian_coal_ore", Blocks.COAL_ORE, UniformInt.of(0, 2));
     public static final DeferredBlock<DropExperienceBlock> AURORIAN_IRON_ORE = ore("aurorian_iron_ore", Blocks.IRON_ORE, ConstantInt.ZERO);

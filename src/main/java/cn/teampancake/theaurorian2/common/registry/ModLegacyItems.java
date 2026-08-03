@@ -1,5 +1,6 @@
 package cn.teampancake.theaurorian2.common.registry;
 
+import cn.teampancake.theaurorian2.common.item.ModelledItem;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -114,13 +115,13 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> MOON_WATER_BUCKET =
             register("moon_water_bucket", Category.TOOLS, 1);
     public static final DeferredItem<Item> MOONSILVER_AXE =
-            register("moonsilver_axe", Category.TOOLS, 1);
+            registerModelled("moonsilver_axe", Category.TOOLS, "moonsilver_axe_3d", null);
     public static final DeferredItem<Item> MOONSILVER_HOE =
             register("moonsilver_hoe", Category.TOOLS, 1);
     public static final DeferredItem<Item> MOONSILVER_PICKAXE =
-            register("moonsilver_pickaxe", Category.TOOLS, 1);
+            registerModelled("moonsilver_pickaxe", Category.TOOLS, "moonsilver_pickaxe_3d", null);
     public static final DeferredItem<Item> MOONSILVER_SHOVEL =
-            register("moonsilver_shovel", Category.TOOLS, 1);
+            registerModelled("moonsilver_shovel", Category.TOOLS, "moonsilver_shovel_3d", null);
     public static final DeferredItem<Item> MOONSTONE_AXE =
             register("moonstone_axe", Category.TOOLS, 1);
     public static final DeferredItem<Item> MOONSTONE_HOE =
@@ -200,7 +201,7 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> CRYSTALLINE_SPEAR =
             register("crystalline_spear", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> CRYSTALLINE_SWORD =
-            register("crystalline_sword", Category.EQUIPMENT, 1);
+            registerModelled("crystalline_sword", Category.EQUIPMENT, "crystalline_sword_3d", null);
     public static final DeferredItem<Item> DARK_AMULET =
             register("dark_amulet", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> DUNGEON_KEEPER_AMULET =
@@ -234,21 +235,21 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> MOONSILVER_BOOTS =
             register("moonsilver_boots", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> MOONSILVER_BOW =
-            register("moonsilver_bow", Category.EQUIPMENT, 1);
+            registerModelled("moonsilver_bow", Category.EQUIPMENT, "moonsilver_bow_3d", "misc.idle");
     public static final DeferredItem<Item> MOONSILVER_CHESTPLATE =
             register("moonsilver_chestplate", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> MOONSILVER_DAGGER =
             register("moonsilver_dagger", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> MOONSILVER_GREAT_SWORD =
-            register("moonsilver_great_sword", Category.EQUIPMENT, 1);
+            registerModelled("moonsilver_great_sword", Category.EQUIPMENT, "moonsilver_great_sword", null);
     public static final DeferredItem<Item> MOONSILVER_HELMET =
             register("moonsilver_helmet", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> MOONSILVER_LEGGINGS =
             register("moonsilver_leggings", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> MOONSILVER_SCYTHE =
-            register("moonsilver_scythe", Category.EQUIPMENT, 1);
+            registerModelled("moonsilver_scythe", Category.EQUIPMENT, "moonsilver_scythe_3d", null);
     public static final DeferredItem<Item> MOONSILVER_SWORD =
-            register("moonsilver_sword", Category.EQUIPMENT, 1);
+            registerModelled("moonsilver_sword", Category.EQUIPMENT, "moonsilver_sword_3d", null);
     public static final DeferredItem<Item> MOONSTONE_SHIELD =
             register("moonstone_shield", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> MOONSTONE_SWORD =
@@ -326,6 +327,16 @@ public final class ModLegacyItems {
     private static DeferredItem<Item> register(String id, Category category, int maxStack) {
         DeferredItem<Item> item = ModItems.ITEMS.registerItem(
                 id, properties -> new Item(maxStack == 64 ? properties : properties.stacksTo(maxStack)));
+        ITEMS_BY_CATEGORY.get(category).add(item);
+        return item;
+    }
+
+    private static DeferredItem<Item> registerModelled(
+            String id, Category category, String textureName, String idleAnimationName) {
+        DeferredItem<Item> item = ModItems.ITEMS.<Item>registerItem(
+                id,
+                properties -> new ModelledItem(
+                        properties.stacksTo(1), id, textureName, idleAnimationName));
         ITEMS_BY_CATEGORY.get(category).add(item);
         return item;
     }

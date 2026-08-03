@@ -9,6 +9,8 @@ import cn.teampancake.theaurorian2.common.block.entity.FireplaceBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianTableBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianHangingSignBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianSignBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.CrystallineSwordPedestalBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.SacrificeTableBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.SilentCampfireBlockEntity;
 import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -28,6 +30,18 @@ public final class ModBlockEntities {
                     () -> new BlockEntityType<>(
                             AstrologyTableBlockEntity::new,
                             Set.of(ModBlocks.ASTROLOGY_TABLE.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SacrificeTableBlockEntity>> SACRIFICE_TABLE =
+            BLOCK_ENTITY_TYPES.register(
+                    "sacrifice_table",
+                    () -> new BlockEntityType<>(
+                            SacrificeTableBlockEntity::new,
+                            Set.of(ModStructureBlocks.SACRIFICE_TABLE.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CrystallineSwordPedestalBlockEntity>>
+            CRYSTALLINE_SWORD_PEDESTAL = BLOCK_ENTITY_TYPES.register(
+                    "crystalline_sword_pedestal",
+                    () -> new BlockEntityType<>(
+                            CrystallineSwordPedestalBlockEntity::new,
+                            Set.of(ModStructureBlocks.CRYSTALLINE_SWORD_PEDESTAL.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianGrassRockBlockEntity>>
             AURORIAN_GRASS_ROCK = BLOCK_ENTITY_TYPES.register(
                     "aurorian_grass_rock",

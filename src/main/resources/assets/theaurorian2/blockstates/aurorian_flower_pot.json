@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/flower_pot"
+      "model": "theaurorian2:block/aurorian_flower_pot"
     }
   }
 }

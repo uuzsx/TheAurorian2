@@ -3,6 +3,7 @@ package cn.teampancake.theaurorian2.common.registry;
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.worldgen.structure.AurorianSkyIslandPiece;
 import cn.teampancake.theaurorian2.common.worldgen.structure.AurorianSkyIslandStructure;
+import cn.teampancake.theaurorian2.common.worldgen.structure.AurorianMineshaftStructure;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
@@ -20,6 +21,9 @@ public final class ModStructures {
     public static final DeferredHolder<StructureType<?>, StructureType<AurorianSkyIslandStructure>>
             AURORIAN_SKY_ISLAND_GROUP = STRUCTURE_TYPES.register(
                     "aurorian_sky_island_group", () -> () -> AurorianSkyIslandStructure.CODEC);
+    public static final DeferredHolder<StructureType<?>, StructureType<AurorianMineshaftStructure>>
+            AURORIAN_MINESHAFT = STRUCTURE_TYPES.register(
+                    "aurorian_mineshaft", () -> () -> AurorianMineshaftStructure.CODEC);
     public static final DeferredHolder<StructurePieceType, StructurePieceType> AURORIAN_SKY_ISLAND_GROUP_PIECE =
             STRUCTURE_PIECES.register(
                     "aurorian_sky_island_group", () -> (context, tag) -> new AurorianSkyIslandPiece(tag));
