@@ -6,7 +6,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public final class ModNetworking {
 
-    private static final String NETWORK_VERSION = "2";
+    private static final String NETWORK_VERSION = "3";
 
     private ModNetworking() {
     }
@@ -20,6 +20,14 @@ public final class ModNetworking {
                 (payload, context) -> context.enqueueWork(() -> {
                     if (context.player() instanceof ServerPlayer player) {
                         PhantomBlossomAttackPayload.handle(player);
+                    }
+                }));
+        registrar.playToServer(
+                RotateArtifactPayload.TYPE,
+                RotateArtifactPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (context.player() instanceof ServerPlayer player) {
+                        RotateArtifactPayload.handle(player, payload.slot());
                     }
                 }));
     }

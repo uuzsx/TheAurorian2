@@ -89,7 +89,7 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> AURORIANITE_PICKAXE =
             register("aurorianite_pickaxe", Category.TOOLS, 1);
     public static final DeferredItem<Item> BOOK_OF_SIN =
-            register("book_of_sin", Category.TOOLS, 1);
+            register("book_of_sin", Category.ACCESSORIES, 1);
     public static final DeferredItem<Item> BROKEN_OX_HORN =
             register("broken_ox_horn", Category.TOOLS, 1);
     public static final DeferredItem<Item> CRYSTALLINE_PICKAXE =
@@ -151,7 +151,7 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> VAGRANT_NOTE =
             register("vagrant_note", Category.TOOLS, 1);
     public static final DeferredItem<Item> WORLD_SCROLL =
-            register("world_scroll", Category.TOOLS, 1);
+            register("world_scroll", Category.ACCESSORIES, 1);
     public static final DeferredItem<Item> ABSORPTION_ORB =
             register("absorption_orb", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> AURORIAN_ALLOY_STEEL_SWORD =
@@ -185,7 +185,7 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> CERULEAN_SHIELD =
             register("cerulean_shield", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> CRIMSON_PACT_PENDANT =
-            register("crimson_pact_pendant", Category.EQUIPMENT, 1);
+            register("crimson_pact_pendant", Category.ACCESSORIES, 1);
     public static final DeferredItem<Item> CRYSTAL_ARROW =
             register("crystal_arrow", Category.EQUIPMENT, 64);
     public static final DeferredItem<Item> CRYSTAL_RUNE_BOOTS =
@@ -315,11 +315,11 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> UMBRA_SWORD =
             register("umbra_sword", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> TROPHY_KEEPER =
-            register("trophy_keeper", Category.FUNCTIONAL, 1);
+            register("trophy_keeper", Category.ACCESSORIES, 1);
     public static final DeferredItem<Item> TROPHY_MOON_QUEEN =
-            register("trophy_moon_queen", Category.FUNCTIONAL, 1);
+            register("trophy_moon_queen", Category.ACCESSORIES, 1);
     public static final DeferredItem<Item> TROPHY_SPIDER_MOTHER =
-            register("trophy_spider_mother", Category.FUNCTIONAL, 1);
+            register("trophy_spider_mother", Category.ACCESSORIES, 1);
 
     private ModLegacyItems() {
     }
@@ -345,6 +345,10 @@ public final class ModLegacyItems {
         ITEMS_BY_CATEGORY.get(Category.EQUIPMENT).forEach(item -> consumer.accept(item.get()));
     }
 
+    public static void forEachAccessories(Consumer<Item> consumer) {
+        ITEMS_BY_CATEGORY.get(Category.ACCESSORIES).forEach(item -> consumer.accept(item.get()));
+    }
+
     public static void forEachFood(Consumer<Item> consumer) {
         ITEMS_BY_CATEGORY.get(Category.FOOD).forEach(item -> consumer.accept(item.get()));
     }
@@ -365,6 +369,7 @@ public final class ModLegacyItems {
     }
 
     private enum Category {
+        ACCESSORIES,
         EQUIPMENT,
         FOOD,
         FUNCTIONAL,

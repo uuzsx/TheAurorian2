@@ -4,7 +4,14 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.enchantment.AurorianEnchantmentBookTooltip;
 import cn.teampancake.theaurorian2.common.enchantment.EnchantmentTooltips;
 import cn.teampancake.theaurorian2.common.item.PhantomBlossomTooltip;
+import cn.teampancake.theaurorian2.common.inventory.AccessoryEffects;
+import cn.teampancake.theaurorian2.common.inventory.AccessoryEnhancements;
+import cn.teampancake.theaurorian2.common.inventory.AccessoryInventory;
+import cn.teampancake.theaurorian2.common.inventory.AccessorySlot;
+import cn.teampancake.theaurorian2.common.inventory.AccessoryTooltip;
+import cn.teampancake.theaurorian2.common.registry.ModAccessoryItems;
 import cn.teampancake.theaurorian2.common.registry.ModItems;
+import cn.teampancake.theaurorian2.common.registry.ModLegacyItems;
 import com.mojang.datafixers.util.Either;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +19,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -24,6 +33,7 @@ public final class AurorianEnchantmentBookTooltipEvents {
     private static final int TITLE_COLOR = 0x76B2C4;
     private static final int BODY_COLOR = 0x9EB8C8;
     private static final int DEVELOPER_BODY_COLOR = 0xAFC5D2;
+    private static final int MOON_QUEEN_COLOR = 0xEA98FA;
     private static final int MAX_TEXT_WIDTH = 160;
     private static final int DEVELOPER_ITEM_MAX_TEXT_WIDTH = 172;
     private static final int SCREEN_MARGIN = 48;
@@ -35,11 +45,18 @@ public final class AurorianEnchantmentBookTooltipEvents {
     public static void registerTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
         event.register(AurorianEnchantmentBookTooltip.class, ClientAurorianEnchantmentBookTooltip::new);
         event.register(PhantomBlossomTooltip.class, ClientPhantomBlossomTooltip::new);
+        event.register(AccessoryTooltip.class, ClientAccessoryTooltip::new);
     }
 
     @SubscribeEvent
     public static void gatherTooltipComponents(RenderTooltipEvent.GatherComponents event) {
         ItemStack stack = event.getItemStack();
+        if (stack.is(ModAccessoryItems.ARCANE_DAGGER.get())
+                || stack.is(ModLegacyItems.TROPHY_MOON_QUEEN.get())
+                || AccessoryEnhancements.isArtifact(stack)) {
+            gatherAccessoryTooltip(event, stack);
+            return;
+        }
         boolean developerItem = stack.is(ModItems.PHANTOM_BLOSSOM_REQUIEM.get());
         if (developerItem) {
             gatherDeveloperItemTooltip(event, stack);
@@ -77,9 +94,113 @@ public final class AurorianEnchantmentBookTooltipEvents {
     @SubscribeEvent
     public static void selectTooltipTexture(RenderTooltipEvent.Texture event) {
         if (event.getItemStack().is(ModItems.PHANTOM_BLOSSOM_REQUIEM.get())
+                || event.getItemStack().is(ModAccessoryItems.ARCANE_DAGGER.get())
+                || event.getItemStack().is(ModLegacyItems.TROPHY_MOON_QUEEN.get())
+                || AccessoryEnhancements.isArtifact(event.getItemStack())
                 || EnchantmentTooltips.hasAurorianEnchantment(event.getItemStack())) {
             event.setTexture(TheAurorian2.id("aurorian_enchantment_book"));
         }
+    }
+
+    private static void gatherAccessoryTooltip(RenderTooltipEvent.GatherComponents event, ItemStack stack) {
+        int maxTextWidth = Math.min(176, Math.max(112, event.getScreenWidth() - SCREEN_MARGIN));
+        List<Component> body;
+        if (stack.is(ModAccessoryItems.ARCANE_DAGGER.get())) {
+            int level = hoveredEnhancementLevel(stack);
+            int percent = AccessoryEffects.attackSpeedPercent(level);
+            Component value = Component.literal(percent + "%")
+                    .withStyle(style -> style.withColor(0x75F28B));
+            body = List.of(
+                    Component.translatable(
+                                    "item.theaurorian2.arcane_dagger.tooltip.attack_speed", value)
+                            .withStyle(style -> style.withColor(0xD2DCE3)),
+                    rarityLine("accessory.theaurorian2.rarity.rare", 0x75F28B),
+                    Component.translatable("item.theaurorian2.arcane_dagger.tooltip.flavor")
+                            .withStyle(style -> style.withColor(0xAFC5D2).withItalic(true)));
+        } else if (stack.is(ModLegacyItems.TROPHY_MOON_QUEEN.get())) {
+            body = moonQueenTrophyTooltip(hoveredEnhancementLevel(stack));
+        } else if (stack.is(ModAccessoryItems.SEALED_ARTIFACT_ADVANCE.get())) {
+            body = List.of(
+                    Component.translatable("item.theaurorian2.sealed_artifact_advance.tooltip.effect")
+                            .withStyle(style -> style.withColor(0xD2DCE3)),
+                    Component.translatable("item.theaurorian2.sealed_artifact_advance.tooltip.level")
+                            .withStyle(style -> style.withColor(0x69AFFF)),
+                    rarityLine("accessory.theaurorian2.rarity.uncommon", 0x69AFFF),
+                    Component.translatable("item.theaurorian2.sealed_artifact_advance.tooltip.flavor")
+                            .withStyle(style -> style.withColor(0xAFC5D2).withItalic(true)));
+        } else if (stack.is(ModAccessoryItems.SEALED_ARTIFACT_CHOICE.get())) {
+            body = artifactTooltip("sealed_artifact_choice");
+        } else {
+            body = artifactTooltip("sealed_artifact_desire");
+        }
+
+        event.getTooltipElements().clear();
+        event.getTooltipElements().add(Either.right(new AccessoryTooltip(
+                stack.getHoverName(), body, maxTextWidth)));
+        event.setMaxWidth(maxTextWidth);
+    }
+
+    private static List<Component> artifactTooltip(String artifactId) {
+        String key = "item.theaurorian2." + artifactId + ".tooltip.";
+        return List.of(
+                Component.translatable(key + "effect")
+                        .withStyle(style -> style.withColor(0xD2DCE3)),
+                Component.translatable(key + "level")
+                        .withStyle(style -> style.withColor(0xB86BFF)),
+                rarityLine("accessory.theaurorian2.rarity.epic", 0xB86BFF),
+                Component.translatable(key + "flavor")
+                        .withStyle(style -> style.withColor(0xAFC5D2).withItalic(true)));
+    }
+
+    private static List<Component> moonQueenTrophyTooltip(int enhancementLevel) {
+        int level = AccessoryEffects.effectiveMoonQueenLevel(enhancementLevel);
+        Component percent = mythicValue(AccessoryEffects.moonQueenPercent(level) + "%");
+        Component maxHealth = mythicValue(formatHealth(AccessoryEffects.moonQueenMaxHealthBonus(level)));
+        String key = "item.theaurorian2.trophy_moon_queen.tooltip.";
+        return List.of(
+                statLine(key + "critical_chance", percent),
+                statLine(key + "melee_damage", percent),
+                statLine(key + "movement_speed", percent),
+                statLine(key + "max_health", maxHealth),
+                statLine(key + "damage_reduction", percent),
+                Component.translatable("accessory.theaurorian2.tooltip.unique")
+                        .withStyle(style -> style.withColor(0xFFD25F).withBold(true)),
+                rarityLine("accessory.theaurorian2.rarity.mythic", MOON_QUEEN_COLOR),
+                Component.translatable(key + "flavor")
+                        .withStyle(style -> style.withColor(0xAFC5D2).withItalic(true)));
+    }
+
+    private static Component statLine(String key, Component value) {
+        return Component.translatable(key, value)
+                .withStyle(style -> style.withColor(0xD2DCE3));
+    }
+
+    private static Component mythicValue(String value) {
+        return Component.literal(value).withStyle(style -> style.withColor(MOON_QUEEN_COLOR));
+    }
+
+    private static String formatHealth(double value) {
+        return value == Math.rint(value) ? Integer.toString((int) value) : Double.toString(value);
+    }
+
+    private static Component rarityLine(String rarityKey, int rarityColor) {
+        Component rarity = Component.translatable(rarityKey)
+                .withStyle(style -> style.withColor(rarityColor));
+        return Component.translatable("accessory.theaurorian2.tooltip.rarity", rarity)
+                .withStyle(style -> style.withColor(0xD2DCE3));
+    }
+
+    private static int hoveredEnhancementLevel(ItemStack stack) {
+        if (!(Minecraft.getInstance().screen instanceof InventoryScreen screen)) {
+            return 0;
+        }
+        if (!(screen.getHoveredSlot() instanceof AccessorySlot slot)
+                || !ItemStack.isSameItemSameComponents(slot.getItem(), stack)
+                || !(slot.container instanceof AccessoryInventory inventory)) {
+            return 0;
+        }
+        int[] levels = AccessoryEnhancements.calculate(inventory);
+        return Math.max(0, levels[slot.getContainerSlot()]);
     }
 
     private static Component asComponent(FormattedText text) {

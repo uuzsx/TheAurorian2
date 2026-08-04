@@ -106,7 +106,21 @@ public final class ModCreativeTabs {
                     .displayItems(ModCreativeTabs::addIngredients)
                     .build());
 
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ACCESSORIES_AND_ARTIFACTS = TABS.register(
+            "accessories_and_artifacts",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable(
+                            "itemGroup.theaurorian2.accessories_and_artifacts"))
+                    .icon(() -> new ItemStack(ModAccessoryItems.AURORIAN_BLESSING.get()))
+                    .displayItems((parameters, output) -> addAccessoriesAndArtifacts(output))
+                    .build());
+
     private ModCreativeTabs() {
+    }
+
+    private static void addAccessoriesAndArtifacts(CreativeModeTab.Output output) {
+        ModAccessoryItems.ALL.forEach(item -> output.accept(item.get()));
+        ModLegacyItems.forEachAccessories(output::accept);
     }
 
     private static void addBuildingBlocks(CreativeModeTab.Output output) {

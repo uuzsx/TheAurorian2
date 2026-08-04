@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import cn.teampancake.theaurorian2.common.crafting.AurorianRecipeIntegration;
 import cn.teampancake.theaurorian2.common.enchantment.EnchantmentTooltips;
 import cn.teampancake.theaurorian2.common.entity.TrainingDummyCommands;
+import cn.teampancake.theaurorian2.common.registry.ModAccessoryItems;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModAttachments;
 import cn.teampancake.theaurorian2.common.registry.ModBlockEntities;
@@ -59,6 +60,7 @@ public final class TheAurorian2 {
         ModMobEffects.register(modEventBus);
         ModEnchantmentEffectTypes.register(modEventBus);
         ModItems.register(modEventBus);
+        ModAccessoryItems.register(modEventBus);
         ModTreeDecorators.register(modEventBus);
         ModFeatures.register(modEventBus);
         ModStructures.register(modEventBus);

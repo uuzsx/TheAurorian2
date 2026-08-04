@@ -3,6 +3,7 @@ package cn.teampancake.theaurorian2.common.registry;
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.effect.CorruptionData;
 import cn.teampancake.theaurorian2.common.item.PhantomBlossomMark;
+import cn.teampancake.theaurorian2.common.inventory.AccessoryInventory;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.neoforged.bus.api.IEventBus;
@@ -41,6 +42,12 @@ public final class ModAttachments {
                     () -> AttachmentType.builder(() -> false)
                             .sync(ByteBufCodecs.BOOL)
                             .build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AccessoryInventory>> ACCESSORY_INVENTORY =
+            ATTACHMENTS.register("accessory_inventory", () -> AttachmentType.serializable(
+                            holder -> new AccessoryInventory((net.minecraft.world.entity.player.Player) holder))
+                    .copyOnDeath()
+                    .build());
 
     private ModAttachments() {
     }
