@@ -3,6 +3,10 @@ package cn.teampancake.theaurorian2.client;
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.client.color.AurorianGrassTintSource;
 import cn.teampancake.theaurorian2.client.hud.AurorianNightHud;
+import cn.teampancake.theaurorian2.client.model.AurorianRabbitModel;
+import cn.teampancake.theaurorian2.client.model.AurorianPigModel;
+import cn.teampancake.theaurorian2.client.model.AurorianSheepModel;
+import cn.teampancake.theaurorian2.client.model.AurorianCowModel;
 import cn.teampancake.theaurorian2.client.particle.WickParticle;
 import cn.teampancake.theaurorian2.client.particle.PhantomBloomPetalParticle;
 import cn.teampancake.theaurorian2.client.particle.PhantomButterflyParticle;
@@ -18,6 +22,10 @@ import cn.teampancake.theaurorian2.client.renderer.AstrologyTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.CrystallineSwordPedestalRenderer;
 import cn.teampancake.theaurorian2.client.renderer.ModelledBlockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.TrainingDummyRenderer;
+import cn.teampancake.theaurorian2.client.renderer.AurorianRabbitRenderer;
+import cn.teampancake.theaurorian2.client.renderer.AurorianPigRenderer;
+import cn.teampancake.theaurorian2.client.renderer.AurorianSheepRenderer;
+import cn.teampancake.theaurorian2.client.renderer.AurorianCowRenderer;
 import cn.teampancake.theaurorian2.client.screen.AstrologyForecastScreen;
 import cn.teampancake.theaurorian2.common.network.AstrologyForecastPayload;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
@@ -70,6 +78,10 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.AURORIAN_RABBIT.get(), AurorianRabbitRenderer::new);
+        event.registerEntityRenderer(ModEntities.AURORIAN_PIG.get(), AurorianPigRenderer::new);
+        event.registerEntityRenderer(ModEntities.AURORIAN_SHEEP.get(), AurorianSheepRenderer::new);
+        event.registerEntityRenderer(ModEntities.AURORIAN_COW.get(), AurorianCowRenderer::new);
         event.registerEntityRenderer(ModEntities.TRAINING_DUMMY.get(), TrainingDummyRenderer::new);
         event.registerEntityRenderer(ModEntities.DAMAGE_NUMBER.get(), DamageNumberRenderer::new);
         event.registerEntityRenderer(
@@ -114,6 +126,14 @@ public final class ClientModEvents {
         event.registerSpriteSet(ModParticles.PHANTOM_BUTTERFLY_PINK.get(), PhantomButterflyParticle.Provider::new);
         event.registerSpriteSet(ModParticles.PHANTOM_PETAL.get(), PhantomPetalParticle.Provider::new);
         event.registerSpriteSet(ModParticles.PHANTOM_BLOOM_PETAL.get(), PhantomBloomPetalParticle.Provider::new);
+    }
+
+    @SubscribeEvent
+    public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(AurorianRabbitRenderer.LAYER, AurorianRabbitModel::createBodyLayer);
+        event.registerLayerDefinition(AurorianPigRenderer.LAYER, AurorianPigModel::createBodyLayer);
+        event.registerLayerDefinition(AurorianSheepRenderer.LAYER, AurorianSheepModel::createBodyLayer);
+        event.registerLayerDefinition(AurorianCowRenderer.LAYER, AurorianCowModel::createBodyLayer);
     }
 
     @SubscribeEvent

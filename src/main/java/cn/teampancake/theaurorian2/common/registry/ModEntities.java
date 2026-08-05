@@ -4,16 +4,46 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.entity.DamageNumberEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianChestMinecartEntity;
 import cn.teampancake.theaurorian2.common.entity.TrainingDummyEntity;
+import cn.teampancake.theaurorian2.common.entity.AurorianRabbitEntity;
+import cn.teampancake.theaurorian2.common.entity.AurorianPigEntity;
+import cn.teampancake.theaurorian2.common.entity.AurorianSheepEntity;
+import cn.teampancake.theaurorian2.common.entity.AurorianCowEntity;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.cow.AbstractCow;
+import net.minecraft.world.entity.animal.pig.Pig;
+import net.minecraft.world.entity.animal.rabbit.Rabbit;
+import net.minecraft.world.entity.animal.sheep.Sheep;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class ModEntities {
 
     public static final DeferredRegister.Entities ENTITIES = DeferredRegister.createEntities(TheAurorian2.MOD_ID);
+
+    public static final DeferredHolder<EntityType<?>, EntityType<AurorianRabbitEntity>> AURORIAN_RABBIT =
+            ENTITIES.registerEntityType(
+                    "aurorian_rabbit", AurorianRabbitEntity::new, MobCategory.CREATURE,
+                    builder -> builder.sized(0.4F, 0.5F).clientTrackingRange(8));
+    public static final DeferredHolder<EntityType<?>, EntityType<AurorianPigEntity>> AURORIAN_PIG =
+            ENTITIES.registerEntityType(
+                    "aurorian_pig", AurorianPigEntity::new, MobCategory.CREATURE,
+                    builder -> builder.sized(0.9F, 0.9F).clientTrackingRange(10));
+    public static final DeferredHolder<EntityType<?>, EntityType<AurorianSheepEntity>> AURORIAN_SHEEP =
+            ENTITIES.registerEntityType(
+                    "aurorian_sheep", AurorianSheepEntity::new, MobCategory.CREATURE,
+                    builder -> builder.sized(1.0F, 1.3F).clientTrackingRange(10));
+    public static final DeferredHolder<EntityType<?>, EntityType<AurorianCowEntity>> AURORIAN_COW =
+            ENTITIES.registerEntityType(
+                    "aurorian_cow", AurorianCowEntity::new, MobCategory.CREATURE,
+                    builder -> builder.sized(1.5F, 1.46F).clientTrackingRange(10));
 
     public static final DeferredHolder<EntityType<?>, EntityType<TrainingDummyEntity>> TRAINING_DUMMY =
             ENTITIES.registerEntityType(
@@ -57,9 +87,31 @@ public final class ModEntities {
     public static void register(IEventBus modEventBus) {
         ENTITIES.register(modEventBus);
         modEventBus.addListener(ModEntities::registerAttributes);
+        modEventBus.addListener(ModEntities::registerSpawnPlacements);
     }
 
     private static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(TRAINING_DUMMY.get(), TrainingDummyEntity.createAttributes().build());
+        event.put(AURORIAN_RABBIT.get(), Rabbit.createAttributes().build());
+        event.put(AURORIAN_PIG.get(), Pig.createAttributes().build());
+        event.put(AURORIAN_SHEEP.get(), Sheep.createAttributes().build());
+        event.put(AURORIAN_COW.get(), AbstractCow.createAttributes().build());
+    }
+
+    private static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
+        registerAnimalSpawn(event, AURORIAN_RABBIT.get());
+        registerAnimalSpawn(event, AURORIAN_PIG.get());
+        registerAnimalSpawn(event, AURORIAN_SHEEP.get());
+        registerAnimalSpawn(event, AURORIAN_COW.get());
+    }
+
+    private static <T extends Animal> void registerAnimalSpawn(
+            RegisterSpawnPlacementsEvent event, EntityType<T> type) {
+        event.register(
+                type,
+                SpawnPlacementTypes.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Animal::checkAnimalSpawnRules,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 }

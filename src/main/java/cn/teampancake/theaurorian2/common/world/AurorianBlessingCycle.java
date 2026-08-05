@@ -8,6 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.clock.WorldClock;
 import net.minecraft.world.clock.WorldClocks;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -47,6 +48,7 @@ public final class AurorianBlessingCycle {
     private static final long CYCLE_DAYS = Blessing.values().length;
     private static final long CYCLE_TICKS = DAY_TICKS * CYCLE_DAYS;
     private static final long PREPARE_NEXT_DAY_TICK = 18_000L;
+    private static final long AURORIAN_NIGHT_END = 12_000L;
 
     private AurorianBlessingCycle() {
     }
@@ -96,6 +98,17 @@ public final class AurorianBlessingCycle {
         }
 
         return List.copyOf(forecast);
+    }
+
+    public static boolean isActive(Level level, Blessing blessing) {
+        if (!level.dimensionTypeRegistration().is(TheAurorian2.AURORIAN_DIMENSION_TYPE)
+                || Math.floorMod(level.getDefaultClockTime(), DAY_TICKS) >= AURORIAN_NIGHT_END) {
+            return false;
+        }
+        Holder<WorldClock> blessingClock = level.registryAccess().getOrThrow(BLESSING_CLOCK);
+        long blessingTicks = Math.floorMod(
+                level.clockManager().getTotalTicks(blessingClock), CYCLE_TICKS);
+        return Blessing.fromSlot((int) (blessingTicks / DAY_TICKS)) == blessing;
     }
 
     private static int blessingSlot(long worldSeed, long worldDay) {

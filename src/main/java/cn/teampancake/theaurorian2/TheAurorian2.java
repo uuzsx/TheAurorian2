@@ -47,7 +47,7 @@ public final class TheAurorian2 {
 
     public static final String MOD_ID = "theaurorian2";
     public static final Logger LOGGER = LogUtils.getLogger();
-    private static final ResourceKey<DimensionType> AURORIAN_DIMENSION_TYPE = ResourceKey.create(
+    public static final ResourceKey<DimensionType> AURORIAN_DIMENSION_TYPE = ResourceKey.create(
             Registries.DIMENSION_TYPE, id("the_aurorian"));
 
     public TheAurorian2(IEventBus modEventBus, ModContainer modContainer) {

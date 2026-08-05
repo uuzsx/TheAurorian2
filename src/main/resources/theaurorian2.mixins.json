@@ -10,6 +10,7 @@
     "FireBlockAccessor",
     "FoodDataMixin",
     "InventoryMenuMixin",
+    "ItemStackDurabilityMixin",
     "MineshaftCorridorMixin",
     "ServerPlayerNaturalHealingMixin"
   ],

@@ -556,6 +556,7 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.CRYSTAL.get());
         output.accept(ModBlocks.AURORIAN_CLAY_BALL.get());
         output.accept(ModBlocks.AURORIAN_BRICK.get());
+        output.accept(ModItems.AURORIAN_LEATHER.get());
         ModLegacyItems.forEachIngredients(output::accept);
         parameters.holders().lookup(Registries.ENCHANTMENT).ifPresent(enchantments -> {
             addEnchantmentBooks(output, enchantments, ModEnchantments.IMPALE);

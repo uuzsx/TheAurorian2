@@ -44,6 +44,7 @@ public final class ModItems {
             "aurorian_chest_minecart",
             properties -> new MinecartItem(
                     ModEntities.AURORIAN_CHEST_MINECART.get(), properties.stacksTo(1)));
+    public static final DeferredItem<Item> AURORIAN_LEATHER = ITEMS.registerSimpleItem("aurorian_leather");
 
     public static final DeferredItem<Item> SILENT_WOOD_SWORD = ITEMS.registerItem(
             "silent_wood_sword",

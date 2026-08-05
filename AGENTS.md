@@ -11,6 +11,14 @@ These rules apply to the entire repository. They are persistent project requirem
 
 Never change, omit, weaken, or approximate a requested result merely to reduce code or file size. A complete implementation may be large when the feature genuinely requires it.
 
+## Story Canon
+
+- `docs/LORE_CANON.md` is the authoritative narrative reference for The Aurorian 2.
+- Read it before writing or changing lore-sensitive names, dialogue, quests, advancements, item or boss descriptions, structures, inscriptions, environmental storytelling, faction behavior, sky events, or story progression.
+- Preserve the distinction between confirmed canon, in-world propaganda, deliberately hidden truth, and unresolved design questions.
+- Do not turn an unresolved detail into canon without explicit user approval.
+- In-world text may contradict the truth when the canon document identifies it as Aurorian Church propaganda; implementation notes and internal documentation must not present that propaganda as objective fact.
+
 ## Required Design Check
 
 Before implementing a feature, explicitly consider:

@@ -91,7 +91,7 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> BOOK_OF_SIN =
             register("book_of_sin", Category.ACCESSORIES, 1);
     public static final DeferredItem<Item> BROKEN_OX_HORN =
-            register("broken_ox_horn", Category.TOOLS, 1);
+            register("broken_ox_horn", Category.INGREDIENTS, 1);
     public static final DeferredItem<Item> CRYSTALLINE_PICKAXE =
             register("crystalline_pickaxe", Category.TOOLS, 1);
     public static final DeferredItem<Item> DARK_STONE_KEY =
