@@ -25,6 +25,7 @@ public final class AccessoryEffects {
 
     public static final int ARCANE_DAGGER_BASE_PERCENT = 10;
     public static final int ARCANE_DAGGER_PERCENT_PER_LEVEL = 10;
+    public static final int ARCANE_DAGGER_MAX_LEVEL = 2;
     public static final int MOON_QUEEN_TROPHY_MAX_LEVEL = 4;
     public static final int MOON_QUEEN_TROPHY_BASE_PERCENT = 5;
     public static final int MOON_QUEEN_TROPHY_PERCENT_PER_LEVEL = 2;
@@ -63,8 +64,12 @@ public final class AccessoryEffects {
     }
 
     public static int attackSpeedPercent(int enhancementLevel) {
-        int effectiveLevel = Math.max(0, enhancementLevel);
+        int effectiveLevel = effectiveArcaneDaggerLevel(enhancementLevel);
         return ARCANE_DAGGER_BASE_PERCENT + effectiveLevel * ARCANE_DAGGER_PERCENT_PER_LEVEL;
+    }
+
+    public static int effectiveArcaneDaggerLevel(int enhancementLevel) {
+        return Math.min(ARCANE_DAGGER_MAX_LEVEL, Math.max(0, enhancementLevel));
     }
 
     public static int effectiveMoonQueenLevel(int enhancementLevel) {

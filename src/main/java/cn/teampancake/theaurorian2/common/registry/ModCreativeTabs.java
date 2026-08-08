@@ -505,6 +505,10 @@ public final class ModCreativeTabs {
     }
 
     private static void addCombatItems(CreativeModeTab.Output output) {
+        output.accept(ModItems.SPIDER_MOTHER_SPAWN_EGG.get());
+        output.accept(ModItems.SPIDERLING_SPAWN_EGG.get());
+        output.accept(ModItems.SPIDERLING_CRYSTAL_SHELL_SPAWN_EGG.get());
+        output.accept(ModItems.SPIDERLING_WALL_CLIMBER_SPAWN_EGG.get());
         output.accept(ModItems.PHANTOM_BLOSSOM_REQUIEM.get());
         output.accept(ModItems.SILENT_WOOD_SWORD.get());
         output.accept(ModItems.AURORIAN_STONE_SWORD.get());

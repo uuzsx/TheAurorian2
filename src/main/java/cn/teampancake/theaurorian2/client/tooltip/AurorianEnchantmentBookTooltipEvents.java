@@ -114,6 +114,7 @@ public final class AurorianEnchantmentBookTooltipEvents {
                     Component.translatable(
                                     "item.theaurorian2.arcane_dagger.tooltip.attack_speed", value)
                             .withStyle(style -> style.withColor(0xD2DCE3)),
+                    enhancementLine(level, AccessoryEffects.ARCANE_DAGGER_MAX_LEVEL, 0x75F28B),
                     rarityLine("accessory.theaurorian2.rarity.rare", 0x75F28B),
                     Component.translatable("item.theaurorian2.arcane_dagger.tooltip.flavor")
                             .withStyle(style -> style.withColor(0xAFC5D2).withItalic(true)));
@@ -125,6 +126,7 @@ public final class AurorianEnchantmentBookTooltipEvents {
                             .withStyle(style -> style.withColor(0xD2DCE3)),
                     Component.translatable("item.theaurorian2.sealed_artifact_advance.tooltip.level")
                             .withStyle(style -> style.withColor(0x69AFFF)),
+                    rotatableLine(),
                     rarityLine("accessory.theaurorian2.rarity.uncommon", 0x69AFFF),
                     Component.translatable("item.theaurorian2.sealed_artifact_advance.tooltip.flavor")
                             .withStyle(style -> style.withColor(0xAFC5D2).withItalic(true)));
@@ -147,6 +149,7 @@ public final class AurorianEnchantmentBookTooltipEvents {
                         .withStyle(style -> style.withColor(0xD2DCE3)),
                 Component.translatable(key + "level")
                         .withStyle(style -> style.withColor(0xB86BFF)),
+                rotatableLine(),
                 rarityLine("accessory.theaurorian2.rarity.epic", 0xB86BFF),
                 Component.translatable(key + "flavor")
                         .withStyle(style -> style.withColor(0xAFC5D2).withItalic(true)));
@@ -163,6 +166,8 @@ public final class AurorianEnchantmentBookTooltipEvents {
                 statLine(key + "movement_speed", percent),
                 statLine(key + "max_health", maxHealth),
                 statLine(key + "damage_reduction", percent),
+                enhancementLine(
+                        enhancementLevel, AccessoryEffects.MOON_QUEEN_TROPHY_MAX_LEVEL, MOON_QUEEN_COLOR),
                 Component.translatable("accessory.theaurorian2.tooltip.unique")
                         .withStyle(style -> style.withColor(0xFFD25F).withBold(true)),
                 rarityLine("accessory.theaurorian2.rarity.mythic", MOON_QUEEN_COLOR),
@@ -177,6 +182,23 @@ public final class AurorianEnchantmentBookTooltipEvents {
 
     private static Component mythicValue(String value) {
         return Component.literal(value).withStyle(style -> style.withColor(MOON_QUEEN_COLOR));
+    }
+
+    private static Component rotatableLine() {
+        return Component.translatable("accessory.theaurorian2.tooltip.rotatable")
+                .withStyle(style -> style.withColor(0x69AFFF).withBold(true));
+    }
+
+    private static Component enhancementLine(int level, int maxLevel, int rarityColor) {
+        int currentLevel = Math.max(0, level);
+        int currentColor = currentLevel > maxLevel ? 0xFFD25F : rarityColor;
+        Component current = Component.literal(Integer.toString(currentLevel))
+                .withStyle(style -> style.withColor(currentColor));
+        Component maximum = Component.literal(Integer.toString(maxLevel))
+                .withStyle(style -> style.withColor(rarityColor));
+        return Component.translatable(
+                        "accessory.theaurorian2.tooltip.current_enhancement", current, maximum)
+                .withStyle(style -> style.withColor(0xD2DCE3));
     }
 
     private static String formatHealth(double value) {

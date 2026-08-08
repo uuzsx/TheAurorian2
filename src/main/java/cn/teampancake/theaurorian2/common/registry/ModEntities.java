@@ -3,7 +3,14 @@ package cn.teampancake.theaurorian2.common.registry;
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.entity.DamageNumberEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianChestMinecartEntity;
+import cn.teampancake.theaurorian2.common.entity.CrystalShellSpiderlingEntity;
+import cn.teampancake.theaurorian2.common.entity.SpiderEggEntity;
+import cn.teampancake.theaurorian2.common.entity.SpiderMotherEntity;
+import cn.teampancake.theaurorian2.common.entity.SpiderSilkProjectileEntity;
+import cn.teampancake.theaurorian2.common.entity.SpiderVenomProjectileEntity;
+import cn.teampancake.theaurorian2.common.entity.SpiderlingEntity;
 import cn.teampancake.theaurorian2.common.entity.TrainingDummyEntity;
+import cn.teampancake.theaurorian2.common.entity.WallClimberSpiderlingEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianRabbitEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianPigEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianSheepEntity;
@@ -68,6 +75,78 @@ public final class ModEntities {
                             .updateInterval(1)
                             .noSave()
                             .noSummon()
+                             .noLootTable());
+
+    public static final DeferredHolder<EntityType<?>, EntityType<SpiderMotherEntity>> SPIDER_MOTHER =
+            ENTITIES.registerEntityType(
+                    "spider_mother",
+                    SpiderMotherEntity::new,
+                    MobCategory.MONSTER,
+                    builder -> builder
+                            .fireImmune()
+                            .sized(3.0F, 2.5F)
+                            .eyeHeight(1.65F)
+                            .clientTrackingRange(12)
+                            .updateInterval(2));
+    public static final DeferredHolder<EntityType<?>, EntityType<SpiderlingEntity>> SPIDERLING =
+            ENTITIES.registerEntityType(
+                    "spiderling",
+                    SpiderlingEntity::new,
+                    MobCategory.MONSTER,
+                    builder -> builder
+                            .sized(0.9F, 0.55F)
+                            .eyeHeight(0.35F)
+                            .clientTrackingRange(8)
+                            .noLootTable());
+    public static final DeferredHolder<EntityType<?>, EntityType<CrystalShellSpiderlingEntity>>
+            SPIDERLING_CRYSTAL_SHELL = ENTITIES.registerEntityType(
+                    "spiderling_crystal_shell",
+                    CrystalShellSpiderlingEntity::new,
+                    MobCategory.MONSTER,
+                    builder -> builder
+                            .sized(1.0F, 0.65F)
+                            .eyeHeight(0.4F)
+                            .clientTrackingRange(8)
+                            .noLootTable());
+    public static final DeferredHolder<EntityType<?>, EntityType<WallClimberSpiderlingEntity>>
+            SPIDERLING_WALL_CLIMBER = ENTITIES.registerEntityType(
+                    "spiderling_wall_climber",
+                    WallClimberSpiderlingEntity::new,
+                    MobCategory.MONSTER,
+                    builder -> builder
+                            .sized(1.2F, 0.6F)
+                            .eyeHeight(0.3F)
+                            .clientTrackingRange(10)
+                            .noLootTable());
+    public static final DeferredHolder<EntityType<?>, EntityType<SpiderEggEntity>> SPIDER_EGG =
+            ENTITIES.registerEntityType(
+                    "spider_egg",
+                    SpiderEggEntity::new,
+                    MobCategory.MISC,
+                    builder -> builder
+                            .sized(0.55F, 0.65F)
+                            .clientTrackingRange(8)
+                            .updateInterval(2)
+                            .noLootTable());
+    public static final DeferredHolder<EntityType<?>, EntityType<SpiderVenomProjectileEntity>> SPIDER_VENOM =
+            ENTITIES.registerEntityType(
+                    "spider_venom",
+                    SpiderVenomProjectileEntity::new,
+                    MobCategory.MISC,
+                    builder -> builder
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(8)
+                            .updateInterval(1)
+                            .noLootTable());
+    public static final DeferredHolder<EntityType<?>, EntityType<SpiderSilkProjectileEntity>> SPIDER_SILK =
+            ENTITIES.registerEntityType(
+                    "spider_silk",
+                    SpiderSilkProjectileEntity::new,
+                    MobCategory.MISC,
+                    builder -> builder
+                            .sized(0.3F, 0.3F)
+                            .clientTrackingRange(12)
+                            .updateInterval(1)
                             .noLootTable());
 
     public static final DeferredHolder<EntityType<?>, EntityType<AurorianChestMinecartEntity>>
@@ -92,6 +171,11 @@ public final class ModEntities {
 
     private static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(TRAINING_DUMMY.get(), TrainingDummyEntity.createAttributes().build());
+        event.put(SPIDER_MOTHER.get(), SpiderMotherEntity.createAttributes().build());
+        event.put(SPIDERLING.get(), SpiderlingEntity.createAttributes().build());
+        event.put(SPIDERLING_CRYSTAL_SHELL.get(), CrystalShellSpiderlingEntity.createAttributes().build());
+        event.put(SPIDERLING_WALL_CLIMBER.get(), WallClimberSpiderlingEntity.createAttributes().build());
+        event.put(SPIDER_EGG.get(), SpiderEggEntity.createAttributes().build());
         event.put(AURORIAN_RABBIT.get(), Rabbit.createAttributes().build());
         event.put(AURORIAN_PIG.get(), Pig.createAttributes().build());
         event.put(AURORIAN_SHEEP.get(), Sheep.createAttributes().build());

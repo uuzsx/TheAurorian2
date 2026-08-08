@@ -20,6 +20,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
@@ -36,6 +37,19 @@ public final class ModItems {
 
     public static final DeferredItem<TrainingDummyItem> TRAINING_DUMMY = ITEMS.registerItem(
             "training_dummy", properties -> new TrainingDummyItem(properties.stacksTo(16)));
+    public static final DeferredItem<Item> SPIDER_EGG = ITEMS.registerSimpleItem("spider_egg");
+    public static final DeferredItem<SpawnEggItem> SPIDER_MOTHER_SPAWN_EGG = ITEMS.registerItem(
+            "spider_mother_spawn_egg",
+            properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.SPIDER_MOTHER.get())));
+    public static final DeferredItem<SpawnEggItem> SPIDERLING_SPAWN_EGG = ITEMS.registerItem(
+            "spiderling_spawn_egg",
+            properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.SPIDERLING.get())));
+    public static final DeferredItem<SpawnEggItem> SPIDERLING_CRYSTAL_SHELL_SPAWN_EGG = ITEMS.registerItem(
+            "spiderling_crystal_shell_spawn_egg",
+            properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.SPIDERLING_CRYSTAL_SHELL.get())));
+    public static final DeferredItem<SpawnEggItem> SPIDERLING_WALL_CLIMBER_SPAWN_EGG = ITEMS.registerItem(
+            "spiderling_wall_climber_spawn_egg",
+            properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.SPIDERLING_WALL_CLIMBER.get())));
     public static final DeferredItem<PhantomBlossomRequiemItem> PHANTOM_BLOSSOM_REQUIEM = ITEMS.registerItem(
             "phantom_blossom_requiem",
             properties -> new PhantomBlossomRequiemItem(

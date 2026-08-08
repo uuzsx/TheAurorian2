@@ -3,6 +3,7 @@ package cn.teampancake.theaurorian2.client;
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.client.color.AurorianGrassTintSource;
 import cn.teampancake.theaurorian2.client.hud.AurorianNightHud;
+import cn.teampancake.theaurorian2.client.hud.SpiderMotherBossBar;
 import cn.teampancake.theaurorian2.client.model.AurorianRabbitModel;
 import cn.teampancake.theaurorian2.client.model.AurorianPigModel;
 import cn.teampancake.theaurorian2.client.model.AurorianSheepModel;
@@ -22,6 +23,9 @@ import cn.teampancake.theaurorian2.client.renderer.AstrologyTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.CrystallineSwordPedestalRenderer;
 import cn.teampancake.theaurorian2.client.renderer.ModelledBlockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.TrainingDummyRenderer;
+import cn.teampancake.theaurorian2.client.renderer.SimpleGeoMobRenderer;
+import cn.teampancake.theaurorian2.client.renderer.WallClimberSpiderlingRenderer;
+import cn.teampancake.theaurorian2.client.renderer.SpiderVenomProjectileRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianRabbitRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianPigRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianSheepRenderer;
@@ -68,6 +72,8 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 import net.neoforged.neoforge.client.fluid.FluidTintSources;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import org.joml.Vector4f;
 
 @EventBusSubscriber(modid = TheAurorian2.MOD_ID, value = Dist.CLIENT)
@@ -83,6 +89,24 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntities.AURORIAN_SHEEP.get(), AurorianSheepRenderer::new);
         event.registerEntityRenderer(ModEntities.AURORIAN_COW.get(), AurorianCowRenderer::new);
         event.registerEntityRenderer(ModEntities.TRAINING_DUMMY.get(), TrainingDummyRenderer::new);
+        event.registerEntityRenderer(
+                ModEntities.SPIDER_MOTHER.get(),
+                context -> new SimpleGeoMobRenderer<>(context, TheAurorian2.id("spider_mother"), 1.4F));
+        event.registerEntityRenderer(
+                ModEntities.SPIDERLING.get(),
+                context -> new SimpleGeoMobRenderer<>(context, TheAurorian2.id("spiderling"), 0.35F));
+        event.registerEntityRenderer(
+                ModEntities.SPIDERLING_CRYSTAL_SHELL.get(),
+                context -> new SimpleGeoMobRenderer<>(context, TheAurorian2.id("spiderling_crystal_shell"), 0.4F));
+        event.registerEntityRenderer(
+                ModEntities.SPIDERLING_WALL_CLIMBER.get(), WallClimberSpiderlingRenderer::new);
+        event.registerEntityRenderer(
+                ModEntities.SPIDER_EGG.get(),
+                context -> new SimpleGeoMobRenderer<>(context, TheAurorian2.id("spider_egg"), 0.3F));
+        event.registerEntityRenderer(
+                ModEntities.SPIDER_VENOM.get(), SpiderVenomProjectileRenderer::new);
+        event.registerEntityRenderer(
+                ModEntities.SPIDER_SILK.get(), context -> new ThrownItemRenderer<>(context, 0.65F, true));
         event.registerEntityRenderer(ModEntities.DAMAGE_NUMBER.get(), DamageNumberRenderer::new);
         event.registerEntityRenderer(
                 ModEntities.AURORIAN_CHEST_MINECART.get(), AurorianChestMinecartRenderer::new);
@@ -106,6 +130,7 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
+            NeoForge.EVENT_BUS.addListener(SpiderMotherBossBar::render);
             Sheets.addWoodType(ModStructureBlocks.SILENT_WOOD_TYPE);
             Sheets.addWoodType(ModStructureBlocks.WEEPING_WILLOW_WOOD_TYPE);
             Sheets.addWoodType(ModStructureBlocks.CURTAIN_WOOD_TYPE);
