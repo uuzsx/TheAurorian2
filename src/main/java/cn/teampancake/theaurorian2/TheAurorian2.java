@@ -1,6 +1,7 @@
 package cn.teampancake.theaurorian2;
 
 import com.mojang.logging.LogUtils;
+import cn.teampancake.theaurorian2.common.config.HudLayoutConfig;
 import cn.teampancake.theaurorian2.common.crafting.AurorianRecipeIntegration;
 import cn.teampancake.theaurorian2.common.enchantment.EnchantmentTooltips;
 import cn.teampancake.theaurorian2.common.entity.TrainingDummyCommands;
@@ -35,6 +36,7 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.ItemAbilities;
@@ -51,6 +53,7 @@ public final class TheAurorian2 {
             Registries.DIMENSION_TYPE, id("the_aurorian"));
 
     public TheAurorian2(IEventBus modEventBus, ModContainer modContainer) {
+        modContainer.registerConfig(ModConfig.Type.CLIENT, HudLayoutConfig.SPEC);
         ModAttachments.register(modEventBus);
         ModFluidTypes.register(modEventBus);
         ModFluids.register(modEventBus);

@@ -385,6 +385,7 @@ public final class ModCreativeTabs {
     }
 
     private static void addFunctionalItems(CreativeModeTab.Output output) {
+        output.accept(ModItems.PURIFICATION_TEST_ITEM.get());
         output.accept(ModBlocks.ASTROLOGY_TABLE_ITEM.get());
         output.accept(ModBlocks.AURORIAN_CRAFTING_TABLE.get());
         output.accept(ModBlocks.AURORIAN_FURNACE.get());

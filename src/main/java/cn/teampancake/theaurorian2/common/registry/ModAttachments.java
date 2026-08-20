@@ -4,6 +4,7 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.effect.CorruptionData;
 import cn.teampancake.theaurorian2.common.item.PhantomBlossomMark;
 import cn.teampancake.theaurorian2.common.inventory.AccessoryInventory;
+import cn.teampancake.theaurorian2.common.world.MoonShieldData;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.neoforged.bus.api.IEventBus;
@@ -48,6 +49,16 @@ public final class ModAttachments {
                             holder -> new AccessoryInventory((net.minecraft.world.entity.player.Player) holder))
                     .copyOnDeath()
                     .build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<MoonShieldData>> MOON_SHIELD =
+            ATTACHMENTS.register("moon_shield", () -> AttachmentType.builder(() -> MoonShieldData.EMPTY)
+                    .serialize(MoonShieldData.CODEC.fieldOf("value"))
+                    .copyOnDeath()
+                    .sync((holder, player) -> holder == player, MoonShieldData.STREAM_CODEC)
+                    .build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Long>> MOON_SHIELD_RECOVERY_AT =
+            ATTACHMENTS.register("moon_shield_recovery_at", () -> AttachmentType.builder(() -> 0L).build());
 
     private ModAttachments() {
     }

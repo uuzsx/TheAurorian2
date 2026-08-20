@@ -4,19 +4,24 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.registry.ModAccessoryItems;
 import cn.teampancake.theaurorian2.common.registry.ModAttachments;
 import cn.teampancake.theaurorian2.common.registry.ModLegacyItems;
+import cn.teampancake.theaurorian2.common.world.MoonShieldSystem;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
@@ -29,6 +34,7 @@ public final class AccessoryEffects {
     public static final int MOON_QUEEN_TROPHY_MAX_LEVEL = 4;
     public static final int MOON_QUEEN_TROPHY_BASE_PERCENT = 5;
     public static final int MOON_QUEEN_TROPHY_PERCENT_PER_LEVEL = 2;
+    public static final int CRIMSON_PACT_PENDANT_MAX_LEVEL = 2;
 
     private static final Identifier ARCANE_DAGGER_ATTACK_SPEED =
             TheAurorian2.id("arcane_dagger_attack_speed");
@@ -50,6 +56,7 @@ public final class AccessoryEffects {
         int[] enhancementLevels = AccessoryEnhancements.calculate(inventory);
         double attackSpeedBonus = 0.0D;
         int moonQueenLevel = -1;
+        int crimsonPactLevel = -1;
         for (int slot = 0; slot < AccessoryInventory.SLOT_COUNT; slot++) {
             if (inventory.getItem(slot).is(ModAccessoryItems.ARCANE_DAGGER.get())) {
                 attackSpeedBonus += attackSpeedPercent(enhancementLevels[slot]) / 100.0D;
@@ -58,9 +65,16 @@ public final class AccessoryEffects {
                     && inventory.getItem(slot).is(ModLegacyItems.TROPHY_MOON_QUEEN.get())) {
                 moonQueenLevel = effectiveMoonQueenLevel(enhancementLevels[slot]);
             }
+            if (crimsonPactLevel < 0
+                    && inventory.getItem(slot).is(ModLegacyItems.CRIMSON_PACT_PENDANT.get())) {
+                crimsonPactLevel = effectiveCrimsonPactLevel(enhancementLevels[slot]);
+            }
         }
         applyAttackSpeedBonus(player, attackSpeedBonus);
         applyMoonQueenTrophy(player, moonQueenLevel);
+        if (player instanceof ServerPlayer serverPlayer) {
+            MoonShieldSystem.reconcileMode(serverPlayer, crimsonPactLevel >= 0, Math.max(0, crimsonPactLevel));
+        }
     }
 
     public static int attackSpeedPercent(int enhancementLevel) {
@@ -74,6 +88,10 @@ public final class AccessoryEffects {
 
     public static int effectiveMoonQueenLevel(int enhancementLevel) {
         return Math.min(MOON_QUEEN_TROPHY_MAX_LEVEL, Math.max(0, enhancementLevel));
+    }
+
+    public static int effectiveCrimsonPactLevel(int enhancementLevel) {
+        return Math.min(CRIMSON_PACT_PENDANT_MAX_LEVEL, Math.max(0, enhancementLevel));
     }
 
     public static int moonQueenPercent(int enhancementLevel) {
@@ -197,5 +215,33 @@ public final class AccessoryEffects {
         if (event.getEntity() instanceof ServerPlayer player) {
             reconcile(player, player.getData(ModAttachments.ACCESSORY_INVENTORY));
         }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onPlayerDrops(LivingDropsEvent event) {
+        if (event.isCanceled()
+                || !(event.getEntity() instanceof ServerPlayer player)
+                || player.level().getGameRules().get(GameRules.KEEP_INVENTORY)) {
+            return;
+        }
+
+        AccessoryInventory inventory = player.getData(ModAttachments.ACCESSORY_INVENTORY);
+        for (int slot = 0; slot < AccessoryInventory.SLOT_COUNT; slot++) {
+            ItemStack stack = inventory.getItem(slot);
+            if (stack.isEmpty()) {
+                continue;
+            }
+
+            ItemEntity drop = new ItemEntity(
+                    player.level(),
+                    player.getX(),
+                    player.getY(),
+                    player.getZ(),
+                    stack.copy());
+            drop.setDefaultPickUpDelay();
+            event.getDrops().add(drop);
+        }
+
+        inventory.clearContent();
     }
 }

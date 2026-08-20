@@ -63,6 +63,9 @@ public final class AurorianBlessingEffects {
         if (!(owner instanceof Player player) || owner.level().isClientSide()) {
             return false;
         }
+        if (MoonShieldSystem.isPurified(player)) {
+            return false;
+        }
         if (AurorianBlessingCycle.isActive(owner.level(), AurorianBlessingCycle.Blessing.COMBAT)
                 && isWeapon(stack)) {
             return true;
@@ -91,22 +94,22 @@ public final class AurorianBlessingEffects {
         if (player.level().isClientSide() || player.tickCount % 20 != 0) {
             return;
         }
-        reconcileAttributes(player);
+        reconcilePlayer(player);
     }
 
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        reconcileAttributes(event.getEntity());
+        reconcilePlayer(event.getEntity());
     }
 
     @SubscribeEvent
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        reconcileAttributes(event.getEntity());
+        reconcilePlayer(event.getEntity());
     }
 
     @SubscribeEvent
     public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
-        reconcileAttributes(event.getEntity());
+        reconcilePlayer(event.getEntity());
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
@@ -114,6 +117,7 @@ public final class AurorianBlessingEffects {
         Player player = event.getEntity();
         if (!event.isCriticalHit()
                 && !player.level().isClientSide()
+                && !MoonShieldSystem.isPurified(player)
                 && AurorianBlessingCycle.isActive(player.level(), AurorianBlessingCycle.Blessing.COMBAT)
                 && player.getRandom().nextDouble() < COMBAT_CRITICAL_CHANCE) {
             event.setCriticalHit(true);
@@ -125,6 +129,7 @@ public final class AurorianBlessingEffects {
     public static void onLivingDamagePre(LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player player
                 && !player.level().isClientSide()
+                && !MoonShieldSystem.isPurified(player)
                 && AurorianBlessingCycle.isActive(player.level(), AurorianBlessingCycle.Blessing.PROTECTION)) {
             event.setNewDamage(event.getNewDamage() * (float) PROTECTION_DAMAGE_MULTIPLIER);
         }
@@ -133,7 +138,8 @@ public final class AurorianBlessingEffects {
     @SubscribeEvent
     public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
         Player player = event.getEntity();
-        if (AurorianBlessingCycle.isActive(player.level(), AurorianBlessingCycle.Blessing.MINING)) {
+        if (!MoonShieldSystem.isPurified(player)
+                && AurorianBlessingCycle.isActive(player.level(), AurorianBlessingCycle.Blessing.MINING)) {
             event.setNewSpeed(event.getNewSpeed() * MINING_SPEED_MULTIPLIER);
         }
     }
@@ -145,11 +151,13 @@ public final class AurorianBlessingEffects {
         }
         Level level = event.getLevel();
         BlockState state = event.getState();
-        if (AurorianBlessingCycle.isActive(level, AurorianBlessingCycle.Blessing.MINING)
+        if (!MoonShieldSystem.isPurified(player)
+                && AurorianBlessingCycle.isActive(level, AurorianBlessingCycle.Blessing.MINING)
                 && state.is(Tags.Blocks.ORES)
                 && player.getRandom().nextDouble() < EXTRA_ORE_CHANCE) {
             duplicateDrops(event);
-        } else if (AurorianBlessingCycle.isActive(level, AurorianBlessingCycle.Blessing.GROWTH)
+        } else if (!MoonShieldSystem.isPurified(player)
+                && AurorianBlessingCycle.isActive(level, AurorianBlessingCycle.Blessing.GROWTH)
                 && state.is(BlockTags.CROPS)
                 && isMatureCrop(state)) {
             duplicateDrops(event);
@@ -169,12 +177,13 @@ public final class AurorianBlessingEffects {
         }
     }
 
-    private static void reconcileAttributes(Player player) {
-        boolean exploration = AurorianBlessingCycle.isActive(
+    public static void reconcilePlayer(Player player) {
+        boolean acceptsBlessings = !MoonShieldSystem.isPurified(player);
+        boolean exploration = acceptsBlessings && AurorianBlessingCycle.isActive(
                 player.level(), AurorianBlessingCycle.Blessing.EXPLORATION);
-        boolean combat = AurorianBlessingCycle.isActive(
+        boolean combat = acceptsBlessings && AurorianBlessingCycle.isActive(
                 player.level(), AurorianBlessingCycle.Blessing.COMBAT);
-        boolean protection = AurorianBlessingCycle.isActive(
+        boolean protection = acceptsBlessings && AurorianBlessingCycle.isActive(
                 player.level(), AurorianBlessingCycle.Blessing.PROTECTION);
         applyModifier(player.getAttribute(Attributes.MOVEMENT_SPEED), EXPLORATION_MOVEMENT,
                 exploration ? EXPLORATION_MOVEMENT_SPEED : 0.0D,

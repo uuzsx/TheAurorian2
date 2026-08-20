@@ -3,6 +3,7 @@ package cn.teampancake.theaurorian2.client;
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.client.color.AurorianGrassTintSource;
 import cn.teampancake.theaurorian2.client.hud.AurorianNightHud;
+import cn.teampancake.theaurorian2.client.hud.MoonShieldHud;
 import cn.teampancake.theaurorian2.client.hud.SpiderMotherBossBar;
 import cn.teampancake.theaurorian2.client.model.AurorianRabbitModel;
 import cn.teampancake.theaurorian2.client.model.AurorianPigModel;
@@ -167,6 +168,10 @@ public final class ClientModEvents {
                 VanillaGuiLayers.ARMOR_LEVEL,
                 TheAurorian2.id("aurorian_night_hud"),
                 AurorianNightHud::render);
+        event.registerAbove(
+                VanillaGuiLayers.ARMOR_LEVEL,
+                TheAurorian2.id("moon_shield_hud"),
+                MoonShieldHud::render);
     }
 
     @SubscribeEvent

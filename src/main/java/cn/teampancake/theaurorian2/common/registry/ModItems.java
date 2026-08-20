@@ -6,6 +6,7 @@ import cn.teampancake.theaurorian2.common.item.KnightArmorItem;
 import cn.teampancake.theaurorian2.common.item.KnightGreatswordItem;
 import cn.teampancake.theaurorian2.common.item.KnightSpearItem;
 import cn.teampancake.theaurorian2.common.item.PhantomBlossomRequiemItem;
+import cn.teampancake.theaurorian2.common.item.PurificationTestItem;
 import cn.teampancake.theaurorian2.common.item.TrainingDummyItem;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -35,6 +36,8 @@ public final class ModItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TheAurorian2.MOD_ID);
 
+    public static final DeferredItem<PurificationTestItem> PURIFICATION_TEST_ITEM = ITEMS.registerItem(
+            "purification_test_item", PurificationTestItem::new);
     public static final DeferredItem<TrainingDummyItem> TRAINING_DUMMY = ITEMS.registerItem(
             "training_dummy", properties -> new TrainingDummyItem(properties.stacksTo(16)));
     public static final DeferredItem<Item> SPIDER_EGG = ITEMS.registerSimpleItem("spider_egg");
