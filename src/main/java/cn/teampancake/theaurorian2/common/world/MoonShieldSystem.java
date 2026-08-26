@@ -31,8 +31,12 @@ public final class MoonShieldSystem {
     private static final float NORMAL_RECOVERY = 1.0F;
     private static final float MOON_NIGHT_RECOVERY = 2.0F;
     private static final int HIT_RECOVERY_DELAY = 100;
-    private static final int BREAK_RECOVERY_DELAY = 200;
+    private static final int BREAK_RECOVERY_DELAY = 100;
     private static final int CRIMSON_RECOVERY_DELAY = 20;
+    public static final int BREAK_TRANSITION_FRAME_TICKS = 2;
+    public static final int BREAK_TRANSITION_FRAME_COUNT = 4;
+    public static final int BREAK_TRANSITION_TICKS =
+            BREAK_TRANSITION_FRAME_TICKS * BREAK_TRANSITION_FRAME_COUNT;
     private static final long DAY_TICKS = 24_000L;
     private static final long MOON_NIGHT_START = 12_000L;
     private static final TagKey<net.minecraft.world.entity.EntityType<?>> BOSSES =
@@ -112,7 +116,9 @@ public final class MoonShieldSystem {
         }
 
         float shieldAfter = Math.max(0.0F, shieldBefore - event.getNewDamage());
-        long recoveryDelay = shieldAfter <= 0.0F ? BREAK_RECOVERY_DELAY : HIT_RECOVERY_DELAY;
+        long recoveryDelay = shieldAfter <= 0.0F
+                ? moonShieldBreakRecoveryDelay(player) + BREAK_TRANSITION_TICKS * 2L
+                : HIT_RECOVERY_DELAY;
         player.setData(
                 ModAttachments.MOON_SHIELD_RECOVERY_AT,
                 gameTime + recoveryDelay);
@@ -126,17 +132,41 @@ public final class MoonShieldSystem {
 
     @SubscribeEvent
     public static void onLivingDamagePost(LivingDamageEvent.Post event) {
-        if (!(event.getEntity() instanceof ServerPlayer player)
-                || event.getHealthDamage() <= 0.0F) {
+        if (event.getHealthDamage() <= 0.0F) {
             return;
         }
 
-        MoonShieldData data = player.getData(ModAttachments.MOON_SHIELD);
-        if (data.purified() && data.crimson()) {
-            player.setData(
-                    ModAttachments.MOON_SHIELD_RECOVERY_AT,
-                    player.level().getGameTime() + CRIMSON_RECOVERY_DELAY);
+        if (event.getEntity() instanceof ServerPlayer player) {
+            MoonShieldData data = player.getData(ModAttachments.MOON_SHIELD);
+            if (data.purified() && data.crimson()) {
+                player.setData(
+                        ModAttachments.MOON_SHIELD_RECOVERY_AT,
+                        player.level().getGameTime() + CRIMSON_RECOVERY_DELAY);
+            }
         }
+
+        if (!isValidCrimsonAttackTarget(event.getEntity())) {
+            return;
+        }
+
+        ServerPlayer attacker = creditedPlayer(event.getSource());
+        if (attacker == null || !isCrimson(attacker)) {
+            return;
+        }
+
+        MoonShieldData data = attacker.getData(ModAttachments.MOON_SHIELD);
+        if (data.shield() >= data.maxShield()) {
+            return;
+        }
+
+        int chance = AccessoryEffects.gloomyPauldronsCrimsonChance(attacker);
+        if (chance <= 0 || attacker.getRandom().nextInt(100) >= chance) {
+            return;
+        }
+
+        attacker.setData(
+                ModAttachments.MOON_SHIELD,
+                data.withShield(Math.min(data.maxShield(), data.shield() + 1.0F)));
     }
 
     @SubscribeEvent
@@ -200,16 +230,26 @@ public final class MoonShieldSystem {
             return;
         }
 
-        if (player.tickCount % 20 != 0
-                || data.shield() >= MAX_SHIELD
-                || gameTime < player.getData(ModAttachments.MOON_SHIELD_RECOVERY_AT)) {
+        long recoveryAt = player.getData(ModAttachments.MOON_SHIELD_RECOVERY_AT);
+        if (data.shield() >= MAX_SHIELD
+                || gameTime < recoveryAt
+                || Math.floorMod(gameTime - recoveryAt, 20L) != 0L) {
             return;
         }
 
-        float recovery = isAurorianMoonNight(player)
-                ? MOON_NIGHT_RECOVERY
-                : NORMAL_RECOVERY;
+        float recovery = moonShieldRecovery(serverPlayer, isAurorianMoonNight(player));
         player.setData(ModAttachments.MOON_SHIELD, data.withShield(data.shield() + recovery));
+    }
+
+    public static int moonShieldBreakRecoveryDelay(ServerPlayer player) {
+        int reductionPercent = Math.clamp(AccessoryEffects.gloomyPauldronsMoonPercent(player), 0, 100);
+        return Math.max(0, Math.round(BREAK_RECOVERY_DELAY * (1.0F - reductionPercent / 100.0F)));
+    }
+
+    public static float moonShieldRecovery(ServerPlayer player, boolean moonNight) {
+        float base = moonNight ? MOON_NIGHT_RECOVERY : NORMAL_RECOVERY;
+        int percent = Math.max(0, AccessoryEffects.gloomyPauldronsMoonPercent(player));
+        return base * (1.0F + percent / 100.0F);
     }
 
     public static float crimsonRecovery(int level) {
@@ -234,6 +274,10 @@ public final class MoonShieldSystem {
             return player;
         }
         return null;
+    }
+
+    private static boolean isValidCrimsonAttackTarget(LivingEntity target) {
+        return !(target instanceof Player);
     }
 
     private static boolean isAurorianMoonNight(Player player) {

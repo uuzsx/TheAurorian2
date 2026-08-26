@@ -14,6 +14,15 @@ public final class ModNetworking {
     public static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(NETWORK_VERSION);
         registrar.playToClient(AstrologyForecastPayload.TYPE, AstrologyForecastPayload.STREAM_CODEC);
+        registrar.playToClient(PurificationRitualPromptPayload.TYPE, PurificationRitualPromptPayload.STREAM_CODEC);
+        registrar.playToServer(
+                PurificationRitualConfirmPayload.TYPE,
+                PurificationRitualConfirmPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (context.player() instanceof ServerPlayer player) {
+                        PurificationRitualConfirmPayload.handle(player, payload.pos());
+                    }
+                }));
         registrar.playToServer(
                 PhantomBlossomAttackPayload.TYPE,
                 PhantomBlossomAttackPayload.STREAM_CODEC,

@@ -11,6 +11,8 @@ import cn.teampancake.theaurorian2.common.entity.SpiderVenomProjectileEntity;
 import cn.teampancake.theaurorian2.common.entity.SpiderlingEntity;
 import cn.teampancake.theaurorian2.common.entity.TrainingDummyEntity;
 import cn.teampancake.theaurorian2.common.entity.WallClimberSpiderlingEntity;
+import cn.teampancake.theaurorian2.common.entity.PurificationRiftEntity;
+import cn.teampancake.theaurorian2.common.entity.PurificationRitualZombieEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianRabbitEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianPigEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianSheepEntity;
@@ -149,6 +151,31 @@ public final class ModEntities {
                             .updateInterval(1)
                             .noLootTable());
 
+    public static final DeferredHolder<EntityType<?>, EntityType<PurificationRiftEntity>> PURIFICATION_RIFT =
+            ENTITIES.registerEntityType(
+                    "purification_rift",
+                    PurificationRiftEntity::new,
+                    MobCategory.MISC,
+                    builder -> builder
+                            .sized(0.1F, 0.1F)
+                            .clientTrackingRange(12)
+                            .updateInterval(1)
+                            .noSave()
+                            .noSummon()
+                            .noLootTable());
+    public static final DeferredHolder<EntityType<?>, EntityType<PurificationRitualZombieEntity>>
+            PURIFICATION_RITUAL_ZOMBIE = ENTITIES.registerEntityType(
+                    "purification_ritual_zombie",
+                    PurificationRitualZombieEntity::new,
+                    MobCategory.MONSTER,
+                    builder -> builder
+                            .sized(0.6F, 1.95F)
+                            .eyeHeight(1.74F)
+                            .clientTrackingRange(12)
+                            .updateInterval(2)
+                            .noSave()
+                            .noLootTable());
+
     public static final DeferredHolder<EntityType<?>, EntityType<AurorianChestMinecartEntity>>
             AURORIAN_CHEST_MINECART = ENTITIES.registerEntityType(
                     "aurorian_chest_minecart",
@@ -180,6 +207,8 @@ public final class ModEntities {
         event.put(AURORIAN_PIG.get(), Pig.createAttributes().build());
         event.put(AURORIAN_SHEEP.get(), Sheep.createAttributes().build());
         event.put(AURORIAN_COW.get(), AbstractCow.createAttributes().build());
+        event.put(PURIFICATION_RITUAL_ZOMBIE.get(),
+                net.minecraft.world.entity.monster.zombie.Zombie.createAttributes().build());
     }
 
     private static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {

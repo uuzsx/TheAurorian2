@@ -32,12 +32,16 @@ import cn.teampancake.theaurorian2.common.block.LuminousAurorianDoublePlantBlock
 import cn.teampancake.theaurorian2.common.block.LuminousAurorianGrassBlock;
 import cn.teampancake.theaurorian2.common.block.MysteriumWoolBedBlock;
 import cn.teampancake.theaurorian2.common.block.PebbleBlock;
+import cn.teampancake.theaurorian2.common.block.PurificationAltarBaseBlock;
+import cn.teampancake.theaurorian2.common.block.PurificationAltarBlock;
+import cn.teampancake.theaurorian2.common.block.PurificationAltarBasePartBlock;
 import cn.teampancake.theaurorian2.common.block.SnowfieldTallPlantBlock;
 import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
 import cn.teampancake.theaurorian2.common.block.TallAurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.block.WallMushroomBlock;
 import cn.teampancake.theaurorian2.common.item.AstrologyTableItem;
 import cn.teampancake.theaurorian2.common.item.AurorianGrassRockItem;
+import cn.teampancake.theaurorian2.common.item.PurificationAltarItem;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BedItem;
@@ -328,6 +332,22 @@ public final class ModBlocks {
                     .strength(6.0F)
                     .lightLevel(state -> 7)
                     .noOcclusion());
+    public static final DeferredBlock<PurificationAltarBaseBlock> PURIFICATION_ALTAR_BASE = BLOCKS.registerBlock(
+            "purification_altar_base", PurificationAltarBaseBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+                    .strength(4.0F)
+                    .noOcclusion());
+    public static final DeferredBlock<PurificationAltarBasePartBlock> PURIFICATION_ALTAR_BASE_PART = BLOCKS.registerBlock(
+            "purification_altar_base_part", PurificationAltarBasePartBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+                    .strength(Block.INDESTRUCTIBLE, 3600000.0F)
+                    .noOcclusion()
+                    .noLootTable());
+    public static final DeferredBlock<PurificationAltarBlock> PURIFICATION_ALTAR = BLOCKS.registerBlock(
+            "purification_altar", PurificationAltarBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+                    .strength(4.0F)
+                    .noOcclusion());
 
     public static final DeferredBlock<RotatedPillarBlock> SILENT_TREE_LOG = BLOCKS.registerBlock(
             "silent_tree_log", RotatedPillarBlock::new,
@@ -492,6 +512,10 @@ public final class ModBlocks {
                     CLOUDBERRY_BUSH.get(), properties.useItemDescriptionPrefix().food(Foods.SWEET_BERRIES)));
     public static final DeferredItem<AstrologyTableItem> ASTROLOGY_TABLE_ITEM = ITEMS.registerItem(
             "astrology_table", properties -> new AstrologyTableItem(ASTROLOGY_TABLE.get(), properties));
+    public static final DeferredItem<BlockItem> PURIFICATION_ALTAR_BASE_ITEM =
+            ITEMS.registerSimpleBlockItem(PURIFICATION_ALTAR_BASE);
+    public static final DeferredItem<PurificationAltarItem> PURIFICATION_ALTAR_ITEM =
+            ITEMS.registerItem("purification_altar", PurificationAltarItem::new);
     public static final DeferredItem<DoubleHighBlockItem> SILENT_WOOD_DOOR_ITEM = doorItem(
             "silent_wood_door", SILENT_WOOD.door());
     public static final DeferredItem<DoubleHighBlockItem> CURTAIN_WOOD_DOOR_ITEM = doorItem(
@@ -517,6 +541,9 @@ public final class ModBlocks {
                         && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM
                         && block != AURORIAN_LILY_PAD && block != AURORIAN_WATER_MUSHROOM
                         && block != ASTROLOGY_TABLE
+                        && block != PURIFICATION_ALTAR_BASE
+                        && block != PURIFICATION_ALTAR
+                        && block != PURIFICATION_ALTAR_BASE_PART
                         && block != FIREPLACE_PART
                         && block != WOOD_TABLE_PART
                         && block != MYSTERIUM_WOOL_BED

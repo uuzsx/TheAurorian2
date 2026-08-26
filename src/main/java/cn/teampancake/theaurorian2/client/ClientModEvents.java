@@ -4,6 +4,7 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.client.color.AurorianGrassTintSource;
 import cn.teampancake.theaurorian2.client.hud.AurorianNightHud;
 import cn.teampancake.theaurorian2.client.hud.MoonShieldHud;
+import cn.teampancake.theaurorian2.client.hud.PurificationRitualBossBar;
 import cn.teampancake.theaurorian2.client.hud.SpiderMotherBossBar;
 import cn.teampancake.theaurorian2.client.model.AurorianRabbitModel;
 import cn.teampancake.theaurorian2.client.model.AurorianPigModel;
@@ -21,6 +22,7 @@ import cn.teampancake.theaurorian2.client.renderer.AurorianFurnaceRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianGrassRockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AstrologyTableRenderer;
+import cn.teampancake.theaurorian2.client.renderer.PurificationAltarRenderer;
 import cn.teampancake.theaurorian2.client.renderer.CrystallineSwordPedestalRenderer;
 import cn.teampancake.theaurorian2.client.renderer.ModelledBlockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.TrainingDummyRenderer;
@@ -32,7 +34,9 @@ import cn.teampancake.theaurorian2.client.renderer.AurorianPigRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianSheepRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianCowRenderer;
 import cn.teampancake.theaurorian2.client.screen.AstrologyForecastScreen;
+import cn.teampancake.theaurorian2.client.screen.PurificationRitualScreen;
 import cn.teampancake.theaurorian2.common.network.AstrologyForecastPayload;
+import cn.teampancake.theaurorian2.common.network.PurificationRitualPromptPayload;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModBlockEntities;
 import cn.teampancake.theaurorian2.common.registry.ModEntities;
@@ -75,6 +79,8 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.ZombieRenderer;
+import cn.teampancake.theaurorian2.client.renderer.PurificationRiftRenderer;
 import org.joml.Vector4f;
 
 @EventBusSubscriber(modid = TheAurorian2.MOD_ID, value = Dist.CLIENT)
@@ -111,7 +117,13 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntities.DAMAGE_NUMBER.get(), DamageNumberRenderer::new);
         event.registerEntityRenderer(
                 ModEntities.AURORIAN_CHEST_MINECART.get(), AurorianChestMinecartRenderer::new);
+        event.registerEntityRenderer(
+                ModEntities.PURIFICATION_RIFT.get(), PurificationRiftRenderer::new);
+        event.registerEntityRenderer(
+                ModEntities.PURIFICATION_RITUAL_ZOMBIE.get(), ZombieRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ASTROLOGY_TABLE.get(), AstrologyTableRenderer::new);
+        event.registerBlockEntityRenderer(
+                ModBlockEntities.PURIFICATION_ALTAR.get(), PurificationAltarRenderer::new);
         event.registerBlockEntityRenderer(
                 ModBlockEntities.SACRIFICE_TABLE.get(),
                 context -> new ModelledBlockRenderer<>(context, TheAurorian2.id("sacrifice_table")));
@@ -131,6 +143,7 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
+            NeoForge.EVENT_BUS.addListener(PurificationRitualBossBar::render);
             NeoForge.EVENT_BUS.addListener(SpiderMotherBossBar::render);
             Sheets.addWoodType(ModStructureBlocks.SILENT_WOOD_TYPE);
             Sheets.addWoodType(ModStructureBlocks.WEEPING_WILLOW_WOOD_TYPE);
@@ -143,6 +156,8 @@ public final class ClientModEvents {
     public static void registerClientPayloadHandlers(RegisterClientPayloadHandlersEvent event) {
         event.register(AstrologyForecastPayload.TYPE, (payload, context) ->
                 Minecraft.getInstance().setScreen(new AstrologyForecastScreen(payload.forecast())));
+        event.register(PurificationRitualPromptPayload.TYPE, (payload, context) ->
+                Minecraft.getInstance().setScreen(new PurificationRitualScreen(payload.pos())));
     }
 
     @SubscribeEvent

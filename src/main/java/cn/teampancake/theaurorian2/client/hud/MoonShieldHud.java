@@ -6,6 +6,7 @@ import cn.teampancake.theaurorian2.common.config.HudLayoutConfig;
 import cn.teampancake.theaurorian2.common.config.HudLayoutConfig.MoonShieldStyle;
 import cn.teampancake.theaurorian2.common.registry.ModAttachments;
 import cn.teampancake.theaurorian2.common.world.MoonShieldData;
+import cn.teampancake.theaurorian2.common.world.MoonShieldSystem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -20,7 +21,7 @@ public final class MoonShieldHud {
 
     private static final Identifier HORIZONTAL_FRAME = texture("common_horizontal_frame");
     private static final Identifier HORIZONTAL_FILL = texture("common_horizontal");
-    private static final Identifier HORIZONTAL_BROKEN = texture("common_broken_horizontal");
+    private static final Identifier HORIZONTAL_BREAK_ANIMATION = texture("common_horizontal_break_animation");
     private static final Identifier VERTICAL_FRAME = texture("common_vertical_frame");
     private static final Identifier VERTICAL_FILL = texture("common_vertical");
     private static final Identifier VERTICAL_BROKEN = texture("common_broken_vertical");
@@ -32,6 +33,9 @@ public final class MoonShieldHud {
     private static final Identifier CRIMSON_VERTICAL_BROKEN = texture("blood_moon_broken_vertical");
     private static final int HORIZONTAL_FRAME_WIDTH = 78;
     private static final int HORIZONTAL_FRAME_HEIGHT = 12;
+    private static final int HORIZONTAL_BREAK_FRAME_HEIGHT = 17;
+    private static final int HORIZONTAL_BREAK_TEXTURE_HEIGHT = 136;
+    private static final int HORIZONTAL_BREAK_Y = -2;
     private static final int HORIZONTAL_FILL_WIDTH = 73;
     private static final int HORIZONTAL_FILL_HEIGHT = 8;
     private static final int HORIZONTAL_FILL_X = 3;
@@ -46,12 +50,15 @@ public final class MoonShieldHud {
     private static final int VERTICAL_VALUE_Y = 32;
     private static final int VALUE_COLOR = 0xFFF2FBFF;
     private static final int VALUE_OUTLINE_COLOR = 0xFF232A42;
+    private static final int CRIMSON_VALUE_COLOR = 0xFFFFC5CF;
+    private static final int CRIMSON_VALUE_OUTLINE_COLOR = 0xFF4A1222;
     private static final float RECOVERY_ANIMATION_TICKS = 20.0F;
     private static final Component[] VALUE_TEXT = createValueText();
     private static LocalPlayer animatedPlayer;
     private static float displayedShield;
     private static float targetShield;
     private static float recoveryPerTick;
+    private static float breakTransitionTicks;
 
     private MoonShieldHud() {
     }
@@ -71,7 +78,11 @@ public final class MoonShieldHud {
             return;
         }
 
-        updateAnimation(minecraft.player, data.shield(), deltaTracker.getRealtimeDeltaTicks());
+        updateAnimation(
+                minecraft.player,
+                data.shield(),
+                data.crimson(),
+                deltaTracker.getRealtimeDeltaTicks());
         HudLayoutRegistry.Position position = HudLayoutRegistry.position(
                 HudLayoutRegistry.MOON_SHIELD,
                 graphics.guiWidth(),
@@ -83,11 +94,24 @@ public final class MoonShieldHud {
                 displayedShield,
                 style(),
                 data.crimson(),
-                data.maxShield());
+                data.maxShield(),
+                data.shield() <= 0.0F,
+                minecraft.player.getData(ModAttachments.MOON_SHIELD_RECOVERY_AT),
+                minecraft.player.level().getGameTime());
     }
 
     static void renderPreview(GuiGraphicsExtractor graphics, int x, int y) {
-        renderAt(graphics, x, y, MoonShieldData.MAX_SHIELD, style(), false, MoonShieldData.MAX_SHIELD);
+        renderAt(
+                graphics,
+                x,
+                y,
+                MoonShieldData.MAX_SHIELD,
+                style(),
+                false,
+                MoonShieldData.MAX_SHIELD,
+                false,
+                0L,
+                0L);
     }
 
     static int frameWidth() {
@@ -109,11 +133,23 @@ public final class MoonShieldHud {
             float shield,
             MoonShieldStyle style,
             boolean crimson,
-            float maxShield) {
+            float maxShield,
+            boolean depleted,
+            long recoveryAt,
+            long gameTime) {
         if (style == MoonShieldStyle.VERTICAL) {
             renderVertical(graphics, frameX, frameY, shield, crimson, maxShield);
         } else {
-            renderHorizontal(graphics, frameX, frameY, shield, crimson, maxShield);
+            renderHorizontal(
+                    graphics,
+                    frameX,
+                    frameY,
+                    shield,
+                    crimson,
+                    maxShield,
+                    depleted,
+                    recoveryAt,
+                    gameTime);
         }
     }
 
@@ -123,9 +159,24 @@ public final class MoonShieldHud {
             int frameY,
             float shield,
             boolean crimson,
-            float maxShield) {
+            float maxShield,
+            boolean depleted,
+            long recoveryAt,
+            long gameTime) {
         int fillX = frameX + HORIZONTAL_FILL_X;
         int fillY = frameY + HORIZONTAL_FILL_Y;
+        if (!crimson && depleted) {
+            renderHorizontalBreakAnimation(graphics, frameX, frameY, recoveryAt, gameTime);
+            renderValue(
+                    graphics,
+                    frameX,
+                    frameY + HORIZONTAL_VALUE_Y,
+                    HORIZONTAL_FRAME_WIDTH,
+                    shield,
+                    maxShield,
+                    false);
+            return;
+        }
         graphics.blit(
                 RenderPipelines.GUI_TEXTURED,
                 crimson ? CRIMSON_HORIZONTAL_FRAME : HORIZONTAL_FRAME,
@@ -137,10 +188,10 @@ public final class MoonShieldHud {
                 HORIZONTAL_FRAME_HEIGHT,
                 HORIZONTAL_FRAME_WIDTH,
                 HORIZONTAL_FRAME_HEIGHT);
-        if (shield <= 0.0F) {
+        if (crimson && shield <= 0.0F) {
             graphics.blit(
                     RenderPipelines.GUI_TEXTURED,
-                    crimson ? CRIMSON_HORIZONTAL_BROKEN : HORIZONTAL_BROKEN,
+                    CRIMSON_HORIZONTAL_BROKEN,
                     fillX,
                     fillY,
                     0.0F,
@@ -149,7 +200,7 @@ public final class MoonShieldHud {
                     HORIZONTAL_FILL_HEIGHT,
                     HORIZONTAL_FILL_WIDTH,
                     HORIZONTAL_FILL_HEIGHT);
-        } else {
+        } else if (shield > 0.0F) {
             int width = Mth.ceil(shield / maxShield * HORIZONTAL_FILL_WIDTH);
             graphics.blit(
                     RenderPipelines.GUI_TEXTURED,
@@ -169,7 +220,47 @@ public final class MoonShieldHud {
                 frameY + HORIZONTAL_VALUE_Y,
                 HORIZONTAL_FRAME_WIDTH,
                 shield,
-                maxShield);
+                maxShield,
+                crimson);
+    }
+
+    private static void renderHorizontalBreakAnimation(
+            GuiGraphicsExtractor graphics,
+            int frameX,
+            int frameY,
+            long recoveryAt,
+            long gameTime) {
+        int frame = horizontalBreakFrame(recoveryAt, gameTime);
+        graphics.blit(
+                RenderPipelines.GUI_TEXTURED,
+                HORIZONTAL_BREAK_ANIMATION,
+                frameX,
+                frameY + HORIZONTAL_BREAK_Y,
+                0.0F,
+                frame * HORIZONTAL_BREAK_FRAME_HEIGHT,
+                HORIZONTAL_FRAME_WIDTH,
+                HORIZONTAL_BREAK_FRAME_HEIGHT,
+                HORIZONTAL_FRAME_WIDTH,
+                HORIZONTAL_BREAK_TEXTURE_HEIGHT);
+    }
+
+    private static int horizontalBreakFrame(long recoveryAt, long gameTime) {
+        int transitionTicks = MoonShieldSystem.BREAK_TRANSITION_TICKS;
+        if (breakTransitionTicks < transitionTicks) {
+            return Math.min(
+                    MoonShieldSystem.BREAK_TRANSITION_FRAME_COUNT - 1,
+                    (int) breakTransitionTicks / MoonShieldSystem.BREAK_TRANSITION_FRAME_TICKS);
+        }
+
+        long remainingTicks = recoveryAt - gameTime;
+        if (recoveryAt <= 0L || remainingTicks > transitionTicks) {
+            return MoonShieldSystem.BREAK_TRANSITION_FRAME_COUNT - 1;
+        }
+
+        long repairTicks = Math.clamp(transitionTicks - Math.max(0L, remainingTicks), 0L, transitionTicks - 1L);
+        int repairFrame = (int) (repairTicks / MoonShieldSystem.BREAK_TRANSITION_FRAME_TICKS);
+        return MoonShieldSystem.BREAK_TRANSITION_FRAME_COUNT
+                + Math.min(MoonShieldSystem.BREAK_TRANSITION_FRAME_COUNT - 1, repairFrame);
     }
 
     private static void renderVertical(
@@ -219,7 +310,7 @@ public final class MoonShieldHud {
                     VERTICAL_FILL_WIDTH,
                     VERTICAL_FILL_HEIGHT);
         }
-        renderVerticalValue(graphics, frameX, frameY, shield, maxShield);
+        renderVerticalValue(graphics, frameX, frameY, shield, maxShield, crimson);
     }
 
     private static void renderVerticalValue(
@@ -227,14 +318,16 @@ public final class MoonShieldHud {
             int frameX,
             int frameY,
             float shield,
-            float maxShield) {
+            float maxShield,
+            boolean crimson) {
         renderValue(
                 graphics,
                 frameX + 1,
                 frameY + VERTICAL_VALUE_Y,
                 VERTICAL_FRAME_WIDTH,
                 shield,
-                maxShield);
+                maxShield,
+                crimson);
     }
 
     private static void renderValue(
@@ -243,43 +336,60 @@ public final class MoonShieldHud {
             int textY,
             int frameWidth,
             float shield,
-            float maxShield) {
+            float maxShield,
+            boolean crimson) {
         Font font = Minecraft.getInstance().font;
         int roundedShield = Math.clamp(Math.round(shield), 0, Math.round(maxShield));
         Component text = VALUE_TEXT[roundedShield];
         int textX = frameX + (frameWidth - font.width(text)) / 2;
-        graphics.text(font, text, textX - 1, textY, VALUE_OUTLINE_COLOR, false);
-        graphics.text(font, text, textX + 1, textY, VALUE_OUTLINE_COLOR, false);
-        graphics.text(font, text, textX, textY - 1, VALUE_OUTLINE_COLOR, false);
-        graphics.text(font, text, textX, textY + 1, VALUE_OUTLINE_COLOR, false);
-        graphics.text(font, text, textX, textY, VALUE_COLOR, false);
+        int valueColor = crimson ? CRIMSON_VALUE_COLOR : VALUE_COLOR;
+        int outlineColor = crimson ? CRIMSON_VALUE_OUTLINE_COLOR : VALUE_OUTLINE_COLOR;
+        graphics.text(font, text, textX - 1, textY, outlineColor, false);
+        graphics.text(font, text, textX + 1, textY, outlineColor, false);
+        graphics.text(font, text, textX, textY - 1, outlineColor, false);
+        graphics.text(font, text, textX, textY + 1, outlineColor, false);
+        graphics.text(font, text, textX, textY, valueColor, false);
     }
 
-    private static void updateAnimation(LocalPlayer player, float shield, float deltaTicks) {
+    private static void updateAnimation(LocalPlayer player, float shield, boolean crimson, float deltaTicks) {
         if (animatedPlayer != player) {
             animatedPlayer = player;
             displayedShield = shield;
             targetShield = shield;
             recoveryPerTick = 0.0F;
+            breakTransitionTicks = shield <= 0.0F && !crimson
+                    ? MoonShieldSystem.BREAK_TRANSITION_TICKS
+                    : 0.0F;
             return;
         }
 
+        boolean justBroke = !crimson && shield <= 0.0F && targetShield > 0.0F;
         if (shield < targetShield) {
             displayedShield = shield;
             targetShield = shield;
             recoveryPerTick = 0.0F;
-            return;
+            if (justBroke) {
+                breakTransitionTicks = 0.0F;
+            }
+        } else {
+            if (shield > targetShield) {
+                targetShield = shield;
+                recoveryPerTick = (targetShield - displayedShield) / RECOVERY_ANIMATION_TICKS;
+            }
+
+            if (displayedShield < targetShield) {
+                displayedShield = Math.min(
+                        targetShield,
+                        displayedShield + recoveryPerTick * Math.max(0.0F, deltaTicks));
+            }
         }
 
-        if (shield > targetShield) {
-            targetShield = shield;
-            recoveryPerTick = (targetShield - displayedShield) / RECOVERY_ANIMATION_TICKS;
-        }
-
-        if (displayedShield < targetShield) {
-            displayedShield = Math.min(
-                    targetShield,
-                    displayedShield + recoveryPerTick * Math.max(0.0F, deltaTicks));
+        if (!crimson && shield <= 0.0F && !justBroke) {
+            breakTransitionTicks = Math.min(
+                    MoonShieldSystem.BREAK_TRANSITION_TICKS,
+                    breakTransitionTicks + Math.max(0.0F, deltaTicks));
+        } else if (crimson || shield > 0.0F) {
+            breakTransitionTicks = 0.0F;
         }
     }
 
@@ -288,6 +398,7 @@ public final class MoonShieldHud {
         displayedShield = 0.0F;
         targetShield = 0.0F;
         recoveryPerTick = 0.0F;
+        breakTransitionTicks = 0.0F;
     }
 
     private static Identifier texture(String name) {

@@ -1,0 +1,118 @@
+{
+  "format_version": "1.21.11",
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "credit": "Made with Blockbench",
+  "texture_size": [64, 64],
+  "textures": {
+    "0": "theaurorian2:block/purification_altar_base",
+    "particle": "theaurorian2:block/purification_altar_base"
+  },
+  "elements": [
+    {
+      "from": [-8, 0, -8],
+      "to": [24, 16, 24],
+      "shade": false,
+      "faces": {
+        "north": {"uv": [0, 12, 8, 16], "texture": "#0"},
+        "east": {"uv": [0, 12, 8, 16], "texture": "#0"},
+        "south": {"uv": [0, 12, 8, 16], "texture": "#0"},
+        "west": {"uv": [0, 12, 8, 16], "texture": "#0"},
+        "up": {"uv": [0, 3.75, 8, 11.75], "texture": "#0"},
+        "down": {"uv": [9, 12.75, 11.75, 15.5], "texture": "#0"}
+      }
+    },
+    {
+      "from": [-15, 0, -15],
+      "to": [-7, 12, -7],
+      "shade": false,
+      "rotation": {"angle": 0, "axis": "y", "origin": [-15, 0, -9]},
+      "faces": {
+        "north": {"uv": [8.25, 8.75, 10.25, 11.75], "texture": "#0"},
+        "east": {"uv": [10.25, 8.75, 8.25, 11.75], "texture": "#0"},
+        "south": {"uv": [8.25, 8.75, 10.25, 11.75], "texture": "#0"},
+        "west": {"uv": [10.25, 8.75, 8.25, 11.75], "texture": "#0"},
+        "up": {"uv": [8.25, 6.5, 10.25, 8.5], "texture": "#0"},
+        "down": {"uv": [9.25, 12.75, 11.25, 14.75], "texture": "#0"}
+      }
+    },
+    {
+      "from": [23, 0, -15],
+      "to": [31, 12, -7],
+      "shade": false,
+      "rotation": {"angle": 0, "axis": "y", "origin": [31, 0, -9]},
+      "faces": {
+        "north": {"uv": [10.25, 8.75, 8.25, 11.75], "texture": "#0"},
+        "east": {"uv": [8.25, 8.75, 10.25, 11.75], "texture": "#0"},
+        "south": {"uv": [10.25, 8.75, 8.25, 11.75], "texture": "#0"},
+        "west": {"uv": [8.25, 8.75, 10.25, 11.75], "texture": "#0"},
+        "up": {"uv": [10.25, 6.5, 8.25, 8.5], "texture": "#0"},
+        "down": {"uv": [11.25, 12.75, 9.25, 14.75], "texture": "#0"}
+      }
+    },
+    {
+      "from": [-15, 0, 23],
+      "to": [-7, 12, 31],
+      "shade": false,
+      "rotation": {"angle": 0, "axis": "y", "origin": [-15, 0, 25]},
+      "faces": {
+        "north": {"uv": [10.25, 8.75, 8.25, 11.75], "texture": "#0"},
+        "east": {"uv": [8.25, 8.75, 10.25, 11.75], "texture": "#0"},
+        "south": {"uv": [10.25, 8.75, 8.25, 11.75], "texture": "#0"},
+        "west": {"uv": [8.25, 8.75, 10.25, 11.75], "texture": "#0"},
+        "up": {"uv": [8.25, 8.5, 10.25, 6.5], "texture": "#0"},
+        "down": {"uv": [9.25, 14.75, 11.25, 12.75], "texture": "#0"}
+      }
+    },
+    {
+      "from": [23, 0, 23],
+      "to": [31, 12, 31],
+      "shade": false,
+      "rotation": {"angle": 0, "axis": "y", "origin": [31, 0, 25]},
+      "faces": {
+        "north": {"uv": [8.25, 8.75, 10.25, 11.75], "texture": "#0"},
+        "east": {"uv": [10.25, 8.75, 8.25, 11.75], "texture": "#0"},
+        "south": {"uv": [8.25, 8.75, 10.25, 11.75], "texture": "#0"},
+        "west": {"uv": [10.25, 8.75, 8.25, 11.75], "texture": "#0"},
+        "up": {"uv": [10.25, 8.5, 8.25, 6.5], "texture": "#0"},
+        "down": {"uv": [11.25, 14.75, 9.25, 12.75], "texture": "#0"}
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, -2.5, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "ground": {
+      "translation": [0, 1.5, 0],
+      "scale": [0.15, 0.15, 0.15]
+    },
+    "fixed": {
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 1.5, 0],
+      "scale": [0.2, 0.2, 0.2]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "scale": [0.2, 0.2, 0.2]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 225, 0],
+      "scale": [0.2, 0.2, 0.2]
+    }
+  },
+  "groups": [
+    {
+      "name": "group",
+      "origin": [8, 8, 8],
+      "scope": 0,
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

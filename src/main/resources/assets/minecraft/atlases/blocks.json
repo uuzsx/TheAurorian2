@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "theaurorian2:entity/enchantment/purification_altar_book"
+    }
+  ]
+}

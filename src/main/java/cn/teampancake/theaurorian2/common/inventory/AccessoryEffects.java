@@ -35,6 +35,11 @@ public final class AccessoryEffects {
     public static final int MOON_QUEEN_TROPHY_BASE_PERCENT = 5;
     public static final int MOON_QUEEN_TROPHY_PERCENT_PER_LEVEL = 2;
     public static final int CRIMSON_PACT_PENDANT_MAX_LEVEL = 2;
+    public static final int GLOOMY_PAULDRONS_MAX_LEVEL = 1;
+    public static final int GLOOMY_PAULDRONS_BASE_MOON_PERCENT = 20;
+    public static final int GLOOMY_PAULDRONS_ENHANCED_MOON_PERCENT = 30;
+    public static final int GLOOMY_PAULDRONS_BASE_CRIMSON_CHANCE = 10;
+    public static final int GLOOMY_PAULDRONS_ENHANCED_CRIMSON_CHANCE = 15;
 
     private static final Identifier ARCANE_DAGGER_ATTACK_SPEED =
             TheAurorian2.id("arcane_dagger_attack_speed");
@@ -92,6 +97,43 @@ public final class AccessoryEffects {
 
     public static int effectiveCrimsonPactLevel(int enhancementLevel) {
         return Math.min(CRIMSON_PACT_PENDANT_MAX_LEVEL, Math.max(0, enhancementLevel));
+    }
+
+    public static int effectiveGloomyPauldronsLevel(int enhancementLevel) {
+        return Math.min(GLOOMY_PAULDRONS_MAX_LEVEL, Math.max(0, enhancementLevel));
+    }
+
+    public static int gloomyPauldronsMoonPercent(int enhancementLevel) {
+        return effectiveGloomyPauldronsLevel(enhancementLevel) > 0
+                ? GLOOMY_PAULDRONS_ENHANCED_MOON_PERCENT
+                : GLOOMY_PAULDRONS_BASE_MOON_PERCENT;
+    }
+
+    public static int gloomyPauldronsCrimsonChance(int enhancementLevel) {
+        return effectiveGloomyPauldronsLevel(enhancementLevel) > 0
+                ? GLOOMY_PAULDRONS_ENHANCED_CRIMSON_CHANCE
+                : GLOOMY_PAULDRONS_BASE_CRIMSON_CHANCE;
+    }
+
+    public static int gloomyPauldronsMoonPercent(Player player) {
+        int enhancementLevel = gloomyPauldronsEnhancementLevel(player);
+        return enhancementLevel < 0 ? 0 : gloomyPauldronsMoonPercent(enhancementLevel);
+    }
+
+    public static int gloomyPauldronsCrimsonChance(Player player) {
+        int enhancementLevel = gloomyPauldronsEnhancementLevel(player);
+        return enhancementLevel < 0 ? 0 : gloomyPauldronsCrimsonChance(enhancementLevel);
+    }
+
+    private static int gloomyPauldronsEnhancementLevel(Player player) {
+        AccessoryInventory inventory = player.getData(ModAttachments.ACCESSORY_INVENTORY);
+        int[] enhancementLevels = AccessoryEnhancements.calculate(inventory);
+        for (int slot = 0; slot < AccessoryInventory.SLOT_COUNT; slot++) {
+            if (inventory.getItem(slot).is(ModAccessoryItems.GLOOMY_PAULDRONS.get())) {
+                return effectiveGloomyPauldronsLevel(enhancementLevels[slot]);
+            }
+        }
+        return -1;
     }
 
     public static int moonQueenPercent(int enhancementLevel) {

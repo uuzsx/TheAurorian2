@@ -56,6 +56,7 @@ public final class AurorianEnchantmentBookTooltipEvents {
         if (stack.is(ModAccessoryItems.ARCANE_DAGGER.get())
                 || stack.is(ModLegacyItems.TROPHY_MOON_QUEEN.get())
                 || stack.is(ModLegacyItems.CRIMSON_PACT_PENDANT.get())
+                || stack.is(ModAccessoryItems.GLOOMY_PAULDRONS.get())
                 || AccessoryEnhancements.isArtifact(stack)) {
             gatherAccessoryTooltip(event, stack);
             return;
@@ -100,6 +101,7 @@ public final class AurorianEnchantmentBookTooltipEvents {
                 || event.getItemStack().is(ModAccessoryItems.ARCANE_DAGGER.get())
                 || event.getItemStack().is(ModLegacyItems.TROPHY_MOON_QUEEN.get())
                 || event.getItemStack().is(ModLegacyItems.CRIMSON_PACT_PENDANT.get())
+                || event.getItemStack().is(ModAccessoryItems.GLOOMY_PAULDRONS.get())
                 || AccessoryEnhancements.isArtifact(event.getItemStack())
                 || EnchantmentTooltips.hasAurorianEnchantment(event.getItemStack())) {
             event.setTexture(TheAurorian2.id("aurorian_enchantment_book"));
@@ -126,6 +128,8 @@ public final class AurorianEnchantmentBookTooltipEvents {
             body = moonQueenTrophyTooltip(hoveredEnhancementLevel(stack));
         } else if (stack.is(ModLegacyItems.CRIMSON_PACT_PENDANT.get())) {
             body = crimsonPactPendantTooltip(hoveredEnhancementLevel(stack));
+        } else if (stack.is(ModAccessoryItems.GLOOMY_PAULDRONS.get())) {
+            body = gloomyPauldronsTooltip(hoveredEnhancementLevel(stack));
         } else if (stack.is(ModAccessoryItems.SEALED_ARTIFACT_ADVANCE.get())) {
             body = List.of(
                     Component.translatable("item.theaurorian2.sealed_artifact_advance.tooltip.effect")
@@ -206,6 +210,25 @@ public final class AurorianEnchantmentBookTooltipEvents {
                         .withStyle(style -> style.withColor(0xAFC5D2).withItalic(true)));
     }
 
+    private static List<Component> gloomyPauldronsTooltip(int enhancementLevel) {
+        int level = AccessoryEffects.effectiveGloomyPauldronsLevel(enhancementLevel);
+        Component moonPercent = epicValue(AccessoryEffects.gloomyPauldronsMoonPercent(level) + "%");
+        Component crimsonChance = epicValue(AccessoryEffects.gloomyPauldronsCrimsonChance(level) + "%");
+        String key = "item.theaurorian2.gloomy_pauldrons.tooltip.";
+        return List.of(
+                Component.translatable(key + "moon_shield", moonPercent, moonPercent)
+                        .withStyle(style -> style.withColor(0xD2DCE3)),
+                Component.translatable(key + "crimson_shield", crimsonChance)
+                        .withStyle(style -> style.withColor(0xD2DCE3)),
+                enhancementLine(
+                        enhancementLevel, AccessoryEffects.GLOOMY_PAULDRONS_MAX_LEVEL, 0xB86BFF),
+                Component.translatable("accessory.theaurorian2.tooltip.unique")
+                        .withStyle(style -> style.withColor(0xFFD25F).withBold(true)),
+                rarityLine("accessory.theaurorian2.rarity.epic", 0xB86BFF),
+                Component.translatable(key + "flavor")
+                        .withStyle(style -> style.withColor(0xAFC5D2).withItalic(true)));
+    }
+
     private static Component statLine(String key, Component value) {
         return Component.translatable(key, value)
                 .withStyle(style -> style.withColor(0xD2DCE3));
@@ -217,6 +240,10 @@ public final class AurorianEnchantmentBookTooltipEvents {
 
     private static Component legendaryValue(String value) {
         return Component.literal(value).withStyle(style -> style.withColor(0xFFD25F));
+    }
+
+    private static Component epicValue(String value) {
+        return Component.literal(value).withStyle(style -> style.withColor(0xB86BFF));
     }
 
     private static Component rotatableLine() {
