@@ -9,6 +9,8 @@ public final class ModBlockTags {
 
     public static final TagKey<Block> SPIDER_MOTHER_BREAKABLE_TRAPS =
             TagKey.create(Registries.BLOCK, TheAurorian2.id("spider_mother_breakable_traps"));
+    public static final TagKey<Block> QUEENS_PICKAXE_PROTECTED =
+            TagKey.create(Registries.BLOCK, TheAurorian2.id("queens_pickaxe_protected"));
 
     private ModBlockTags() {
     }

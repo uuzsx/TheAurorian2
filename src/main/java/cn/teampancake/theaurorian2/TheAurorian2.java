@@ -19,11 +19,13 @@ import cn.teampancake.theaurorian2.common.registry.ModItems;
 import cn.teampancake.theaurorian2.common.registry.ModMobEffects;
 import cn.teampancake.theaurorian2.common.network.ModNetworking;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
+import cn.teampancake.theaurorian2.common.registry.ModPlacementModifiers;
 import cn.teampancake.theaurorian2.common.registry.ModStats;
 import cn.teampancake.theaurorian2.common.registry.ModStructureBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModStructures;
 import cn.teampancake.theaurorian2.common.registry.ModTreeDecorators;
 import cn.teampancake.theaurorian2.common.world.AurorianBlessingCycle;
+import cn.teampancake.theaurorian2.common.world.AurorianTravelEvents;
 import cn.teampancake.theaurorian2.mixin.FireBlockAccessor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -51,6 +53,8 @@ public final class TheAurorian2 {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final ResourceKey<DimensionType> AURORIAN_DIMENSION_TYPE = ResourceKey.create(
             Registries.DIMENSION_TYPE, id("the_aurorian"));
+    public static final ResourceKey<Level> AURORIAN_LEVEL = ResourceKey.create(
+            Registries.DIMENSION, id("the_aurorian"));
 
     public TheAurorian2(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.CLIENT, HudLayoutConfig.SPEC);
@@ -66,6 +70,7 @@ public final class TheAurorian2 {
         ModAccessoryItems.register(modEventBus);
         ModTreeDecorators.register(modEventBus);
         ModFeatures.register(modEventBus);
+        ModPlacementModifiers.register(modEventBus);
         ModStructures.register(modEventBus);
         ModParticles.register(modEventBus);
         ModStats.register(modEventBus);
@@ -75,6 +80,7 @@ public final class TheAurorian2 {
         NeoForge.EVENT_BUS.addListener(AurorianRecipeIntegration::onModifyRecipeJsons);
         NeoForge.EVENT_BUS.addListener(TrainingDummyCommands::register);
         NeoForge.EVENT_BUS.addListener(AurorianBlessingCycle::onServerTick);
+        NeoForge.EVENT_BUS.addListener(AurorianTravelEvents::onPlayerWakeUp);
         NeoForge.EVENT_BUS.addListener(this::onFluidPlaceBlock);
         NeoForge.EVENT_BUS.addListener(this::onBlockToolModification);
         modEventBus.addListener(this::commonSetup);

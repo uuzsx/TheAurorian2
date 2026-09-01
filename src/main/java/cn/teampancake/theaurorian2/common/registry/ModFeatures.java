@@ -5,6 +5,7 @@ import cn.teampancake.theaurorian2.common.worldgen.feature.AncientCurtainTreeFea
 import cn.teampancake.theaurorian2.common.worldgen.feature.AncientSilentTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.AncientStumpFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.AurorianGrassRockFeature;
+import cn.teampancake.theaurorian2.common.worldgen.feature.AurorianKelpFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.AurorianDungeonFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.AurorianSeagrassFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.AurorianDripstoneClusterFeature;
@@ -45,6 +46,8 @@ public final class ModFeatures {
             FEATURES.register("fallen_log", FallenLogFeature::new);
     public static final DeferredHolder<Feature<?>, AurorianSeagrassFeature> AURORIAN_SEAGRASS =
             FEATURES.register("aurorian_seagrass", AurorianSeagrassFeature::new);
+    public static final DeferredHolder<Feature<?>, AurorianKelpFeature> AURORIAN_KELP =
+            FEATURES.register("aurorian_kelp", AurorianKelpFeature::new);
     public static final DeferredHolder<Feature<?>, AurorianGrassRockFeature> AURORIAN_GRASS_ROCK =
             FEATURES.register("aurorian_grass_rock", AurorianGrassRockFeature::new);
     public static final DeferredHolder<Feature<?>, AurorianDungeonFeature> AURORIAN_DUNGEON =

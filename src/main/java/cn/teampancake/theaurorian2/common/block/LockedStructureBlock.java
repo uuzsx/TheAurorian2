@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-public final class LockedStructureBlock extends Block {
+public class LockedStructureBlock extends Block {
     public static final MapCodec<LockedStructureBlock> CODEC = simpleCodec(LockedStructureBlock::new);
     public static final BooleanProperty UNLOCKED = BooleanProperty.create("unlocked");
 

@@ -2,6 +2,7 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.block.entity.AstrologyTableBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.ArcaneMagicCircleBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.PurificationAltarBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianGrassRockBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianChestBlockEntity;
@@ -13,6 +14,7 @@ import cn.teampancake.theaurorian2.common.block.entity.AurorianSignBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.CrystallineSwordPedestalBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.SacrificeTableBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.SilentCampfireBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.SpiderMotherSpawnerBlockEntity;
 import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -31,6 +33,12 @@ public final class ModBlockEntities {
                     () -> new BlockEntityType<>(
                             AstrologyTableBlockEntity::new,
                             Set.of(ModBlocks.ASTROLOGY_TABLE.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ArcaneMagicCircleBlockEntity>>
+            ARCANE_MAGIC_CIRCLE = BLOCK_ENTITY_TYPES.register(
+                    "arcane_magic_circle",
+                    () -> new BlockEntityType<>(
+                            ArcaneMagicCircleBlockEntity::new,
+                            Set.of(ModBlocks.ARCANE_MAGIC_CIRCLE.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PurificationAltarBlockEntity>>
             PURIFICATION_ALTAR = BLOCK_ENTITY_TYPES.register(
                     "purification_altar",
@@ -116,6 +124,12 @@ public final class ModBlockEntities {
                     () -> new BlockEntityType<>(
                             SilentCampfireBlockEntity::new,
                             Set.of(ModStructureBlocks.SILENT_CAMPFIRE.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpiderMotherSpawnerBlockEntity>>
+            SPIDER_MOTHER_SPAWNER = BLOCK_ENTITY_TYPES.register(
+                    "spider_mother_spawner",
+                    () -> new BlockEntityType<>(
+                            SpiderMotherSpawnerBlockEntity::new,
+                            Set.of(ModStructureBlocks.SPIDER_MOTHER_SPAWNER.get())));
 
     private ModBlockEntities() {
     }

@@ -90,8 +90,8 @@ public final class AstrologyForecastScreen extends Screen {
         graphics.blit(
                 RenderPipelines.GUI_TEXTURED,
                 PAGE_TEXTURE,
-                left + PAGE_WIDTH - EMBLEM_WIDTH + 7,
-                top + 6,
+                left + PAGE_WIDTH - EMBLEM_WIDTH + 13,
+                top - 12,
                 EMBLEM_U,
                 0.0F,
                 EMBLEM_WIDTH,

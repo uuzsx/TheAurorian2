@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/spore_blossom",
+  "textures": {
+    "particle": "theaurorian2:block/mist_spore_blossom",
+    "flower": "theaurorian2:block/mist_spore_blossom",
+    "base": "theaurorian2:block/mist_spore_blossom_base"
+  }
+}

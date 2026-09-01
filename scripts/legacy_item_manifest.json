@@ -124,7 +124,7 @@
   {"id":"mysterium_wool_helmet","zh":"秘境羊毛头盔","en":"Mysterium Wool Helmet","category":"equipment"},
   {"id":"mysterium_wool_leggings","zh":"秘境羊毛护腿","en":"Mysterium Wool Leggings","category":"equipment"},
   {"id":"nacreous_halberd","zh":"珠光战戟","en":"Nacreous Halberd","category":"equipment","model":"handheld"},
-  {"id":"queens_chipper","zh":"女王裁刀","en":"Queen's Chipper","category":"equipment","model":"handheld"},
+  {"id":"queens_chipper","zh":"女王镐","en":"Queen's Pickaxe","category":"tools","model":"handheld"},
   {"id":"red_book_ring","zh":"赤书指环","en":"Red Book Ring","category":"equipment"},
   {"id":"runestone_blaze","zh":"烈焰符石","en":"Blaze Runestone","category":"equipment"},
   {"id":"runestone_darkness","zh":"暗影符石","en":"Darkness Runestone","category":"equipment"},

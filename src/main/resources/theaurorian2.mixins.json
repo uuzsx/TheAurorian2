@@ -20,6 +20,7 @@
     "EntityRenderDispatcherMixin",
     "InventoryScreenMixin",
     "LivingEntityDeathParticleMixin",
+    "MusicManagerMixin",
     "ParticleEngineMixin",
     "SkyRendererMixin"
   ]

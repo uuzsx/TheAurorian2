@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -22,6 +23,7 @@ public final class PurificationAltarBasePartBlock extends Block {
 
     public static final MapCodec<PurificationAltarBasePartBlock> CODEC =
             simpleCodec(PurificationAltarBasePartBlock::new);
+    public static final BooleanProperty RITUAL_ACTIVE = BooleanProperty.create("ritual_active");
     public static final IntegerProperty OFFSET_X = IntegerProperty.create("offset_x", 0, 2);
     public static final IntegerProperty OFFSET_Z = IntegerProperty.create("offset_z", 0, 2);
     private static final VoxelShape[][] COLLISION_SHAPES = {
@@ -52,7 +54,10 @@ public final class PurificationAltarBasePartBlock extends Block {
 
     public PurificationAltarBasePartBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(OFFSET_X, 1).setValue(OFFSET_Z, 1));
+        registerDefaultState(stateDefinition.any()
+                .setValue(RITUAL_ACTIVE, false)
+                .setValue(OFFSET_X, 1)
+                .setValue(OFFSET_Z, 1));
     }
 
     @Override
@@ -109,7 +114,7 @@ public final class PurificationAltarBasePartBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(OFFSET_X, OFFSET_Z);
+        builder.add(RITUAL_ACTIVE, OFFSET_X, OFFSET_Z);
     }
 
     private static VoxelShape box(

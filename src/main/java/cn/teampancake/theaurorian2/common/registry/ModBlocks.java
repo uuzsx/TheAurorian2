@@ -2,11 +2,15 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.block.AurorianDoublePlantBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianFireflyBushBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCaveVinesBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCaveVinesPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianGrassBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianGrassRockBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianKelpBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianKelpPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianPlantBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianSporeBlossomBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianTallGrassBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianTableBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianTablePartBlock;
@@ -15,6 +19,7 @@ import cn.teampancake.theaurorian2.common.block.AurorianTwistingVinesPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWaterSurfacePlantBlock;
 import cn.teampancake.theaurorian2.common.block.AstrologyTableBlock;
+import cn.teampancake.theaurorian2.common.block.ArcaneMagicCircleBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianChestBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCraftingTableBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCrystalClusterBlock;
@@ -35,6 +40,7 @@ import cn.teampancake.theaurorian2.common.block.PebbleBlock;
 import cn.teampancake.theaurorian2.common.block.PurificationAltarBaseBlock;
 import cn.teampancake.theaurorian2.common.block.PurificationAltarBlock;
 import cn.teampancake.theaurorian2.common.block.PurificationAltarBasePartBlock;
+import cn.teampancake.theaurorian2.common.block.PurificationAltarUpperBlock;
 import cn.teampancake.theaurorian2.common.block.SnowfieldTallPlantBlock;
 import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
 import cn.teampancake.theaurorian2.common.block.TallAurorianWaterGrassBlock;
@@ -70,7 +76,6 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.GlowLichenBlock;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.SporeBlossomBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.TorchBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
@@ -79,6 +84,7 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.ColoredFallingBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.RailBlock;
@@ -136,6 +142,9 @@ public final class ModBlocks {
             "aurorian_portal_frame_bricks", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS));
     public static final DeferredBlock<Block> AURORIAN_DIRT = BLOCKS.registerSimpleBlock(
             "aurorian_dirt", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT));
+    public static final DeferredBlock<ColoredFallingBlock> AURORIAN_GRAVEL = BLOCKS.registerBlock(
+            "aurorian_gravel", properties -> new ColoredFallingBlock(new ColorRGBA(0xFF6A8FC4), properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL));
     public static final DeferredBlock<Block> AURORIAN_CLAY = BLOCKS.registerSimpleBlock(
             "aurorian_clay", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CLAY));
     public static final DeferredBlock<PointedDripstoneBlock> AURORIAN_POINTED_DRIPSTONE = BLOCKS.registerBlock(
@@ -154,8 +163,8 @@ public final class ModBlocks {
     public static final DeferredBlock<AzaleaBlock> FLOWERING_STAR_AZALEA = BLOCKS.registerBlock(
             "flowering_star_azalea", AzaleaBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWERING_AZALEA));
-    public static final DeferredBlock<SporeBlossomBlock> MIST_SPORE_BLOSSOM = BLOCKS.registerBlock(
-            "mist_spore_blossom", SporeBlossomBlock::new,
+    public static final DeferredBlock<AurorianSporeBlossomBlock> MIST_SPORE_BLOSSOM = BLOCKS.registerBlock(
+            "mist_spore_blossom", AurorianSporeBlossomBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPORE_BLOSSOM));
     public static final DeferredBlock<AurorianCaveVinesBlock> DEW_CAVE_VINES = BLOCKS.registerBlock(
             "dew_cave_vines", AurorianCaveVinesBlock::new,
@@ -235,6 +244,12 @@ public final class ModBlocks {
     public static final DeferredBlock<TallAurorianWaterGrassBlock> TALL_AURORIAN_WATER_GRASS = BLOCKS.registerBlock(
             "tall_aurorian_water_grass", TallAurorianWaterGrassBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_SEAGRASS));
+    public static final DeferredBlock<AurorianKelpBlock> AURORIAN_KELP = BLOCKS.registerBlock(
+            "aurorian_kelp", AurorianKelpBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.KELP));
+    public static final DeferredBlock<AurorianKelpPlantBlock> AURORIAN_KELP_PLANT = BLOCKS.registerBlock(
+            "aurorian_kelp_plant", AurorianKelpPlantBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.KELP_PLANT));
     public static final DeferredBlock<AurorianWaterSurfacePlantBlock> AURORIAN_LILY_PAD = BLOCKS.registerBlock(
             "aurorian_lily_pad",
             properties -> new AurorianWaterSurfacePlantBlock(
@@ -278,6 +293,9 @@ public final class ModBlocks {
     public static final DeferredBlock<CloudberryBushBlock> CLOUDBERRY_BUSH = BLOCKS.registerBlock(
             "cloudberry_bush", CloudberryBushBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<AurorianFireflyBushBlock> AURORIAN_FIREFLY_BUSH = BLOCKS.registerBlock(
+            "aurorian_firefly_bush", AurorianFireflyBushBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.FIREFLY_BUSH));
     public static final DeferredBlock<GroundBranchBlock> SILENT_WOOD_STICK = BLOCKS.registerBlock(
             "silent_wood_stick", GroundBranchBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DEAD_BUSH).noOcclusion());
@@ -332,22 +350,41 @@ public final class ModBlocks {
                     .strength(6.0F)
                     .lightLevel(state -> 7)
                     .noOcclusion());
+    public static final DeferredBlock<ArcaneMagicCircleBlock> ARCANE_MAGIC_CIRCLE = BLOCKS.registerBlock(
+            "arcane_magic_circle", ArcaneMagicCircleBlock::new,
+            () -> BlockBehaviour.Properties.of()
+                    .strength(0.2F)
+                    .noCollision()
+                    .noOcclusion()
+                    .lightLevel(state -> 4)
+                    .pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<PurificationAltarBaseBlock> PURIFICATION_ALTAR_BASE = BLOCKS.registerBlock(
             "purification_altar_base", PurificationAltarBaseBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
                     .strength(4.0F)
+                    .lightLevel(state -> state.getValue(PurificationAltarBaseBlock.RITUAL_ACTIVE) ? 11 : 7)
                     .noOcclusion());
     public static final DeferredBlock<PurificationAltarBasePartBlock> PURIFICATION_ALTAR_BASE_PART = BLOCKS.registerBlock(
             "purification_altar_base_part", PurificationAltarBasePartBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
                     .strength(Block.INDESTRUCTIBLE, 3600000.0F)
                     .noOcclusion()
+                    .lightLevel(state -> state.getValue(PurificationAltarBasePartBlock.RITUAL_ACTIVE) ? 11 : 7)
                     .noLootTable());
     public static final DeferredBlock<PurificationAltarBlock> PURIFICATION_ALTAR = BLOCKS.registerBlock(
             "purification_altar", PurificationAltarBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
                     .strength(4.0F)
+                    .lightLevel(state -> state.getValue(PurificationAltarBlock.RITUAL_ACTIVE) ? 11 : 7)
                     .noOcclusion());
+    public static final DeferredBlock<PurificationAltarUpperBlock> PURIFICATION_ALTAR_UPPER = BLOCKS.registerBlock(
+            "purification_altar_upper", PurificationAltarUpperBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+                    .strength(4.0F)
+                    .noOcclusion()
+                    .lightLevel(state -> state.getValue(PurificationAltarUpperBlock.RITUAL_ACTIVE) ? 11 : 7)
+                    .noLootTable()
+                    .pushReaction(PushReaction.BLOCK));
 
     public static final DeferredBlock<RotatedPillarBlock> SILENT_TREE_LOG = BLOCKS.registerBlock(
             "silent_tree_log", RotatedPillarBlock::new,
@@ -493,6 +530,9 @@ public final class ModBlocks {
     public static final DeferredItem<PlaceOnWaterBlockItem> AURORIAN_WATER_MUSHROOM_ITEM = ITEMS.registerItem(
             "aurorian_water_mushroom",
             properties -> new PlaceOnWaterBlockItem(AURORIAN_WATER_MUSHROOM.get(), properties));
+    public static final DeferredItem<BlockItem> AURORIAN_KELP_ITEM = ITEMS.registerItem(
+            "aurorian_kelp",
+            properties -> new BlockItem(AURORIAN_KELP.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<Item> RAW_MOONSTONE = ITEMS.registerSimpleItem("raw_moonstone");
     public static final DeferredItem<Item> RAW_CERULEAN = ITEMS.registerSimpleItem("raw_cerulean");
     public static final DeferredItem<Item> CRYSTAL = ITEMS.registerSimpleItem("crystal");
@@ -510,6 +550,9 @@ public final class ModBlocks {
             "cloudberry",
             properties -> new BlockItem(
                     CLOUDBERRY_BUSH.get(), properties.useItemDescriptionPrefix().food(Foods.SWEET_BERRIES)));
+    public static final DeferredItem<BlockItem> AURORIAN_FIREFLY_BUSH_ITEM = ITEMS.registerItem(
+            "aurorian_firefly_bush",
+            properties -> new BlockItem(AURORIAN_FIREFLY_BUSH.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<AstrologyTableItem> ASTROLOGY_TABLE_ITEM = ITEMS.registerItem(
             "astrology_table", properties -> new AstrologyTableItem(ASTROLOGY_TABLE.get(), properties));
     public static final DeferredItem<BlockItem> PURIFICATION_ALTAR_BASE_ITEM =
@@ -537,6 +580,7 @@ public final class ModBlocks {
                         && block != AURORIAN_DIRT && block != AURORIAN_GRASS_BLOCK
                         && block != MOON_SAND_RIVER && block != MOON_DEW_BLOCK
                         && block != BLUEBERRY_BUSH && block != CLOUDBERRY_BUSH
+                        && block != AURORIAN_FIREFLY_BUSH
                         && block != PEBBLE && block != AURORIAN_GRASS_ROCK
                         && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM
                         && block != AURORIAN_LILY_PAD && block != AURORIAN_WATER_MUSHROOM
@@ -544,6 +588,7 @@ public final class ModBlocks {
                         && block != PURIFICATION_ALTAR_BASE
                         && block != PURIFICATION_ALTAR
                         && block != PURIFICATION_ALTAR_BASE_PART
+                        && block != PURIFICATION_ALTAR_UPPER
                         && block != FIREPLACE_PART
                         && block != WOOD_TABLE_PART
                         && block != MYSTERIUM_WOOL_BED
@@ -552,7 +597,9 @@ public final class ModBlocks {
                         && block != CURSED_FROST_WOOD.door()
                         && block != AURORIAN_TWISTING_VINES_PLANT
                         && block != DEW_CAVE_VINES_PLANT
-                        && block != TALL_AURORIAN_WATER_GRASS)
+                        && block != TALL_AURORIAN_WATER_GRASS
+                        && block != AURORIAN_KELP
+                        && block != AURORIAN_KELP_PLANT)
                 .forEach(block -> ITEMS.registerSimpleBlockItem(block));
     }
 

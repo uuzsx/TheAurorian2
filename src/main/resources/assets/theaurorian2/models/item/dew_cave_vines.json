@@ -1,4 +1,4 @@
 {
   "parent": "minecraft:item/generated",
-  "textures": { "layer0": "minecraft:block/cave_vines" }
+  "textures": { "layer0": "theaurorian2:block/dew_cave_vines" }
 }

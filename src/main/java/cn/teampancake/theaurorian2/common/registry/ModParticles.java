@@ -23,6 +23,12 @@ public final class ModParticles {
             PARTICLES.register("phantom_petal", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PHANTOM_BLOOM_PETAL =
             PARTICLES.register("phantom_bloom_petal", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> BLUE_SPORE_BLOSSOM_AIR =
+            PARTICLES.register("blue_spore_blossom_air", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> BLUE_FALLING_SPORE_BLOSSOM =
+            PARTICLES.register("blue_falling_spore_blossom", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AURORIAN_FIREFLY =
+            PARTICLES.register("aurorian_firefly", () -> new SimpleParticleType(false));
 
     private ModParticles() {
     }

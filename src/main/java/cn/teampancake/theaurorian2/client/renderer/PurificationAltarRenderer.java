@@ -38,9 +38,10 @@ public final class PurificationAltarRenderer
             TheAurorian2.id("entity/enchantment/purification_altar_book"));
     private static final Identifier SHIELD_TEXTURE =
             TheAurorian2.id("textures/entity/purification_shield.png");
-    private static final RenderType SHIELD_RENDER_TYPE =
-            // Avoid cardinal lighting: the white shield should stay bright at every orbit angle.
-            RenderTypes.eyes(SHIELD_TEXTURE);
+    // Eyes uses the emissive entity shader, so the shield remains bright regardless of
+    // the altar's orbit angle or the surrounding world's directional lighting.  Both
+    // windings are submitted by ShieldQuadGeometry to make the quad visible from either side.
+    private static final RenderType SHIELD_RENDER_TYPE = RenderTypes.eyes(SHIELD_TEXTURE);
     private static final float SHIELD_RADIUS = 0.72F;
     private static final float SHIELD_Y = 0.92F;
     private final SpriteGetter sprites;
@@ -108,8 +109,8 @@ public final class PurificationAltarRenderer
                     SHIELD_Y,
                     0.5F + Mth.sin(angle) * SHIELD_RADIUS);
             // The quad is vertical in the local XY plane. Turn it 90 degrees
-            // so its face is parallel to the altar side and points inward.
-            poseStack.mulPose(Axis.YP.rotation(-angle - Mth.HALF_PI));
+            // so its face is parallel to the altar side and points outward.
+            poseStack.mulPose(Axis.YP.rotation(-angle + Mth.HALF_PI));
             submitNodeCollector.submitCustomGeometry(
                     poseStack,
                     SHIELD_RENDER_TYPE,
@@ -168,7 +169,7 @@ public final class PurificationAltarRenderer
         private float animationTime;
         private float shieldFade;
         private int shieldCount;
-        private final ShieldQuadGeometry shieldGeometry = new ShieldQuadGeometry(0.36F, 0.50F);
+        private final ShieldQuadGeometry shieldGeometry = new ShieldQuadGeometry(0.50F, 0.50F);
 
         private void updateShieldOpacity() {
             this.shieldGeometry.setOpacity(this.shieldFade);
@@ -192,10 +193,18 @@ public final class PurificationAltarRenderer
 
         @Override
         public void render(PoseStack.Pose pose, VertexConsumer buffer) {
+            // Keep the front face toward the orbit exterior after the 180-degree horizontal flip.
+            addVertex(pose, buffer, halfWidth, 0.0F, 1.0F, 1.0F);
+            addVertex(pose, buffer, halfWidth, height, 1.0F, 0.0F);
+            addVertex(pose, buffer, -halfWidth, height, 0.0F, 0.0F);
+            addVertex(pose, buffer, -halfWidth, 0.0F, 0.0F, 1.0F);
+
+            // Eyes keeps face culling enabled. Submit the same quad with the opposite
+            // winding so the shield stays visible when viewed from behind as well.
+            addVertex(pose, buffer, halfWidth, 0.0F, 1.0F, 1.0F);
             addVertex(pose, buffer, -halfWidth, 0.0F, 0.0F, 1.0F);
             addVertex(pose, buffer, -halfWidth, height, 0.0F, 0.0F);
             addVertex(pose, buffer, halfWidth, height, 1.0F, 0.0F);
-            addVertex(pose, buffer, halfWidth, 0.0F, 1.0F, 1.0F);
         }
 
         private void addVertex(

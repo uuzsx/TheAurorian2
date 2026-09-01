@@ -146,6 +146,7 @@ public final class ModItems {
             "cooked_aurorian_winged_fish", 5, 6.0F);
     public static final DeferredItem<Item> SILK_BERRY = food("silk_berry", 1, 0.1F);
     public static final DeferredItem<Item> AURORIAN_BERRY = vanillaFood("aurorian_berry", Foods.APPLE);
+    public static final DeferredItem<Item> DEW_FRUIT = food("dew_fruit", 2, 0.1F);
     public static final DeferredItem<Item> CANDY = food("candy", 4, 0.2F);
     public static final DeferredItem<Item> CANDY_CANE = effectFood(
             "candy_cane", 4, 0.4F, MobEffects.LUCK, 300, 0);

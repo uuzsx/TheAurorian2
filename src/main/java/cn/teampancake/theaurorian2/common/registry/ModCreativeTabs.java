@@ -389,6 +389,7 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.ASTROLOGY_TABLE_ITEM.get());
         output.accept(ModBlocks.PURIFICATION_ALTAR_BASE_ITEM.get());
         output.accept(ModBlocks.PURIFICATION_ALTAR_ITEM.get());
+        output.accept(ModBlocks.ARCANE_MAGIC_CIRCLE.get());
         output.accept(ModBlocks.AURORIAN_CRAFTING_TABLE.get());
         output.accept(ModBlocks.AURORIAN_FURNACE.get());
         output.accept(ModBlocks.FIREPLACE.get());
@@ -422,12 +423,14 @@ public final class ModCreativeTabs {
 
     private static void addNaturalBlocks(CreativeModeTab.Output output) {
         output.accept(ModBlocks.AURORIAN_DIRT.get());
+        output.accept(ModBlocks.AURORIAN_GRAVEL.get());
         output.accept(ModBlocks.AURORIAN_CLAY.get());
         output.accept(ModBlocks.AURORIAN_ANDESITE.get());
         output.accept(ModBlocks.AURORIAN_DIORITE.get());
         output.accept(ModBlocks.AURORIAN_GRANITE.get());
         output.accept(ModBlocks.AURORIAN_GRASS_BLOCK.get());
         output.accept(ModBlocks.LIGHT_AURORIAN_GRASS_BLOCK.get());
+        output.accept(ModBlocks.AURORIAN_FIREFLY_BUSH_ITEM.get());
         output.accept(ModBlocks.AURORIAN_GRASS_ROCK_ITEM.get());
         output.accept(ModBlocks.MOON_SAND_RIVER.get());
         output.accept(ModBlocks.AURORIAN_DRIPSTONE_BLOCK.get());
@@ -483,6 +486,7 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.AURORIAN_GRASS_LIGHT.get());
         output.accept(ModBlocks.TALL_AURORIAN_GRASS_LIGHT.get());
         output.accept(ModBlocks.AURORIAN_WATER_GRASS.get());
+        output.accept(ModBlocks.AURORIAN_KELP_ITEM.get());
         output.accept(ModBlocks.AURORIAN_LILY_PAD_ITEM.get());
         output.accept(ModBlocks.AURORIAN_WATER_MUSHROOM_ITEM.get());
         output.accept(ModBlocks.PETUNIA_PLANT.get());
@@ -612,6 +616,7 @@ public final class ModCreativeTabs {
         output.accept(ModItems.COOKED_AURORIAN_WINGED_FISH.get());
         output.accept(ModItems.SILK_BERRY.get());
         output.accept(ModItems.AURORIAN_BERRY.get());
+        output.accept(ModItems.DEW_FRUIT.get());
         output.accept(ModItems.CANDY.get());
         output.accept(ModItems.CANDY_CANE.get());
         output.accept(ModItems.GINGERBREAD_MAN.get());

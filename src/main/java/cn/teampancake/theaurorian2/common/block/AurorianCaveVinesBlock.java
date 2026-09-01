@@ -1,7 +1,6 @@
 package cn.teampancake.theaurorian2.common.block;
 
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,22 +24,13 @@ public final class AurorianCaveVinesBlock extends CaveVinesBlock {
     }
 
     @Override
-    protected BlockState getGrowIntoState(BlockState growFromState, RandomSource random) {
-        return super.getGrowIntoState(growFromState, random).setValue(BERRIES, false);
-    }
-
-    @Override
     protected ItemStack getCloneItemStack(LevelReader level, net.minecraft.core.BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(ModBlocks.DEW_CAVE_VINES.get());
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, net.minecraft.core.BlockPos pos, Player player, BlockHitResult hitResult) {
-        return InteractionResult.PASS;
+        return AurorianCaveVines.use(player, state, level, pos);
     }
 
-    @Override
-    public boolean isValidBonemealTarget(LevelReader level, net.minecraft.core.BlockPos pos, BlockState state) {
-        return false;
-    }
 }

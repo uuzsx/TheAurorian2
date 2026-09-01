@@ -10,6 +10,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -37,7 +39,7 @@ public final class PurificationAltarBlock extends BaseEntityBlock {
     public static final MapCodec<PurificationAltarBlock> CODEC = simpleCodec(PurificationAltarBlock::new);
     public static final BooleanProperty RITUAL_ACTIVE = BooleanProperty.create("ritual_active");
     public static final IntegerProperty SHIELD_COUNT = IntegerProperty.create("shield_count", 0, 4);
-    private static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 24.0, 15.0);
+    private static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
     public PurificationAltarBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -117,6 +119,33 @@ public final class PurificationAltarBlock extends BaseEntityBlock {
             return null;
         }
         return this.defaultBlockState();
+    }
+
+    @Override
+    public void setPlacedBy(
+            Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
+        if (!level.isClientSide()) {
+            level.setBlock(
+                    pos.above(),
+                    ModBlocks.PURIFICATION_ALTAR_UPPER.get().defaultBlockState()
+                            .setValue(PurificationAltarUpperBlock.RITUAL_ACTIVE,
+                                    state.getValue(RITUAL_ACTIVE)),
+                    Block.UPDATE_ALL);
+        }
+    }
+
+    @Override
+    protected void affectNeighborsAfterRemoval(
+            BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+        BlockPos upperPos = pos.above();
+        if (level.getBlockState(upperPos).is(ModBlocks.PURIFICATION_ALTAR_UPPER.get())) {
+            level.setBlock(
+                    upperPos,
+                    Blocks.AIR.defaultBlockState(),
+                    Block.UPDATE_ALL | Block.UPDATE_SUPPRESS_DROPS);
+        }
     }
 
     @Override

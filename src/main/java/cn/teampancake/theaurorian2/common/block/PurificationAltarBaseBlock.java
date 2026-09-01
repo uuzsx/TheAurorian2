@@ -13,6 +13,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,6 +26,7 @@ public final class PurificationAltarBaseBlock extends Block {
 
     public static final MapCodec<PurificationAltarBaseBlock> CODEC =
             simpleCodec(PurificationAltarBaseBlock::new);
+    public static final BooleanProperty RITUAL_ACTIVE = BooleanProperty.create("ritual_active");
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     private static final BlockPos[] PART_OFFSETS = {
         new BlockPos(-1, 0, -1), new BlockPos(0, 0, -1), new BlockPos(1, 0, -1),
@@ -33,6 +36,7 @@ public final class PurificationAltarBaseBlock extends Block {
 
     public PurificationAltarBaseBlock(BlockBehaviour.Properties properties) {
         super(properties);
+        registerDefaultState(stateDefinition.any().setValue(RITUAL_ACTIVE, false));
     }
 
     @Override
@@ -48,8 +52,32 @@ public final class PurificationAltarBaseBlock extends Block {
                     pos.offset(offset),
                     ModBlocks.PURIFICATION_ALTAR_BASE_PART.get().defaultBlockState()
                             .setValue(PurificationAltarBasePartBlock.OFFSET_X, offset.getX() + 1)
-                            .setValue(PurificationAltarBasePartBlock.OFFSET_Z, offset.getZ() + 1),
+                            .setValue(PurificationAltarBasePartBlock.OFFSET_Z, offset.getZ() + 1)
+                            .setValue(PurificationAltarBasePartBlock.RITUAL_ACTIVE,
+                                    state.getValue(RITUAL_ACTIVE)),
                     Block.UPDATE_ALL);
+        }
+    }
+
+    public static void setRitualActive(
+            net.minecraft.world.level.Level level, BlockPos center, boolean active) {
+        BlockState centerState = level.getBlockState(center);
+        if (!centerState.is(ModBlocks.PURIFICATION_ALTAR_BASE.get())) {
+            return;
+        }
+        if (centerState.getValue(RITUAL_ACTIVE) != active) {
+            level.setBlock(center, centerState.setValue(RITUAL_ACTIVE, active), Block.UPDATE_ALL);
+        }
+        for (BlockPos offset : PART_OFFSETS) {
+            BlockPos partPos = center.offset(offset);
+            BlockState partState = level.getBlockState(partPos);
+            if (partState.is(ModBlocks.PURIFICATION_ALTAR_BASE_PART.get())
+                    && partState.getValue(PurificationAltarBasePartBlock.RITUAL_ACTIVE) != active) {
+                level.setBlock(
+                        partPos,
+                        partState.setValue(PurificationAltarBasePartBlock.RITUAL_ACTIVE, active),
+                        Block.UPDATE_ALL);
+            }
         }
     }
 
@@ -138,5 +166,10 @@ public final class PurificationAltarBaseBlock extends Block {
             }
         }
         return true;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(RITUAL_ACTIVE);
     }
 }

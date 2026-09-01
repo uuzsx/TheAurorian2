@@ -10,6 +10,9 @@ import cn.teampancake.theaurorian2.client.model.AurorianRabbitModel;
 import cn.teampancake.theaurorian2.client.model.AurorianPigModel;
 import cn.teampancake.theaurorian2.client.model.AurorianSheepModel;
 import cn.teampancake.theaurorian2.client.model.AurorianCowModel;
+import cn.teampancake.theaurorian2.client.particle.BlueFallingSporeBlossomParticle;
+import cn.teampancake.theaurorian2.client.particle.BlueSporeBlossomAirParticle;
+import cn.teampancake.theaurorian2.client.particle.AurorianFireflyParticle;
 import cn.teampancake.theaurorian2.client.particle.WickParticle;
 import cn.teampancake.theaurorian2.client.particle.PhantomBloomPetalParticle;
 import cn.teampancake.theaurorian2.client.particle.PhantomButterflyParticle;
@@ -22,6 +25,7 @@ import cn.teampancake.theaurorian2.client.renderer.AurorianFurnaceRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianGrassRockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AstrologyTableRenderer;
+import cn.teampancake.theaurorian2.client.renderer.ArcaneMagicCircleRenderer;
 import cn.teampancake.theaurorian2.client.renderer.PurificationAltarRenderer;
 import cn.teampancake.theaurorian2.client.renderer.CrystallineSwordPedestalRenderer;
 import cn.teampancake.theaurorian2.client.renderer.ModelledBlockRenderer;
@@ -33,9 +37,12 @@ import cn.teampancake.theaurorian2.client.renderer.AurorianRabbitRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianPigRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianSheepRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianCowRenderer;
+import cn.teampancake.theaurorian2.client.renderer.IserynValeRenderer;
 import cn.teampancake.theaurorian2.client.screen.AstrologyForecastScreen;
 import cn.teampancake.theaurorian2.client.screen.PurificationRitualScreen;
+import cn.teampancake.theaurorian2.client.sound.PurificationRitualMusic;
 import cn.teampancake.theaurorian2.common.network.AstrologyForecastPayload;
+import cn.teampancake.theaurorian2.common.network.PurificationRitualMusicPayload;
 import cn.teampancake.theaurorian2.common.network.PurificationRitualPromptPayload;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModBlockEntities;
@@ -95,6 +102,7 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntities.AURORIAN_PIG.get(), AurorianPigRenderer::new);
         event.registerEntityRenderer(ModEntities.AURORIAN_SHEEP.get(), AurorianSheepRenderer::new);
         event.registerEntityRenderer(ModEntities.AURORIAN_COW.get(), AurorianCowRenderer::new);
+        event.registerEntityRenderer(ModEntities.ISERYN_VALE.get(), IserynValeRenderer::new);
         event.registerEntityRenderer(ModEntities.TRAINING_DUMMY.get(), TrainingDummyRenderer::new);
         event.registerEntityRenderer(
                 ModEntities.SPIDER_MOTHER.get(),
@@ -123,6 +131,8 @@ public final class ClientModEvents {
                 ModEntities.PURIFICATION_RITUAL_ZOMBIE.get(), ZombieRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ASTROLOGY_TABLE.get(), AstrologyTableRenderer::new);
         event.registerBlockEntityRenderer(
+                ModBlockEntities.ARCANE_MAGIC_CIRCLE.get(), ArcaneMagicCircleRenderer::new);
+        event.registerBlockEntityRenderer(
                 ModBlockEntities.PURIFICATION_ALTAR.get(), PurificationAltarRenderer::new);
         event.registerBlockEntityRenderer(
                 ModBlockEntities.SACRIFICE_TABLE.get(),
@@ -145,6 +155,8 @@ public final class ClientModEvents {
         event.enqueueWork(() -> {
             NeoForge.EVENT_BUS.addListener(PurificationRitualBossBar::render);
             NeoForge.EVENT_BUS.addListener(SpiderMotherBossBar::render);
+            NeoForge.EVENT_BUS.addListener(PurificationRitualMusic::tick);
+            NeoForge.EVENT_BUS.addListener(PurificationRitualMusic::onLogout);
             Sheets.addWoodType(ModStructureBlocks.SILENT_WOOD_TYPE);
             Sheets.addWoodType(ModStructureBlocks.WEEPING_WILLOW_WOOD_TYPE);
             Sheets.addWoodType(ModStructureBlocks.CURTAIN_WOOD_TYPE);
@@ -158,6 +170,8 @@ public final class ClientModEvents {
                 Minecraft.getInstance().setScreen(new AstrologyForecastScreen(payload.forecast())));
         event.register(PurificationRitualPromptPayload.TYPE, (payload, context) ->
                 Minecraft.getInstance().setScreen(new PurificationRitualScreen(payload.pos())));
+        event.register(PurificationRitualMusicPayload.TYPE, (payload, context) ->
+                context.enqueueWork(() -> PurificationRitualMusic.handle(payload.playing())));
     }
 
     @SubscribeEvent
@@ -167,6 +181,11 @@ public final class ClientModEvents {
         event.registerSpriteSet(ModParticles.PHANTOM_BUTTERFLY_PINK.get(), PhantomButterflyParticle.Provider::new);
         event.registerSpriteSet(ModParticles.PHANTOM_PETAL.get(), PhantomPetalParticle.Provider::new);
         event.registerSpriteSet(ModParticles.PHANTOM_BLOOM_PETAL.get(), PhantomBloomPetalParticle.Provider::new);
+        event.registerSpriteSet(
+                ModParticles.BLUE_SPORE_BLOSSOM_AIR.get(), BlueSporeBlossomAirParticle.Provider::new);
+        event.registerSpriteSet(
+                ModParticles.BLUE_FALLING_SPORE_BLOSSOM.get(), BlueFallingSporeBlossomParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.AURORIAN_FIREFLY.get(), AurorianFireflyParticle.Provider::new);
     }
 
     @SubscribeEvent

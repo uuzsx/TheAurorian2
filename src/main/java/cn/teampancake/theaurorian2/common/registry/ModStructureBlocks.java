@@ -8,6 +8,8 @@ import cn.teampancake.theaurorian2.common.block.AurorianStandingSignBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWallHangingSignBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWallSignBlock;
 import cn.teampancake.theaurorian2.common.block.CrystallineSwordPedestalBlock;
+import cn.teampancake.theaurorian2.common.block.DarkStoneGateBlock;
+import cn.teampancake.theaurorian2.common.block.DarkStoneGateKeyholeBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyAgeThreeCropBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyFacingBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyHorizontalFacingBlock;
@@ -19,6 +21,8 @@ import cn.teampancake.theaurorian2.common.block.LegacyVerticalDirectionBlock;
 import cn.teampancake.theaurorian2.common.block.LockedStructureBlock;
 import cn.teampancake.theaurorian2.common.block.SacrificeTableBlock;
 import cn.teampancake.theaurorian2.common.block.SilentCampfireBlock;
+import cn.teampancake.theaurorian2.common.block.SpiderMotherBarrierBlock;
+import cn.teampancake.theaurorian2.common.block.SpiderMotherSpawnerBlock;
 import cn.teampancake.theaurorian2.common.block.VerticalSlabBlock;
 import cn.teampancake.theaurorian2.common.block.VerticalStairBlock;
 import cn.teampancake.theaurorian2.common.item.ModelledBlockItem;
@@ -587,11 +591,12 @@ public final class ModStructureBlocks {
     public static final DeferredBlock<RotatedPillarBlock> RUNE_STONE_PILLAR = decorative(
             "rune_stone_pillar", RotatedPillarBlock::new, runeProperties(5.0F));
 
-    public static final DeferredBlock<Block> DARK_STONE_GATE = decorativeRuneStone("dark_stone_gate");
+    public static final DeferredBlock<DarkStoneGateBlock> DARK_STONE_GATE = decorative(
+            "dark_stone_gate", DarkStoneGateBlock::new, runeProperties(5.0F));
     public static final DeferredBlock<Block> MOON_TEMPLE_CELL_GATE = decorativeRuneStone("moon_temple_cell_gate");
     public static final DeferredBlock<Block> RUNE_STONE_LOOT_GATE = decorativeRuneStone("rune_stone_loot_gate");
-    public static final DeferredBlock<LockedStructureBlock> DARK_STONE_GATE_KEYHOLE =
-            locked("dark_stone_gate_keyhole");
+    public static final DeferredBlock<DarkStoneGateKeyholeBlock> DARK_STONE_GATE_KEYHOLE = decorative(
+            "dark_stone_gate_keyhole", DarkStoneGateKeyholeBlock::new, runeProperties(5.0F));
     public static final DeferredBlock<LockedStructureBlock> MOON_TEMPLE_CELL_GATE_KEYHOLE =
             locked("moon_temple_cell_gate_keyhole");
     public static final DeferredBlock<LockedStructureBlock> MOON_TEMPLE_GATE_KEYHOLE =
@@ -612,6 +617,14 @@ public final class ModStructureBlocks {
     public static final DeferredBlock<CrystallineSwordPedestalBlock> CRYSTALLINE_SWORD_PEDESTAL = modelledDecorative(
             "crystalline_sword_pedestal", CrystallineSwordPedestalBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).noOcclusion());
+    public static final DeferredBlock<SpiderMotherBarrierBlock> SPIDER_MOTHER_BARRIER = hidden(
+            "spider_mother_barrier",
+            SpiderMotherBarrierBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BEDROCK).noLootTable().noOcclusion());
+    public static final DeferredBlock<SpiderMotherSpawnerBlock> SPIDER_MOTHER_SPAWNER = hidden(
+            "spider_mother_spawner",
+            SpiderMotherSpawnerBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BEDROCK).noLootTable().noOcclusion());
     public static final DeferredBlock<Block> LASER_CRYSTAL = decorative(
             "laser_crystal", Block::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).noOcclusion());

@@ -3,6 +3,8 @@ package cn.teampancake.theaurorian2.common.entity;
 import cn.teampancake.theaurorian2.common.block.entity.PurificationAltarBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -22,6 +24,7 @@ public final class PurificationRiftEntity extends Entity {
     private static final int FIRST_SPAWN_TICK = 2 * 20;
     private static final int SECOND_SPAWN_TICK = 8 * 20;
     private static final int THIRD_SPAWN_TICK = 13 * 20;
+    private static final int OPEN_ANIMATION_TICKS = 4 * 2;
     private static final EntityDataAccessor<Boolean> CLOSING =
             SynchedEntityData.defineId(PurificationRiftEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> CLOSING_TICKS =
@@ -90,6 +93,10 @@ public final class PurificationRiftEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
+        if (this.level().isClientSide()) {
+            playAmbientPortalSound();
+            return;
+        }
         if (this.isClosing()) {
             if (this.closingTicks < 0) {
                 this.closingTicks = 0;
@@ -130,6 +137,23 @@ public final class PurificationRiftEntity extends Entity {
             this.thirdSpawned = true;
             altar.spawnRitualZombies(this, 1);
         }
+    }
+
+    private void playAmbientPortalSound() {
+        if (this.isClosing()
+                || this.tickCount < OPEN_ANIMATION_TICKS
+                || this.random.nextInt(100) != 0) {
+            return;
+        }
+        this.level().playLocalSound(
+                this.getX(),
+                this.getY() + 1.5D,
+                this.getZ(),
+                SoundEvents.PORTAL_AMBIENT,
+                SoundSource.BLOCKS,
+                0.5F,
+                this.random.nextFloat() * 0.4F + 0.8F,
+                false);
     }
 
     @Override

@@ -1,0 +1,1 @@
+{"variants":{"facing=east":{"model":"theaurorian2:block/spider_mother_barrier","y":90},"facing=north":{"model":"theaurorian2:block/spider_mother_barrier"},"facing=south":{"model":"theaurorian2:block/spider_mother_barrier","y":180},"facing=west":{"model":"theaurorian2:block/spider_mother_barrier","y":270}}}

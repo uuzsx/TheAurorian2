@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "theaurorian2:block/dew_cave_vines_lit"
+  }
+}

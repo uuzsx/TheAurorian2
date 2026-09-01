@@ -1,0 +1,1 @@
+{"ambientocclusion":false,"render_type":"minecraft:translucent","textures":{"barrier":"theaurorian2:block/spider_mother_barrier","particle":"theaurorian2:block/spider_mother_barrier"},"elements":[{"from":[0,0,7.5],"to":[16,16,8.5],"faces":{"north":{"texture":"#barrier"},"south":{"texture":"#barrier"}}}]}

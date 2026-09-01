@@ -1,6 +1,8 @@
 package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.common.item.ModelledItem;
+import cn.teampancake.theaurorian2.common.item.QueensPickaxeItem;
+import cn.teampancake.theaurorian2.common.item.WorldScrollItem;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -151,7 +153,7 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> VAGRANT_NOTE =
             register("vagrant_note", Category.TOOLS, 1);
     public static final DeferredItem<Item> WORLD_SCROLL =
-            register("world_scroll", Category.ACCESSORIES, 1);
+            registerWorldScroll();
     public static final DeferredItem<Item> ABSORPTION_ORB =
             register("absorption_orb", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> AURORIAN_ALLOY_STEEL_SWORD =
@@ -264,8 +266,9 @@ public final class ModLegacyItems {
             register("mysterium_wool_leggings", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> NACREOUS_HALBERD =
             register("nacreous_halberd", Category.EQUIPMENT, 1);
-    public static final DeferredItem<Item> QUEENS_CHIPPER =
-            register("queens_chipper", Category.EQUIPMENT, 1);
+    public static final DeferredItem<Item> QUEENS_PICKAXE = registerQueensPickaxe();
+    @Deprecated
+    public static final DeferredItem<Item> QUEENS_CHIPPER = QUEENS_PICKAXE;
     public static final DeferredItem<Item> RED_BOOK_RING =
             register("red_book_ring", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> RUNESTONE_BLAZE =
@@ -328,6 +331,20 @@ public final class ModLegacyItems {
         DeferredItem<Item> item = ModItems.ITEMS.registerItem(
                 id, properties -> new Item(maxStack == 64 ? properties : properties.stacksTo(maxStack)));
         ITEMS_BY_CATEGORY.get(category).add(item);
+        return item;
+    }
+
+    private static DeferredItem<Item> registerQueensPickaxe() {
+        DeferredItem<Item> item = ModItems.ITEMS.registerItem(
+                "queens_chipper", QueensPickaxeItem::new);
+        ITEMS_BY_CATEGORY.get(Category.TOOLS).add(item);
+        return item;
+    }
+
+    private static DeferredItem<Item> registerWorldScroll() {
+        DeferredItem<Item> item = ModItems.ITEMS.<Item>registerItem(
+                "world_scroll", WorldScrollItem::new);
+        ITEMS_BY_CATEGORY.get(Category.ACCESSORIES).add(item);
         return item;
     }
 

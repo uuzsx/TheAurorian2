@@ -4,6 +4,7 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.effect.CorruptionData;
 import cn.teampancake.theaurorian2.common.item.PhantomBlossomMark;
 import cn.teampancake.theaurorian2.common.inventory.AccessoryInventory;
+import cn.teampancake.theaurorian2.common.world.AurorianTravelData;
 import cn.teampancake.theaurorian2.common.world.MoonShieldData;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -50,6 +51,12 @@ public final class ModAttachments {
                     .copyOnDeath()
                     .build());
 
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AurorianTravelData>> AURORIAN_TRAVEL =
+            ATTACHMENTS.register("aurorian_travel", () -> AttachmentType.builder(() -> AurorianTravelData.EMPTY)
+                    .serialize(AurorianTravelData.CODEC.fieldOf("value"))
+                    .copyOnDeath()
+                    .build());
+
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<MoonShieldData>> MOON_SHIELD =
             ATTACHMENTS.register("moon_shield", () -> AttachmentType.builder(() -> MoonShieldData.EMPTY)
                     .serialize(MoonShieldData.CODEC.fieldOf("value"))
@@ -58,7 +65,9 @@ public final class ModAttachments {
                     .build());
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Long>> MOON_SHIELD_RECOVERY_AT =
-            ATTACHMENTS.register("moon_shield_recovery_at", () -> AttachmentType.builder(() -> 0L).build());
+            ATTACHMENTS.register("moon_shield_recovery_at", () -> AttachmentType.builder(() -> 0L)
+                    .sync((holder, player) -> holder == player, ByteBufCodecs.VAR_LONG)
+                    .build());
 
     private ModAttachments() {
     }

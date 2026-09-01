@@ -4,6 +4,8 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.worldgen.structure.AurorianSkyIslandPiece;
 import cn.teampancake.theaurorian2.common.worldgen.structure.AurorianSkyIslandStructure;
 import cn.teampancake.theaurorian2.common.worldgen.structure.AurorianMineshaftStructure;
+import cn.teampancake.theaurorian2.common.worldgen.structure.UmbraDarkMazePiece;
+import cn.teampancake.theaurorian2.common.worldgen.structure.UmbraDarkMazeStructure;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
@@ -24,9 +26,13 @@ public final class ModStructures {
     public static final DeferredHolder<StructureType<?>, StructureType<AurorianMineshaftStructure>>
             AURORIAN_MINESHAFT = STRUCTURE_TYPES.register(
                     "aurorian_mineshaft", () -> () -> AurorianMineshaftStructure.CODEC);
+    public static final DeferredHolder<StructureType<?>, StructureType<UmbraDarkMazeStructure>> UMBRA_DARK_MAZE =
+            STRUCTURE_TYPES.register("umbra_dark_maze", () -> () -> UmbraDarkMazeStructure.CODEC);
     public static final DeferredHolder<StructurePieceType, StructurePieceType> AURORIAN_SKY_ISLAND_GROUP_PIECE =
             STRUCTURE_PIECES.register(
                     "aurorian_sky_island_group", () -> (context, tag) -> new AurorianSkyIslandPiece(tag));
+    public static final DeferredHolder<StructurePieceType, StructurePieceType> UMBRA_DARK_MAZE_PIECE =
+            STRUCTURE_PIECES.register("umbra_dark_maze", () -> (context, tag) -> new UmbraDarkMazePiece(tag));
 
     private ModStructures() {
     }

@@ -148,6 +148,7 @@ public final class SpiderMotherEntity extends Monster implements GeoEntity {
     private @Nullable UUID trackedHighTarget;
     private @Nullable UUID elevatedAggressor;
     private @Nullable Vec3 nestQuakePosition;
+    private @Nullable BlockPos arenaBarrier;
     private boolean silkAttempted;
     private boolean silkInFlight;
     private boolean pendingVenomPool;
@@ -202,7 +203,12 @@ public final class SpiderMotherEntity extends Monster implements GeoEntity {
     @Override
     protected void customServerAiStep(ServerLevel level) {
         if (level.getDifficulty() == Difficulty.PEACEFUL) {
-            this.discard();
+            if (this.arenaBarrier == null) {
+                this.discard();
+            } else {
+                this.setTarget(null);
+                this.setDeltaMovement(Vec3.ZERO);
+            }
             return;
         }
         super.customServerAiStep(level);
@@ -1206,6 +1212,38 @@ public final class SpiderMotherEntity extends Monster implements GeoEntity {
         return killed;
     }
 
+    public void setArenaBarrier(@Nullable BlockPos arenaBarrier) {
+        this.arenaBarrier = arenaBarrier == null ? null : arenaBarrier.immutable();
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        if (this.arenaBarrier != null && this.level() instanceof ServerLevel level) {
+            this.releaseArenaBarrier(level);
+        }
+        super.die(source);
+    }
+
+    private void releaseArenaBarrier(ServerLevel level) {
+        if (this.arenaBarrier == null) {
+            return;
+        }
+        BlockPos center = this.arenaBarrier;
+        BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+        for (int dx = -3; dx <= 3; dx++) {
+            for (int dy = -3; dy <= 3; dy++) {
+                for (int dz = -3; dz <= 3; dz++) {
+                    cursor.set(center.getX() + dx, center.getY() + dy, center.getZ() + dz);
+                    if (level.getBlockState(cursor).is(
+                            cn.teampancake.theaurorian2.common.registry.ModStructureBlocks.SPIDER_MOTHER_BARRIER.get())) {
+                        level.removeBlock(cursor, false);
+                    }
+                }
+            }
+        }
+        this.arenaBarrier = null;
+    }
+
     @Override
     public boolean canAttack(LivingEntity target) {
         return this.isCombatTarget(target) && super.canAttack(target);
@@ -1223,6 +1261,11 @@ public final class SpiderMotherEntity extends Monster implements GeoEntity {
         output.putInt("OutOfCombatTicks", this.outOfCombatTicks);
         output.putInt("HuntingChargeCooldown", this.huntingChargeCooldown);
         output.putBoolean("ForcedHatchTriggered", this.forcedHatchTriggered);
+        if (this.arenaBarrier != null) {
+            output.putInt("ArenaBarrierX", this.arenaBarrier.getX());
+            output.putInt("ArenaBarrierY", this.arenaBarrier.getY());
+            output.putInt("ArenaBarrierZ", this.arenaBarrier.getZ());
+        }
     }
 
     @Override
@@ -1239,6 +1282,16 @@ public final class SpiderMotherEntity extends Monster implements GeoEntity {
         this.huntingChargeCooldown = Math.max(0, input.getIntOr("HuntingChargeCooldown", 0));
         this.huntingChargeTicks = 0;
         this.forcedHatchTriggered = input.getBooleanOr("ForcedHatchTriggered", false);
+        if (input.getInt("ArenaBarrierX").isPresent()
+                && input.getInt("ArenaBarrierY").isPresent()
+                && input.getInt("ArenaBarrierZ").isPresent()) {
+            this.arenaBarrier = new BlockPos(
+                    input.getIntOr("ArenaBarrierX", 0),
+                    input.getIntOr("ArenaBarrierY", 0),
+                    input.getIntOr("ArenaBarrierZ", 0));
+        } else {
+            this.arenaBarrier = null;
+        }
         this.resetHighGroundState();
         this.silkBindings.clear();
         this.venomPools.clear();

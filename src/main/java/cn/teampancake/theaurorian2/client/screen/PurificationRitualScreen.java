@@ -9,8 +9,10 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
@@ -180,12 +182,10 @@ public final class PurificationRitualScreen extends Screen {
                     && event.y() >= bottom - PAGE_CORNER_HEIGHT - PAGE_EDGE_INSET
                     && event.y() <= bottom - PAGE_EDGE_INSET;
 
-            if (nextCorner && this.currentPage < this.pageCount() - 1) {
-                this.currentPage++;
+            if (nextCorner && this.turnPage(1)) {
                 return true;
             }
-            if (previousCorner && this.currentPage > 0) {
-                this.currentPage--;
+            if (previousCorner && this.turnPage(-1)) {
                 return true;
             }
         }
@@ -194,15 +194,24 @@ public final class PurificationRitualScreen extends Screen {
 
     @Override
     public boolean keyPressed(KeyEvent event) {
-        if (event.key() == 262 && this.currentPage < this.pageCount() - 1) {
-            this.currentPage++;
+        if (event.key() == 262 && this.turnPage(1)) {
             return true;
         }
-        if (event.key() == 263 && this.currentPage > 0) {
-            this.currentPage--;
+        if (event.key() == 263 && this.turnPage(-1)) {
             return true;
         }
         return super.keyPressed(event);
+    }
+
+    private boolean turnPage(int offset) {
+        int nextPage = this.currentPage + offset;
+        if (nextPage < 0 || nextPage >= this.pageCount()) {
+            return false;
+        }
+        this.currentPage = nextPage;
+        this.minecraft.getSoundManager().play(
+                SimpleSoundInstance.forUI(SoundEvents.BOOK_PAGE_TURN, 1.0F));
+        return true;
     }
 
     private List<FormattedCharSequence> renderedLinesForCurrentPage() {

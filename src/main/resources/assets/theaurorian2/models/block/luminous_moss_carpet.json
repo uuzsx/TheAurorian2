@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/carpet",
+  "textures": {
+    "wool": "theaurorian2:block/luminous_moss_carpet"
+  }
+}

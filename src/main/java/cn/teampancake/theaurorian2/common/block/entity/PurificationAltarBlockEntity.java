@@ -1,9 +1,13 @@
 package cn.teampancake.theaurorian2.common.block.entity;
 
 import cn.teampancake.theaurorian2.common.block.PurificationAltarBlock;
+import cn.teampancake.theaurorian2.common.block.PurificationAltarBaseBlock;
+import cn.teampancake.theaurorian2.common.block.PurificationAltarUpperBlock;
 import cn.teampancake.theaurorian2.common.entity.PurificationRiftEntity;
 import cn.teampancake.theaurorian2.common.entity.PurificationRitualZombieEntity;
+import cn.teampancake.theaurorian2.common.network.PurificationRitualMusicPayload;
 import cn.teampancake.theaurorian2.common.network.PurificationRitualPromptPayload;
+import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModEntities;
 import cn.teampancake.theaurorian2.common.registry.ModBlockEntities;
 import cn.teampancake.theaurorian2.common.world.MoonShieldSystem;
@@ -43,9 +47,9 @@ import java.util.UUID;
 /** Server-authoritative state machine for the permanent purification ritual. */
 public final class PurificationAltarBlockEntity extends BlockEntity {
 
-    public static final int CHANNEL_TICKS = 2 * 60 * 20;
+    public static final int CHANNEL_TICKS = 4 * 60 * 20 + 20 * 20;
     public static final long PROGRESS_EVENT_ID_PREFIX = 0x5055524946590000L;
-    private static final int PROMPT_TICKS = 100;
+    private static final int PROMPT_TICKS = 5 * 60 * 20;
     private static final int PROGRESS_STEPS = 176;
     private static final double CONFIRM_MAX_DISTANCE_SQUARED = 20.25D;
     private static final int INITIAL_SHIELDS = 4;
@@ -53,7 +57,7 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
     private static final int MAX_RIFTS = 2;
     private static final int MAX_RITUAL_ZOMBIES = 6;
     private static final int RIFT_OPEN_DELAY_TICKS = 8 * 20;
-    private static final int RIFT_SPAWN_STOP_TICKS = 108 * 20;
+    private static final int RIFT_SPAWN_STOP_TICKS = CHANNEL_TICKS - 12 * 20;
     private static final int RIFT_MIN_DISTANCE = 4;
     private static final double RIFT_MIN_RADIUS = 6.5D;
     private static final double RIFT_MAX_RADIUS = 10.5D;
@@ -66,6 +70,8 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
     private long nextRiftAt;
     private float lastHealth;
     private int altarHitCooldown;
+    private boolean baseLightSynchronized;
+    private boolean upperPartSynchronized;
     private @Nullable ServerBossEvent progressEvent;
     private int lastProgressStep = -1;
 
@@ -122,6 +128,8 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
         altarHitCooldown = 0;
         setShieldCount(INITIAL_SHIELDS);
         setRitualActive(true);
+        PacketDistributor.sendToPlayersInDimension(
+                (ServerLevel) level, new PurificationRitualMusicPayload(true));
         updateProgressEvent(player, 0L);
         level.playSound(
                 null, worldPosition, SoundEvents.AMETHYST_BLOCK_CHIME,
@@ -338,8 +346,14 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
 
     public static void serverTick(
             Level level, BlockPos pos, BlockState state, PurificationAltarBlockEntity altar) {
+        if (!altar.upperPartSynchronized) {
+            altar.syncUpperPart();
+        }
         if (!state.getValue(PurificationAltarBlock.RITUAL_ACTIVE)) {
             return;
+        }
+        if (!altar.baseLightSynchronized) {
+            altar.syncBaseLight(true);
         }
         if (!(level instanceof ServerLevel serverLevel)) {
             return;
@@ -374,6 +388,7 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
                     && MoonShieldSystem.purify(player)) {
                 altar.cleanupRitualEntities(serverLevel);
                 altar.clearProgressEvent();
+                altar.setRitualMusicPlaying(serverLevel, false);
                 altar.setRitualActive(false);
                 altar.ritualPlayer = null;
                 player.sendSystemMessage(Component.translatable(
@@ -408,6 +423,7 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
         clearProgressEvent();
         if (level instanceof ServerLevel serverLevel) {
             cleanupRitualEntities(serverLevel);
+            setRitualMusicPlaying(serverLevel, false);
         }
         setRitualActive(false);
         ritualPlayer = null;
@@ -443,6 +459,11 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
                 .forEach(Entity::discard);
     }
 
+    private void setRitualMusicPlaying(ServerLevel serverLevel, boolean playing) {
+        PacketDistributor.sendToPlayersInDimension(
+                serverLevel, new PurificationRitualMusicPayload(playing));
+    }
+
     private void setRitualActive(boolean active) {
         if (level == null || getBlockState().getValue(PurificationAltarBlock.RITUAL_ACTIVE) == active) {
             return;
@@ -451,7 +472,41 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
                 worldPosition,
                 getBlockState().setValue(PurificationAltarBlock.RITUAL_ACTIVE, active),
                 Block.UPDATE_ALL);
+        syncUpperPart();
+        syncBaseLight(active);
         setChanged();
+    }
+
+    private void syncUpperPart() {
+        if (level == null) {
+            return;
+        }
+        BlockPos upperPos = worldPosition.above();
+        BlockState upperState = level.getBlockState(upperPos);
+        boolean active = getBlockState().getValue(PurificationAltarBlock.RITUAL_ACTIVE);
+        if (upperState.is(ModBlocks.PURIFICATION_ALTAR_UPPER.get())) {
+            if (upperState.getValue(PurificationAltarUpperBlock.RITUAL_ACTIVE) != active) {
+                level.setBlock(
+                        upperPos,
+                        upperState.setValue(PurificationAltarUpperBlock.RITUAL_ACTIVE, active),
+                        Block.UPDATE_ALL);
+            }
+        } else if (upperState.canBeReplaced()) {
+            level.setBlock(
+                    upperPos,
+                    ModBlocks.PURIFICATION_ALTAR_UPPER.get().defaultBlockState()
+                            .setValue(PurificationAltarUpperBlock.RITUAL_ACTIVE, active),
+                    Block.UPDATE_ALL);
+        }
+        upperPartSynchronized = true;
+    }
+
+    private void syncBaseLight(boolean active) {
+        if (level == null) {
+            return;
+        }
+        PurificationAltarBaseBlock.setRitualActive(level, worldPosition.below(), active);
+        baseLightSynchronized = true;
     }
 
     private void setShieldCount(int count) {

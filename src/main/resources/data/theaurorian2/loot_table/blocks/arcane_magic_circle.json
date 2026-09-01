@@ -1,0 +1,1 @@
+{"type":"minecraft:block","pools":[{"rolls":1,"bonus_rolls":0,"entries":[{"type":"minecraft:item","name":"theaurorian2:arcane_magic_circle"}],"conditions":[{"condition":"minecraft:survives_explosion"}]}],"random_sequence":"theaurorian2:blocks/arcane_magic_circle"}

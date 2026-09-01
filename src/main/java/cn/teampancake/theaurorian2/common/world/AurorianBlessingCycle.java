@@ -8,6 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.clock.WorldClock;
 import net.minecraft.world.clock.WorldClocks;
@@ -67,7 +68,7 @@ public final class AurorianBlessingCycle {
         }
 
         long overworldTicks = server.clockManager().getTotalTicks(overworldClock);
-        long worldDay = Math.floorDiv(overworldTicks, DAY_TICKS);
+        long worldDay = blessingDay(server, Math.floorDiv(overworldTicks, DAY_TICKS));
         long dayTime = Math.floorMod(overworldTicks, DAY_TICKS);
         long worldSeed = server.overworld().getSeed();
         int timelineSegment = blessingSlot(worldSeed, worldDay);
@@ -90,7 +91,9 @@ public final class AurorianBlessingCycle {
         }
 
         Holder<WorldClock> overworldClock = server.registryAccess().getOrThrow(WorldClocks.OVERWORLD);
-        long currentWorldDay = Math.floorDiv(server.clockManager().getTotalTicks(overworldClock), DAY_TICKS);
+        long currentWorldDay = blessingDay(
+                server,
+                Math.floorDiv(server.clockManager().getTotalTicks(overworldClock), DAY_TICKS));
         long worldSeed = server.overworld().getSeed();
         List<Blessing> forecast = new ArrayList<>(forecastDays);
         for (int daysAhead = 1; daysAhead <= forecastDays; daysAhead++) {
@@ -127,6 +130,18 @@ public final class AurorianBlessingCycle {
             shuffledSlots[swapIndex] = slot;
         }
         return shuffledSlots[dayInCycle - 1];
+    }
+
+    public static long currentOverworldDay(MinecraftServer server) {
+        Holder<WorldClock> overworldClock = server.registryAccess().getOrThrow(WorldClocks.OVERWORLD);
+        return Math.floorDiv(server.clockManager().getTotalTicks(overworldClock), DAY_TICKS);
+    }
+
+    private static long blessingDay(MinecraftServer server, long currentOverworldDay) {
+        ServerLevel aurorian = server.getLevel(TheAurorian2.AURORIAN_LEVEL);
+        return aurorian == null
+                ? currentOverworldDay
+                : AurorianArrivalSiteData.relativeBlessingDay(aurorian, currentOverworldDay);
     }
 
     private static long mixSeed(long worldSeed, long cycle) {

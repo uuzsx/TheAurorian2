@@ -30,11 +30,7 @@ public final class AurorianCaveVinesPlantBlock extends CaveVinesPlantBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, net.minecraft.core.BlockPos pos, Player player, BlockHitResult hitResult) {
-        return InteractionResult.PASS;
+        return AurorianCaveVines.use(player, state, level, pos);
     }
 
-    @Override
-    public boolean isValidBonemealTarget(LevelReader level, net.minecraft.core.BlockPos pos, BlockState state) {
-        return false;
-    }
 }

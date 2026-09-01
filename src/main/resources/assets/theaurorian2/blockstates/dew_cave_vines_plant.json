@@ -1,10 +1,10 @@
 {
   "variants": {
     "berries=false": {
-      "model": "minecraft:block/cave_vines_plant"
+      "model": "theaurorian2:block/dew_cave_vines_plant"
     },
     "berries=true": {
-      "model": "minecraft:block/cave_vines_plant_lit"
+      "model": "theaurorian2:block/dew_cave_vines_plant_lit"
     }
   }
 }

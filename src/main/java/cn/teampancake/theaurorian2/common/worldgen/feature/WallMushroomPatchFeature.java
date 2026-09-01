@@ -1,6 +1,7 @@
 package cn.teampancake.theaurorian2.common.worldgen.feature;
 
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
+import cn.teampancake.theaurorian2.common.worldgen.placement.NotInUmbraDarkMazePlacement;
 import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
@@ -34,7 +35,8 @@ public final class WallMushroomPatchFeature extends Feature<NoneFeatureConfigura
                     random.nextInt(SEARCH_RADIUS * 2 + 1) - SEARCH_RADIUS,
                     random.nextInt(SEARCH_RADIUS * 2 + 1) - SEARCH_RADIUS);
             if (pos.getY() <= level.getMinY() || pos.getY() >= level.getMaxY()
-                    || !level.getBlockState(pos).isAir()) {
+                    || !level.getBlockState(pos).isAir()
+                    || NotInUmbraDarkMazePlacement.isInsideExcludedStructure(level, pos)) {
                 continue;
             }
             for (Direction facing : Direction.Plane.HORIZONTAL.shuffledCopy(random)) {
@@ -63,6 +65,7 @@ public final class WallMushroomPatchFeature extends Feature<NoneFeatureConfigura
                     : center.offset(lateral, vertical, 0);
             if (!placed.contains(candidate)
                     && level.getBlockState(candidate).isAir()
+                    && !NotInUmbraDarkMazePlacement.isInsideExcludedStructure(level, candidate)
                     && canAttachToCaveWall(level, candidate, facing)) {
                 place(level, candidate, facing, mushroom, random);
                 placed.add(candidate);

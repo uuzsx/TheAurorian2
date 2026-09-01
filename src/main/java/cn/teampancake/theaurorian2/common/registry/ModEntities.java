@@ -10,6 +10,7 @@ import cn.teampancake.theaurorian2.common.entity.SpiderSilkProjectileEntity;
 import cn.teampancake.theaurorian2.common.entity.SpiderVenomProjectileEntity;
 import cn.teampancake.theaurorian2.common.entity.SpiderlingEntity;
 import cn.teampancake.theaurorian2.common.entity.TrainingDummyEntity;
+import cn.teampancake.theaurorian2.common.entity.IserynValeEntity;
 import cn.teampancake.theaurorian2.common.entity.WallClimberSpiderlingEntity;
 import cn.teampancake.theaurorian2.common.entity.PurificationRiftEntity;
 import cn.teampancake.theaurorian2.common.entity.PurificationRitualZombieEntity;
@@ -53,6 +54,16 @@ public final class ModEntities {
             ENTITIES.registerEntityType(
                     "aurorian_cow", AurorianCowEntity::new, MobCategory.CREATURE,
                     builder -> builder.sized(1.5F, 1.46F).clientTrackingRange(10));
+    public static final DeferredHolder<EntityType<?>, EntityType<IserynValeEntity>> ISERYN_VALE =
+            ENTITIES.registerEntityType(
+                    "iseryn_vale",
+                    IserynValeEntity::new,
+                    MobCategory.CREATURE,
+                    builder -> builder
+                            .sized(0.6F, 1.8F)
+                            .eyeHeight(1.62F)
+                            .clientTrackingRange(10)
+                            .noLootTable());
 
     public static final DeferredHolder<EntityType<?>, EntityType<TrainingDummyEntity>> TRAINING_DUMMY =
             ENTITIES.registerEntityType(
@@ -207,6 +218,7 @@ public final class ModEntities {
         event.put(AURORIAN_PIG.get(), Pig.createAttributes().build());
         event.put(AURORIAN_SHEEP.get(), Sheep.createAttributes().build());
         event.put(AURORIAN_COW.get(), AbstractCow.createAttributes().build());
+        event.put(ISERYN_VALE.get(), IserynValeEntity.createAttributes().build());
         event.put(PURIFICATION_RITUAL_ZOMBIE.get(),
                 net.minecraft.world.entity.monster.zombie.Zombie.createAttributes().build());
     }

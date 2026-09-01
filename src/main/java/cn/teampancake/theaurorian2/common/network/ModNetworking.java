@@ -6,7 +6,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public final class ModNetworking {
 
-    private static final String NETWORK_VERSION = "3";
+    private static final String NETWORK_VERSION = "4";
 
     private ModNetworking() {
     }
@@ -15,6 +15,7 @@ public final class ModNetworking {
         PayloadRegistrar registrar = event.registrar(NETWORK_VERSION);
         registrar.playToClient(AstrologyForecastPayload.TYPE, AstrologyForecastPayload.STREAM_CODEC);
         registrar.playToClient(PurificationRitualPromptPayload.TYPE, PurificationRitualPromptPayload.STREAM_CODEC);
+        registrar.playToClient(PurificationRitualMusicPayload.TYPE, PurificationRitualMusicPayload.STREAM_CODEC);
         registrar.playToServer(
                 PurificationRitualConfirmPayload.TYPE,
                 PurificationRitualConfirmPayload.STREAM_CODEC,
