@@ -2,6 +2,7 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.entity.DamageNumberEntity;
+import cn.teampancake.theaurorian2.common.entity.StoolSeatEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianChestMinecartEntity;
 import cn.teampancake.theaurorian2.common.entity.CrystalShellSpiderlingEntity;
 import cn.teampancake.theaurorian2.common.entity.SpiderEggEntity;
@@ -37,6 +38,14 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModEntities {
 
     public static final DeferredRegister.Entities ENTITIES = DeferredRegister.createEntities(TheAurorian2.MOD_ID);
+
+    // Keep the type serializable: vanilla refuses to mount noSave entity types.
+    // Seats are not saved as world entities; player autosaves can preserve their
+    // mount for crash recovery. Normal logout dismounts before saving the player.
+    public static final DeferredHolder<EntityType<?>, EntityType<StoolSeatEntity>> STOOL_SEAT =
+            ENTITIES.registerEntityType("stool_seat", StoolSeatEntity::new, MobCategory.MISC,
+                    builder -> builder.sized(0.01F, 0.01F).clientTrackingRange(8)
+                            .updateInterval(Integer.MAX_VALUE).noSummon().noLootTable());
 
     public static final DeferredHolder<EntityType<?>, EntityType<AurorianRabbitEntity>> AURORIAN_RABBIT =
             ENTITIES.registerEntityType(

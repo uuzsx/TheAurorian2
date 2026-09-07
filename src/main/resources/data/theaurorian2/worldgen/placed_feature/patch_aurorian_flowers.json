@@ -5,13 +5,13 @@
     {"type":"minecraft:rarity_filter","chance":32},
     {"type":"minecraft:in_square"},
     {"type":"minecraft:heightmap","heightmap":"MOTION_BLOCKING"},
-    {"type":"minecraft:biome"},
     {"count":64,"type":"minecraft:count"},
     {
       "xz_spread": {"plateau":0,"min":-6,"type":"minecraft:trapezoid","max":6},
       "type": "minecraft:random_offset",
       "y_spread": {"plateau":0,"min":-2,"type":"minecraft:trapezoid","max":2}
     },
+    {"type":"minecraft:biome"},
     {
       "predicate": {
         "type": "minecraft:all_of",

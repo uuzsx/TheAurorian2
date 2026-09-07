@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Util;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -19,11 +20,13 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
-public final class AurorianGrassBlock extends SpreadingSnowyBlock implements BonemealableBlock {
+public class AurorianGrassBlock extends SpreadingSnowyBlock implements BonemealableBlock {
 
     public static final MapCodec<AurorianGrassBlock> CODEC = simpleCodec(AurorianGrassBlock::new);
     private static final ResourceKey<Block> AURORIAN_DIRT = ResourceKey.create(
             Registries.BLOCK, TheAurorian2.id("aurorian_dirt"));
+    private static final ResourceKey<Biome> EQUINOX_FLOWER_ISLAND = ResourceKey.create(
+            Registries.BIOME, TheAurorian2.id("equinox_flower_island"));
 
     public AurorianGrassBlock(BlockBehaviour.Properties properties) {
         super(properties, AURORIAN_DIRT);
@@ -32,6 +35,45 @@ public final class AurorianGrassBlock extends SpreadingSnowyBlock implements Bon
     @Override
     protected MapCodec<? extends SpreadingSnowyBlock> codec() {
         return CODEC;
+    }
+
+    /** Prevents normal grass from crossing into the island, while keeping filthy grass island-local. */
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        boolean filthy = state.is(ModBlocks.FILTHY_GRASS_BLOCK.get());
+        boolean island = level.getBiome(pos).is(EQUINOX_FLOWER_ISLAND);
+        boolean neighboringIsland = hasNeighborBiome(level, pos, true);
+
+        if (filthy) {
+            if (!island || hasNeighborBiome(level, pos, false)) {
+                return;
+            }
+        } else {
+            if (island) {
+                level.setBlockAndUpdate(pos, ModBlocks.FILTHY_GRASS_BLOCK.get().defaultBlockState());
+                return;
+            }
+            if (neighboringIsland) {
+                return;
+            }
+        }
+
+        super.randomTick(state, level, pos, random);
+    }
+
+    private static boolean hasNeighborBiome(LevelReader level, BlockPos pos, boolean island) {
+        for (int x = -1; x <= 1; x++) {
+            for (int z = -1; z <= 1; z++) {
+                if (x == 0 && z == 0) {
+                    continue;
+                }
+                boolean neighborIsland = level.getBiome(pos.offset(x, 0, z)).is(EQUINOX_FLOWER_ISLAND);
+                if (neighborIsland == island) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

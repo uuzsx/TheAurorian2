@@ -1,16 +1,1 @@
-{
-  "sources": [
-    {
-      "type": "minecraft:single",
-      "resource": "theaurorian2:entity/chest/silent_wood"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "theaurorian2:entity/chest/silent_wood_left"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "theaurorian2:entity/chest/silent_wood_right"
-    }
-  ]
-}
+{"sources":[{"resource":"theaurorian2:entity/chest/aurorian_chest","type":"minecraft:single"},{"resource":"theaurorian2:entity/chest/weeping_willow_chest","type":"minecraft:single"},{"resource":"theaurorian2:entity/chest/curtain_wood_chest","type":"minecraft:single"},{"resource":"theaurorian2:entity/chest/cursed_frost_wood_chest","type":"minecraft:single"},{"resource":"theaurorian2:entity/chest/filthy_wood_chest","type":"minecraft:single"}]}

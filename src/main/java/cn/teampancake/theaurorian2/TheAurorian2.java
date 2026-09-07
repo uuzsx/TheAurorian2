@@ -101,6 +101,11 @@ public final class TheAurorian2 {
 
     private static void registerFlammableWood() {
         FireBlockAccessor fire = (FireBlockAccessor) Blocks.FIRE;
+        fire.theaurorian2$setFlammable(ModBlocks.FILTHY_TREE_PLANKS.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModBlocks.FILTHY_WOOD_STAIRS.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModBlocks.FILTHY_WOOD_SLAB.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModBlocks.FILTHY_WOOD_FENCE.get(), 5, 20);
+        fire.theaurorian2$setFlammable(ModBlocks.FILTHY_WOOD_FENCE_GATE.get(), 5, 20);
         registerFlammableWoodSet(fire, ModBlocks.SILENT_WOOD);
         registerFlammableWoodSet(fire, ModBlocks.CURTAIN_WOOD);
         registerFlammableWoodSet(fire, ModBlocks.CURSED_FROST_WOOD);
@@ -112,6 +117,7 @@ public final class TheAurorian2 {
         fire.theaurorian2$setFlammable(ModBlocks.CURSED_FROST_TREE_SAPLING.get(), 60, 100);
         registerWeepingWillowWood(fire);
         fire.theaurorian2$setFlammable(ModStructureBlocks.EQUINOX_FLOWER.get(), 60, 100);
+        fire.theaurorian2$setFlammable(ModStructureBlocks.FILTHY_EQUINOX_FLOWER.get(), 60, 100);
     }
 
     private static void registerFlammableWoodSet(FireBlockAccessor fire, ModBlocks.WoodSet wood) {

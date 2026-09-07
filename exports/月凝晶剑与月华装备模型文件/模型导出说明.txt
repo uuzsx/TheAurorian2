@@ -1,0 +1,31 @@
+月凝晶剑与月华装备模型文件
+
+本导出包保留项目内的原始资源目录结构，方便直接复制或手动调整。
+
+每件模型化物品包含：
+- geckolib/models/item/<id>.geo.json：Geo 几何模型
+- textures/item/<贴图名>.png：模型贴图
+- models/item/<id>.json：手持、创造栏、快捷栏、地面及展示框显示参数
+- items/<id>.json：Minecraft 物品特殊渲染入口
+
+已包含：
+- crystalline_sword（月凝晶剑）
+- moonsilver_axe（月华斧）
+- moonsilver_bow（月华弓，另含 geckolib/animations/item/moonsilver_bow.animation.json）
+- moonsilver_great_sword（月华大剑）
+- moonsilver_pickaxe（月华镐）
+- moonsilver_scythe（月华镰刀）
+- moonsilver_shovel（月华锹）
+- moonsilver_sword（月华剑）
+
+月凝晶剑说明：
+- 旧版左右手旋转、位移、缩放参数均原样保留。
+- gui、ground、fixed 参数沿用同尺寸月华大剑的取景比例，用于三维创造栏、快捷栏、掉落物和展示框渲染。
+- Geo 文件只压缩了无意义空白；骨骼、UV、负数 UV 尺寸、枢轴、旋转和所有数值均未改变。
+
+暂未包含 Geo 模型：
+- moonsilver_hoe（月华锄）
+- moonsilver_dagger（月华匕首）
+- moonsilver_helmet / chestplate / leggings / boots（月华盔甲）
+
+这些物品目前只有平面资源，项目和旧资产中未找到对应 Geo 模型，因此没有伪造模型文件。

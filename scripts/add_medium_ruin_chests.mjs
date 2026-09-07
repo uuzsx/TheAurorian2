@@ -30,7 +30,7 @@ function paletteName(palette, index) {
 
 function chestPaletteEntry(facing) {
   return {
-    Name: {type: 8, value: 'theaurorian2:aurorian_chest'},
+    Name: {type: 8, value: 'theaurorian2:silent_wood_chest'},
     Properties: {
       type: 10,
       value: {
@@ -46,13 +46,13 @@ function emptyChestData() {
   return {
     type: 10,
     value: {
-      id: {type: 8, value: 'theaurorian2:aurorian_chest'},
+      id: {type: 8, value: 'theaurorian2:silent_wood_chest'},
     },
   };
 }
 
 function findChestState(palette, facing) {
-  return palette.findIndex(entry => entry.Name.value === 'theaurorian2:aurorian_chest'
+  return palette.findIndex(entry => entry.Name.value === 'theaurorian2:silent_wood_chest'
     && entry.Properties?.value?.facing?.value === facing
     && entry.Properties?.value?.type?.value === 'single'
     && entry.Properties?.value?.waterlogged?.value === 'false');
@@ -62,11 +62,11 @@ function verifyChest(filePath, expected) {
   const root = readNbt(filePath).value;
   const palette = list(root.palette);
   const chests = list(root.blocks).filter(block => {
-    return paletteName(palette, block.state.value) === 'theaurorian2:aurorian_chest';
+    return paletteName(palette, block.state.value) === 'theaurorian2:silent_wood_chest';
   });
   assert.equal(chests.length, 1, `${filePath} must contain exactly one Aurorian chest`);
   assert.deepEqual(blockPosition(chests[0]), expected.pos, `${filePath} chest is at the wrong position`);
-  assert.equal(chests[0].nbt?.value?.id?.value, 'theaurorian2:aurorian_chest');
+  assert.equal(chests[0].nbt?.value?.id?.value, 'theaurorian2:silent_wood_chest');
   assert.equal(chests[0].nbt?.value?.LootTable, undefined, `${filePath} must not define loot yet`);
 }
 
@@ -87,7 +87,7 @@ for (const [fileName, placement] of Object.entries(placements)) {
   }
 
   const oldName = paletteName(palette, target.state.value);
-  if (oldName !== 'minecraft:air' && oldName !== 'theaurorian2:aurorian_chest') {
+  if (oldName !== 'minecraft:air' && oldName !== 'theaurorian2:silent_wood_chest') {
     throw new Error(`${fileName} chest position contains ${oldName}, expected air`);
   }
 

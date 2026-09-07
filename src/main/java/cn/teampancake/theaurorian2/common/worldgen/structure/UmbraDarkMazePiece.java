@@ -699,7 +699,7 @@ public final class UmbraDarkMazePiece extends StructurePiece {
                 continue;
             }
             BlockState chestState = StructurePiece.reorient(
-                    level, pos, ModBlocks.AURORIAN_CHEST.get().defaultBlockState());
+                    level, pos, ModBlocks.SILENT_WOOD_CHEST.get().defaultBlockState());
             level.setBlock(pos, chestState, 2);
             if (level.getBlockEntity(pos) instanceof RandomizableContainerBlockEntity container) {
                 container.setLootTable(BuiltInLootTables.SIMPLE_DUNGEON);

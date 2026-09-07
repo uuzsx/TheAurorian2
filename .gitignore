@@ -43,3 +43,10 @@ repo/
 # Local extraction and reverse-engineering scratch data
 /work/
 /原版贴图绘制参考/
+/META-INF/
+/assets/
+/data/
+/net/
+/logs/
+__pycache__/
+*.pyc

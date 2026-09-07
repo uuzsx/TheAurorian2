@@ -5,7 +5,7 @@ import {pathToFileURL} from 'node:url';
 import zlib from 'node:zlib';
 
 const LEGACY_BLOCK_MAPPINGS = new Map([
-  ['silent_wood_chest', 'aurorian_chest'],
+  ['aurorian_chest', 'silent_wood_chest'],
   ['moon_water', 'moon_dew'],
   ['snow_aurorian_grass_block', 'aurorian_grass_block'],
 ]);

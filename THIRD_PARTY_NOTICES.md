@@ -28,3 +28,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Adventurer Tools models and recolored textures
+
+The models for the Aurorian wooden and stone pickaxes, axes, hoes, and shovels originate from
+Adventurer Tools v8 by Akaleaf, supplied by the project owner from MCModels Marketplace.
+The corresponding textures are recolored adaptations. Model geometry, UVs, and
+item display transforms are retained from the supplied assets.
+
+Original creator: Akaleaf
+- Marketplace: mcmodels.net
+- Discord: akaleaf#4723 / discord.gg/jpbHGee
+- X: x.com/akaleafwastaken
+
+These assets remain subject to their original asset license; the project license
+and the NeoForged MDK MIT notice above do not relicense them.
+
+## Wooden Pack chest
+
+The five wood chest variants use the project owner's supplied Wooden Pack
+`box_wood` model and a recolored version of its texture, credited in the pack
+under EliteCreatures / Elite-Craft. Adaptations fit the model to a block, hollow
+its base for opening, and extend the single chest into a double chest with
+repeated UVs. These assets remain subject to the supplied original asset terms;
+the project license does not relicense them.

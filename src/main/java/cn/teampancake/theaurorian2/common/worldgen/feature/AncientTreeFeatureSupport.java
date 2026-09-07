@@ -1,14 +1,19 @@
 package cn.teampancake.theaurorian2.common.worldgen.feature;
 
+import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeafLitterBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 final class AncientTreeFeatureSupport {
@@ -16,6 +21,13 @@ final class AncientTreeFeatureSupport {
     private static final int PLACEMENT_SEARCH_RADIUS = 1;
     private static final int PLACEMENT_SEARCH_ATTEMPTS = 8;
     private static final int MAX_PLACEMENT_CANDIDATES = 4;
+    private static final int LEAF_LITTER_UPDATE_FLAGS = 19;
+    private static final int OUTER_LEAF_LITTER_RADIUS = 7;
+    private static final int OUTER_LEAF_LITTER_HEIGHT = 3;
+    private static final int OUTER_LEAF_LITTER_TRIES = 200;
+    private static final int INNER_LEAF_LITTER_RADIUS = 4;
+    private static final int INNER_LEAF_LITTER_HEIGHT = 2;
+    private static final int INNER_LEAF_LITTER_TRIES = 280;
 
     private AncientTreeFeatureSupport() {
     }
@@ -68,6 +80,87 @@ final class AncientTreeFeatureSupport {
             }
         }
         return true;
+    }
+
+    /** Places the denser two-ring ground litter used beneath the 3x3 ancient trees. */
+    static void placeLeafLitterUnderAncientTree(
+            WorldGenLevel level,
+            BlockPos origin,
+            Map<BlockPos, BlockState> logs,
+            RandomSource random) {
+        if (logs.isEmpty()) {
+            return;
+        }
+
+        int baseY = logs.keySet().stream().mapToInt(BlockPos::getY).min().orElse(origin.getY());
+        int minX = origin.getX();
+        int maxX = origin.getX();
+        int minZ = origin.getZ();
+        int maxZ = origin.getZ();
+        for (BlockPos log : logs.keySet()) {
+            if (log.getY() != baseY) {
+                continue;
+            }
+            minX = Math.min(minX, log.getX());
+            maxX = Math.max(maxX, log.getX());
+            minZ = Math.min(minZ, log.getZ());
+            maxZ = Math.max(maxZ, log.getZ());
+        }
+
+        placeLeafLitterPass(
+                level, random, minX, maxX, minZ, maxZ, baseY,
+                OUTER_LEAF_LITTER_RADIUS, OUTER_LEAF_LITTER_HEIGHT,
+                OUTER_LEAF_LITTER_TRIES, 3);
+        placeLeafLitterPass(
+                level, random, minX, maxX, minZ, maxZ, baseY,
+                INNER_LEAF_LITTER_RADIUS, INNER_LEAF_LITTER_HEIGHT,
+                INNER_LEAF_LITTER_TRIES, 4);
+    }
+
+    private static void placeLeafLitterPass(
+            WorldGenLevel level,
+            RandomSource random,
+            int minX,
+            int maxX,
+            int minZ,
+            int maxZ,
+            int baseY,
+            int radius,
+            int height,
+            int tries,
+            int maxSegmentAmount) {
+        int minCandidateX = minX - radius;
+        int maxCandidateX = maxX + radius;
+        int minCandidateZ = minZ - radius;
+        int maxCandidateZ = maxZ + radius;
+        BlockState litter = ModBlocks.SILENT_TREE_LEAF_LITTER.get().defaultBlockState();
+
+        for (int attempt = 0; attempt < tries; attempt++) {
+            int x = minCandidateX + random.nextInt(maxCandidateX - minCandidateX + 1);
+            int y = baseY - height + random.nextInt(height * 2 + 1);
+            int z = minCandidateZ + random.nextInt(maxCandidateZ - minCandidateZ + 1);
+            BlockPos groundPos = new BlockPos(x, y, z);
+            BlockPos litterPos = groundPos.above();
+            if (litterPos.getY() >= level.getMaxY()) {
+                continue;
+            }
+
+            BlockState aboveState = level.getBlockState(litterPos);
+            if (!aboveState.isAir() && !aboveState.is(Blocks.VINE)) {
+                continue;
+            }
+            if (!level.getBlockState(groundPos).isSolidRender()
+                    || level.getHeightmapPos(
+                            Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, groundPos).getY()
+                    > litterPos.getY()) {
+                continue;
+            }
+
+            BlockState selected = litter
+                    .setValue(LeafLitterBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random))
+                    .setValue(BlockStateProperties.SEGMENT_AMOUNT, 1 + random.nextInt(maxSegmentAmount));
+            level.setBlock(litterPos, selected, LEAF_LITTER_UPDATE_FLAGS);
+        }
     }
 
     private static BlockPos findTerrainAlignedOrigin(WorldGenLevel level, int centerX, int centerZ) {

@@ -1,6 +1,1 @@
-{
-    "replace":  false,
-    "values":  [
-                   "theaurorian2:aurorian_chest"
-               ]
-}
+{"replace":false,"values":["theaurorian2:silent_wood_chest","theaurorian2:weeping_willow_chest","theaurorian2:curtain_wood_chest","theaurorian2:cursed_frost_wood_chest","theaurorian2:filthy_wood_chest"]}

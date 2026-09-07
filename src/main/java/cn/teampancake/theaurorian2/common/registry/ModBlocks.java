@@ -6,7 +6,6 @@ import cn.teampancake.theaurorian2.common.block.AurorianFireflyBushBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCaveVinesBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCaveVinesPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianGrassBlock;
-import cn.teampancake.theaurorian2.common.block.AurorianGrassRockBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianKelpBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianKelpPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianPlantBlock;
@@ -21,15 +20,20 @@ import cn.teampancake.theaurorian2.common.block.AurorianWaterSurfacePlantBlock;
 import cn.teampancake.theaurorian2.common.block.AstrologyTableBlock;
 import cn.teampancake.theaurorian2.common.block.ArcaneMagicCircleBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianChestBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianCrateBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianStoolBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianChairBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianLongTableBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCraftingTableBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianBuddingCrystalBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCrystalClusterBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianFurnaceBlock;
 import cn.teampancake.theaurorian2.common.block.BlueberryBushBlock;
-import cn.teampancake.theaurorian2.common.block.CloudberryBushBlock;
 import cn.teampancake.theaurorian2.common.block.ColoredParticleLeavesBlock;
 import cn.teampancake.theaurorian2.common.block.ColdAurorianPlantBlock;
 import cn.teampancake.theaurorian2.common.block.FireplaceBlock;
 import cn.teampancake.theaurorian2.common.block.FireplacePartBlock;
+import cn.teampancake.theaurorian2.common.block.FilthyGrassBlock;
 import cn.teampancake.theaurorian2.common.block.GroundBranchBlock;
 import cn.teampancake.theaurorian2.common.block.GroundMushroomBlock;
 import cn.teampancake.theaurorian2.common.block.LogMushroomBlock;
@@ -46,7 +50,6 @@ import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
 import cn.teampancake.theaurorian2.common.block.TallAurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.block.WallMushroomBlock;
 import cn.teampancake.theaurorian2.common.item.AstrologyTableItem;
-import cn.teampancake.theaurorian2.common.item.AurorianGrassRockItem;
 import cn.teampancake.theaurorian2.common.item.PurificationAltarItem;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.BlockItem;
@@ -86,6 +89,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.ColoredFallingBlock;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.LeafLitterBlock;
 import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.RailBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -104,6 +108,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public final class ModBlocks {
 
@@ -184,6 +189,8 @@ public final class ModBlocks {
             "medium_cerulean_bud", 4, 3, Blocks.MEDIUM_AMETHYST_BUD);
     public static final DeferredBlock<AurorianCrystalClusterBlock> SMALL_CERULEAN_BUD = crystalCluster(
             "small_cerulean_bud", 3, 4, Blocks.SMALL_AMETHYST_BUD);
+    public static final DeferredBlock<AurorianBuddingCrystalBlock> BUDDING_CERULEAN = buddingCrystal(
+            "budding_cerulean", SMALL_CERULEAN_BUD, MEDIUM_CERULEAN_BUD, LARGE_CERULEAN_BUD, CERULEAN_CLUSTER);
     public static final DeferredBlock<AurorianCrystalClusterBlock> MOONSTONE_CLUSTER = crystalCluster(
             "moonstone_cluster", 7, 3, Blocks.AMETHYST_CLUSTER);
     public static final DeferredBlock<AurorianCrystalClusterBlock> LARGE_MOONSTONE_BUD = crystalCluster(
@@ -192,6 +199,8 @@ public final class ModBlocks {
             "medium_moonstone_bud", 4, 3, Blocks.MEDIUM_AMETHYST_BUD);
     public static final DeferredBlock<AurorianCrystalClusterBlock> SMALL_MOONSTONE_BUD = crystalCluster(
             "small_moonstone_bud", 3, 4, Blocks.SMALL_AMETHYST_BUD);
+    public static final DeferredBlock<AurorianBuddingCrystalBlock> BUDDING_MOONSTONE = buddingCrystal(
+            "budding_moonstone", SMALL_MOONSTONE_BUD, MEDIUM_MOONSTONE_BUD, LARGE_MOONSTONE_BUD, MOONSTONE_CLUSTER);
 
     public static final DeferredBlock<Block> AURORIAN_BRICKS = BLOCKS.registerSimpleBlock(
             "aurorian_bricks", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS));
@@ -217,6 +226,9 @@ public final class ModBlocks {
     public static final DeferredBlock<AurorianGrassBlock> LIGHT_AURORIAN_GRASS_BLOCK = BLOCKS.registerBlock(
             "light_aurorian_grass_block", AurorianGrassBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).lightLevel(state -> 2));
+    public static final DeferredBlock<FilthyGrassBlock> FILTHY_GRASS_BLOCK = BLOCKS.registerBlock(
+            "filthy_grass_block", FilthyGrassBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK));
     public static final DeferredBlock<SandBlock> MOON_SAND_RIVER = BLOCKS.registerBlock(
             "moon_sand_river", properties -> new SandBlock(new ColorRGBA(0xFFB7A9D6), properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SAND));
@@ -290,9 +302,6 @@ public final class ModBlocks {
     public static final DeferredBlock<BlueberryBushBlock> BLUEBERRY_BUSH = BLOCKS.registerBlock(
             "blueberry_bush", BlueberryBushBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
-    public static final DeferredBlock<CloudberryBushBlock> CLOUDBERRY_BUSH = BLOCKS.registerBlock(
-            "cloudberry_bush", CloudberryBushBlock::new,
-            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
     public static final DeferredBlock<AurorianFireflyBushBlock> AURORIAN_FIREFLY_BUSH = BLOCKS.registerBlock(
             "aurorian_firefly_bush", AurorianFireflyBushBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.FIREFLY_BUSH));
@@ -305,12 +314,9 @@ public final class ModBlocks {
                     .strength(0.2F)
                     .sound(SoundType.STONE)
                     .noOcclusion());
-    public static final DeferredBlock<AurorianGrassRockBlock> AURORIAN_GRASS_ROCK = BLOCKS.registerBlock(
-            "aurorian_grass_rock", AurorianGrassRockBlock::new,
-            () -> BlockBehaviour.Properties.of()
-                    .strength(0.2F)
-                    .sound(SoundType.STONE)
-                    .noOcclusion());
+    public static final DeferredBlock<LeafLitterBlock> SILENT_TREE_LEAF_LITTER = BLOCKS.registerBlock(
+            "leaf_litter", LeafLitterBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.LEAF_LITTER));
     public static final DeferredBlock<GroundMushroomBlock> WHITE_GROUND_MUSHROOM = BLOCKS.registerBlock(
             "white_ground_mushroom", GroundMushroomBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM).noOcclusion());
@@ -413,6 +419,9 @@ public final class ModBlocks {
     public static final DeferredBlock<RotatedPillarBlock> CURSED_FROST_TREE_LOG = BLOCKS.registerBlock(
             "cursed_frost_tree_log", RotatedPillarBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LOG));
+    public static final DeferredBlock<RotatedPillarBlock> FILTHY_TREE_LOG = BLOCKS.registerBlock(
+            "filthy_tree_log", RotatedPillarBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG));
     public static final DeferredBlock<ColoredParticleLeavesBlock> CURSED_FROST_TREE_LEAVES = BLOCKS.registerBlock(
             "cursed_frost_tree_leaves",
             properties -> new ColoredParticleLeavesBlock(0.01F, 0xFFE1E9ED, properties),
@@ -420,6 +429,31 @@ public final class ModBlocks {
     public static final DeferredBlock<SaplingBlock> CURSED_FROST_TREE_SAPLING = BLOCKS.registerBlock(
             "cursed_frost_tree_sapling", properties -> new SaplingBlock(ModTreeGrowers.CURSED_FROST_TREE, properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING));
+
+    public static final DeferredBlock<Block> FILTHY_TREE_PLANKS = BLOCKS.registerSimpleBlock(
+            "filthy_tree_planks", () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<StairBlock> FILTHY_WOOD_STAIRS = BLOCKS.registerBlock(
+            "filthy_wood_stairs", properties -> new StairBlock(FILTHY_TREE_PLANKS.get().defaultBlockState(), properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS));
+    public static final DeferredBlock<SlabBlock> FILTHY_WOOD_SLAB = BLOCKS.registerBlock(
+            "filthy_wood_slab", SlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB));
+    public static final DeferredBlock<FenceBlock> FILTHY_WOOD_FENCE = BLOCKS.registerBlock(
+            "filthy_wood_fence", FenceBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceGateBlock> FILTHY_WOOD_FENCE_GATE = BLOCKS.registerBlock(
+            "filthy_wood_fence_gate", properties -> new FenceGateBlock(WoodType.OAK, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE));
+    public static final DeferredBlock<DoorBlock> FILTHY_WOOD_DOOR = BLOCKS.registerBlock(
+            "filthy_wood_door", properties -> new DoorBlock(BlockSetType.OAK, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<TrapDoorBlock> FILTHY_WOOD_TRAPDOOR = BLOCKS.registerBlock(
+            "filthy_wood_trapdoor", properties -> new TrapDoorBlock(BlockSetType.OAK, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR));
+    public static final DeferredBlock<PressurePlateBlock> FILTHY_WOOD_PRESSURE_PLATE = BLOCKS.registerBlock(
+            "filthy_wood_pressure_plate", properties -> new PressurePlateBlock(BlockSetType.OAK, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE));
+    public static final DeferredBlock<ButtonBlock> FILTHY_WOOD_BUTTON = BLOCKS.registerBlock(
+            "filthy_wood_button", properties -> new ButtonBlock(BlockSetType.OAK, 30, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_BUTTON));
 
     public static final WoodSet SILENT_WOOD = woodSet(
             "silent_tree", "silent_wood", SILENT_TREE_LOG,
@@ -470,8 +504,41 @@ public final class ModBlocks {
                     .noOcclusion()
                     .noLootTable()
                     .pushReaction(PushReaction.BLOCK));
-    public static final DeferredBlock<AurorianChestBlock> AURORIAN_CHEST = BLOCKS.registerBlock(
-            "aurorian_chest", AurorianChestBlock::new,
+    public static final DeferredBlock<AurorianCrateBlock> SILENT_WOOD_CRATE = crate("silent_wood_crate");
+    public static final DeferredBlock<AurorianStoolBlock> SILENT_WOOD_STOOL = stool("silent_wood_stool");
+    public static final DeferredBlock<AurorianStoolBlock> WEEPING_WILLOW_STOOL = stool("weeping_willow_stool");
+    public static final DeferredBlock<AurorianStoolBlock> CURTAIN_WOOD_STOOL = stool("curtain_wood_stool");
+    public static final DeferredBlock<AurorianStoolBlock> CURSED_FROST_WOOD_STOOL = stool("cursed_frost_wood_stool");
+    public static final DeferredBlock<AurorianStoolBlock> FILTHY_WOOD_STOOL = stool("filthy_wood_stool");
+    public static final DeferredBlock<AurorianChairBlock> SILENT_WOOD_CHAIR = chair("silent_wood_chair");
+    public static final DeferredBlock<AurorianChairBlock> WEEPING_WILLOW_CHAIR = chair("weeping_willow_chair");
+    public static final DeferredBlock<AurorianChairBlock> CURTAIN_WOOD_CHAIR = chair("curtain_wood_chair");
+    public static final DeferredBlock<AurorianChairBlock> CURSED_FROST_WOOD_CHAIR = chair("cursed_frost_wood_chair");
+    public static final DeferredBlock<AurorianChairBlock> FILTHY_WOOD_CHAIR = chair("filthy_wood_chair");
+    public static final DeferredBlock<AurorianLongTableBlock> SILENT_WOOD_LONG_TABLE = longTable("silent_wood_long_table");
+    public static final DeferredBlock<AurorianLongTableBlock> WEEPING_WILLOW_LONG_TABLE = longTable("weeping_willow_long_table");
+    public static final DeferredBlock<AurorianLongTableBlock> CURTAIN_WOOD_LONG_TABLE = longTable("curtain_wood_long_table");
+    public static final DeferredBlock<AurorianLongTableBlock> CURSED_FROST_WOOD_LONG_TABLE = longTable("cursed_frost_wood_long_table");
+    public static final DeferredBlock<AurorianLongTableBlock> FILTHY_WOOD_LONG_TABLE = longTable("filthy_wood_long_table");
+    public static final DeferredBlock<AurorianCrateBlock> WEEPING_WILLOW_CRATE = crate("weeping_willow_crate");
+    public static final DeferredBlock<AurorianCrateBlock> CURTAIN_WOOD_CRATE = crate("curtain_wood_crate");
+    public static final DeferredBlock<AurorianCrateBlock> CURSED_FROST_WOOD_CRATE = crate("cursed_frost_wood_crate");
+    public static final DeferredBlock<AurorianCrateBlock> FILTHY_WOOD_CRATE = crate("filthy_wood_crate");
+
+    public static final DeferredBlock<AurorianChestBlock> SILENT_WOOD_CHEST = BLOCKS.registerBlock(
+            "silent_wood_chest", AurorianChestBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST));
+    public static final DeferredBlock<AurorianChestBlock> WEEPING_WILLOW_CHEST = BLOCKS.registerBlock(
+            "weeping_willow_chest", AurorianChestBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST));
+    public static final DeferredBlock<AurorianChestBlock> CURTAIN_WOOD_CHEST = BLOCKS.registerBlock(
+            "curtain_wood_chest", AurorianChestBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST));
+    public static final DeferredBlock<AurorianChestBlock> CURSED_FROST_WOOD_CHEST = BLOCKS.registerBlock(
+            "cursed_frost_wood_chest", AurorianChestBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST));
+    public static final DeferredBlock<AurorianChestBlock> FILTHY_WOOD_CHEST = BLOCKS.registerBlock(
+            "filthy_wood_chest", AurorianChestBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST));
     public static final DeferredBlock<MysteriumWoolBedBlock> MYSTERIUM_WOOL_BED = BLOCKS.registerBlock(
             "mysterium_wool_bed", MysteriumWoolBedBlock::new,
@@ -513,11 +580,11 @@ public final class ModBlocks {
     public static final DeferredItem<BlockItem> AURORIAN_EROSIVE_ITEM = ITEMS.registerSimpleBlockItem(AURORIAN_EROSIVE);
     public static final DeferredItem<BlockItem> AURORIAN_DIRT_ITEM = ITEMS.registerSimpleBlockItem(AURORIAN_DIRT);
     public static final DeferredItem<BlockItem> AURORIAN_GRASS_BLOCK_ITEM = ITEMS.registerSimpleBlockItem(AURORIAN_GRASS_BLOCK);
+    public static final DeferredItem<BlockItem> FILTHY_GRASS_BLOCK_ITEM = ITEMS.registerSimpleBlockItem(FILTHY_GRASS_BLOCK);
     public static final DeferredItem<BlockItem> MOON_SAND_RIVER_ITEM = ITEMS.registerSimpleBlockItem(MOON_SAND_RIVER);
     public static final DeferredItem<BlockItem> PEBBLE_ITEM = ITEMS.registerSimpleBlockItem(PEBBLE);
-    public static final DeferredItem<AurorianGrassRockItem> AURORIAN_GRASS_ROCK_ITEM = ITEMS.registerItem(
-            "aurorian_grass_rock",
-            properties -> new AurorianGrassRockItem(AURORIAN_GRASS_ROCK.get(), properties));
+    public static final DeferredItem<BlockItem> SILENT_TREE_LEAF_LITTER_ITEM =
+            ITEMS.registerSimpleBlockItem(SILENT_TREE_LEAF_LITTER);
     public static final DeferredItem<Item> WHITE_GROUND_MUSHROOM_ITEM = ITEMS.registerItem(
             "white_ground_mushroom",
             properties -> new Item(properties.food(groundMushroomFood())));
@@ -546,10 +613,6 @@ public final class ModBlocks {
             "blueberry",
             properties -> new BlockItem(
                     BLUEBERRY_BUSH.get(), properties.useItemDescriptionPrefix().food(Foods.SWEET_BERRIES)));
-    public static final DeferredItem<BlockItem> CLOUDBERRY = ITEMS.registerItem(
-            "cloudberry",
-            properties -> new BlockItem(
-                    CLOUDBERRY_BUSH.get(), properties.useItemDescriptionPrefix().food(Foods.SWEET_BERRIES)));
     public static final DeferredItem<BlockItem> AURORIAN_FIREFLY_BUSH_ITEM = ITEMS.registerItem(
             "aurorian_firefly_bush",
             properties -> new BlockItem(AURORIAN_FIREFLY_BUSH.get(), properties.useBlockDescriptionPrefix()));
@@ -559,6 +622,8 @@ public final class ModBlocks {
             ITEMS.registerSimpleBlockItem(PURIFICATION_ALTAR_BASE);
     public static final DeferredItem<PurificationAltarItem> PURIFICATION_ALTAR_ITEM =
             ITEMS.registerItem("purification_altar", PurificationAltarItem::new);
+    public static final DeferredItem<DoubleHighBlockItem> FILTHY_WOOD_DOOR_ITEM = doorItem(
+            "filthy_wood_door", FILTHY_WOOD_DOOR);
     public static final DeferredItem<DoubleHighBlockItem> SILENT_WOOD_DOOR_ITEM = doorItem(
             "silent_wood_door", SILENT_WOOD.door());
     public static final DeferredItem<DoubleHighBlockItem> CURTAIN_WOOD_DOOR_ITEM = doorItem(
@@ -578,10 +643,11 @@ public final class ModBlocks {
         BLOCKS.getEntries().stream()
                 .filter(block -> block != AURORIAN_STONE && block != AURORIAN_EROSIVE
                         && block != AURORIAN_DIRT && block != AURORIAN_GRASS_BLOCK
+                        && block != FILTHY_GRASS_BLOCK
                         && block != MOON_SAND_RIVER && block != MOON_DEW_BLOCK
-                        && block != BLUEBERRY_BUSH && block != CLOUDBERRY_BUSH
+                        && block != BLUEBERRY_BUSH
                         && block != AURORIAN_FIREFLY_BUSH
-                        && block != PEBBLE && block != AURORIAN_GRASS_ROCK
+                        && block != PEBBLE && block != SILENT_TREE_LEAF_LITTER
                         && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM
                         && block != AURORIAN_LILY_PAD && block != AURORIAN_WATER_MUSHROOM
                         && block != ASTROLOGY_TABLE
@@ -594,7 +660,7 @@ public final class ModBlocks {
                         && block != MYSTERIUM_WOOL_BED
                         && block != SILENT_WOOD_TORCH && block != SILENT_WOOD_WALL_TORCH
                         && block != SILENT_WOOD.door() && block != CURTAIN_WOOD.door()
-                        && block != CURSED_FROST_WOOD.door()
+                        && block != CURSED_FROST_WOOD.door() && block != FILTHY_WOOD_DOOR
                         && block != AURORIAN_TWISTING_VINES_PLANT
                         && block != DEW_CAVE_VINES_PLANT
                         && block != TALL_AURORIAN_WATER_GRASS
@@ -617,6 +683,19 @@ public final class ModBlocks {
                 name,
                 properties -> new AurorianCrystalClusterBlock(height, offset, properties),
                 () -> BlockBehaviour.Properties.ofFullCopy(vanillaBlock));
+    }
+
+    private static DeferredBlock<AurorianBuddingCrystalBlock> buddingCrystal(
+            String name,
+            Supplier<? extends Block> smallBud,
+            Supplier<? extends Block> mediumBud,
+            Supplier<? extends Block> largeBud,
+            Supplier<? extends Block> cluster) {
+        return BLOCKS.registerBlock(
+                name,
+                properties -> new AurorianBuddingCrystalBlock(
+                        properties, smallBud, mediumBud, largeBud, cluster),
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BUDDING_AMETHYST));
     }
 
     private static DeferredBlock<RedStoneOreBlock> redstoneOre(String name, Block vanillaOre) {
@@ -705,6 +784,12 @@ public final class ModBlocks {
                 .or(() -> ModStructureBlocks.getStrippedState(state));
     }
 
+    public static boolean isAurorianGrassBlock(BlockState state) {
+        return state.is(AURORIAN_GRASS_BLOCK.get())
+                || state.is(LIGHT_AURORIAN_GRASS_BLOCK.get())
+                || state.is(FILTHY_GRASS_BLOCK.get());
+    }
+
     public record WoodSet(
             DeferredBlock<RotatedPillarBlock> log,
             DeferredBlock<RotatedPillarBlock> strippedLog,
@@ -741,6 +826,29 @@ public final class ModBlocks {
                 () -> BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
     }
 
+    private static DeferredBlock<AurorianCrateBlock> crate(String name) {
+        return BLOCKS.registerBlock(name, AurorianCrateBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.0F).noOcclusion());
+    }
+
+    private static DeferredBlock<AurorianStoolBlock> stool(String name) {
+        return BLOCKS.registerBlock(name, AurorianStoolBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.5F).noOcclusion()
+                        .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK));
+    }
+
+    private static DeferredBlock<AurorianChairBlock> chair(String name) {
+        return BLOCKS.registerBlock(name, AurorianChairBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.5F).noOcclusion()
+                        .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK));
+    }
+
+    private static DeferredBlock<AurorianLongTableBlock> longTable(String name) {
+        return BLOCKS.registerBlock(name, AurorianLongTableBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.5F).noOcclusion()
+                        .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK));
+    }
+
     private static DeferredBlock<ColdAurorianPlantBlock> coldPlant(String name) {
         return BLOCKS.registerBlock(name, ColdAurorianPlantBlock::new,
                 () -> BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
@@ -751,6 +859,9 @@ public final class ModBlocks {
     }
 
     public static void register(IEventBus modEventBus) {
+        // Old saves and structure palettes resolve to the renamed registry entries.
+        BLOCKS.addAlias(TheAurorian2.id("aurorian_chest"), TheAurorian2.id("silent_wood_chest"));
+        ITEMS.addAlias(TheAurorian2.id("aurorian_chest"), TheAurorian2.id("silent_wood_chest"));
         ModStructureBlocks.bootstrap();
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);

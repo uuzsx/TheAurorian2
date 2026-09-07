@@ -140,6 +140,15 @@ public final class ModCreativeTabs {
         addBuildingBlock(items, ModBlocks.AURORIAN_BRICK_SLAB.get());
         addBuildingBlock(items, ModBlocks.AURORIAN_BRICK_WALL.get());
         addBuildingBlock(items, ModBlocks.AURORIAN_TERRACOTTA.get());
+        addBuildingBlock(items, ModBlocks.FILTHY_TREE_PLANKS.get());
+        addBuildingBlock(items, ModBlocks.FILTHY_WOOD_STAIRS.get());
+        addBuildingBlock(items, ModBlocks.FILTHY_WOOD_SLAB.get());
+        addBuildingBlock(items, ModBlocks.FILTHY_WOOD_FENCE.get());
+        addBuildingBlock(items, ModBlocks.FILTHY_WOOD_FENCE_GATE.get());
+        addBuildingBlock(items, ModBlocks.FILTHY_WOOD_DOOR.get());
+        addBuildingBlock(items, ModBlocks.FILTHY_WOOD_TRAPDOOR.get());
+        addBuildingBlock(items, ModBlocks.FILTHY_WOOD_PRESSURE_PLATE.get());
+        addBuildingBlock(items, ModBlocks.FILTHY_WOOD_BUTTON.get());
         addWoodSet(items, ModBlocks.SILENT_WOOD);
         addWoodSet(items, ModBlocks.CURTAIN_WOOD);
         addWoodSet(items, ModBlocks.CURSED_FROST_WOOD);
@@ -396,7 +405,31 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.SILENT_WOOD_TABLE.get());
         output.accept(ModBlocks.CURTAIN_WOOD_TABLE.get());
         output.accept(ModBlocks.CURSED_FROST_WOOD_TABLE.get());
-        output.accept(ModBlocks.AURORIAN_CHEST.get());
+        output.accept(ModBlocks.SILENT_WOOD_CHEST.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_CHEST.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_CHEST.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_CHEST.get());
+        output.accept(ModBlocks.FILTHY_WOOD_CHEST.get());
+        output.accept(ModBlocks.SILENT_WOOD_CRATE.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_CRATE.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_CRATE.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_CRATE.get());
+        output.accept(ModBlocks.FILTHY_WOOD_CRATE.get());
+        output.accept(ModBlocks.SILENT_WOOD_STOOL.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_STOOL.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_STOOL.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_STOOL.get());
+        output.accept(ModBlocks.FILTHY_WOOD_STOOL.get());
+        output.accept(ModBlocks.SILENT_WOOD_CHAIR.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_CHAIR.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_CHAIR.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_CHAIR.get());
+        output.accept(ModBlocks.FILTHY_WOOD_CHAIR.get());
+        output.accept(ModBlocks.SILENT_WOOD_LONG_TABLE.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_LONG_TABLE.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_LONG_TABLE.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_LONG_TABLE.get());
+        output.accept(ModBlocks.FILTHY_WOOD_LONG_TABLE.get());
         output.accept(ModBlocks.SILENT_WOOD_LADDER.get());
         output.accept(ModBlocks.MYSTERIUM_WOOL_BED_ITEM.get());
         output.accept(ModBlocks.SILENT_WOOD_TORCH_ITEM.get());
@@ -430,8 +463,8 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.AURORIAN_GRANITE.get());
         output.accept(ModBlocks.AURORIAN_GRASS_BLOCK.get());
         output.accept(ModBlocks.LIGHT_AURORIAN_GRASS_BLOCK.get());
+        output.accept(ModBlocks.FILTHY_GRASS_BLOCK.get());
         output.accept(ModBlocks.AURORIAN_FIREFLY_BUSH_ITEM.get());
-        output.accept(ModBlocks.AURORIAN_GRASS_ROCK_ITEM.get());
         output.accept(ModBlocks.MOON_SAND_RIVER.get());
         output.accept(ModBlocks.AURORIAN_DRIPSTONE_BLOCK.get());
         output.accept(ModBlocks.AURORIAN_POINTED_DRIPSTONE.get());
@@ -442,10 +475,12 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.MIST_SPORE_BLOSSOM.get());
         output.accept(ModBlocks.DEW_CAVE_VINES.get());
         output.accept(ModBlocks.STAR_GLOW_LICHEN.get());
+        output.accept(ModBlocks.BUDDING_CERULEAN.get());
         output.accept(ModBlocks.CERULEAN_CLUSTER.get());
         output.accept(ModBlocks.LARGE_CERULEAN_BUD.get());
         output.accept(ModBlocks.MEDIUM_CERULEAN_BUD.get());
         output.accept(ModBlocks.SMALL_CERULEAN_BUD.get());
+        output.accept(ModBlocks.BUDDING_MOONSTONE.get());
         output.accept(ModBlocks.MOONSTONE_CLUSTER.get());
         output.accept(ModBlocks.LARGE_MOONSTONE_BUD.get());
         output.accept(ModBlocks.MEDIUM_MOONSTONE_BUD.get());
@@ -476,10 +511,12 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.SILENT_TREE_LEAVES.get());
         output.accept(ModBlocks.FRUITING_SILENT_TREE_LEAVES.get());
         output.accept(ModBlocks.SILENT_TREE_SAPLING.get());
+        output.accept(ModBlocks.SILENT_TREE_LEAF_LITTER.get());
         output.accept(ModBlocks.CURTAIN_TREE_LEAVES.get());
         output.accept(ModBlocks.CURTAIN_TREE_SAPLING.get());
         output.accept(ModBlocks.CURSED_FROST_TREE_LEAVES.get());
         output.accept(ModBlocks.CURSED_FROST_TREE_SAPLING.get());
+        output.accept(ModBlocks.FILTHY_TREE_LOG.get());
 
         output.accept(ModBlocks.AURORIAN_GRASS.get());
         output.accept(ModBlocks.TALL_AURORIAN_GRASS.get());
@@ -581,7 +618,6 @@ public final class ModCreativeTabs {
     private static void addFood(
             CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         output.accept(ModBlocks.BLUEBERRY.get());
-        output.accept(ModBlocks.CLOUDBERRY.get());
         output.accept(ModBlocks.WHITE_GROUND_MUSHROOM_ITEM.get());
         output.accept(ModBlocks.BLUE_GROUND_MUSHROOM_ITEM.get());
 

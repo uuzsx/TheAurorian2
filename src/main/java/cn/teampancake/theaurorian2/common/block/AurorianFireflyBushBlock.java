@@ -22,8 +22,7 @@ public final class AurorianFireflyBushBlock extends FireflyBushBlock {
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.is(ModBlocks.AURORIAN_GRASS_BLOCK.get())
-                || state.is(ModBlocks.LIGHT_AURORIAN_GRASS_BLOCK.get())
+        return ModBlocks.isAurorianGrassBlock(state)
                 || state.is(ModBlocks.AURORIAN_DIRT.get());
     }
 

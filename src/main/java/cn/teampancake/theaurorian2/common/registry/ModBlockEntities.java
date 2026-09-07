@@ -4,7 +4,6 @@ import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.block.entity.AstrologyTableBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.ArcaneMagicCircleBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.PurificationAltarBlockEntity;
-import cn.teampancake.theaurorian2.common.block.entity.AurorianGrassRockBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianChestBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianFurnaceBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.FireplaceBlockEntity;
@@ -15,6 +14,7 @@ import cn.teampancake.theaurorian2.common.block.entity.CrystallineSwordPedestalB
 import cn.teampancake.theaurorian2.common.block.entity.SacrificeTableBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.SilentCampfireBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.SpiderMotherSpawnerBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.AurorianUrnBlockEntity;
 import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -57,12 +57,6 @@ public final class ModBlockEntities {
                     () -> new BlockEntityType<>(
                             CrystallineSwordPedestalBlockEntity::new,
                             Set.of(ModStructureBlocks.CRYSTALLINE_SWORD_PEDESTAL.get())));
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianGrassRockBlockEntity>>
-            AURORIAN_GRASS_ROCK = BLOCK_ENTITY_TYPES.register(
-                    "aurorian_grass_rock",
-                    () -> new BlockEntityType<>(
-                            AurorianGrassRockBlockEntity::new,
-                            Set.of(ModBlocks.AURORIAN_GRASS_ROCK.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianFurnaceBlockEntity>> AURORIAN_FURNACE =
             BLOCK_ENTITY_TYPES.register(
                     "aurorian_furnace",
@@ -75,12 +69,14 @@ public final class ModBlockEntities {
                     () -> new BlockEntityType<>(
                             FireplaceBlockEntity::new,
                             Set.of(ModBlocks.FIREPLACE.get())));
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianChestBlockEntity>> AURORIAN_CHEST =
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianChestBlockEntity>> SILENT_WOOD_CHEST =
             BLOCK_ENTITY_TYPES.register(
-                    "aurorian_chest",
+                    "silent_wood_chest",
                     () -> new BlockEntityType<>(
                             AurorianChestBlockEntity::new,
-                            Set.of(ModBlocks.AURORIAN_CHEST.get())));
+                            Set.of(ModBlocks.SILENT_WOOD_CHEST.get(), ModBlocks.WEEPING_WILLOW_CHEST.get(),
+                                    ModBlocks.CURTAIN_WOOD_CHEST.get(), ModBlocks.CURSED_FROST_WOOD_CHEST.get(),
+                                    ModBlocks.FILTHY_WOOD_CHEST.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianTableBlockEntity>> AURORIAN_TABLE =
             BLOCK_ENTITY_TYPES.register(
                     "aurorian_table",
@@ -130,11 +126,18 @@ public final class ModBlockEntities {
                     () -> new BlockEntityType<>(
                             SpiderMotherSpawnerBlockEntity::new,
                             Set.of(ModStructureBlocks.SPIDER_MOTHER_SPAWNER.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianUrnBlockEntity>> AURORIAN_URN =
+            BLOCK_ENTITY_TYPES.register(
+                    "aurorian_urn",
+                    () -> new BlockEntityType<>(
+                            AurorianUrnBlockEntity::new,
+                            Set.of(ModStructureBlocks.URN.get())));
 
     private ModBlockEntities() {
     }
 
     public static void register(IEventBus modEventBus) {
+        BLOCK_ENTITY_TYPES.addAlias(TheAurorian2.id("aurorian_chest"), TheAurorian2.id("silent_wood_chest"));
         BLOCK_ENTITY_TYPES.register(modEventBus);
     }
 }

@@ -12,7 +12,7 @@ public final class AurorianChestBlock extends ChestBlock {
 
     public AurorianChestBlock(Properties properties) {
         super(
-                ModBlockEntities.AURORIAN_CHEST::get,
+                ModBlockEntities.SILENT_WOOD_CHEST::get,
                 SoundEvents.CHEST_OPEN,
                 SoundEvents.CHEST_CLOSE,
                 properties);

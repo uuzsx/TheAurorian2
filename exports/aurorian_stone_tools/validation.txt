@@ -1,0 +1,4 @@
+pickaxe: 8 elements; geometry, UV, transforms, alpha unchanged
+axe: 9 elements; geometry, UV, transforms, alpha unchanged
+hoe: 6 elements; geometry, UV, transforms, alpha unchanged
+shovel: 5 elements; geometry, UV, transforms, alpha unchanged

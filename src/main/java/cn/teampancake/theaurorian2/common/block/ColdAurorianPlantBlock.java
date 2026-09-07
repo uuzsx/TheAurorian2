@@ -16,6 +16,6 @@ public final class ColdAurorianPlantBlock extends BushBlock {
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.is(ModBlocks.AURORIAN_GRASS_BLOCK.get()) || state.is(Blocks.SNOW_BLOCK);
+        return ModBlocks.isAurorianGrassBlock(state) || state.is(Blocks.SNOW_BLOCK);
     }
 }

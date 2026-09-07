@@ -3,6 +3,7 @@
   "textures": {
     "side": "theaurorian2:block/star_azalea_side",
     "top": "theaurorian2:block/star_azalea_top",
-    "plant": "theaurorian2:block/star_azalea_plant"
+    "plant": "theaurorian2:block/star_azalea_plant",
+    "particle": "theaurorian2:block/star_azalea_plant"
   }
 }

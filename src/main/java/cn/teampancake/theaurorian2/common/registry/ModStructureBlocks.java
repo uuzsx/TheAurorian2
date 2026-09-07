@@ -7,6 +7,7 @@ import cn.teampancake.theaurorian2.common.block.AurorianPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianStandingSignBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWallHangingSignBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWallSignBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianUrnBlock;
 import cn.teampancake.theaurorian2.common.block.CrystallineSwordPedestalBlock;
 import cn.teampancake.theaurorian2.common.block.DarkStoneGateBlock;
 import cn.teampancake.theaurorian2.common.block.DarkStoneGateKeyholeBlock;
@@ -548,6 +549,10 @@ public final class ModStructureBlocks {
             "equinox_flower", AurorianPlantBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
 
+    public static final DeferredBlock<AurorianPlantBlock> FILTHY_EQUINOX_FLOWER = natural(
+            "filthy_equinox_flower", AurorianPlantBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
     public static final DeferredBlock<FlowerPotBlock> POTTED_AURORIAN_GRASS =
             potted("potted_aurorian_grass", ModBlocks.AURORIAN_GRASS);
     public static final DeferredBlock<FlowerPotBlock> POTTED_EQUINOX_FLOWER =
@@ -628,9 +633,12 @@ public final class ModStructureBlocks {
     public static final DeferredBlock<Block> LASER_CRYSTAL = decorative(
             "laser_crystal", Block::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).noOcclusion());
-    public static final DeferredBlock<Block> URN = decorative(
-            "urn", Block::new,
+    public static final DeferredBlock<AurorianUrnBlock> URN = decorative(
+            "urn", AurorianUrnBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DECORATED_POT).noOcclusion());
+    public static final DeferredBlock<Block> RIP = decorative(
+            "rip", Block::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).noOcclusion());
 
     public static final DeferredBlock<LegacyAgeThreeCropBlock> LAVENDER_CROP = hidden(
             "lavender_crop", LegacyAgeThreeCropBlock::new,

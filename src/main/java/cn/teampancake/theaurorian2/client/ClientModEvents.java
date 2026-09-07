@@ -22,7 +22,6 @@ import cn.teampancake.theaurorian2.client.renderer.DamageNumberRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianChestRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianChestMinecartRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianFurnaceRenderer;
-import cn.teampancake.theaurorian2.client.renderer.AurorianGrassRockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AstrologyTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.ArcaneMagicCircleRenderer;
@@ -123,6 +122,7 @@ public final class ClientModEvents {
         event.registerEntityRenderer(
                 ModEntities.SPIDER_SILK.get(), context -> new ThrownItemRenderer<>(context, 0.65F, true));
         event.registerEntityRenderer(ModEntities.DAMAGE_NUMBER.get(), DamageNumberRenderer::new);
+        event.registerEntityRenderer(ModEntities.STOOL_SEAT.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(
                 ModEntities.AURORIAN_CHEST_MINECART.get(), AurorianChestMinecartRenderer::new);
         event.registerEntityRenderer(
@@ -140,10 +140,8 @@ public final class ClientModEvents {
         event.registerBlockEntityRenderer(
                 ModBlockEntities.CRYSTALLINE_SWORD_PEDESTAL.get(),
                 CrystallineSwordPedestalRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_CHEST.get(), AurorianChestRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.SILENT_WOOD_CHEST.get(), AurorianChestRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_FURNACE.get(), AurorianFurnaceRenderer::new);
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.AURORIAN_GRASS_ROCK.get(), AurorianGrassRockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_TABLE.get(), AurorianTableRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_SIGN.get(), StandingSignRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_HANGING_SIGN.get(), HangingSignRenderer::new);

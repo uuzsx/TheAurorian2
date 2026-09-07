@@ -15,6 +15,6 @@ public final class AurorianPlantBlock extends BushBlock {
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.is(ModBlocks.AURORIAN_GRASS_BLOCK.get());
+        return ModBlocks.isAurorianGrassBlock(state);
     }
 }

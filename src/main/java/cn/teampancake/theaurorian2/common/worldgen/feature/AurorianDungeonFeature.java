@@ -86,13 +86,13 @@ public final class AurorianDungeonFeature extends Feature<NoneFeatureConfigurati
                     if (shell) {
                         if (pos.getY() >= level.getMinY() && !level.getBlockState(pos.below()).isSolid()) {
                             level.setBlock(pos, AIR, 2);
-                        } else if (state.isSolid() && !state.is(ModBlocks.AURORIAN_CHEST)) {
+                        } else if (state.isSolid() && !state.is(ModBlocks.SILENT_WOOD_CHEST)) {
                             BlockState wall = y == -1 && random.nextInt(4) != 0
                                     ? ModBlocks.MOSSY_AURORIAN_COBBLESTONE.get().defaultBlockState()
                                     : ModBlocks.AURORIAN_COBBLESTONE.get().defaultBlockState();
                             safeSetBlock(level, pos, wall, replaceable);
                         }
-                    } else if (!state.is(ModBlocks.AURORIAN_CHEST) && !state.is(Blocks.SPAWNER)) {
+                    } else if (!state.is(ModBlocks.SILENT_WOOD_CHEST) && !state.is(Blocks.SPAWNER)) {
                         safeSetBlock(level, pos, AIR, replaceable);
                     }
                 }
@@ -124,7 +124,7 @@ public final class AurorianDungeonFeature extends Feature<NoneFeatureConfigurati
                 }
                 if (walls == 1) {
                     BlockState chestState = StructurePiece.reorient(
-                            level, pos, ModBlocks.AURORIAN_CHEST.get().defaultBlockState());
+                            level, pos, ModBlocks.SILENT_WOOD_CHEST.get().defaultBlockState());
                     safeSetBlock(level, pos, chestState, replaceable);
                     break;
                 }

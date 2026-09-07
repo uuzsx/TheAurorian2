@@ -1,8 +1,1 @@
-{
-  "sources": [
-    {
-      "type": "minecraft:single",
-      "resource": "theaurorian2:entity/enchantment/purification_altar_book"
-    }
-  ]
-}
+{"sources":[{"type":"minecraft:single","resource":"theaurorian2:entity/enchantment/purification_altar_book"},{"type":"minecraft:single","resource":"theaurorian2:entity/chest/aurorian_chest","sprite":"theaurorian2:block/aurorian_chest_model"},{"type":"minecraft:single","sprite":"theaurorian2:block/weeping_willow_chest_model","resource":"theaurorian2:entity/chest/weeping_willow_chest"},{"type":"minecraft:single","sprite":"theaurorian2:block/curtain_wood_chest_model","resource":"theaurorian2:entity/chest/curtain_wood_chest"},{"type":"minecraft:single","sprite":"theaurorian2:block/cursed_frost_wood_chest_model","resource":"theaurorian2:entity/chest/cursed_frost_wood_chest"},{"type":"minecraft:single","sprite":"theaurorian2:block/filthy_wood_chest_model","resource":"theaurorian2:entity/chest/filthy_wood_chest"}]}

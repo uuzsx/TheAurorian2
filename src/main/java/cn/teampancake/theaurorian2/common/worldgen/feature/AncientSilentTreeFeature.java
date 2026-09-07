@@ -1,5 +1,6 @@
 package cn.teampancake.theaurorian2.common.worldgen.feature;
 
+import cn.teampancake.theaurorian2.common.registry.ModBiomeTags;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -38,6 +39,10 @@ public final class AncientSilentTreeFeature extends Feature<NoneFeatureConfigura
                     context.level(), origin, plan.logs(), plan.leaves(),
                     ModBlocks.SILENT_TREE_LEAVES.get(), ModBlocks.SILENT_TREE_SAPLING.get(),
                     ModBlocks.FRUITING_SILENT_TREE_LEAVES.get(), 0.05F, random)) {
+                if (context.level().getBiome(origin).is(ModBiomeTags.HAS_SILENT_TREE_LEAF_LITTER)) {
+                    AncientTreeFeatureSupport.placeLeafLitterUnderAncientTree(
+                            context.level(), origin, plan.logs(), random);
+                }
                 WallMushroomPlacement.placeOnAncientTree(
                         context.level(), origin, plan.logs(), random);
                 return true;
