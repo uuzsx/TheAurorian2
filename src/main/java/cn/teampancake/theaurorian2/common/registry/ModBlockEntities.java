@@ -15,6 +15,7 @@ import cn.teampancake.theaurorian2.common.block.entity.SacrificeTableBlockEntity
 import cn.teampancake.theaurorian2.common.block.entity.SilentCampfireBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.SpiderMotherSpawnerBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianUrnBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.LongMirrorBlockEntity;
 import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -26,6 +27,13 @@ public final class ModBlockEntities {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, TheAurorian2.MOD_ID);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LongMirrorBlockEntity>> LONG_MIRROR =
+            BLOCK_ENTITY_TYPES.register("long_mirror", () -> new BlockEntityType<>(
+                    LongMirrorBlockEntity::new,
+                    Set.of(ModBlocks.SILENT_WOOD_LONG_MIRROR.get(), ModBlocks.WEEPING_WILLOW_LONG_MIRROR.get(),
+                            ModBlocks.CURTAIN_WOOD_LONG_MIRROR.get(), ModBlocks.CURSED_FROST_WOOD_LONG_MIRROR.get(),
+                            ModBlocks.FILTHY_WOOD_LONG_MIRROR.get())));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AstrologyTableBlockEntity>> ASTROLOGY_TABLE =
             BLOCK_ENTITY_TYPES.register(

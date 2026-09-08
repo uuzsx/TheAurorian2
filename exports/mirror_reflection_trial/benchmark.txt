@@ -1,0 +1,5 @@
+MIRROR TERRAIN CACHE: meshes=9, bytes=157864, buildMs=12.817
+MIRROR BENCHMARK phase=0 enabled=false frames=7735 meanMs=1.034311570782159 medianMs=0.9256 p95Ms=1.7991
+MIRROR BENCHMARK phase=1 enabled=true frames=7176 meanMs=1.1148180183946488 medianMs=0.983 p95Ms=1.885
+MIRROR BENCHMARK phase=2 enabled=false frames=7664 meanMs=1.0437377740083507 medianMs=0.9394 p95Ms=1.7567
+MIRROR BENCHMARK phase=3 enabled=true frames=6989 meanMs=1.1446400343396765 medianMs=1.0246 p95Ms=1.9051

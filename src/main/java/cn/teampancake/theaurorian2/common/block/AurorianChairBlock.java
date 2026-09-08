@@ -18,8 +18,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public final class AurorianChairBlock extends PairedFurnitureBlock {
     public static final MapCodec<AurorianChairBlock> CODEC = simpleCodec(AurorianChairBlock::new);
+    public static final double SEAT_HEIGHT = 0.75;
     private static final Map<Direction, VoxelShape> LOWER = Shapes.rotateHorizontal(Shapes.or(
-            AurorianStoolBlock.collisionShape(), box(1, 12, 13, 3, 16, 15), box(13, 12, 13, 15, 16, 15),
+            box(0, 9, 0, 16, 12, 16),
+            box(1, 0, 1, 4, 9, 4), box(12, 0, 1, 15, 9, 4),
+            box(1, 0, 12, 4, 9, 15), box(12, 0, 12, 15, 9, 15),
+            box(4, 3, 1.5, 12, 5, 3.5), box(4, 3, 12.5, 12, 5, 14.5),
+            box(1.5, 3, 4, 3.5, 5, 12), box(12.5, 3, 4, 14.5, 5, 12),
+            box(1, 12, 13, 3, 16, 15), box(13, 12, 13, 15, 16, 15),
             box(3, 12, 13, 13, 14, 15), box(4, 14, 13.5, 6, 16, 14.5),
             box(7, 14, 13.5, 9, 16, 14.5), box(10, 14, 13.5, 12, 16, 14.5)));
     private static final Map<Direction, VoxelShape> UPPER = Shapes.rotateHorizontal(Shapes.or(

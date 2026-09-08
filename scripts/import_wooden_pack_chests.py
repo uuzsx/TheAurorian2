@@ -3,11 +3,12 @@
 Uniform block fitting and a 180-degree facing correction preserve source shape.
 The solid base is hollowed without changing its exterior. Double-box extensions
 repeat the original UVs instead of stretching the texture or corner hardware.
-Runtime UVs use the existing 64-unit convention with a 256x128 atlas: wood on the left, shared dark straps on the right.
+Runtime UVs use the existing 64-unit convention with a 256x128 atlas: wood on the left, matching bark-colored straps on the right.
 """
 import base64, copy, importlib.util, inspect, json, math, uuid
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
+from wood_bark_palette import bark_trim
 
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=Path('C:/Users/84446/Downloads/Wooden-Pack-mvaynq/Wooden Pack')
@@ -126,9 +127,7 @@ for row,(key,label,plank) in enumerate(WOODS):
  # Monotonic palette transfer preserves all authored pixel locations and grain.
  mapping={c:colors[round(i*(len(colors)-1)/(len(src_colors)-1))] for i,c in enumerate(src_colors)}
  base=Image.new('RGB',original.size);base.putdata([mapping[c] for c in original.getdata()])
- dark_colors=[(42,43,49),(49,50,57),(56,58,64),(64,66,72),(73,75,82),(83,85,92),(95,97,104)]
- dark_map={c:dark_colors[round(i*6/(len(src_colors)-1))] for i,c in enumerate(src_colors)}
- bands=Image.new('RGB',original.size);bands.putdata([dark_map[c] for c in original.getdata()])
+ bands=bark_trim(base,plank)
  tex=Image.new('RGB',(256,128));tex.paste(base,(0,0));tex.paste(bands,(128,0))
  tex.paste(wood,(0,96))
  folder=OUT/key;folder.mkdir(exist_ok=True);tex.save(folder/'chest.png')

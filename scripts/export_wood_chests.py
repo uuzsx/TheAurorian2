@@ -99,11 +99,16 @@ def surfaces(model, opened=False):
         for name, face in e['faces'].items():
             ids, normal = FACES[name]
             u,v,U,V = face['uv']
-            yield points[ids], lid @ r @ normal, np.array([[u,V],[U,V],[U,v],[u,v]]), face.get('texture', 0)
+            vertices = points[ids]
+            normal = np.cross(vertices[1]-vertices[0], vertices[2]-vertices[0])
+            length = np.linalg.norm(normal)
+            if length < 1e-9: continue
+            uv = np.roll(np.array([[u,V],[U,V],[U,v],[u,v]]), -face.get('rotation', 0)//90, axis=0)
+            yield vertices, normal/length, uv, face.get('texture', 0)
 
 
-def render(model, atlas, width, height, opened=False):
-    scene = list(surfaces(model, opened)); camera = rotation((18,-24,0))
+def render(model, atlas, width, height, opened=False, camera_angles=(18,-24,0)):
+    scene = list(surfaces(model, opened)); camera = rotation(camera_angles)
     positions = np.concatenate([v @ camera.T for v,n,uv,slot in scene])
     lo,hi = positions[:,:2].min(0),positions[:,:2].max(0)
     center = (lo+hi)/2
@@ -113,7 +118,8 @@ def render(model, atlas, width, height, opened=False):
     textures = [np.asarray(a) for a in atlas] if isinstance(atlas, tuple) else [np.asarray(atlas)]
     for vertices,normal,uv,slot in scene:
         texture = textures[slot]
-        uv = uv * np.array([texture.shape[1]/64, texture.shape[0]/64])
+        resolution = model.get('resolution', {'width':64,'height':64})
+        uv = uv * np.array([texture.shape[1]/resolution['width'], texture.shape[0]/resolution['height']])
         n = camera @ normal
         if n[2] <= 0: continue
         vertices = vertices @ camera.T
@@ -136,8 +142,9 @@ def render(model, atlas, width, height, opened=False):
             mask=(A>=-1e-7)&(B>=-1e-7)&(C>=-1e-7)&(Z>region)
             U=np.clip((A*t[0,0]+B*t[1,0]+C*t[2,0]).astype(int),0,texture.shape[1]-1)
             V=np.clip((A*t[0,1]+B*t[1,1]+C*t[2,1]).astype(int),0,texture.shape[0]-1)
+            if texture.shape[2] == 4: mask &= texture[V,U,3] > 0
             target=pixels[ymin:ymax+1,xmin:xmax+1]
-            target[:,:,:3][mask]=np.clip(texture[V,U]*shade,0,255).astype(np.uint8)[mask]
+            target[:,:,:3][mask]=np.clip(texture[V,U,:3]*shade,0,255).astype(np.uint8)[mask]
             target[:,:,3][mask]=255;region[mask]=Z[mask]
     return Image.fromarray(pixels)
 

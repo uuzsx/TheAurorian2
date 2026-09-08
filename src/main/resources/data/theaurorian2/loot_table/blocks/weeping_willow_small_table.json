@@ -1,0 +1,1 @@
+{"type":"minecraft:block","pools":[{"rolls":1,"conditions":[{"condition":"minecraft:survives_explosion"}],"entries":[{"type":"minecraft:item","name":"theaurorian2:weeping_willow_small_table"}]}]}

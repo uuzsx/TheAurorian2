@@ -16,8 +16,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public final class AurorianLongTableBlock extends PairedFurnitureBlock {
     public static final MapCodec<AurorianLongTableBlock> CODEC = simpleCodec(AurorianLongTableBlock::new);
-    private static final Map<Direction, VoxelShape> FIRST_SHAPES = shapes(1, 4);
-    private static final Map<Direction, VoxelShape> SECOND_SHAPES = shapes(12, 15);
+    private static final Map<Direction, VoxelShape> FIRST_SHAPES = shapes(1, 3);
+    private static final Map<Direction, VoxelShape> SECOND_SHAPES = shapes(13, 15);
 
     public AurorianLongTableBlock(BlockBehaviour.Properties properties) { super(properties); }
 
@@ -40,10 +40,8 @@ public final class AurorianLongTableBlock extends PairedFurnitureBlock {
     }
 
     private static Map<Direction, VoxelShape> shapes(int legMin, int legMax) {
-        return Shapes.rotateHorizontal(Shapes.or(box(0, 15, 0, 16, 18, 16),
-                box(legMin, 0, 1, legMax, 15, 4), box(legMin, 0, 12, legMax, 15, 15),
-                box(0, 12.5, 1, 16, 15, 3), box(0, 12.5, 13, 16, 15, 15),
-                box(legMin, 12.5, 3, legMin + 2, 15, 13)));
+        return Shapes.rotateHorizontal(Shapes.or(box(0, 14, 0, 16, 16, 16),
+                box(legMin, 0, 1.5, legMax, 14, 14.5)));
     }
 
     @Override

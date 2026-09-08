@@ -58,6 +58,8 @@ public final class TheAurorian2 {
 
     public TheAurorian2(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.CLIENT, HudLayoutConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.CLIENT,
+                cn.teampancake.theaurorian2.common.config.MirrorConfig.SPEC, "theaurorian2-mirrors.toml");
         ModAttachments.register(modEventBus);
         ModFluidTypes.register(modEventBus);
         ModFluids.register(modEventBus);

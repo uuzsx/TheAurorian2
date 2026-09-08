@@ -52,6 +52,13 @@ import cn.teampancake.theaurorian2.common.block.WallMushroomBlock;
 import cn.teampancake.theaurorian2.common.item.AstrologyTableItem;
 import cn.teampancake.theaurorian2.common.item.PurificationAltarItem;
 import net.minecraft.util.ColorRGBA;
+import cn.teampancake.theaurorian2.common.block.AurorianWoodBucketBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianJugBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianLongMirrorBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianBenchBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianSmallTableBlock;
+import cn.teampancake.theaurorian2.common.item.WaterVesselItem;
+import cn.teampancake.theaurorian2.common.item.AurorianJugItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BedItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
@@ -504,6 +511,37 @@ public final class ModBlocks {
                     .noOcclusion()
                     .noLootTable()
                     .pushReaction(PushReaction.BLOCK));
+    public static final DeferredBlock<AurorianBenchBlock> SILENT_WOOD_BENCH = bench("silent_wood_bench");
+    public static final DeferredBlock<AurorianBenchBlock> WEEPING_WILLOW_BENCH = bench("weeping_willow_bench");
+    public static final DeferredBlock<AurorianBenchBlock> CURTAIN_WOOD_BENCH = bench("curtain_wood_bench");
+    public static final DeferredBlock<AurorianBenchBlock> CURSED_FROST_WOOD_BENCH = bench("cursed_frost_wood_bench");
+    public static final DeferredBlock<AurorianBenchBlock> FILTHY_WOOD_BENCH = bench("filthy_wood_bench");
+    public static final DeferredBlock<AurorianSmallTableBlock> SILENT_WOOD_SMALL_TABLE = smallTable("silent_wood_small_table");
+    public static final DeferredBlock<AurorianSmallTableBlock> WEEPING_WILLOW_SMALL_TABLE = smallTable("weeping_willow_small_table");
+    public static final DeferredBlock<AurorianSmallTableBlock> CURTAIN_WOOD_SMALL_TABLE = smallTable("curtain_wood_small_table");
+    public static final DeferredBlock<AurorianSmallTableBlock> CURSED_FROST_WOOD_SMALL_TABLE = smallTable("cursed_frost_wood_small_table");
+    public static final DeferredBlock<AurorianSmallTableBlock> FILTHY_WOOD_SMALL_TABLE = smallTable("filthy_wood_small_table");
+
+    public static final DeferredBlock<AurorianLongMirrorBlock> SILENT_WOOD_LONG_MIRROR = longMirror("silent_wood_long_mirror");
+    public static final DeferredBlock<AurorianLongMirrorBlock> WEEPING_WILLOW_LONG_MIRROR = longMirror("weeping_willow_long_mirror");
+    public static final DeferredBlock<AurorianLongMirrorBlock> CURTAIN_WOOD_LONG_MIRROR = longMirror("curtain_wood_long_mirror");
+    public static final DeferredBlock<AurorianLongMirrorBlock> CURSED_FROST_WOOD_LONG_MIRROR = longMirror("cursed_frost_wood_long_mirror");
+    public static final DeferredBlock<AurorianLongMirrorBlock> FILTHY_WOOD_LONG_MIRROR = longMirror("filthy_wood_long_mirror");
+
+    public static final DeferredBlock<AurorianJugBlock> AURORIAN_JUG = BLOCKS.registerBlock(
+            "aurorian_jug", AurorianJugBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DECORATED_POT).strength(0.5F).noOcclusion());
+    public static final DeferredItem<AurorianJugItem> AURORIAN_JUG_ITEM = ITEMS.registerItem("aurorian_jug",
+            properties -> new AurorianJugItem(AURORIAN_JUG.get(), false, properties.stacksTo(16).useBlockDescriptionPrefix()));
+    public static final DeferredItem<AurorianJugItem> AURORIAN_JUG_WATER = ITEMS.registerItem("aurorian_jug_water",
+            properties -> new AurorianJugItem(AURORIAN_JUG.get(), true, properties.stacksTo(1).craftRemainder(AURORIAN_JUG_ITEM.get())));
+
+    public static final WoodBucketSet SILENT_WOOD_BUCKET = woodBucket("silent_wood_bucket");
+    public static final WoodBucketSet WEEPING_WILLOW_BUCKET = woodBucket("weeping_willow_bucket");
+    public static final WoodBucketSet CURTAIN_WOOD_BUCKET = woodBucket("curtain_wood_bucket");
+    public static final WoodBucketSet CURSED_FROST_WOOD_BUCKET = woodBucket("cursed_frost_wood_bucket");
+    public static final WoodBucketSet FILTHY_WOOD_BUCKET = woodBucket("filthy_wood_bucket");
+
     public static final DeferredBlock<AurorianCrateBlock> SILENT_WOOD_CRATE = crate("silent_wood_crate");
     public static final DeferredBlock<AurorianStoolBlock> SILENT_WOOD_STOOL = stool("silent_wood_stool");
     public static final DeferredBlock<AurorianStoolBlock> WEEPING_WILLOW_STOOL = stool("weeping_willow_stool");
@@ -657,6 +695,12 @@ public final class ModBlocks {
                         && block != PURIFICATION_ALTAR_UPPER
                         && block != FIREPLACE_PART
                         && block != WOOD_TABLE_PART
+                        && block != AURORIAN_JUG
+                        && block != SILENT_WOOD_BUCKET.block()
+                        && block != WEEPING_WILLOW_BUCKET.block()
+                        && block != CURTAIN_WOOD_BUCKET.block()
+                        && block != CURSED_FROST_WOOD_BUCKET.block()
+                        && block != FILTHY_WOOD_BUCKET.block()
                         && block != MYSTERIUM_WOOL_BED
                         && block != SILENT_WOOD_TORCH && block != SILENT_WOOD_WALL_TORCH
                         && block != SILENT_WOOD.door() && block != CURTAIN_WOOD.door()
@@ -826,6 +870,19 @@ public final class ModBlocks {
                 () -> BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
     }
 
+    public record WoodBucketSet(DeferredBlock<AurorianWoodBucketBlock> block,
+            DeferredItem<WaterVesselItem> empty, DeferredItem<WaterVesselItem> water) {}
+
+    private static WoodBucketSet woodBucket(String name) {
+        var block = BLOCKS.registerBlock(name, AurorianWoodBucketBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.0F).noOcclusion());
+        var empty = ITEMS.registerItem(name,
+                properties -> new WaterVesselItem(block.get(), false, properties.stacksTo(16).useBlockDescriptionPrefix()));
+        var water = ITEMS.registerItem(name + "_water",
+                properties -> new WaterVesselItem(block.get(), true, properties.stacksTo(1).craftRemainder(empty.get())));
+        return new WoodBucketSet(block, empty, water);
+    }
+
     private static DeferredBlock<AurorianCrateBlock> crate(String name) {
         return BLOCKS.registerBlock(name, AurorianCrateBlock::new,
                 () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.0F).noOcclusion());
@@ -835,6 +892,23 @@ public final class ModBlocks {
         return BLOCKS.registerBlock(name, AurorianStoolBlock::new,
                 () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.5F).noOcclusion()
                         .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK));
+    }
+
+    private static DeferredBlock<AurorianLongMirrorBlock> longMirror(String name) {
+        return BLOCKS.registerBlock(name, AurorianLongMirrorBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(0.5F).noCollision()
+                        .pushReaction(PushReaction.BLOCK));
+    }
+
+    private static DeferredBlock<AurorianBenchBlock> bench(String name) {
+        return BLOCKS.registerBlock(name, AurorianBenchBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.5F).noOcclusion()
+                        .pushReaction(PushReaction.BLOCK));
+    }
+
+    private static DeferredBlock<AurorianSmallTableBlock> smallTable(String name) {
+        return BLOCKS.registerBlock(name, AurorianSmallTableBlock::new,
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.5F).noOcclusion());
     }
 
     private static DeferredBlock<AurorianChairBlock> chair(String name) {

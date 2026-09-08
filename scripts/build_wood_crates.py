@@ -6,6 +6,7 @@ Models are ordinary baked blocks: no inventory, block entity, tick or packets.
 import base64, copy, importlib.util, json, math, uuid
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
+from wood_bark_palette import bark_trim
 
 ROOT=Path(__file__).resolve().parents[1]
 ASSETS=ROOT/'src/main/resources/assets/theaurorian2'
@@ -71,7 +72,7 @@ for row,(key,label,english,plank) in enumerate(WOODS):
   mapping=dict(zip(original_colors,filthy_colors))
   wood=Image.new('RGB',template.size);wood.putdata([mapping[p] for p in template.getdata()])
  atlas=Image.new('RGB',(64,64),(38,39,43));atlas.paste(wood,(0,0))
- dark=wood.point(lambda v:round(v*.55));atlas.paste(dark,(16,0))
+ dark=bark_trim(wood,plank);atlas.paste(dark,(16,0))
  inner=wood.point(lambda v:round(v*.26));atlas.paste(inner,(32,0))
  nail=Image.new('RGB',(16,16),(92,95,99));atlas.paste(nail,(48,0))
  atlas.save(folder/'crate.png');atlas.save(ASSETS/f'textures/block/{name}.png')

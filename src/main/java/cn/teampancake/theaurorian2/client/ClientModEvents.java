@@ -141,6 +141,8 @@ public final class ClientModEvents {
                 ModBlockEntities.CRYSTALLINE_SWORD_PEDESTAL.get(),
                 CrystallineSwordPedestalRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SILENT_WOOD_CHEST.get(), AurorianChestRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.LONG_MIRROR.get(),
+                cn.teampancake.theaurorian2.client.renderer.mirror.LongMirrorRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_FURNACE.get(), AurorianFurnaceRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_TABLE.get(), AurorianTableRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_SIGN.get(), StandingSignRenderer::new);

@@ -2,6 +2,7 @@ package cn.teampancake.theaurorian2.common.entity;
 
 import cn.teampancake.theaurorian2.common.block.AurorianStoolBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianChairBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianBenchBlock;
 import cn.teampancake.theaurorian2.common.block.PairedFurnitureBlock;
 import cn.teampancake.theaurorian2.TheAurorian2;
 import net.minecraft.core.Direction;
@@ -21,7 +22,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-/** Invisible, immobile mount that exists only while a stool or chair is occupied. */
+/** Invisible, immobile mount that exists only while a stool, chair or bench seat is occupied. */
 @EventBusSubscriber(modid = TheAurorian2.MOD_ID)
 public final class StoolSeatEntity extends Entity {
     public StoolSeatEntity(EntityType<? extends StoolSeatEntity> type, Level level) {
@@ -44,6 +45,7 @@ public final class StoolSeatEntity extends Entity {
     private boolean hasSeatBlock() {
         var state = level().getBlockState(blockPosition());
         return state.getBlock() instanceof AurorianStoolBlock
+                || state.getBlock() instanceof AurorianBenchBlock
                 || state.getBlock() instanceof AurorianChairBlock && !state.getValue(PairedFurnitureBlock.SECOND);
     }
 
@@ -63,7 +65,7 @@ public final class StoolSeatEntity extends Entity {
 
     @Override
     public Vec3 getPassengerRidingPosition(Entity passenger) {
-        return position().add(0, AurorianStoolBlock.SEAT_HEIGHT, 0);
+        return position().add(0, AurorianStoolBlock.seatHeight(level().getBlockState(blockPosition())), 0);
     }
 
     @Override
@@ -75,7 +77,7 @@ public final class StoolSeatEntity extends Entity {
         }
         Vec3 above = DismountHelper.findSafeDismountLocation(
                 passenger.getType(), level(), blockPosition().above(), true);
-        return above != null ? above : position().add(0, AurorianStoolBlock.SEAT_HEIGHT, 0);
+        return above != null ? above : getPassengerRidingPosition(passenger);
     }
 
     @Override

@@ -52,3 +52,42 @@ under EliteCreatures / Elite-Craft. Adaptations fit the model to a block, hollow
 its base for opening, and extend the single chest into a double chest with
 repeated UVs. These assets remain subject to the supplied original asset terms;
 the project license does not relicense them.
+
+## ShizuArt medieval water buckets
+
+The five wooden water buckets use the project owner's supplied ShizuArt medieval
+bathroom models `seau` and `seau_remplie`. Their geometry, signed inner surfaces,
+UVs, transparent cutouts, water plane and item display transforms are retained.
+The brown wood ramp in `baquet2` is recolored from each matching Aurorian plank;
+original dark hoops and blue water remain. These assets remain subject to their
+original terms; the project license does not relicense them.
+
+## ShizuArt medieval ceramic jug
+
+The Aurorian Jug uses `cruche_terre_cuite` from the project owner's supplied
+ShizuArt medieval bathroom pack. The ceramic colors are sampled from the Aurorian
+brick item texture. Original geometry, UVs, pivots, handle planes, water alpha and
+display transforms are retained; the empty variant hides only the water plane.
+These assets remain subject to their original terms; the project license does
+not relicense them.
+
+## ShizuArt medieval long mirrors
+
+The five wooden long mirrors use the supplied ShizuArt `long_miroir` model.
+Only the frame's brown color ramp is mapped to the matching Aurorian plank palette;
+the original blue mirror, transparency and texture resolution are retained.
+The model is split vertically with matching UVs for two-block wall placement.
+Original geometry, reversed inner surfaces and item display transforms are retained.
+These assets remain subject to their original terms; the project license does not relicense them.
+
+## ShizuArt medieval bathroom seats and tables
+
+The five wood stool, bench, small-table and long-table variants use the project owner's supplied
+ShizuArt medieval bathroom pack models `tabouret`, `banc`, `petite_table` and `table`, with the shared
+`baquet2` texture recolored from each Aurorian plank palette. The source files
+credit "Made with Blockbench by ShizuArt". Geometry, signed inner surfaces,
+transparent cutouts and face UV rotations are retained. The long table and bench are translated
+and split at the block seam with matching UVs for two-block placement. The bench
+and small table retain the source inventory transforms; long-table inventory presentation
+is adapted to the mod's block items. These assets remain subject to their original terms;
+the project license does not relicense them.

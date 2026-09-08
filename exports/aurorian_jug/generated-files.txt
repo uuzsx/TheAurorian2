@@ -1,0 +1,12 @@
+D:\极光\src\main\resources\assets\theaurorian2\models\block\aurorian_jug.json
+D:\极光\src\main\resources\assets\theaurorian2\items\aurorian_jug.json
+D:\极光\exports\aurorian_jug\aurorian_jug.bbmodel
+D:\极光\src\main\resources\assets\theaurorian2\models\block\aurorian_jug_water.json
+D:\极光\src\main\resources\assets\theaurorian2\items\aurorian_jug_water.json
+D:\极光\exports\aurorian_jug\aurorian_jug_water.bbmodel
+D:\极光\src\main\resources\assets\theaurorian2\blockstates\aurorian_jug.json
+D:\极光\src\main\resources\data\theaurorian2\recipe\aurorian_jug.json
+D:\极光\src\main\resources\data\theaurorian2\loot_table\blocks\aurorian_jug.json
+D:\极光\src\main\resources\assets\theaurorian2\lang\zh_cn.json
+D:\极光\src\main\resources\assets\theaurorian2\lang\en_us.json
+D:\极光\src\main\resources\data\minecraft\tags\block\mineable\pickaxe.json
