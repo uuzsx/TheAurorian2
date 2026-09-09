@@ -5,7 +5,7 @@ import cn.teampancake.theaurorian2.common.block.PurificationAltarBaseBlock;
 import cn.teampancake.theaurorian2.common.block.PurificationAltarUpperBlock;
 import cn.teampancake.theaurorian2.common.entity.PurificationRiftEntity;
 import cn.teampancake.theaurorian2.common.entity.PurificationRitualZombieEntity;
-import cn.teampancake.theaurorian2.common.network.PurificationRitualMusicPayload;
+import cn.teampancake.theaurorian2.common.world.PurificationRitualMusicState;
 import cn.teampancake.theaurorian2.common.network.PurificationRitualPromptPayload;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModEntities;
@@ -68,6 +68,8 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
     private long ritualStartedAt;
     private long ritualId;
     private long nextRiftAt;
+    // Deliberately not saved: unloading/restarting interrupts the continuous defense.
+    private long lastRitualTick = -1L;
     private float lastHealth;
     private int altarHitCooldown;
     private boolean baseLightSynchronized;
@@ -122,14 +124,14 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
         pendingPlayer = null;
         ritualPlayer = player.getUUID();
         ritualStartedAt = level.getGameTime();
+        lastRitualTick = ritualStartedAt;
         ritualId++;
         nextRiftAt = ritualStartedAt + RIFT_OPEN_DELAY_TICKS;
         lastHealth = player.getHealth();
         altarHitCooldown = 0;
         setShieldCount(INITIAL_SHIELDS);
         setRitualActive(true);
-        PacketDistributor.sendToPlayersInDimension(
-                (ServerLevel) level, new PurificationRitualMusicPayload(true));
+        setRitualMusicPlaying((ServerLevel) level, true);
         updateProgressEvent(player, 0L);
         level.playSound(
                 null, worldPosition, SoundEvents.AMETHYST_BLOCK_CHIME,
@@ -359,6 +361,13 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
             return;
         }
 
+        long now = level.getGameTime();
+        if (altar.lastRitualTick < 0L || now - altar.lastRitualTick > 1L || now < altar.lastRitualTick) {
+            altar.cancelRitual("message.theaurorian2.purification.interrupted", false);
+            return;
+        }
+        altar.lastRitualTick = now;
+
         if (altar.altarHitCooldown > 0) {
             altar.altarHitCooldown--;
         }
@@ -460,8 +469,7 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
     }
 
     private void setRitualMusicPlaying(ServerLevel serverLevel, boolean playing) {
-        PacketDistributor.sendToPlayersInDimension(
-                serverLevel, new PurificationRitualMusicPayload(playing));
+        PurificationRitualMusicState.setPlaying(serverLevel, worldPosition, playing);
     }
 
     private void setRitualActive(boolean active) {
@@ -600,6 +608,7 @@ public final class PurificationAltarBlockEntity extends BlockEntity {
     public void setRemoved() {
         clearProgressEvent();
         if (level instanceof ServerLevel serverLevel) {
+            setRitualMusicPlaying(serverLevel, false);
             cleanupRitualEntities(serverLevel);
         }
         super.setRemoved();

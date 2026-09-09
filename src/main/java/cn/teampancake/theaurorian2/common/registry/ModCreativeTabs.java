@@ -400,11 +400,39 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.PURIFICATION_ALTAR_ITEM.get());
         output.accept(ModBlocks.ARCANE_MAGIC_CIRCLE.get());
         output.accept(ModBlocks.AURORIAN_CRAFTING_TABLE.get());
+        output.accept(ModBlocks.CARPENTER_WORKBENCH.get());
+        output.accept(ModBlocks.AMETHYST_WIND_CHIMES.get());
+        output.accept(ModBlocks.BAMBOO_WIND_CHIMES.get());
         output.accept(ModBlocks.AURORIAN_FURNACE.get());
         output.accept(ModBlocks.FIREPLACE.get());
         output.accept(ModBlocks.SILENT_WOOD_TABLE.get());
         output.accept(ModBlocks.CURTAIN_WOOD_TABLE.get());
         output.accept(ModBlocks.CURSED_FROST_WOOD_TABLE.get());
+        output.accept(ModBlocks.SILENT_WOOD_STORAGE_CRATE_1.get());
+        output.accept(ModBlocks.SILENT_WOOD_STORAGE_CRATE_2.get());
+        output.accept(ModBlocks.SILENT_WOOD_STORAGE_CRATE_3.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_STORAGE_CRATE_1.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_STORAGE_CRATE_2.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_STORAGE_CRATE_3.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_STORAGE_CRATE_1.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_STORAGE_CRATE_2.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_STORAGE_CRATE_3.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_STORAGE_CRATE_1.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_STORAGE_CRATE_2.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_STORAGE_CRATE_3.get());
+        output.accept(ModBlocks.FILTHY_WOOD_STORAGE_CRATE_1.get());
+        output.accept(ModBlocks.FILTHY_WOOD_STORAGE_CRATE_2.get());
+        output.accept(ModBlocks.FILTHY_WOOD_STORAGE_CRATE_3.get());
+        output.accept(ModBlocks.SILENT_WOOD_STORAGE_BARREL.get());
+        output.accept(ModBlocks.SILENT_WOOD_HORIZONTAL_BARREL.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_STORAGE_BARREL.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_HORIZONTAL_BARREL.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_STORAGE_BARREL.get());
+        output.accept(ModBlocks.CURTAIN_WOOD_HORIZONTAL_BARREL.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_STORAGE_BARREL.get());
+        output.accept(ModBlocks.CURSED_FROST_WOOD_HORIZONTAL_BARREL.get());
+        output.accept(ModBlocks.FILTHY_WOOD_STORAGE_BARREL.get());
+        output.accept(ModBlocks.FILTHY_WOOD_HORIZONTAL_BARREL.get());
         output.accept(ModBlocks.SILENT_WOOD_CHEST.get());
         output.accept(ModBlocks.WEEPING_WILLOW_CHEST.get());
         output.accept(ModBlocks.CURTAIN_WOOD_CHEST.get());
@@ -694,7 +722,6 @@ public final class ModCreativeTabs {
         output.accept(ModItems.AURORIAN_WINTER_ROOT.get());
         output.accept(ModItems.ROASTED_AURORIAN_WINTER_ROOT.get());
         output.accept(ModItems.DARK_STONE_SHRIMP.get());
-        output.accept(ModItems.WHITE_CHOCOLATE.get());
         ModLegacyItems.forEachFood(output::accept);
     }
 

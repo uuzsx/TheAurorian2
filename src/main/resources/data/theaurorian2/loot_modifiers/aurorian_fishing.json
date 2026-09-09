@@ -1,0 +1,1 @@
+{"type":"theaurorian2:aurorian_fishing","priority":2000,"conditions":[{"condition":"neoforge:loot_table_id","loot_table_id":"minecraft:gameplay/fishing"}]}

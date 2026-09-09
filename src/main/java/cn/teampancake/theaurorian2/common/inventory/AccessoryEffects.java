@@ -54,7 +54,10 @@ public final class AccessoryEffects {
     }
 
     public static void reconcile(Player player, AccessoryInventory inventory) {
-        if (player.level().isClientSide()) {
+        // Attachment deserialization happens before the login connection exists.
+        // Login/respawn events reconcile the restored inventory once synchronization is safe.
+        if (player.level().isClientSide()
+                || player instanceof ServerPlayer serverPlayer && serverPlayer.connection == null) {
             return;
         }
 

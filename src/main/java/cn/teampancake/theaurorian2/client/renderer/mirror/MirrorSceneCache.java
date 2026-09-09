@@ -91,6 +91,7 @@ final class MirrorSceneCache implements AutoCloseable {
 
     private static Compiled compile(SectionCompiler compiler, SectionPos pos, RenderSectionRegion region,
             List<net.neoforged.neoforge.client.event.AddSectionGeometryEvent.AdditionalSectionRenderer> additional) {
+        boolean extension = MirrorShaderCompat.beginMesh();
         try (var builders = new SectionBufferBuilderPack()) {
             var result = compiler.compile(pos, region, VertexSorting.DISTANCE_TO_ORIGIN, builders, additional);
             try {
@@ -103,7 +104,7 @@ final class MirrorSceneCache implements AutoCloseable {
                 }
                 return new Compiled(layers, List.copyOf(result.blockEntities));
             } finally { result.release(); }
-        }
+        } finally { MirrorShaderCompat.endMesh(extension); }
     }
 
     private static byte[] copy(ByteBuffer buffer) {

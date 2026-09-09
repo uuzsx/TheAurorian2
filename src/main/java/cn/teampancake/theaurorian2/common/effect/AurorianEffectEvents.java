@@ -11,6 +11,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
+import java.lang.ref.WeakReference;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -64,6 +65,10 @@ public final class AurorianEffectEvents {
     private static final Map<UUID, Float> CRYSTALLIZATION_HEALTH_SNAPSHOTS = new java.util.HashMap<>();
     private static final Map<LivingEntity, MotionState> LACERATION_MOTION = new WeakHashMap<>();
     private static final ThreadLocal<Boolean> SETTLING_CORRUPTION = ThreadLocal.withInitial(() -> false);
+    // Enchantment queries expose the stack, not its wearer. Keep ownership transient;
+    // never make a temporary curse a persistent property of transferable equipment.
+    private static final ThreadLocal<Map<ItemStack, WeakReference<Player>>> FORBIDDEN_OWNERS =
+            ThreadLocal.withInitial(WeakHashMap::new);
 
     private AurorianEffectEvents() {
     }
@@ -287,7 +292,7 @@ public final class AurorianEffectEvents {
 
     @SubscribeEvent
     public static void onGetEnchantmentLevel(GetEnchantmentLevelEvent event) {
-        if (event.getStack() instanceof ItemStack stack && hasBooleanMarker(stack, FORBIDDEN_MARKER)) {
+        if (event.getStack() instanceof ItemStack stack && isForbiddenEquipment(stack)) {
             ItemEnchantments.Mutable enchantments = event.getEnchantments();
             enchantments.removeIf(enchantment -> true);
         }
@@ -471,10 +476,36 @@ public final class AurorianEffectEvents {
     }
 
     private static void setForbiddenForInventory(Player player, boolean active) {
-        forEachPlayerStack(player, stack -> setBooleanMarker(
-                stack,
-                FORBIDDEN_MARKER,
-                active && stack.isEnchanted()));
+        Map<ItemStack, WeakReference<Player>> owners = FORBIDDEN_OWNERS.get();
+        forEachPlayerStack(player, stack -> {
+            if (stack.isEmpty()) return;
+            // Migrate old saved markers without touching the actual enchantments.
+            if (stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).contains(FORBIDDEN_MARKER)) {
+                CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> tag.remove(FORBIDDEN_MARKER));
+            }
+            if (active && stack.isEnchanted()) {
+                WeakReference<Player> existing = owners.get(stack);
+                if (existing == null || existing.get() != player) owners.put(stack, new WeakReference<>(player));
+            } else if (!owners.isEmpty()) {
+                owners.remove(stack);
+            }
+        });
+    }
+
+    private static boolean isForbiddenEquipment(ItemStack stack) {
+        var owners = FORBIDDEN_OWNERS.get();
+        var reference = owners.get(stack);
+        Player owner = reference == null ? null : reference.get();
+        if (owner != null && !owner.isRemoved() && owner.hasEffect(ModMobEffects.FORBIDDEN_CURSE)) {
+            for (ItemStack held : owner.getInventory().getNonEquipmentItems()) {
+                if (held == stack) return true;
+            }
+            for (EquipmentSlot slot : EquipmentSlot.VALUES) {
+                if (owner.getItemBySlot(slot) == stack) return true;
+            }
+        }
+        if (reference != null) owners.remove(stack);
+        return false;
     }
 
     private static void settleArmorDebts(ServerPlayer player) {
@@ -517,7 +548,9 @@ public final class AurorianEffectEvents {
         if (stack.isEmpty()) {
             return ArmorDebt.EMPTY;
         }
-        CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        CustomData customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        if (!customData.contains(ARMOR_DEBT)) return ArmorDebt.EMPTY;
+        CompoundTag tag = customData.copyTag();
         int debt = tag.getIntOr(ARMOR_DEBT, 0);
         String owner = tag.getStringOr(ARMOR_DEBT_OWNER, "");
         long sessionId = tag.getLongOr(ARMOR_DEBT_SESSION, 0L);
@@ -532,32 +565,15 @@ public final class AurorianEffectEvents {
     }
 
     private static void clearArmorDebt(ItemStack stack) {
-        if (!stack.isEmpty()) {
+        CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        if (!stack.isEmpty() && (data.contains(ARMOR_DEBT)
+                || data.contains(ARMOR_DEBT_OWNER) || data.contains(ARMOR_DEBT_SESSION))) {
             CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> {
                 tag.remove(ARMOR_DEBT);
                 tag.remove(ARMOR_DEBT_OWNER);
                 tag.remove(ARMOR_DEBT_SESSION);
             });
         }
-    }
-
-    private static boolean hasBooleanMarker(ItemStack stack, String key) {
-        return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY)
-                .copyTag()
-                .getBooleanOr(key, false);
-    }
-
-    private static void setBooleanMarker(ItemStack stack, String key, boolean enabled) {
-        if (stack.isEmpty() || hasBooleanMarker(stack, key) == enabled) {
-            return;
-        }
-        CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> {
-            if (enabled) {
-                tag.putBoolean(key, true);
-            } else {
-                tag.remove(key);
-            }
-        });
     }
 
     private record FoodSnapshot(int food, float saturation) {

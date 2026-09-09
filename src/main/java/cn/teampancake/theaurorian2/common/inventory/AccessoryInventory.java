@@ -64,7 +64,6 @@ public final class AccessoryInventory extends SimpleContainer implements ValueIO
             });
         } finally {
             this.loading = false;
-            this.setChanged();
         }
     }
 

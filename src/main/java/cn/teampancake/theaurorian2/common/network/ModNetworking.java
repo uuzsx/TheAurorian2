@@ -6,7 +6,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public final class ModNetworking {
 
-    private static final String NETWORK_VERSION = "4";
+    private static final String NETWORK_VERSION = "5";
 
     private ModNetworking() {
     }

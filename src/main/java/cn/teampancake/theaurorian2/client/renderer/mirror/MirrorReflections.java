@@ -52,7 +52,8 @@ public final class MirrorReflections {
 
     @SubscribeEvent public static void extract(ExtractLevelRenderStateEvent event) {
         var mc = Minecraft.getInstance();
-        if (mc.player == null || !MirrorConfig.ENABLED.get() || failed || reset) return;
+        if (mc.player == null || !MirrorConfig.ENABLED.get() || failed || reset
+                || !MirrorShaderCompat.supported() || MirrorShaderCompat.shadowPass()) return;
         var worldState = event.getRenderState();
         var eye = event.getCamera().position();
         var planes = new ArrayList<MirrorPlane>();
@@ -157,7 +158,7 @@ public final class MirrorReflections {
 
     @SubscribeEvent public static void submit(SubmitCustomGeometryEvent event) {
         var views = event.getLevelRenderState().getRenderData(VIEWS);
-        if (views == null || renderer == null || failed) return;
+        if (views == null || renderer == null || failed || MirrorShaderCompat.shadowPass()) return;
         try {
             for (var view : views) {
                 // Keep static glass (or the previous complete frame) while new sections are being prepared.

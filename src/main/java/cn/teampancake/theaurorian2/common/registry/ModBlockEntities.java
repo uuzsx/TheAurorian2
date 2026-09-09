@@ -16,6 +16,8 @@ import cn.teampancake.theaurorian2.common.block.entity.SilentCampfireBlockEntity
 import cn.teampancake.theaurorian2.common.block.entity.SpiderMotherSpawnerBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianUrnBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.LongMirrorBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.WindChimesBlockEntity;
+import cn.teampancake.theaurorian2.common.block.entity.DoubleStorageCrateBlockEntity;
 import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -28,12 +30,26 @@ public final class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, TheAurorian2.MOD_ID);
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DoubleStorageCrateBlockEntity>> DOUBLE_STORAGE_CRATE =
+            BLOCK_ENTITY_TYPES.register("double_storage_crate", () -> new BlockEntityType<>(
+                    DoubleStorageCrateBlockEntity::new,
+                    Set.of(ModBlocks.SILENT_WOOD_STORAGE_CRATE_3.get(), ModBlocks.WEEPING_WILLOW_STORAGE_CRATE_3.get(),
+                            ModBlocks.CURTAIN_WOOD_STORAGE_CRATE_3.get(), ModBlocks.CURSED_FROST_WOOD_STORAGE_CRATE_3.get(),
+                            ModBlocks.FILTHY_WOOD_STORAGE_CRATE_3.get())));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LongMirrorBlockEntity>> LONG_MIRROR =
             BLOCK_ENTITY_TYPES.register("long_mirror", () -> new BlockEntityType<>(
                     LongMirrorBlockEntity::new,
                     Set.of(ModBlocks.SILENT_WOOD_LONG_MIRROR.get(), ModBlocks.WEEPING_WILLOW_LONG_MIRROR.get(),
                             ModBlocks.CURTAIN_WOOD_LONG_MIRROR.get(), ModBlocks.CURSED_FROST_WOOD_LONG_MIRROR.get(),
                             ModBlocks.FILTHY_WOOD_LONG_MIRROR.get())));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WindChimesBlockEntity>> AMETHYST_WIND_CHIMES =
+            BLOCK_ENTITY_TYPES.register("amethyst_wind_chimes", () -> new BlockEntityType<>(
+                    WindChimesBlockEntity::new, Set.of(ModBlocks.AMETHYST_WIND_CHIMES.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WindChimesBlockEntity>> BAMBOO_WIND_CHIMES =
+            BLOCK_ENTITY_TYPES.register("bamboo_wind_chimes", () -> new BlockEntityType<>(
+                    WindChimesBlockEntity::new, Set.of(ModBlocks.BAMBOO_WIND_CHIMES.get())));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AstrologyTableBlockEntity>> ASTROLOGY_TABLE =
             BLOCK_ENTITY_TYPES.register(
@@ -145,7 +161,24 @@ public final class ModBlockEntities {
     }
 
     public static void register(IEventBus modEventBus) {
+        modEventBus.addListener((net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event) ->
+                event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.Item.BLOCK,
+                        DOUBLE_STORAGE_CRATE.get(), (container, side) ->
+                                net.neoforged.neoforge.transfer.item.VanillaContainerWrapper.of(container)));
         BLOCK_ENTITY_TYPES.addAlias(TheAurorian2.id("aurorian_chest"), TheAurorian2.id("silent_wood_chest"));
+        // Public NeoForge hook: reuse all vanilla barrel storage/automation behavior for our BarrelBlock subclasses.
+        modEventBus.addListener((net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent event) ->
+                event.modify(BlockEntityType.BARREL,
+                        ModBlocks.SILENT_WOOD_STORAGE_CRATE_1.get(), ModBlocks.SILENT_WOOD_STORAGE_CRATE_2.get(), ModBlocks.SILENT_WOOD_STORAGE_CRATE_3.get(),
+                        ModBlocks.WEEPING_WILLOW_STORAGE_CRATE_1.get(), ModBlocks.WEEPING_WILLOW_STORAGE_CRATE_2.get(), ModBlocks.WEEPING_WILLOW_STORAGE_CRATE_3.get(),
+                        ModBlocks.CURTAIN_WOOD_STORAGE_CRATE_1.get(), ModBlocks.CURTAIN_WOOD_STORAGE_CRATE_2.get(), ModBlocks.CURTAIN_WOOD_STORAGE_CRATE_3.get(),
+                        ModBlocks.CURSED_FROST_WOOD_STORAGE_CRATE_1.get(), ModBlocks.CURSED_FROST_WOOD_STORAGE_CRATE_2.get(), ModBlocks.CURSED_FROST_WOOD_STORAGE_CRATE_3.get(),
+                        ModBlocks.FILTHY_WOOD_STORAGE_CRATE_1.get(), ModBlocks.FILTHY_WOOD_STORAGE_CRATE_2.get(), ModBlocks.FILTHY_WOOD_STORAGE_CRATE_3.get(),
+                        ModBlocks.SILENT_WOOD_STORAGE_BARREL.get(), ModBlocks.SILENT_WOOD_HORIZONTAL_BARREL.get(),
+                        ModBlocks.WEEPING_WILLOW_STORAGE_BARREL.get(), ModBlocks.WEEPING_WILLOW_HORIZONTAL_BARREL.get(),
+                        ModBlocks.CURTAIN_WOOD_STORAGE_BARREL.get(), ModBlocks.CURTAIN_WOOD_HORIZONTAL_BARREL.get(),
+                        ModBlocks.CURSED_FROST_WOOD_STORAGE_BARREL.get(), ModBlocks.CURSED_FROST_WOOD_HORIZONTAL_BARREL.get(),
+                        ModBlocks.FILTHY_WOOD_STORAGE_BARREL.get(), ModBlocks.FILTHY_WOOD_HORIZONTAL_BARREL.get()));
         BLOCK_ENTITY_TYPES.register(modEventBus);
     }
 }

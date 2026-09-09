@@ -71,7 +71,7 @@ public final class AurorianJugItem extends WaterVesselItem {
         if (!level.mayInteract(player, pos) || !level.getFluidState(pos).is(FluidTags.WATER)) return InteractionResult.PASS;
         if (level.isClientSide()) return InteractionResult.SUCCESS;
         // Like a glass bottle, filling samples water without draining the source or waterlogged block.
-        level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1, 1);
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1, 1);
         level.gameEvent(player, GameEvent.FLUID_PICKUP, pos);
         player.awardStat(Stats.ITEM_USED.get(this));
         return InteractionResult.SUCCESS.heldItemTransformedTo(ItemUtils.createFilledResult(player.getItemInHand(hand), player,

@@ -10,6 +10,10 @@ import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.attachment.IAttachmentSerializer;
+import net.neoforged.neoforge.attachment.IAttachmentHolder;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -46,8 +50,24 @@ public final class ModAttachments {
                             .build());
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AccessoryInventory>> ACCESSORY_INVENTORY =
-            ATTACHMENTS.register("accessory_inventory", () -> AttachmentType.serializable(
+            ATTACHMENTS.register("accessory_inventory", () -> AttachmentType.builder(
                             holder -> new AccessoryInventory((net.minecraft.world.entity.player.Player) holder))
+                    .serialize(new IAttachmentSerializer<AccessoryInventory>() {
+                        @Override
+                        public AccessoryInventory read(IAttachmentHolder holder, ValueInput input) {
+                            // InventoryMenu has already bound its slots during player construction.
+                            // Restore that instance instead of replacing it behind the menu's back.
+                            AccessoryInventory inventory = holder.getData(ACCESSORY_INVENTORY);
+                            inventory.deserialize(input);
+                            return inventory;
+                        }
+
+                        @Override
+                        public boolean write(AccessoryInventory inventory, ValueOutput output) {
+                            inventory.serialize(output);
+                            return true;
+                        }
+                    })
                     .copyOnDeath()
                     .build());
 

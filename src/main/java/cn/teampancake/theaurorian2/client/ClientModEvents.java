@@ -28,6 +28,7 @@ import cn.teampancake.theaurorian2.client.renderer.ArcaneMagicCircleRenderer;
 import cn.teampancake.theaurorian2.client.renderer.PurificationAltarRenderer;
 import cn.teampancake.theaurorian2.client.renderer.CrystallineSwordPedestalRenderer;
 import cn.teampancake.theaurorian2.client.renderer.ModelledBlockRenderer;
+import cn.teampancake.theaurorian2.client.renderer.WindChimesRenderer;
 import cn.teampancake.theaurorian2.client.renderer.TrainingDummyRenderer;
 import cn.teampancake.theaurorian2.client.renderer.SimpleGeoMobRenderer;
 import cn.teampancake.theaurorian2.client.renderer.WallClimberSpiderlingRenderer;
@@ -91,6 +92,12 @@ import org.joml.Vector4f;
 
 @EventBusSubscriber(modid = TheAurorian2.MOD_ID, value = Dist.CLIENT)
 public final class ClientModEvents {
+    @SubscribeEvent
+    public static void registerWindChimesPipeline(
+            net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent event) {
+        event.registerPipeline(WindChimesRenderer.EMISSIVE_CULL);
+    }
+
 
     private ClientModEvents() {
     }
@@ -130,6 +137,10 @@ public final class ClientModEvents {
         event.registerEntityRenderer(
                 ModEntities.PURIFICATION_RITUAL_ZOMBIE.get(), ZombieRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ASTROLOGY_TABLE.get(), AstrologyTableRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.AMETHYST_WIND_CHIMES.get(),
+                context -> new WindChimesRenderer(context, TheAurorian2.id("amethyst_wind_chimes"), true));
+        event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_WIND_CHIMES.get(),
+                context -> new WindChimesRenderer(context, TheAurorian2.id("bamboo_wind_chimes"), false));
         event.registerBlockEntityRenderer(
                 ModBlockEntities.ARCANE_MAGIC_CIRCLE.get(), ArcaneMagicCircleRenderer::new);
         event.registerBlockEntityRenderer(
@@ -171,7 +182,7 @@ public final class ClientModEvents {
         event.register(PurificationRitualPromptPayload.TYPE, (payload, context) ->
                 Minecraft.getInstance().setScreen(new PurificationRitualScreen(payload.pos())));
         event.register(PurificationRitualMusicPayload.TYPE, (payload, context) ->
-                context.enqueueWork(() -> PurificationRitualMusic.handle(payload.playing())));
+                context.enqueueWork(() -> PurificationRitualMusic.handle(payload.altar(), payload.playing())));
     }
 
     @SubscribeEvent

@@ -1,0 +1,10 @@
+D:\极光\src\main\resources\assets\theaurorian2\models\item\carpenter_workbench.json
+D:\极光\src\main\resources\assets\theaurorian2\models\block\carpenter_workbench_false.json
+D:\极光\src\main\resources\assets\theaurorian2\models\block\carpenter_workbench_true.json
+D:\极光\src\main\resources\assets\theaurorian2\blockstates\carpenter_workbench.json
+D:\极光\src\main\resources\assets\theaurorian2\items\carpenter_workbench.json
+D:\极光\src\main\resources\data\theaurorian2\loot_table\blocks\carpenter_workbench.json
+D:\极光\src\main\resources\assets\theaurorian2\lang\zh_cn.json
+D:\极光\src\main\resources\assets\theaurorian2\lang\en_us.json
+D:\极光\src\main\resources\data\minecraft\tags\block\mineable\axe.json
+D:\极光\exports\carpenter_workbench\carpenter_workbench.bbmodel

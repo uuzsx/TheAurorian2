@@ -56,6 +56,12 @@ final class MirrorSceneRenderer implements AutoCloseable {
     }
 
     void render(MirrorReflections.View view, MirrorSceneCache cache, LevelRenderState world) {
+        int shaderState = MirrorShaderCompat.beginRender();
+        try { renderScene(view, cache, world); }
+        finally { MirrorShaderCompat.endRender(shaderState); }
+    }
+
+    private void renderScene(MirrorReflections.View view, MirrorSceneCache cache, LevelRenderState world) {
         var mc = Minecraft.getInstance(); var target = view.surface.target;
         var oldColor = RenderSystem.outputColorTextureOverride; var oldDepth = RenderSystem.outputDepthTextureOverride;
         var oldProjection = RenderSystem.getProjectionMatrixBuffer(); var oldType = RenderSystem.getProjectionType();

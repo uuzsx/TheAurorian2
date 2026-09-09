@@ -18,8 +18,12 @@ import cn.teampancake.theaurorian2.common.block.AurorianTwistingVinesPlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianWaterSurfacePlantBlock;
 import cn.teampancake.theaurorian2.common.block.AstrologyTableBlock;
+import cn.teampancake.theaurorian2.common.block.WindChimesBlock;
 import cn.teampancake.theaurorian2.common.block.ArcaneMagicCircleBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianChestBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianStorageBarrelBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianStorageCrateBlock;
+import cn.teampancake.theaurorian2.common.block.CarpenterWorkbenchBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianCrateBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianStoolBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianChairBlock;
@@ -357,6 +361,15 @@ public final class ModBlocks {
     public static final DeferredBlock<AurorianTwistingVinesPlantBlock> AURORIAN_TWISTING_VINES_PLANT = BLOCKS.registerBlock(
             "aurorian_twisting_vines_plant", AurorianTwistingVinesPlantBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT));
+    public static final DeferredBlock<WindChimesBlock> AMETHYST_WIND_CHIMES = BLOCKS.registerBlock(
+            "amethyst_wind_chimes", WindChimesBlock::new,
+            () -> BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.AMETHYST)
+                    .noCollision().noOcclusion().lightLevel(state -> 15));
+    public static final DeferredBlock<WindChimesBlock> BAMBOO_WIND_CHIMES = BLOCKS.registerBlock(
+            "bamboo_wind_chimes", WindChimesBlock::new,
+            () -> BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.BAMBOO_WOOD)
+                    .noCollision().noOcclusion());
+
     public static final DeferredBlock<AstrologyTableBlock> ASTROLOGY_TABLE = BLOCKS.registerBlock(
             "astrology_table", AstrologyTableBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
@@ -490,6 +503,10 @@ public final class ModBlocks {
     public static final DeferredBlock<AurorianFurnaceBlock> AURORIAN_FURNACE = BLOCKS.registerBlock(
             "aurorian_furnace", AurorianFurnaceBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE));
+    public static final DeferredBlock<CarpenterWorkbenchBlock> CARPENTER_WORKBENCH = BLOCKS.registerBlock(
+            "carpenter_workbench", CarpenterWorkbenchBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE).noOcclusion()
+                    .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK));
     public static final DeferredBlock<FireplaceBlock> FIREPLACE = BLOCKS.registerBlock(
             "fireplace", FireplaceBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SMOKER)
@@ -516,6 +533,33 @@ public final class ModBlocks {
     public static final DeferredBlock<AurorianBenchBlock> CURTAIN_WOOD_BENCH = bench("curtain_wood_bench");
     public static final DeferredBlock<AurorianBenchBlock> CURSED_FROST_WOOD_BENCH = bench("cursed_frost_wood_bench");
     public static final DeferredBlock<AurorianBenchBlock> FILTHY_WOOD_BENCH = bench("filthy_wood_bench");
+    public static final DeferredBlock<AurorianStorageCrateBlock> SILENT_WOOD_STORAGE_CRATE_1 = storageCrate("silent_wood_storage_crate_1", 1);
+    public static final DeferredBlock<AurorianStorageCrateBlock> SILENT_WOOD_STORAGE_CRATE_2 = storageCrate("silent_wood_storage_crate_2", 2);
+    public static final DeferredBlock<AurorianStorageCrateBlock> SILENT_WOOD_STORAGE_CRATE_3 = storageCrate("silent_wood_storage_crate_3", 3);
+    public static final DeferredBlock<AurorianStorageCrateBlock> WEEPING_WILLOW_STORAGE_CRATE_1 = storageCrate("weeping_willow_storage_crate_1", 1);
+    public static final DeferredBlock<AurorianStorageCrateBlock> WEEPING_WILLOW_STORAGE_CRATE_2 = storageCrate("weeping_willow_storage_crate_2", 2);
+    public static final DeferredBlock<AurorianStorageCrateBlock> WEEPING_WILLOW_STORAGE_CRATE_3 = storageCrate("weeping_willow_storage_crate_3", 3);
+    public static final DeferredBlock<AurorianStorageCrateBlock> CURTAIN_WOOD_STORAGE_CRATE_1 = storageCrate("curtain_wood_storage_crate_1", 1);
+    public static final DeferredBlock<AurorianStorageCrateBlock> CURTAIN_WOOD_STORAGE_CRATE_2 = storageCrate("curtain_wood_storage_crate_2", 2);
+    public static final DeferredBlock<AurorianStorageCrateBlock> CURTAIN_WOOD_STORAGE_CRATE_3 = storageCrate("curtain_wood_storage_crate_3", 3);
+    public static final DeferredBlock<AurorianStorageCrateBlock> CURSED_FROST_WOOD_STORAGE_CRATE_1 = storageCrate("cursed_frost_wood_storage_crate_1", 1);
+    public static final DeferredBlock<AurorianStorageCrateBlock> CURSED_FROST_WOOD_STORAGE_CRATE_2 = storageCrate("cursed_frost_wood_storage_crate_2", 2);
+    public static final DeferredBlock<AurorianStorageCrateBlock> CURSED_FROST_WOOD_STORAGE_CRATE_3 = storageCrate("cursed_frost_wood_storage_crate_3", 3);
+    public static final DeferredBlock<AurorianStorageCrateBlock> FILTHY_WOOD_STORAGE_CRATE_1 = storageCrate("filthy_wood_storage_crate_1", 1);
+    public static final DeferredBlock<AurorianStorageCrateBlock> FILTHY_WOOD_STORAGE_CRATE_2 = storageCrate("filthy_wood_storage_crate_2", 2);
+    public static final DeferredBlock<AurorianStorageCrateBlock> FILTHY_WOOD_STORAGE_CRATE_3 = storageCrate("filthy_wood_storage_crate_3", 3);
+
+    public static final DeferredBlock<AurorianStorageBarrelBlock> SILENT_WOOD_STORAGE_BARREL = storageBarrel("silent_wood_storage_barrel", false);
+    public static final DeferredBlock<AurorianStorageBarrelBlock> SILENT_WOOD_HORIZONTAL_BARREL = storageBarrel("silent_wood_horizontal_barrel", true);
+    public static final DeferredBlock<AurorianStorageBarrelBlock> WEEPING_WILLOW_STORAGE_BARREL = storageBarrel("weeping_willow_storage_barrel", false);
+    public static final DeferredBlock<AurorianStorageBarrelBlock> WEEPING_WILLOW_HORIZONTAL_BARREL = storageBarrel("weeping_willow_horizontal_barrel", true);
+    public static final DeferredBlock<AurorianStorageBarrelBlock> CURTAIN_WOOD_STORAGE_BARREL = storageBarrel("curtain_wood_storage_barrel", false);
+    public static final DeferredBlock<AurorianStorageBarrelBlock> CURTAIN_WOOD_HORIZONTAL_BARREL = storageBarrel("curtain_wood_horizontal_barrel", true);
+    public static final DeferredBlock<AurorianStorageBarrelBlock> CURSED_FROST_WOOD_STORAGE_BARREL = storageBarrel("cursed_frost_wood_storage_barrel", false);
+    public static final DeferredBlock<AurorianStorageBarrelBlock> CURSED_FROST_WOOD_HORIZONTAL_BARREL = storageBarrel("cursed_frost_wood_horizontal_barrel", true);
+    public static final DeferredBlock<AurorianStorageBarrelBlock> FILTHY_WOOD_STORAGE_BARREL = storageBarrel("filthy_wood_storage_barrel", false);
+    public static final DeferredBlock<AurorianStorageBarrelBlock> FILTHY_WOOD_HORIZONTAL_BARREL = storageBarrel("filthy_wood_horizontal_barrel", true);
+
     public static final DeferredBlock<AurorianSmallTableBlock> SILENT_WOOD_SMALL_TABLE = smallTable("silent_wood_small_table");
     public static final DeferredBlock<AurorianSmallTableBlock> WEEPING_WILLOW_SMALL_TABLE = smallTable("weeping_willow_small_table");
     public static final DeferredBlock<AurorianSmallTableBlock> CURTAIN_WOOD_SMALL_TABLE = smallTable("curtain_wood_small_table");
@@ -892,6 +936,16 @@ public final class ModBlocks {
         return BLOCKS.registerBlock(name, AurorianStoolBlock::new,
                 () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.5F).noOcclusion()
                         .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK));
+    }
+
+    private static DeferredBlock<AurorianStorageCrateBlock> storageCrate(String name, int style) {
+        return BLOCKS.registerBlock(name, properties -> new AurorianStorageCrateBlock(style, properties),
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL).noOcclusion());
+    }
+
+    private static DeferredBlock<AurorianStorageBarrelBlock> storageBarrel(String name, boolean horizontal) {
+        return BLOCKS.registerBlock(name, properties -> new AurorianStorageBarrelBlock(horizontal, properties),
+                () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL).noOcclusion());
     }
 
     private static DeferredBlock<AurorianLongMirrorBlock> longMirror(String name) {

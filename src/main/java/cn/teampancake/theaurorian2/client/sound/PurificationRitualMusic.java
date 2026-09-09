@@ -1,6 +1,9 @@
 package cn.teampancake.theaurorian2.client.sound;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import java.util.HashSet;
+import java.util.Set;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -20,31 +23,35 @@ public final class PurificationRitualMusic {
     private static @Nullable SimpleSoundInstance currentMusic;
     private static @Nullable ResourceKey<Level> originDimension;
     private static boolean pausedForGamePause;
+    private static final Set<GlobalPos> activeAltars = new HashSet<>();
 
     private PurificationRitualMusic() {
     }
 
-    public static void handle(boolean playing) {
+    public static void handle(GlobalPos altar, boolean playing) {
+        var level = Minecraft.getInstance().level;
+        if (level == null || !altar.dimension().equals(level.dimension())) return;
+        if (originDimension != null && !originDimension.equals(level.dimension())) stop();
         if (playing) {
-            start();
-        } else {
+            boolean wasEmpty = activeAltars.isEmpty();
+            if (activeAltars.add(altar) && wasEmpty) start();
+        } else if (activeAltars.remove(altar) && activeAltars.isEmpty()) {
             stop();
         }
     }
 
     public static boolean suppressesBackgroundMusic() {
-        return currentMusic != null && isInOriginDimension();
+        return currentMusic != null && isInOriginDimension()
+                && Minecraft.getInstance().getSoundManager().isActive(currentMusic);
     }
 
     public static void tick(ClientTickEvent.Post event) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (currentMusic == null) {
-            return;
-        }
-        if (!isInOriginDimension()) {
+        if (originDimension != null && !isInOriginDimension()) {
             stop();
             return;
         }
+        if (currentMusic == null) return;
 
         boolean gamePaused = minecraft.isPaused();
         if (gamePaused == pausedForGamePause) {
@@ -68,7 +75,6 @@ public final class PurificationRitualMusic {
         if (minecraft.level == null) {
             return;
         }
-        stop();
         originDimension = minecraft.level.dimension();
         minecraft.getMusicManager().stopPlaying();
         currentMusic = new SimpleSoundInstance(
@@ -103,6 +109,7 @@ public final class PurificationRitualMusic {
         }
         originDimension = null;
         pausedForGamePause = false;
+        activeAltars.clear();
     }
 
     private static boolean isInOriginDimension() {

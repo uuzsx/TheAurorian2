@@ -1,6 +1,7 @@
 package cn.teampancake.theaurorian2.common.crafting;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import net.minecraft.resources.Identifier;
@@ -78,7 +79,18 @@ public final class AurorianRecipeIntegration {
                 if (value.isJsonPrimitive()
                         && value.getAsJsonPrimitive().isString()
                         && VANILLA_STICK_INGREDIENTS.contains(value.getAsString())) {
-                    ingredient.setValue(new JsonPrimitive(EQUIPMENT_STICKS));
+                    if (value.getAsString().equals("minecraft:stick")) {
+                        ingredient.setValue(new JsonPrimitive(EQUIPMENT_STICKS));
+                    } else {
+                        // Retain all materials accepted by a data pack's common wooden-rod tag.
+                        JsonArray children = new JsonArray();
+                        children.add(value.deepCopy());
+                        children.add(EQUIPMENT_STICKS);
+                        JsonObject union = new JsonObject();
+                        union.addProperty("neoforge:ingredient_type", "neoforge:compound");
+                        union.add("children", children);
+                        ingredient.setValue(union);
+                    }
                 }
             }
         }

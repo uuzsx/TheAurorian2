@@ -131,19 +131,25 @@ public final class ModItems {
             "cooked_aurorian_mutton", Foods.COOKED_MUTTON);
     public static final DeferredItem<Item> COOKED_AURORIAN_RABBIT = vanillaFood(
             "cooked_aurorian_rabbit", Foods.COOKED_RABBIT);
-    public static final DeferredItem<Item> SILK_BERRY_JAM = food("silk_berry_jam", 2, 0.5F);
+    public static final DeferredItem<Item> SILK_BERRY_JAM = ITEMS.registerItem(
+            "silk_berry_jam", properties -> new Item(properties
+                    .food(foodProperties(3, saturationModifierFromPoints(3, 1.2F), false))
+                    .craftRemainder(Items.GLASS_BOTTLE)
+                    .usingConvertsTo(Items.GLASS_BOTTLE)));
     public static final DeferredItem<Item> SILK_BERRY_JAM_SANDWICH = food(
-            "silk_berry_jam_sandwich", 6, 0.9F);
+            "silk_berry_jam_sandwich", 12, saturationModifierFromPoints(12, 14.4F));
     public static final DeferredItem<Item> AURORIAN_SLIMEBALL = food("aurorian_slimeball", 1, 0.2F);
-    public static final DeferredItem<Item> SILK_SHROOM_STEW = bowlFood("silk_shroom_stew", 6, 1.0F);
-    public static final DeferredItem<Item> LAVENDER_BREAD = food("lavender_bread", 4, 0.4F);
+    public static final DeferredItem<Item> SILK_SHROOM_STEW = bowlFood(
+            "silk_shroom_stew", 8, saturationModifierFromPoints(8, 8.0F));
+    public static final DeferredItem<Item> LAVENDER_BREAD = vanillaFood("lavender_bread", Foods.BREAD);
     public static final DeferredItem<Item> SOULLESS_FLESH = food("soulless_flesh", 2, 0.1F);
     public static final DeferredItem<Item> MOON_FISH = food("moon_fish", 2, 0.4F);
     public static final DeferredItem<Item> AURORIAN_WINGED_FISH = food(
             "aurorian_winged_fish", 2, 0.4F);
-    public static final DeferredItem<Item> COOKED_MOON_FISH = food("cooked_moon_fish", 5, 6.0F);
+    public static final DeferredItem<Item> COOKED_MOON_FISH = food(
+            "cooked_moon_fish", 5, saturationModifierFromPoints(5, 6.0F));
     public static final DeferredItem<Item> COOKED_AURORIAN_WINGED_FISH = food(
-            "cooked_aurorian_winged_fish", 5, 6.0F);
+            "cooked_aurorian_winged_fish", 5, saturationModifierFromPoints(5, 6.0F));
     public static final DeferredItem<Item> SILK_BERRY = food("silk_berry", 1, 0.1F);
     public static final DeferredItem<Item> AURORIAN_BERRY = vanillaFood("aurorian_berry", Foods.APPLE);
     public static final DeferredItem<Item> DEW_FRUIT = food("dew_fruit", 2, 0.1F);
@@ -152,26 +158,31 @@ public final class ModItems {
             "candy_cane", 4, 0.4F, MobEffects.LUCK, 300, 0);
     public static final DeferredItem<Item> GINGERBREAD_MAN = food("gingerbread_man", 6, 0.4F);
     public static final DeferredItem<Item> AURORIAN_BACON = effectFood(
-            "aurorian_bacon", 2, 0.8F, MobEffects.REGENERATION, 60, 0);
+            "aurorian_bacon", 1, saturationModifierFromPoints(1, 0.6F), MobEffects.REGENERATION, 60, 0);
     public static final DeferredItem<Item> STRANGE_MEAT = alwaysEdibleFood("strange_meat", 8, 0.9F);
-    public static final DeferredItem<Item> LAVENDER_SALAD = bowlFood("lavender_salad", 4, 5.0F);
+    public static final DeferredItem<Item> LAVENDER_SALAD = bowlFood(
+            "lavender_salad", 8, saturationModifierFromPoints(8, 9.6F));
     public static final DeferredItem<Item> FAKE_ALGAL_PIT_FISH = food(
-            "fake_algal_pit_fish", 4, 5.0F);
+            "fake_algal_pit_fish", 4, saturationModifierFromPoints(4, 5.0F));
     public static final DeferredItem<Item> SASHIMI = effectFood(
-            "sashimi", 5, 0.1F, MobEffects.LUCK, 400, 0);
-    public static final DeferredItem<Item> SILENT_WOOD_FRUIT = food(
-            "silent_wood_fruit", 3, 2.5F);
-    public static final DeferredItem<Item> GOLDEN_SILENT_WOOD_FRUIT = food(
-            "golden_silent_wood_fruit", 4, 5.0F);
+            "sashimi", 2, saturationModifierFromPoints(2, 2.0F), MobEffects.LUCK, 400, 0);
+    public static final DeferredItem<Item> SILENT_WOOD_FRUIT = vanillaFood("silent_wood_fruit", Foods.APPLE);
+    public static final DeferredItem<Item> GOLDEN_SILENT_WOOD_FRUIT = ITEMS.registerItem(
+            "golden_silent_wood_fruit", properties -> new Item(properties.food(
+                    foodProperties(4, saturationModifierFromPoints(4, 5.0F), true),
+                    Consumables.defaultFood()
+                            .onConsume(new ApplyStatusEffectsConsumeEffect(
+                                    new MobEffectInstance(MobEffects.REGENERATION, 100, 0)))
+                            .onConsume(new ApplyStatusEffectsConsumeEffect(
+                                    new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0)))
+                            .build())));
     public static final DeferredItem<Item> KEBAB_WITH_MUSHROOM = effectFood(
-            "kebab_with_mushroom", 12, 15.0F, MobEffects.RESISTANCE, 1200, 0);
+            "kebab_with_mushroom", 6, saturationModifierFromPoints(6, 7.2F), MobEffects.RESISTANCE, 1200, 0);
     public static final DeferredItem<Item> AURORIAN_WINTER_ROOT = food(
             "aurorian_winter_root", 1, 0.8F);
     public static final DeferredItem<Item> ROASTED_AURORIAN_WINTER_ROOT = food(
-            "roasted_aurorian_winter_root", 4, 6.0F);
+            "roasted_aurorian_winter_root", 4, saturationModifierFromPoints(4, 6.0F));
     public static final DeferredItem<Item> DARK_STONE_SHRIMP = food("dark_stone_shrimp", 3, 0.8F);
-    public static final DeferredItem<Item> WHITE_CHOCOLATE = alwaysEdibleFood(
-            "white_chocolate", 0, 0.0F);
 
     public static final DeferredItem<ArcherArmorItem> STARLIGHT_RANGER_HELMET =
             archerArmor("starlight_ranger_helmet", ArmorType.HELMET, "diamond_archer_armor");
@@ -342,6 +353,14 @@ public final class ModItems {
                         effectConsumable(Consumables.defaultDrink(), effect, duration, amplifier))));
     }
 
+    /** Converts an intended saturation gain to the multiplier used by the food registration helpers. */
+    private static float saturationModifierFromPoints(int nutrition, float saturationPoints) {
+        if (nutrition <= 0) {
+            throw new IllegalArgumentException("Saturation multipliers require positive nutrition");
+        }
+        return saturationPoints / (nutrition * 2.0F);
+    }
+
     private static FoodProperties foodProperties(
             int nutrition, float saturationModifier, boolean alwaysEdible) {
         FoodProperties.Builder builder = new FoodProperties.Builder()
@@ -366,6 +385,8 @@ public final class ModItems {
 
     public static void register(IEventBus modEventBus) {
         ModLegacyItems.bootstrap();
+        // Retired food: resolve saved stacks to candy without losing their count or custom data.
+        ITEMS.addAlias(TheAurorian2.id("white_chocolate"), TheAurorian2.id("candy"));
         ITEMS.register(modEventBus);
     }
 }

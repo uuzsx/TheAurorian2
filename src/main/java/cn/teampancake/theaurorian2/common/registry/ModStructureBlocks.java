@@ -16,7 +16,8 @@ import cn.teampancake.theaurorian2.common.block.LegacyFacingBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyHorizontalFacingBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyLargeIceSpikeBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyLevelPlantBlock;
-import cn.teampancake.theaurorian2.common.block.LegacyMoistureBlock;
+import cn.teampancake.theaurorian2.common.block.AurorianFarmlandBlock;
+import cn.teampancake.theaurorian2.common.block.LavenderCropBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyPortalBlock;
 import cn.teampancake.theaurorian2.common.block.LegacyVerticalDirectionBlock;
 import cn.teampancake.theaurorian2.common.block.LockedStructureBlock;
@@ -570,8 +571,8 @@ public final class ModStructureBlocks {
     public static final DeferredBlock<FlowerPotBlock> POTTED_VOID_CANDLE_FLOWER =
             potted("potted_void_candle_flower", ModBlocks.VOID_CANDLE_FLOWER);
 
-    public static final DeferredBlock<LegacyMoistureBlock> AURORIAN_FARM_TILE = hidden(
-            "aurorian_farm_tile", LegacyMoistureBlock::new,
+    public static final DeferredBlock<AurorianFarmlandBlock> AURORIAN_FARM_TILE = hidden(
+            "aurorian_farm_tile", AurorianFarmlandBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND));
     public static final DeferredBlock<LegacyPortalBlock> AURORIAN_PORTAL = hidden(
             "aurorian_portal", LegacyPortalBlock::new,
@@ -640,9 +641,9 @@ public final class ModStructureBlocks {
             "rip", Block::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).noOcclusion());
 
-    public static final DeferredBlock<LegacyAgeThreeCropBlock> LAVENDER_CROP = hidden(
-            "lavender_crop", LegacyAgeThreeCropBlock::new,
-            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS));
+    public static final DeferredBlock<LavenderCropBlock> LAVENDER_CROP = hidden(
+            "lavender_crop", LavenderCropBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS));
     public static final DeferredBlock<LegacyAgeThreeCropBlock> SILK_BERRY_CROP = hidden(
             "silk_berry_crop", LegacyAgeThreeCropBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS));

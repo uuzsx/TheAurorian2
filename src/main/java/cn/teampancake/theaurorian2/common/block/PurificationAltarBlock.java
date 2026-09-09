@@ -139,6 +139,7 @@ public final class PurificationAltarBlock extends BaseEntityBlock {
     protected void affectNeighborsAfterRemoval(
             BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
         super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+        PurificationAltarBaseBlock.setRitualActive(level, pos.below(), false);
         BlockPos upperPos = pos.above();
         if (level.getBlockState(upperPos).is(ModBlocks.PURIFICATION_ALTAR_UPPER.get())) {
             level.setBlock(

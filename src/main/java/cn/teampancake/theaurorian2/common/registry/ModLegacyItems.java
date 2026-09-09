@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BlockItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public final class ModLegacyItems {
@@ -53,7 +54,7 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> LAVENDER =
             register("lavender", Category.INGREDIENTS, 64);
     public static final DeferredItem<Item> LAVENDER_SEEDS =
-            register("lavender_seeds", Category.INGREDIENTS, 64);
+            registerLavenderSeeds();
     public static final DeferredItem<Item> MOONSILVER_INGOT =
             register("moonsilver_ingot", Category.INGREDIENTS, 64);
     public static final DeferredItem<Item> MOONSILVER_NUGGET =
@@ -332,6 +333,13 @@ public final class ModLegacyItems {
                 id, properties -> new Item(maxStack == 64 ? properties : properties.stacksTo(maxStack)));
         ITEMS_BY_CATEGORY.get(category).add(item);
         return item;
+    }
+
+    private static DeferredItem<Item> registerLavenderSeeds() {
+        DeferredItem<Item> seeds = ModItems.ITEMS.registerItem("lavender_seeds", properties -> new BlockItem(
+                ModStructureBlocks.LAVENDER_CROP.get(), properties.useItemDescriptionPrefix()));
+        ITEMS_BY_CATEGORY.get(Category.INGREDIENTS).add(seeds);
+        return seeds;
     }
 
     private static DeferredItem<Item> registerQueensPickaxe() {

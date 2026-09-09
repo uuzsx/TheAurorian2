@@ -5,14 +5,17 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.core.GlobalPos;
 
 /** Starts or stops the ritual music for every client in the ritual's dimension. */
-public record PurificationRitualMusicPayload(boolean playing) implements CustomPacketPayload {
+public record PurificationRitualMusicPayload(GlobalPos altar, boolean playing) implements CustomPacketPayload {
 
     public static final Type<PurificationRitualMusicPayload> TYPE =
             new Type<>(TheAurorian2.id("purification_ritual_music"));
     public static final StreamCodec<RegistryFriendlyByteBuf, PurificationRitualMusicPayload> STREAM_CODEC =
             StreamCodec.composite(
+                    GlobalPos.STREAM_CODEC,
+                    PurificationRitualMusicPayload::altar,
                     ByteBufCodecs.BOOL,
                     PurificationRitualMusicPayload::playing,
                     PurificationRitualMusicPayload::new);

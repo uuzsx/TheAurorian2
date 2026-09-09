@@ -1,5 +1,27 @@
 # Third-Party Notices
 
+## Magic Store blacksmith storage crates
+
+The fifteen storage crates use `blacksmith_box_1`, `blacksmith_box_2` and
+`blacksmith_box_3` from the project owner's supplied Magic Store blacksmith pack
+by atcpybd. Geometry, rotations, pivots, UVs and display transforms are retained.
+Wood colors use the corresponding Aurorian plank palettes; labels and dark
+details retain the original texture colors. The crates share the blacksmith
+texture atlas with the storage barrels. Original asset terms continue to apply;
+the project license does not relicense these assets.
+
+## Magic Store blacksmith storage barrels
+
+The ten wood storage barrels use `blacksmith_barrel_1` and `blacksmith_barrel_3`
+from the project owner's supplied Magic Store blacksmith pack, authored by atcpybd.
+Original geometry, pivots, UVs, display transforms and pixel detail are retained;
+the wood color ramp is mapped to matching Aurorian planks, while the hoops retain
+their original texture and colors.
+Untextured internal faces marked `#missing` by the JSON exporter are omitted from
+runtime models, matching their untextured Blockbench source faces.
+These assets remain subject to their original terms; the project license does
+not relicense them.
+
 The project skeleton contains files derived from the NeoForged MDK template.
 Those template portions are licensed as follows:
 
@@ -91,3 +113,23 @@ and split at the block seam with matching UVs for two-block placement. The bench
 and small table retain the source inventory transforms; long-table inventory presentation
 is adapted to the mod's block items. These assets remain subject to their original terms;
 the project license does not relicense them.
+
+## Magic Store carpenter workbench
+
+The carpenter workbench uses the project owner's supplied Magic Store / atcpybd
+`blacksmith_table_1_2x1` model. Original tools, paper, geometry, pivots, UVs and item
+display transforms are retained. The world model is translated and its tabletop
+is split at the two-block seam with continuous UVs. Wood and handle color ramps come from the
+Aurorian crafting-table model texture; metal heads and paper retain their original
+pixels, and original pixel resolution and alpha remain.
+These assets remain subject to their original terms; the project license does
+not relicense them.
+
+## Scene Wind Chimes
+
+The amethyst and bamboo wind chimes use the project owner's supplied `1316场景风铃`
+Blockbench models, embedded textures and OGG audio. The original geometry, bone
+hierarchy, UV mapping, animation keyframes and texture/audio bytes are preserved.
+The source pack's author-local MP3 reference and MythicMobs timeline command are
+replaced with namespaced in-game sound events. These third-party assets remain
+subject to their original terms; the project license does not relicense them.
