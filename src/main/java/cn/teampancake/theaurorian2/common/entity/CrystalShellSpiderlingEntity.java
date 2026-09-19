@@ -34,6 +34,9 @@ public final class CrystalShellSpiderlingEntity extends AbstractSpiderlingEntity
         }
     }
 
+    @Override
+    protected double ambientDurationScale() { return 1.2; }
+
     private void healNearbySpiders(ServerLevel level) {
         double radiusSqr = Mth.square(HEAL_RADIUS);
         AABB searchArea = this.getBoundingBox().inflate(HEAL_RADIUS);

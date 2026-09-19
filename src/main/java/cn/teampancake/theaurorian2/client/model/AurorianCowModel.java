@@ -8,24 +8,26 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import cn.teampancake.theaurorian2.client.renderer.state.AurorianCowRenderState;
+import cn.teampancake.theaurorian2.client.animation.AurorianCowAnimations;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.util.Mth;
 
-public final class AurorianCowModel extends EntityModel<LivingEntityRenderState> {
+public final class AurorianCowModel extends EntityModel<AurorianCowRenderState> {
     private final ModelPart head;
-    private final ModelPart rightHindLeg;
-    private final ModelPart leftHindLeg;
-    private final ModelPart rightFrontLeg;
-    private final ModelPart leftFrontLeg;
+    private final KeyframeAnimation breathe, chew, sniff, tailSwish, walk, run, startle;
 
     public AurorianCowModel(ModelPart root) {
         super(root);
         ModelPart body = root.getChild("body");
         this.head = body.getChild("head");
-        this.rightHindLeg = body.getChild("right_leg_2");
-        this.leftHindLeg = body.getChild("left_leg_2");
-        this.rightFrontLeg = body.getChild("right_leg_1");
-        this.leftFrontLeg = body.getChild("left_leg_1");
+        breathe = AurorianCowAnimations.IDLE_BREATHE.bake(root);
+        chew = AurorianCowAnimations.IDLE_CHEW_LOOK.bake(root);
+        sniff = AurorianCowAnimations.IDLE_SNIFF.bake(root);
+        tailSwish = AurorianCowAnimations.IDLE_TAIL_SWISH.bake(root);
+        walk = AurorianCowAnimations.WALK_RELAXED.bake(root);
+        run = AurorianCowAnimations.RUN_SCARED.bake(root);
+        startle = AurorianCowAnimations.STARTLE.bake(root);
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -47,13 +49,24 @@ public final class AurorianCowModel extends EntityModel<LivingEntityRenderState>
     }
 
     @Override
-    public void setupAnim(LivingEntityRenderState state) {
+    public void setupAnim(AurorianCowRenderState state) {
         super.setupAnim(state);
-        this.head.xRot = state.xRot * Mth.DEG_TO_RAD;
-        this.head.yRot = state.yRot * Mth.DEG_TO_RAD;
-        this.rightHindLeg.xRot = Mth.cos(state.walkAnimationPos * 0.6662F) * 1.4F * state.walkAnimationSpeed;
-        this.leftHindLeg.xRot = Mth.cos(state.walkAnimationPos * 0.6662F + Mth.PI) * 1.4F * state.walkAnimationSpeed;
-        this.rightFrontLeg.xRot = this.leftHindLeg.xRot;
-        this.leftFrontLeg.xRot = this.rightHindLeg.xRot;
+        if (state.deathTime > 0) return;
+        float moving = Mth.clamp(state.walkAnimationSpeed * 4, 0, 1);
+        float frightened = state.startleTime >= 0 && state.startleTime < 0.55F
+                ? Math.min(1, (0.55F - state.startleTime) / 0.12F) : 0;
+        float idle = state.idleBlend * (1 - moving) * (1 - state.panicBlend) * (1 - frightened);
+        breathe.apply((long)(state.ageInTicks * 50), (1 - moving) * (1 - idle) * (1 - frightened));
+        KeyframeAnimation gesture = switch (state.idleVariant) { case 1 -> chew; case 2 -> sniff; default -> tailSwish; };
+        if (idle > 0) {
+            float length = state.idleVariant == 1 ? 7 : state.idleVariant == 2 ? 6 : 3.6F;
+            gesture.apply((long)(Math.min(state.idleTime, length - 0.001F) * 1000), idle);
+        }
+        walk.apply((long)(state.walkAnimationPos * 300), moving * (1 - state.panicBlend) * (1 - frightened));
+        run.apply((long)(state.walkAnimationPos * 90), moving * state.panicBlend * (1 - frightened));
+        if (frightened > 0) startle.apply((long)(state.startleTime * 1000), frightened);
+        float look = (1 - idle) * (1 - frightened) * (1 - state.panicBlend * 0.75F);
+        this.head.xRot += Mth.clamp(state.xRot, -25, 25) * Mth.DEG_TO_RAD * look;
+        this.head.yRot += Mth.clamp(state.yRot, -40, 40) * Mth.DEG_TO_RAD * look;
     }
 }

@@ -25,6 +25,7 @@ import cn.teampancake.theaurorian2.common.registry.ModStats;
 import cn.teampancake.theaurorian2.common.registry.ModStructureBlocks;
 import cn.teampancake.theaurorian2.common.registry.ModStructures;
 import cn.teampancake.theaurorian2.common.registry.ModTreeDecorators;
+import cn.teampancake.theaurorian2.common.registry.ModWorldgen;
 import cn.teampancake.theaurorian2.common.world.AurorianBlessingCycle;
 import cn.teampancake.theaurorian2.common.world.AurorianTravelEvents;
 import cn.teampancake.theaurorian2.mixin.FireBlockAccessor;
@@ -66,6 +67,7 @@ public final class TheAurorian2 {
         ModFluids.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        cn.teampancake.theaurorian2.common.registry.ModAlchemy.register(modEventBus);
         cn.teampancake.theaurorian2.common.registry.ModSoundEvents.register(modEventBus);
         ModEntities.register(modEventBus);
         ModMobEffects.register(modEventBus);
@@ -77,6 +79,7 @@ public final class TheAurorian2 {
         ModFeatures.register(modEventBus);
         ModPlacementModifiers.register(modEventBus);
         ModStructures.register(modEventBus);
+        ModWorldgen.register(modEventBus);
         ModParticles.register(modEventBus);
         ModStats.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
@@ -86,6 +89,7 @@ public final class TheAurorian2 {
         NeoForge.EVENT_BUS.addListener(TrainingDummyCommands::register);
         NeoForge.EVENT_BUS.addListener(AurorianBlessingCycle::onServerTick);
         NeoForge.EVENT_BUS.addListener(AurorianTravelEvents::onPlayerWakeUp);
+        NeoForge.EVENT_BUS.addListener(AurorianTravelEvents::onChangedDimension);
         NeoForge.EVENT_BUS.addListener(this::onFluidPlaceBlock);
         NeoForge.EVENT_BUS.addListener(this::onBlockToolModification);
         modEventBus.addListener(this::commonSetup);

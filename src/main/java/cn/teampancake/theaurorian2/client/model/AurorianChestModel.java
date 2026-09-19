@@ -27,7 +27,7 @@ public final class AurorianChestModel extends Model<Float> {
     @Override
     public void setupAnim(Float open) {
         super.setupAnim(open);
-        this.lid.xRot = -open * (float) Math.toRadians(100);
+        this.lid.xRot = -open * (float) Math.toRadians(105);
     }
 
     private static ModelPart load(String variant) {

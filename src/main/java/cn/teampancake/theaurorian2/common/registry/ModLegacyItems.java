@@ -1,6 +1,8 @@
 package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.common.item.ModelledItem;
+import cn.teampancake.theaurorian2.common.item.LegacyArmorItem;
+import cn.teampancake.theaurorian2.common.item.HolyKnightArmorItem;
 import cn.teampancake.theaurorian2.common.item.QueensPickaxeItem;
 import cn.teampancake.theaurorian2.common.item.WorldScrollItem;
 import java.util.ArrayList;
@@ -8,8 +10,19 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorMaterials;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.MobBucketItem;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public final class ModLegacyItems {
@@ -86,7 +99,7 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> TEA =
             register("tea", Category.FOOD, 1);
     public static final DeferredItem<Item> AURORIAN_WINGED_FISH_BUCKET =
-            register("aurorian_winged_fish_bucket", Category.TOOLS, 1);
+            registerFishBucket("aurorian_winged_fish_bucket", ModEntities.AURORIAN_WINGED_FISH);
     public static final DeferredItem<Item> AURORIANITE_AXE =
             register("aurorianite_axe", Category.TOOLS, 1);
     public static final DeferredItem<Item> AURORIANITE_PICKAXE =
@@ -108,7 +121,7 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> LOCK_PICKS =
             register("lock_picks", Category.TOOLS, 1);
     public static final DeferredItem<Item> MOON_FISH_BUCKET =
-            register("moon_fish_bucket", Category.TOOLS, 1);
+            registerFishBucket("moon_fish_bucket", ModEntities.MOON_FISH);
     public static final DeferredItem<Item> MOON_TEMPLE_CELL_KEY =
             register("moon_temple_cell_key", Category.TOOLS, 1);
     public static final DeferredItem<Item> MOON_TEMPLE_CELL_KEY_FRAGMENT =
@@ -168,7 +181,7 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> AURORIAN_NIGHT_RIPPER =
             register("aurorian_night_ripper", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> AURORIAN_SLIME_BOOTS =
-            register("aurorian_slime_boots", Category.EQUIPMENT, 1);
+            registerArmor("aurorian_slime_boots", "aurorian_slime_boots", ArmorType.BOOTS, ArmorMaterials.LEATHER);
     public static final DeferredItem<Item> AURORIAN_STONE_SICKLE =
             register("aurorian_stone_sickle", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> AURORIANITE_SWORD =
@@ -178,13 +191,13 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> CERULEAN_ARROW =
             register("cerulean_arrow", Category.EQUIPMENT, 64);
     public static final DeferredItem<Item> CERULEAN_BOOTS =
-            register("cerulean_boots", Category.EQUIPMENT, 1);
+            registerArmor("cerulean_boots", "cerulean", ArmorType.BOOTS, ArmorMaterials.IRON);
     public static final DeferredItem<Item> CERULEAN_CHESTPLATE =
-            register("cerulean_chestplate", Category.EQUIPMENT, 1);
+            registerArmor("cerulean_chestplate", "cerulean", ArmorType.CHESTPLATE, ArmorMaterials.IRON);
     public static final DeferredItem<Item> CERULEAN_HELMET =
-            register("cerulean_helmet", Category.EQUIPMENT, 1);
+            registerArmor("cerulean_helmet", "cerulean", ArmorType.HELMET, ArmorMaterials.IRON);
     public static final DeferredItem<Item> CERULEAN_LEGGINGS =
-            register("cerulean_leggings", Category.EQUIPMENT, 1);
+            registerArmor("cerulean_leggings", "cerulean", ArmorType.LEGGINGS, ArmorMaterials.IRON);
     public static final DeferredItem<Item> CERULEAN_SHIELD =
             register("cerulean_shield", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> CRIMSON_PACT_PENDANT =
@@ -192,13 +205,13 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> CRYSTAL_ARROW =
             register("crystal_arrow", Category.EQUIPMENT, 64);
     public static final DeferredItem<Item> CRYSTAL_RUNE_BOOTS =
-            register("crystal_rune_boots", Category.EQUIPMENT, 1);
+            registerArmor("crystal_rune_boots", "crystal_rune", ArmorType.BOOTS, ArmorMaterials.IRON);
     public static final DeferredItem<Item> CRYSTAL_RUNE_CHESTPLATE =
-            register("crystal_rune_chestplate", Category.EQUIPMENT, 1);
+            registerArmor("crystal_rune_chestplate", "crystal_rune", ArmorType.CHESTPLATE, ArmorMaterials.IRON);
     public static final DeferredItem<Item> CRYSTAL_RUNE_HELMET =
-            register("crystal_rune_helmet", Category.EQUIPMENT, 1);
+            registerArmor("crystal_rune_helmet", "crystal_rune", ArmorType.HELMET, ArmorMaterials.IRON);
     public static final DeferredItem<Item> CRYSTAL_RUNE_LEGGINGS =
-            register("crystal_rune_leggings", Category.EQUIPMENT, 1);
+            registerArmor("crystal_rune_leggings", "crystal_rune", ArmorType.LEGGINGS, ArmorMaterials.IRON);
     public static final DeferredItem<Item> CRYSTALLINE_SHIELD =
             register("crystalline_shield", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> CRYSTALLINE_SPEAR =
@@ -210,23 +223,23 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> DUNGEON_KEEPER_AMULET =
             register("dungeon_keeper_amulet", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> HOLY_KNIGHT_BOOTS =
-            register("holy_knight_boots", Category.EQUIPMENT, 1);
+            registerArmor("holy_knight_boots", "holy_knight", ArmorType.BOOTS, ArmorMaterials.IRON);
     public static final DeferredItem<Item> HOLY_KNIGHT_CHESTPLATE =
-            register("holy_knight_chestplate", Category.EQUIPMENT, 1);
+            registerArmor("holy_knight_chestplate", "holy_knight", ArmorType.CHESTPLATE, ArmorMaterials.IRON);
     public static final DeferredItem<Item> HOLY_KNIGHT_HELMET =
-            register("holy_knight_helmet", Category.EQUIPMENT, 1);
+            registerArmor("holy_knight_helmet", "holy_knight", ArmorType.HELMET, ArmorMaterials.IRON);
     public static final DeferredItem<Item> HOLY_KNIGHT_LEGGINGS =
-            register("holy_knight_leggings", Category.EQUIPMENT, 1);
+            registerArmor("holy_knight_leggings", "holy_knight", ArmorType.LEGGINGS, ArmorMaterials.IRON);
     public static final DeferredItem<Item> KEEPERS_BOW =
             register("keepers_bow", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> KNIGHT_BOOTS =
-            register("knight_boots", Category.EQUIPMENT, 1);
+            registerArmor("knight_boots", "knight", ArmorType.BOOTS, ArmorMaterials.IRON);
     public static final DeferredItem<Item> KNIGHT_CHESTPLATE =
-            register("knight_chestplate", Category.EQUIPMENT, 1);
+            registerArmor("knight_chestplate", "knight", ArmorType.CHESTPLATE, ArmorMaterials.IRON);
     public static final DeferredItem<Item> KNIGHT_HELMET =
-            register("knight_helmet", Category.EQUIPMENT, 1);
+            registerArmor("knight_helmet", "knight", ArmorType.HELMET, ArmorMaterials.IRON);
     public static final DeferredItem<Item> KNIGHT_LEGGINGS =
-            register("knight_leggings", Category.EQUIPMENT, 1);
+            registerArmor("knight_leggings", "knight", ArmorType.LEGGINGS, ArmorMaterials.IRON);
     public static final DeferredItem<Item> KOPISH_DAGGER =
             register("kopish_dagger", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> LUCKY_RABBIT_EAR =
@@ -236,19 +249,19 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> MOON_SHURIKEN =
             register("moon_shuriken", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> MOONSILVER_BOOTS =
-            register("moonsilver_boots", Category.EQUIPMENT, 1);
+            registerArmor("moonsilver_boots", "moonsilver", ArmorType.BOOTS, ArmorMaterials.DIAMOND);
     public static final DeferredItem<Item> MOONSILVER_BOW =
             registerModelled("moonsilver_bow", Category.EQUIPMENT, "moonsilver_bow_3d", "misc.idle");
     public static final DeferredItem<Item> MOONSILVER_CHESTPLATE =
-            register("moonsilver_chestplate", Category.EQUIPMENT, 1);
+            registerArmor("moonsilver_chestplate", "moonsilver", ArmorType.CHESTPLATE, ArmorMaterials.DIAMOND);
     public static final DeferredItem<Item> MOONSILVER_DAGGER =
             register("moonsilver_dagger", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> MOONSILVER_GREAT_SWORD =
             registerModelled("moonsilver_great_sword", Category.EQUIPMENT, "moonsilver_great_sword", null);
     public static final DeferredItem<Item> MOONSILVER_HELMET =
-            register("moonsilver_helmet", Category.EQUIPMENT, 1);
+            registerArmor("moonsilver_helmet", "moonsilver", ArmorType.HELMET, ArmorMaterials.DIAMOND);
     public static final DeferredItem<Item> MOONSILVER_LEGGINGS =
-            register("moonsilver_leggings", Category.EQUIPMENT, 1);
+            registerArmor("moonsilver_leggings", "moonsilver", ArmorType.LEGGINGS, ArmorMaterials.DIAMOND);
     public static final DeferredItem<Item> MOONSILVER_SCYTHE =
             registerModelled("moonsilver_scythe", Category.EQUIPMENT, "moonsilver_scythe_3d", null);
     public static final DeferredItem<Item> MOONSILVER_SWORD =
@@ -258,13 +271,13 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> MOONSTONE_SWORD =
             register("moonstone_sword", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> MYSTERIUM_WOOL_BOOTS =
-            register("mysterium_wool_boots", Category.EQUIPMENT, 1);
+            registerArmor("mysterium_wool_boots", "mysterium_wool", ArmorType.BOOTS, ArmorMaterials.LEATHER);
     public static final DeferredItem<Item> MYSTERIUM_WOOL_CHESTPLATE =
-            register("mysterium_wool_chestplate", Category.EQUIPMENT, 1);
+            registerArmor("mysterium_wool_chestplate", "mysterium_wool", ArmorType.CHESTPLATE, ArmorMaterials.LEATHER);
     public static final DeferredItem<Item> MYSTERIUM_WOOL_HELMET =
-            register("mysterium_wool_helmet", Category.EQUIPMENT, 1);
+            registerArmor("mysterium_wool_helmet", "mysterium_wool", ArmorType.HELMET, ArmorMaterials.LEATHER);
     public static final DeferredItem<Item> MYSTERIUM_WOOL_LEGGINGS =
-            register("mysterium_wool_leggings", Category.EQUIPMENT, 1);
+            registerArmor("mysterium_wool_leggings", "mysterium_wool", ArmorType.LEGGINGS, ArmorMaterials.LEATHER);
     public static final DeferredItem<Item> NACREOUS_HALBERD =
             register("nacreous_halberd", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> QUEENS_PICKAXE = registerQueensPickaxe();
@@ -295,17 +308,17 @@ public final class ModLegacyItems {
     public static final DeferredItem<Item> RUNESTONE_WATER =
             register("runestone_water", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> SILENT_WOOD_BOW =
-            register("silent_wood_bow", Category.EQUIPMENT, 1);
+            registerSilentWoodBow();
     public static final DeferredItem<Item> SPECTRAL_BOOTS =
-            register("spectral_boots", Category.EQUIPMENT, 1);
+            registerArmor("spectral_boots", "spectral", ArmorType.BOOTS, ArmorMaterials.LEATHER);
     public static final DeferredItem<Item> SPECTRAL_CHESTPLATE =
-            register("spectral_chestplate", Category.EQUIPMENT, 1);
+            registerArmor("spectral_chestplate", "spectral", ArmorType.CHESTPLATE, ArmorMaterials.LEATHER);
     public static final DeferredItem<Item> SPECTRAL_HELMET =
-            register("spectral_helmet", Category.EQUIPMENT, 1);
+            registerArmor("spectral_helmet", "spectral", ArmorType.HELMET, ArmorMaterials.LEATHER);
     public static final DeferredItem<Item> SPECTRAL_LEGGINGS =
-            register("spectral_leggings", Category.EQUIPMENT, 1);
+            registerArmor("spectral_leggings", "spectral", ArmorType.LEGGINGS, ArmorMaterials.LEATHER);
     public static final DeferredItem<Item> SPIKED_CHESTPLATE =
-            register("spiked_chestplate", Category.EQUIPMENT, 1);
+            registerArmor("spiked_chestplate", "spiked_chestplate", ArmorType.CHESTPLATE, ArmorMaterials.IRON);
     public static final DeferredItem<Item> STEEL_DAGGER =
             register("steel_dagger", Category.EQUIPMENT, 1);
     public static final DeferredItem<Item> STICKY_SPIKER =
@@ -335,11 +348,34 @@ public final class ModLegacyItems {
         return item;
     }
 
+    private static DeferredItem<Item> registerArmor(String id, String model, ArmorType type, ArmorMaterial material) {
+        DeferredItem<Item> item = ModItems.ITEMS.registerItem(id, properties -> model.equals("holy_knight")
+                ? new HolyKnightArmorItem(properties, type)
+                : new LegacyArmorItem(properties, model, type, material));
+        ITEMS_BY_CATEGORY.get(Category.EQUIPMENT).add(item);
+        return item;
+    }
+
     private static DeferredItem<Item> registerLavenderSeeds() {
         DeferredItem<Item> seeds = ModItems.ITEMS.registerItem("lavender_seeds", properties -> new BlockItem(
                 ModStructureBlocks.LAVENDER_CROP.get(), properties.useItemDescriptionPrefix()));
         ITEMS_BY_CATEGORY.get(Category.INGREDIENTS).add(seeds);
         return seeds;
+    }
+
+    private static DeferredItem<Item> registerSilentWoodBow() {
+        DeferredItem<Item> bow = ModItems.ITEMS.registerItem("silent_wood_bow",
+                properties -> new BowItem(properties.durability(384).enchantable(1)));
+        ITEMS_BY_CATEGORY.get(Category.EQUIPMENT).add(bow);
+        return bow;
+    }
+
+    private static DeferredItem<Item> registerFishBucket(String id, Supplier<? extends EntityType<? extends Mob>> type) {
+        DeferredItem<Item> item = ModItems.ITEMS.registerItem(id, properties -> new MobBucketItem(
+                type.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,
+                properties.stacksTo(1).craftRemainder(Items.BUCKET)));
+        ITEMS_BY_CATEGORY.get(Category.TOOLS).add(item);
+        return item;
     }
 
     private static DeferredItem<Item> registerQueensPickaxe() {

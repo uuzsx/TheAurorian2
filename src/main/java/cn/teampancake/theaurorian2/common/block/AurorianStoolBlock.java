@@ -41,7 +41,7 @@ public final class AurorianStoolBlock extends Block {
 
     public static double seatHeight(BlockState state) {
         if (state.getBlock() instanceof AurorianBenchBlock) return AurorianBenchBlock.SEAT_HEIGHT;
-        return state.getBlock() instanceof AurorianChairBlock ? AurorianChairBlock.SEAT_HEIGHT : SEAT_HEIGHT;
+        return SEAT_HEIGHT;
     }
 
     @Override
@@ -75,12 +75,6 @@ public final class AurorianStoolBlock extends Block {
             return InteractionResult.FAIL;
         }
         seat.positionRider(player);
-        BlockState state = level.getBlockState(pos);
-        if (state.getBlock() instanceof AurorianChairBlock && player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-            float yaw = state.getValue(PairedFurnitureBlock.FACING).toYRot();
-            player.setYHeadRot(yaw);
-            serverPlayer.connection.teleport(player.getX(), player.getY(), player.getZ(), yaw, player.getXRot());
-        }
         return InteractionResult.SUCCESS;
     }
 }

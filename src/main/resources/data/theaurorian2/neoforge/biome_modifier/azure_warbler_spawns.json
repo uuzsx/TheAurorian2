@@ -1,0 +1,1 @@
+{"type":"neoforge:add_spawns","biomes":"#theaurorian2:has_azure_warbler","spawners":{"type":"theaurorian2:azure_warbler","weight":4,"minCount":1,"maxCount":3}}

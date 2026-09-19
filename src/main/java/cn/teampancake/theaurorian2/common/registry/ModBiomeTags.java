@@ -9,6 +9,8 @@ public final class ModBiomeTags {
 
     public static final TagKey<Biome> HAS_SILENT_TREE_LEAF_LITTER =
             TagKey.create(Registries.BIOME, TheAurorian2.id("has_silent_tree_leaf_litter"));
+    public static final TagKey<Biome> HAS_FOREST_ALLAYS =
+            TagKey.create(Registries.BIOME, TheAurorian2.id("has_forest_allays"));
 
     private ModBiomeTags() {
     }

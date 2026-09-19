@@ -18,6 +18,7 @@ import cn.teampancake.theaurorian2.common.worldgen.feature.SilentTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.SmallRuinFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.TombstoneFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.WallMushroomPatchFeature;
+import cn.teampancake.theaurorian2.common.worldgen.feature.WeepingWillowTreeFeature;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.neoforged.bus.api.IEventBus;
@@ -33,6 +34,8 @@ public final class ModFeatures {
             FEATURES.register("curtain_tree", CurtainTreeFeature::new);
     public static final DeferredHolder<Feature<?>, SilentTreeFeature> SILENT_TREE =
             FEATURES.register("silent_tree", SilentTreeFeature::new);
+    public static final DeferredHolder<Feature<?>, WeepingWillowTreeFeature> WEEPING_WILLOW_TREE =
+            FEATURES.register("weeping_willow_tree", WeepingWillowTreeFeature::new);
     public static final DeferredHolder<Feature<?>, CursedFrostTreeFeature> CURSED_FROST_TREE =
             FEATURES.register("cursed_frost_tree", CursedFrostTreeFeature::new);
     public static final DeferredHolder<Feature<?>, AncientSilentTreeFeature> ANCIENT_SILENT_TREE =

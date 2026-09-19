@@ -10,6 +10,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModSoundEvents {
     private static final DeferredRegister<SoundEvent> SOUNDS =
             DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, TheAurorian2.MOD_ID);
+    public static final DeferredHolder<SoundEvent, SoundEvent> WORLD_SCROLL_TELEPORT =
+            SOUNDS.register("world_scroll_teleport", () -> SoundEvent.createVariableRangeEvent(
+                    TheAurorian2.id("world_scroll_teleport")));
     public static final DeferredHolder<SoundEvent, SoundEvent> AMETHYST_WIND_CHIMES =
             SOUNDS.register("amethyst_wind_chimes", () -> SoundEvent.createFixedRangeEvent(
                     TheAurorian2.id("amethyst_wind_chimes"), 25));

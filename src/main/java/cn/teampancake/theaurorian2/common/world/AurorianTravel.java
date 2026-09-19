@@ -1,17 +1,15 @@
 package cn.teampancake.theaurorian2.common.world;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import cn.teampancake.theaurorian2.common.entity.WorldScrollTeleportEntity;
 import cn.teampancake.theaurorian2.common.registry.ModAttachments;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.item.ItemStack;
@@ -29,6 +27,8 @@ public final class AurorianTravel {
     }
 
     public static boolean canBegin(ServerPlayer player, boolean showMessage) {
+        WorldScrollTeleportEntity effect = WorldScrollTeleportEntity.active(player);
+        if (effect != null && effect.isMaterializing()) return false;
         if (!player.isAlive() || player.isSpectator()) {
             return false;
         }
@@ -85,8 +85,8 @@ public final class AurorianTravel {
             destinationPitch = currentData.returnPitch();
         }
 
-        source.playSound(null, player.getX(), player.getY(), player.getZ(),
-                SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.PLAYERS, 0.9F, 0.65F);
+        WorldScrollTeleportEntity departure = WorldScrollTeleportEntity.active(player);
+        if (departure != null) departure.completeDeparture();
         TeleportTransition transition = new TeleportTransition(
                 destinationLevel,
                 destination,
@@ -95,6 +95,7 @@ public final class AurorianTravel {
                 destinationPitch,
                 entity -> arrivalEffects((ServerPlayer) entity));
         if (player.teleport(transition) == null) {
+            if (departure != null) departure.cancel();
             player.sendOverlayMessage(Component.translatable(
                     "message.theaurorian2.world_scroll.interrupted"));
             return false;
@@ -145,19 +146,9 @@ public final class AurorianTravel {
     }
 
     private static void arrivalEffects(ServerPlayer player) {
-        ServerLevel level = player.level();
         player.resetFallDistance();
         player.setDeltaMovement(Vec3.ZERO);
-        level.sendParticles(
-                ParticleTypes.END_ROD,
-                player.getX(), player.getY() + 1.0, player.getZ(),
-                48, 0.75, 1.1, 0.75, 0.035);
-        level.sendParticles(
-                ParticleTypes.REVERSE_PORTAL,
-                player.getX(), player.getY() + 0.8, player.getZ(),
-                36, 0.55, 0.85, 0.55, 0.08);
-        level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.0F, 1.2F);
+        WorldScrollTeleportEntity.begin(player, true);
     }
 
     private static boolean fail(ServerPlayer player, boolean showMessage, String key) {

@@ -36,4 +36,8 @@ public record AurorianTravelData(
     public AurorianTravelData recordDeparture(GlobalPos point, float yaw, float pitch) {
         return new AurorianTravelData(true, true, Optional.of(point), yaw, pitch);
     }
+
+    public AurorianTravelData recordArrival() {
+        return new AurorianTravelData(this.signalReceived, true, this.returnPoint, this.returnYaw, this.returnPitch);
+    }
 }

@@ -775,7 +775,6 @@ $forestBiome = Get-Content -Raw -LiteralPath (Join-Path $data 'worldgen/biome/au
 $forestFeatures = @($forestBiome.features)
 $forestFeatures[9] = @(
     'theaurorian2:trees_silent_wood_forest',
-    'theaurorian2:patch_blueberry_bush',
     'theaurorian2:patch_forest_branches',
     'theaurorian2:patch_tall_wick_grass',
     'theaurorian2:patch_silent_forest_tall_grass',
@@ -789,7 +788,6 @@ $curtainForestBiome = Get-Content -Raw -LiteralPath (Join-Path $data 'worldgen/b
 $curtainForestFeatures = @($curtainForestBiome.features)
 $curtainForestFeatures[9] = @(
     'theaurorian2:trees_curtain_tree_forest',
-    'theaurorian2:patch_blueberry_bush',
     'theaurorian2:patch_forest_branches',
     'theaurorian2:patch_tall_wick_grass',
     'theaurorian2:patch_silent_forest_tall_grass',

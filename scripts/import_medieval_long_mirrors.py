@@ -2,6 +2,7 @@
 import copy
 import json
 import uuid
+from furniture_palette import apply_furniture_palette
 from PIL import Image, ImageDraw, ImageFont
 from import_medieval_wood_furniture import ROOT, A, SOURCE, WOODS, bbmodel
 import export_wood_chests as renderer
@@ -54,6 +55,7 @@ def main():
         mapping={c:palette[round(n*(len(palette)-1)/(len(colors)-1))] for n,c in enumerate(colors)}
         atlas=Image.new('RGBA',original.size)
         atlas.putdata([(*mapping.get(p[:3],p[:3]),p[3]) for p in original.get_flattened_data()])
+        atlas=apply_furniture_palette(atlas,key)
         atlas.save(folder/'long_mirror.png');atlas.save(A/f'textures/block/{name}.png')
         base={'parent':'minecraft:block/block','render_type':'minecraft:cutout',
               'textures':{'0':f'theaurorian2:block/{name}','particle':f'theaurorian2:block/{plank}'}}

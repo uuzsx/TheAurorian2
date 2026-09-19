@@ -1,0 +1,1 @@
+{"type":"minecraft:block","pools":[{"rolls":1,"entries":[{"type":"minecraft:item","name":"theaurorian2:treasure_chest_4","functions":[{"function":"minecraft:copy_state","block":"theaurorian2:treasure_chest_4","properties":["unlocked"]}]}],"conditions":[{"condition":"minecraft:survives_explosion"}]}]}

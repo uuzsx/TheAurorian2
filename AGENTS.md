@@ -11,6 +11,12 @@ These rules apply to the entire repository. They are persistent project requirem
 
 Never change, omit, weaken, or approximate a requested result merely to reduce code or file size. A complete implementation may be large when the feature genuinely requires it.
 
+## Legacy Source Reference
+
+- The user-designated legacy source is `D:/TheAurorian-NeoForge-1.21`.
+- Its current source root is nested at `D:/TheAurorian-NeoForge-1.21/TheAurorian-NeoForge-1.21`.
+- Use this source when reviewing or porting legacy features. `D:/TheAurorian` is outdated and must not be treated as the latest legacy implementation.
+
 ## Story Canon
 
 - `docs/LORE_CANON.md` is the authoritative narrative reference for The Aurorian 2.
@@ -69,9 +75,19 @@ Before implementing a feature, explicitly consider:
 - Retain intentional variants. Remove a resource only after proving it has no direct, conventional, generated, or dynamic reference.
 - Do not convert a model format or share a parent model unless rendered output and all transforms remain identical.
 
+## Approved Model Presentation And Hello Defaults
+
+- The user-approved `stupid_cat` model is the default reference for future model size, inventory presentation, and hello interaction, unless the user specifies otherwise. Use `exports/skin_doll/final/stupid_cat.bbmodel` locally and the packaged `geckolib/models/block/stupid_cat.geo.json` as the geometry reference.
+- Keep the approved doll proportions and uniform physical pixel size across head, body, arms, and legs; do not stretch the original skin proportions to create smaller limbs. Match this size for subsequent dolls.
+- Inventory icons use front lighting (`gui_light: front`) and must appear centered with no clipping. The approved reference GUI transform is rotation `[15,150,0]`, translation `[0,-7,0]`, scale `[0.85,0.85,0.85]`. Match the visual result; models with different bounds or pivots may require different transform values. Verify the actual creative inventory display.
+- Hello interaction follows `StupidCatBlockEntity`: right-click plays `wave_hello` once, then returns to `idle_blink`; the right hand leads and the left hand moves subtly. The reference duration is 3.2 seconds (64 ticks); suppress repeated triggers during playback and synchronize from the server. Blink surfaces remain coplanar with the eyes, with correct backface culling.
+- The cat doll plays one vanilla classic cat meow when hello starts, with no sound stacking. Preserve character-appropriate audio for future models rather than automatically giving unrelated objects a cat voice.
+- Apply these defaults to future work, preserving explicitly requested object dimensions and mechanics (for example, furniture dimensions or chest opening animations). This does not request a retroactive rewrite of existing models.
+
 ## Verification
 
 - Preserve unrelated working-tree changes and never include `logs/` in a commit.
+- Treat root `docs/` and `exports/` as local-only personal notes and experiments. Preserve their local files; never add or force-add their contents to Git or upload them to GitHub. Local references such as `docs/LORE_CANON.md` remain applicable. Removing previously tracked copies from the Git index is allowed without deleting local files.
 - Review the exact changed-file set before staging.
 - Parse all changed JSON and verify whitespace-only rewrites preserve their token streams.
 - Run `gradlew.bat build` for implementation changes.

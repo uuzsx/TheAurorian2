@@ -1,14 +1,15 @@
 package cn.teampancake.theaurorian2.common.entity;
 
 import cn.teampancake.theaurorian2.common.registry.ModEntities;
+import cn.teampancake.theaurorian2.TheAurorian2;
+import cn.teampancake.theaurorian2.common.effect.SpiderSilkGrounding;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.golem.IronGolem;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -27,6 +28,10 @@ public final class SpiderSilkProjectileEntity extends ThrowableItemProjectile {
     }
 
     public static void shoot(ServerLevel level, SpiderMotherEntity owner, LivingEntity target) {
+        shoot(level, owner, target.getBoundingBox().getCenter());
+    }
+
+    public static void shoot(ServerLevel level, SpiderMotherEntity owner, Vec3 targetPosition) {
         SpiderSilkProjectileEntity silk = ModEntities.SPIDER_SILK.get().create(level, EntitySpawnReason.TRIGGERED);
         if (silk == null) {
             return;
@@ -34,7 +39,7 @@ public final class SpiderSilkProjectileEntity extends ThrowableItemProjectile {
 
         silk.setOwner(owner);
         silk.setPos(owner.getX(), owner.getEyeY() - 0.2, owner.getZ());
-        Vec3 direction = target.getBoundingBox().getCenter().subtract(silk.position());
+        Vec3 direction = targetPosition.subtract(silk.position());
         silk.shoot(direction.x, direction.y, direction.z, 1.5F, 0.5F);
         level.addFreshEntity(silk);
     }
@@ -68,13 +73,14 @@ public final class SpiderSilkProjectileEntity extends ThrowableItemProjectile {
         super.onHitEntity(hitResult);
         Entity hit = hitResult.getEntity();
         Entity owner = this.getOwner();
-        boolean validTarget = hit instanceof IronGolem
-                || hit instanceof Player player && !player.isCreative() && !player.isSpectator();
+        boolean validTarget = !hit.isSpectator()
+                && !BuiltInRegistries.ENTITY_TYPE.getKey(hit.getType()).getNamespace().equals(TheAurorian2.MOD_ID);
         if (this.level() instanceof ServerLevel level
                 && owner instanceof SpiderMotherEntity mother
                 && hit instanceof LivingEntity living
-                && validTarget
-                && living.hurtServer(level, this.damageSources().thrown(this, owner), 4.0F)) {
+                && living.isAlive() && validTarget) {
+            living.hurtServer(level, this.damageSources().thrown(this, owner), 4.0F);
+            SpiderSilkGrounding.apply(living);
             mother.bindWithSilk(living);
             this.resolve(true);
         }

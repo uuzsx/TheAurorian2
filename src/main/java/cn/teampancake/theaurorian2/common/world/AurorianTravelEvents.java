@@ -1,5 +1,6 @@
 package cn.teampancake.theaurorian2.common.world;
 
+import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.registry.ModAttachments;
 import cn.teampancake.theaurorian2.common.registry.ModLegacyItems;
 import net.minecraft.advancements.AdvancementHolder;
@@ -12,12 +13,22 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.event.entity.player.PlayerWakeUpEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public final class AurorianTravelEvents {
 
     private static final Identifier SMELT_IRON = Identifier.withDefaultNamespace("story/smelt_iron");
 
     private AurorianTravelEvents() {
+    }
+
+    /** Count successful Overworld arrivals through any route, including commands. */
+    public static void onChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)
+                || !event.getFrom().equals(Level.OVERWORLD)
+                || !event.getTo().equals(TheAurorian2.AURORIAN_LEVEL)) return;
+        AurorianTravelData data = player.getData(ModAttachments.AURORIAN_TRAVEL);
+        if (!data.enteredAurorian()) player.setData(ModAttachments.AURORIAN_TRAVEL, data.recordArrival());
     }
 
     public static void onPlayerWakeUp(PlayerWakeUpEvent event) {

@@ -396,6 +396,7 @@ public final class ModCreativeTabs {
     private static void addFunctionalItems(CreativeModeTab.Output output) {
         output.accept(ModItems.PURIFICATION_TEST_ITEM.get());
         output.accept(ModBlocks.ASTROLOGY_TABLE_ITEM.get());
+        output.accept(ModBlocks.ALCHEMY_TABLE.get());
         output.accept(ModBlocks.PURIFICATION_ALTAR_BASE_ITEM.get());
         output.accept(ModBlocks.PURIFICATION_ALTAR_ITEM.get());
         output.accept(ModBlocks.ARCANE_MAGIC_CIRCLE.get());
@@ -405,9 +406,6 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.BAMBOO_WIND_CHIMES.get());
         output.accept(ModBlocks.AURORIAN_FURNACE.get());
         output.accept(ModBlocks.FIREPLACE.get());
-        output.accept(ModBlocks.SILENT_WOOD_TABLE.get());
-        output.accept(ModBlocks.CURTAIN_WOOD_TABLE.get());
-        output.accept(ModBlocks.CURSED_FROST_WOOD_TABLE.get());
         output.accept(ModBlocks.SILENT_WOOD_STORAGE_CRATE_1.get());
         output.accept(ModBlocks.SILENT_WOOD_STORAGE_CRATE_2.get());
         output.accept(ModBlocks.SILENT_WOOD_STORAGE_CRATE_3.get());
@@ -433,6 +431,16 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.CURSED_FROST_WOOD_HORIZONTAL_BARREL.get());
         output.accept(ModBlocks.FILTHY_WOOD_STORAGE_BARREL.get());
         output.accept(ModBlocks.FILTHY_WOOD_HORIZONTAL_BARREL.get());
+        output.accept(ModBlocks.TREASURE_CHEST_2.get());
+        output.accept(ModItems.TREASURE_CHEST_2_KEY.get());
+        output.accept(ModBlocks.TREASURE_CHEST_4.get());
+        output.accept(ModItems.TREASURE_CHEST_4_KEY.get());
+        output.accept(ModBlocks.MOON_CHEST.get());
+        output.accept(ModBlocks.STUPID_CAT.get());
+        output.accept(ModBlocks.NEKO.get());
+        output.accept(ModBlocks.YOUYOUZI.get());
+        output.accept(ModBlocks.BEIDOU_YUHUI.get());
+        output.accept(ModItems.MOON_CHEST_KEY.get());
         output.accept(ModBlocks.SILENT_WOOD_CHEST.get());
         output.accept(ModBlocks.WEEPING_WILLOW_CHEST.get());
         output.accept(ModBlocks.CURTAIN_WOOD_CHEST.get());
@@ -473,11 +481,6 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.CURTAIN_WOOD_STOOL.get());
         output.accept(ModBlocks.CURSED_FROST_WOOD_STOOL.get());
         output.accept(ModBlocks.FILTHY_WOOD_STOOL.get());
-        output.accept(ModBlocks.SILENT_WOOD_CHAIR.get());
-        output.accept(ModBlocks.WEEPING_WILLOW_CHAIR.get());
-        output.accept(ModBlocks.CURTAIN_WOOD_CHAIR.get());
-        output.accept(ModBlocks.CURSED_FROST_WOOD_CHAIR.get());
-        output.accept(ModBlocks.FILTHY_WOOD_CHAIR.get());
         output.accept(ModBlocks.SILENT_WOOD_LONG_TABLE.get());
         output.accept(ModBlocks.WEEPING_WILLOW_LONG_TABLE.get());
         output.accept(ModBlocks.CURTAIN_WOOD_LONG_TABLE.get());
@@ -496,6 +499,7 @@ public final class ModCreativeTabs {
     }
 
     private static void addToolsAndUtilities(CreativeModeTab.Output output) {
+        output.accept(ModItems.FROSTFIN_BUCKET.get());
         output.accept(ModItems.SILENT_WOOD_PICKAXE.get());
         output.accept(ModItems.SILENT_WOOD_AXE.get());
         output.accept(ModItems.SILENT_WOOD_SHOVEL.get());
@@ -566,6 +570,7 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.SILENT_TREE_LEAVES.get());
         output.accept(ModBlocks.FRUITING_SILENT_TREE_LEAVES.get());
         output.accept(ModBlocks.SILENT_TREE_SAPLING.get());
+        output.accept(ModBlocks.WEEPING_WILLOW_SAPLING.get());
         output.accept(ModBlocks.SILENT_TREE_LEAF_LITTER.get());
         output.accept(ModBlocks.CURTAIN_TREE_LEAVES.get());
         output.accept(ModBlocks.CURTAIN_TREE_SAPLING.get());
@@ -604,6 +609,13 @@ public final class ModCreativeTabs {
     }
 
     private static void addCombatItems(CreativeModeTab.Output output) {
+        output.accept(ModItems.MOON_FISH_SPAWN_EGG.get());
+        output.accept(ModItems.AURORIAN_WINGED_FISH_SPAWN_EGG.get());
+        output.accept(ModItems.FROSTFIN_SPAWN_EGG.get());
+        output.accept(ModItems.MOONREAVER_SKELETON_SPAWN_EGG.get());
+        output.accept(ModItems.MOONREAVER_SKELETON_SWORDSMAN_SPAWN_EGG.get());
+        output.accept(ModItems.MOONREAVER_SKELETON_CAPTAIN_SPAWN_EGG.get());
+        output.accept(ModItems.AZURE_WARBLER_SPAWN_EGG.get());
         output.accept(ModItems.SPIDER_MOTHER_SPAWN_EGG.get());
         output.accept(ModItems.SPIDERLING_SPAWN_EGG.get());
         output.accept(ModItems.SPIDERLING_CRYSTAL_SHELL_SPAWN_EGG.get());
@@ -616,18 +628,51 @@ public final class ModCreativeTabs {
         output.accept(ModItems.STARLIGHT_RANGER_CHESTPLATE.get());
         output.accept(ModItems.STARLIGHT_RANGER_LEGGINGS.get());
         output.accept(ModItems.STARLIGHT_RANGER_BOOTS.get());
+        output.accept(ModItems.STARLIGHT_RANGER_LIGHT_BOW.get());
+        output.accept(ModItems.STARLIGHT_RANGER_HEAVY_BOW.get());
+        output.accept(ModItems.STARLIGHT_RANGER_CROSSBOW.get());
         output.accept(ModItems.DAWNLIGHT_RANGER_HELMET.get());
         output.accept(ModItems.DAWNLIGHT_RANGER_CHESTPLATE.get());
         output.accept(ModItems.DAWNLIGHT_RANGER_LEGGINGS.get());
         output.accept(ModItems.DAWNLIGHT_RANGER_BOOTS.get());
+        output.accept(ModItems.DAWNLIGHT_RANGER_LIGHT_BOW.get());
+        output.accept(ModItems.DAWNLIGHT_RANGER_HEAVY_BOW.get());
+        output.accept(ModItems.DAWNLIGHT_RANGER_CROSSBOW.get());
         output.accept(ModItems.FORESTSHADE_RANGER_HELMET.get());
         output.accept(ModItems.FORESTSHADE_RANGER_CHESTPLATE.get());
         output.accept(ModItems.FORESTSHADE_RANGER_LEGGINGS.get());
         output.accept(ModItems.FORESTSHADE_RANGER_BOOTS.get());
+        output.accept(ModItems.FORESTSHADE_RANGER_LIGHT_BOW.get());
+        output.accept(ModItems.FORESTSHADE_RANGER_HEAVY_BOW.get());
+        output.accept(ModItems.FORESTSHADE_RANGER_CROSSBOW.get());
         output.accept(ModItems.DUSKFLAME_RANGER_HELMET.get());
         output.accept(ModItems.DUSKFLAME_RANGER_CHESTPLATE.get());
         output.accept(ModItems.DUSKFLAME_RANGER_LEGGINGS.get());
         output.accept(ModItems.DUSKFLAME_RANGER_BOOTS.get());
+        output.accept(ModItems.DUSKFLAME_RANGER_LIGHT_BOW.get());
+        output.accept(ModItems.DUSKFLAME_RANGER_HEAVY_BOW.get());
+        output.accept(ModItems.DUSKFLAME_RANGER_CROSSBOW.get());
+
+        output.accept(ModItems.MISTVEIL_ASSASSIN_HELMET.get());
+        output.accept(ModItems.MISTVEIL_ASSASSIN_CHESTPLATE.get());
+        output.accept(ModItems.MISTVEIL_ASSASSIN_LEGGINGS.get());
+        output.accept(ModItems.MISTVEIL_ASSASSIN_BOOTS.get());
+        output.accept(ModItems.GLOAMGOLD_ASSASSIN_HELMET.get());
+        output.accept(ModItems.GLOAMGOLD_ASSASSIN_CHESTPLATE.get());
+        output.accept(ModItems.GLOAMGOLD_ASSASSIN_LEGGINGS.get());
+        output.accept(ModItems.GLOAMGOLD_ASSASSIN_BOOTS.get());
+        output.accept(ModItems.STARTRACE_ASSASSIN_HELMET.get());
+        output.accept(ModItems.STARTRACE_ASSASSIN_CHESTPLATE.get());
+        output.accept(ModItems.STARTRACE_ASSASSIN_LEGGINGS.get());
+        output.accept(ModItems.STARTRACE_ASSASSIN_BOOTS.get());
+        output.accept(ModItems.EMBERSHADE_ASSASSIN_HELMET.get());
+        output.accept(ModItems.EMBERSHADE_ASSASSIN_CHESTPLATE.get());
+        output.accept(ModItems.EMBERSHADE_ASSASSIN_LEGGINGS.get());
+        output.accept(ModItems.EMBERSHADE_ASSASSIN_BOOTS.get());
+        output.accept(ModItems.FROSTMOON_ASSASSIN_HELMET.get());
+        output.accept(ModItems.FROSTMOON_ASSASSIN_CHESTPLATE.get());
+        output.accept(ModItems.FROSTMOON_ASSASSIN_LEGGINGS.get());
+        output.accept(ModItems.FROSTMOON_ASSASSIN_BOOTS.get());
 
         output.accept(ModItems.STARFORGED_KNIGHT_GREATSWORD.get());
         output.accept(ModItems.STARFORGED_KNIGHT_SPEAR.get());
@@ -705,9 +750,14 @@ public final class ModCreativeTabs {
         output.accept(ModItems.AURORIAN_WINGED_FISH.get());
         output.accept(ModItems.COOKED_MOON_FISH.get());
         output.accept(ModItems.COOKED_AURORIAN_WINGED_FISH.get());
+        output.accept(ModItems.FROSTFIN.get());
+        output.accept(ModItems.COOKED_FROSTFIN.get());
+        output.accept(ModItems.RAW_BIRD.get());
+        output.accept(ModItems.COOKED_BIRD.get());
         output.accept(ModItems.SILK_BERRY.get());
         output.accept(ModItems.AURORIAN_BERRY.get());
         output.accept(ModItems.DEW_FRUIT.get());
+        output.accept(ModItems.FROSTGRAIN.get());
         output.accept(ModItems.CANDY.get());
         output.accept(ModItems.CANDY_CANE.get());
         output.accept(ModItems.GINGERBREAD_MAN.get());

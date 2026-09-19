@@ -117,8 +117,11 @@ public final class WallClimberSpiderlingEntity extends AbstractSpiderlingEntity 
     }
 
     @Override
+    protected double ambientDurationScale() { return 0.85; }
+
+    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<WallClimberSpiderlingEntity>(
-                "idle", state -> state.setAndContinue(IDLE)));
+                "idle", state -> state.setAndContinue(state.isMoving() ? IDLE : this.ambientAnimation())));
     }
 }

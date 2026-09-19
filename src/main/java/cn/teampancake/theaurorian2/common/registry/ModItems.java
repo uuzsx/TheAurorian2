@@ -2,6 +2,7 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.item.ArcherArmorItem;
+import cn.teampancake.theaurorian2.common.item.AssassinArmorItem;
 import cn.teampancake.theaurorian2.common.item.KnightArmorItem;
 import cn.teampancake.theaurorian2.common.item.KnightGreatswordItem;
 import cn.teampancake.theaurorian2.common.item.KnightSpearItem;
@@ -9,20 +10,28 @@ import cn.teampancake.theaurorian2.common.item.PhantomBlossomRequiemItem;
 import cn.teampancake.theaurorian2.common.item.PurificationTestItem;
 import cn.teampancake.theaurorian2.common.item.TrainingDummyItem;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MinecartItem;
+import net.minecraft.world.item.MobBucketItem;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.item.consume_effects.RemoveStatusEffectsConsumeEffect;
@@ -40,7 +49,28 @@ public final class ModItems {
             "purification_test_item", PurificationTestItem::new);
     public static final DeferredItem<TrainingDummyItem> TRAINING_DUMMY = ITEMS.registerItem(
             "training_dummy", properties -> new TrainingDummyItem(properties.stacksTo(16)));
+    public static final DeferredItem<Item> TREASURE_CHEST_2_KEY = ITEMS.registerSimpleItem("treasure_chest_2_key");
+    public static final DeferredItem<Item> TREASURE_CHEST_4_KEY = ITEMS.registerSimpleItem("treasure_chest_4_key");
+    public static final DeferredItem<Item> MOON_CHEST_KEY = ITEMS.registerSimpleItem("moon_chest_key");
     public static final DeferredItem<Item> SPIDER_EGG = ITEMS.registerSimpleItem("spider_egg");
+    public static final DeferredItem<SpawnEggItem> MOON_FISH_SPAWN_EGG = ITEMS.registerItem(
+            "moon_fish_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.MOON_FISH.get())));
+    public static final DeferredItem<SpawnEggItem> AURORIAN_WINGED_FISH_SPAWN_EGG = ITEMS.registerItem(
+            "aurorian_winged_fish_spawn_egg",
+            properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.AURORIAN_WINGED_FISH.get())));
+    public static final DeferredItem<SpawnEggItem> FROSTFIN_SPAWN_EGG = ITEMS.registerItem(
+            "frostfin_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.FROSTFIN.get())));
+    public static final DeferredItem<SpawnEggItem> MOONREAVER_SKELETON_CAPTAIN_SPAWN_EGG = ITEMS.registerItem(
+            "moonreaver_skeleton_captain_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.MOONREAVER_SKELETON_CAPTAIN.get())));
+    public static final DeferredItem<SpawnEggItem> MOONREAVER_SKELETON_SPAWN_EGG = ITEMS.registerItem(
+            "moonreaver_skeleton_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.MOONREAVER_SKELETON.get())));
+    public static final DeferredItem<SpawnEggItem> MOONREAVER_SKELETON_SWORDSMAN_SPAWN_EGG = ITEMS.registerItem(
+            "moonreaver_skeleton_swordsman_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.MOONREAVER_SKELETON_SWORDSMAN.get())));
+    public static final DeferredItem<SpawnEggItem> AZURE_WARBLER_SPAWN_EGG = ITEMS.registerItem(
+            "azure_warbler_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.AZURE_WARBLER.get())));
+    public static final DeferredItem<MobBucketItem> FROSTFIN_BUCKET = ITEMS.registerItem(
+            "frostfin_bucket", properties -> new MobBucketItem(ModEntities.FROSTFIN.get(), Fluids.WATER,
+                    SoundEvents.BUCKET_EMPTY_FISH, properties.stacksTo(1).craftRemainder(Items.BUCKET)));
     public static final DeferredItem<SpawnEggItem> SPIDER_MOTHER_SPAWN_EGG = ITEMS.registerItem(
             "spider_mother_spawn_egg",
             properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.SPIDER_MOTHER.get())));
@@ -150,9 +180,17 @@ public final class ModItems {
             "cooked_moon_fish", 5, saturationModifierFromPoints(5, 6.0F));
     public static final DeferredItem<Item> COOKED_AURORIAN_WINGED_FISH = food(
             "cooked_aurorian_winged_fish", 5, saturationModifierFromPoints(5, 6.0F));
+    public static final DeferredItem<Item> FROSTFIN = vanillaFood("frostfin", Foods.SALMON);
+    public static final DeferredItem<Item> COOKED_FROSTFIN = vanillaFood("cooked_frostfin", Foods.COOKED_SALMON);
+    public static final DeferredItem<Item> RAW_BIRD = ITEMS.registerSimpleItem("raw_bird",
+            properties -> properties.food(Foods.CHICKEN, net.minecraft.world.item.component.Consumables.CHICKEN));
+    public static final DeferredItem<Item> COOKED_BIRD = vanillaFood("cooked_bird", Foods.COOKED_CHICKEN);
     public static final DeferredItem<Item> SILK_BERRY = food("silk_berry", 1, 0.1F);
     public static final DeferredItem<Item> AURORIAN_BERRY = vanillaFood("aurorian_berry", Foods.APPLE);
     public static final DeferredItem<Item> DEW_FRUIT = food("dew_fruit", 2, 0.1F);
+    public static final DeferredItem<BlockItem> FROSTGRAIN = ITEMS.registerItem(
+            "frostgrain", properties -> new BlockItem(ModBlocks.FROSTGRAIN_CROP.get(),
+                    properties.useItemDescriptionPrefix().food(foodProperties(3, 0.4F, false))));
     public static final DeferredItem<Item> CANDY = food("candy", 4, 0.2F);
     public static final DeferredItem<Item> CANDY_CANE = effectFood(
             "candy_cane", 4, 0.4F, MobEffects.LUCK, 300, 0);
@@ -261,7 +299,79 @@ public final class ModItems {
     public static final DeferredItem<KnightSpearItem> MOONFORGED_KNIGHT_SPEAR =
             knightSpear("moonforged_knight_spear", "moonforged_knight_spear");
 
+    public static final DeferredItem<BowItem> STARLIGHT_RANGER_LIGHT_BOW = rangerBow("starlight_ranger_light_bow");
+    public static final DeferredItem<BowItem> STARLIGHT_RANGER_HEAVY_BOW = rangerBow("starlight_ranger_heavy_bow");
+    public static final DeferredItem<CrossbowItem> STARLIGHT_RANGER_CROSSBOW = rangerCrossbow("starlight_ranger_crossbow");
+    public static final DeferredItem<BowItem> DAWNLIGHT_RANGER_LIGHT_BOW = rangerBow("dawnlight_ranger_light_bow");
+    public static final DeferredItem<BowItem> DAWNLIGHT_RANGER_HEAVY_BOW = rangerBow("dawnlight_ranger_heavy_bow");
+    public static final DeferredItem<CrossbowItem> DAWNLIGHT_RANGER_CROSSBOW = rangerCrossbow("dawnlight_ranger_crossbow");
+    public static final DeferredItem<BowItem> FORESTSHADE_RANGER_LIGHT_BOW = rangerBow("forestshade_ranger_light_bow");
+    public static final DeferredItem<BowItem> FORESTSHADE_RANGER_HEAVY_BOW = rangerBow("forestshade_ranger_heavy_bow");
+    public static final DeferredItem<CrossbowItem> FORESTSHADE_RANGER_CROSSBOW = rangerCrossbow("forestshade_ranger_crossbow");
+    public static final DeferredItem<BowItem> DUSKFLAME_RANGER_LIGHT_BOW = rangerBow("duskflame_ranger_light_bow");
+    public static final DeferredItem<BowItem> DUSKFLAME_RANGER_HEAVY_BOW = rangerBow("duskflame_ranger_heavy_bow");
+    public static final DeferredItem<CrossbowItem> DUSKFLAME_RANGER_CROSSBOW = rangerCrossbow("duskflame_ranger_crossbow");
+
+    public static final DeferredItem<AssassinArmorItem> MISTVEIL_ASSASSIN_HELMET =
+            assassinArmor("mistveil_assassin_helmet", ArmorType.HELMET, "mistveil_assassin");
+    public static final DeferredItem<AssassinArmorItem> MISTVEIL_ASSASSIN_CHESTPLATE =
+            assassinArmor("mistveil_assassin_chestplate", ArmorType.CHESTPLATE, "mistveil_assassin");
+    public static final DeferredItem<AssassinArmorItem> MISTVEIL_ASSASSIN_LEGGINGS =
+            assassinArmor("mistveil_assassin_leggings", ArmorType.LEGGINGS, "mistveil_assassin");
+    public static final DeferredItem<AssassinArmorItem> MISTVEIL_ASSASSIN_BOOTS =
+            assassinArmor("mistveil_assassin_boots", ArmorType.BOOTS, "mistveil_assassin");
+
+    public static final DeferredItem<AssassinArmorItem> GLOAMGOLD_ASSASSIN_HELMET =
+            assassinArmor("gloamgold_assassin_helmet", ArmorType.HELMET, "gloamgold_assassin");
+    public static final DeferredItem<AssassinArmorItem> GLOAMGOLD_ASSASSIN_CHESTPLATE =
+            assassinArmor("gloamgold_assassin_chestplate", ArmorType.CHESTPLATE, "gloamgold_assassin");
+    public static final DeferredItem<AssassinArmorItem> GLOAMGOLD_ASSASSIN_LEGGINGS =
+            assassinArmor("gloamgold_assassin_leggings", ArmorType.LEGGINGS, "gloamgold_assassin");
+    public static final DeferredItem<AssassinArmorItem> GLOAMGOLD_ASSASSIN_BOOTS =
+            assassinArmor("gloamgold_assassin_boots", ArmorType.BOOTS, "gloamgold_assassin");
+
+    public static final DeferredItem<AssassinArmorItem> STARTRACE_ASSASSIN_HELMET =
+            assassinArmor("startrace_assassin_helmet", ArmorType.HELMET, "startrace_assassin");
+    public static final DeferredItem<AssassinArmorItem> STARTRACE_ASSASSIN_CHESTPLATE =
+            assassinArmor("startrace_assassin_chestplate", ArmorType.CHESTPLATE, "startrace_assassin");
+    public static final DeferredItem<AssassinArmorItem> STARTRACE_ASSASSIN_LEGGINGS =
+            assassinArmor("startrace_assassin_leggings", ArmorType.LEGGINGS, "startrace_assassin");
+    public static final DeferredItem<AssassinArmorItem> STARTRACE_ASSASSIN_BOOTS =
+            assassinArmor("startrace_assassin_boots", ArmorType.BOOTS, "startrace_assassin");
+
+    public static final DeferredItem<AssassinArmorItem> EMBERSHADE_ASSASSIN_HELMET =
+            assassinArmor("embershade_assassin_helmet", ArmorType.HELMET, "embershade_assassin");
+    public static final DeferredItem<AssassinArmorItem> EMBERSHADE_ASSASSIN_CHESTPLATE =
+            assassinArmor("embershade_assassin_chestplate", ArmorType.CHESTPLATE, "embershade_assassin");
+    public static final DeferredItem<AssassinArmorItem> EMBERSHADE_ASSASSIN_LEGGINGS =
+            assassinArmor("embershade_assassin_leggings", ArmorType.LEGGINGS, "embershade_assassin");
+    public static final DeferredItem<AssassinArmorItem> EMBERSHADE_ASSASSIN_BOOTS =
+            assassinArmor("embershade_assassin_boots", ArmorType.BOOTS, "embershade_assassin");
+
+    public static final DeferredItem<AssassinArmorItem> FROSTMOON_ASSASSIN_HELMET =
+            assassinArmor("frostmoon_assassin_helmet", ArmorType.HELMET, "frostmoon_assassin");
+    public static final DeferredItem<AssassinArmorItem> FROSTMOON_ASSASSIN_CHESTPLATE =
+            assassinArmor("frostmoon_assassin_chestplate", ArmorType.CHESTPLATE, "frostmoon_assassin");
+    public static final DeferredItem<AssassinArmorItem> FROSTMOON_ASSASSIN_LEGGINGS =
+            assassinArmor("frostmoon_assassin_leggings", ArmorType.LEGGINGS, "frostmoon_assassin");
+    public static final DeferredItem<AssassinArmorItem> FROSTMOON_ASSASSIN_BOOTS =
+            assassinArmor("frostmoon_assassin_boots", ArmorType.BOOTS, "frostmoon_assassin");
+
     private ModItems() {
+    }
+
+    private static DeferredItem<BowItem> rangerBow(String name) {
+        return ITEMS.registerItem(name, properties -> new BowItem(properties.durability(384).enchantable(1)));
+    }
+
+    private static DeferredItem<CrossbowItem> rangerCrossbow(String name) {
+        return ITEMS.registerItem(name, properties -> new CrossbowItem(properties.durability(465).enchantable(1)
+                .component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY)));
+    }
+
+    private static DeferredItem<AssassinArmorItem> assassinArmor(String name, ArmorType type, String modelName) {
+        return ITEMS.registerItem(name, properties -> new AssassinArmorItem(
+                properties.humanoidArmor(ArmorMaterials.LEATHER, type), modelName, type));
     }
 
     private static DeferredItem<ArcherArmorItem> archerArmor(String name, ArmorType type, String textureName) {
@@ -385,6 +495,10 @@ public final class ModItems {
 
     public static void register(IEventBus modEventBus) {
         ModLegacyItems.bootstrap();
+        // Preserve old spawn-egg stacks, including their counts and saved components.
+        ITEMS.addAlias(TheAurorian2.id("frostbound_skeleton_spawn_egg"), MOONREAVER_SKELETON_SPAWN_EGG.getId());
+        ITEMS.addAlias(TheAurorian2.id("frostbound_skeleton_swordsman_spawn_egg"), MOONREAVER_SKELETON_SWORDSMAN_SPAWN_EGG.getId());
+        ITEMS.addAlias(TheAurorian2.id("frostbound_skeleton_captain_spawn_egg"), MOONREAVER_SKELETON_CAPTAIN_SPAWN_EGG.getId());
         // Retired food: resolve saved stacks to candy without losing their count or custom data.
         ITEMS.addAlias(TheAurorian2.id("white_chocolate"), TheAurorian2.id("candy"));
         ITEMS.register(modEventBus);

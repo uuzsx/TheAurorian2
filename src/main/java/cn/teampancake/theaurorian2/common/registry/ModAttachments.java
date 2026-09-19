@@ -23,6 +23,21 @@ public final class ModAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS =
             DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, TheAurorian2.MOD_ID);
 
+    // A transient visual entity id; no serialized state or copy-on-death.
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> WORLD_SCROLL_EFFECT =
+            ATTACHMENTS.register("world_scroll_effect", () -> AttachmentType.builder(() -> -1)
+                    .sync(ByteBufCodecs.VAR_INT).build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Byte>> AZURE_WARBLER_SHOULDERS =
+            ATTACHMENTS.register("azure_warbler_shoulders", () -> AttachmentType.builder(() -> (byte) 0)
+                    .sync(ByteBufCodecs.BYTE).build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Long>> SILK_GROUNDED_UNTIL =
+            ATTACHMENTS.register("silk_grounded_until", () -> AttachmentType.builder(() -> 0L)
+                    .serialize(Codec.LONG.fieldOf("value"))
+                    .sync(ByteBufCodecs.VAR_LONG)
+                    .build());
+
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<CorruptionData>> CORRUPTION_DATA =
             ATTACHMENTS.register("corruption_data", () -> AttachmentType.builder(() -> CorruptionData.EMPTY)
                     .serialize(CorruptionData.CODEC.fieldOf("value"))
@@ -75,6 +90,7 @@ public final class ModAttachments {
             ATTACHMENTS.register("aurorian_travel", () -> AttachmentType.builder(() -> AurorianTravelData.EMPTY)
                     .serialize(AurorianTravelData.CODEC.fieldOf("value"))
                     .copyOnDeath()
+                    .sync((holder, player) -> holder == player, ByteBufCodecs.fromCodecWithRegistries(AurorianTravelData.CODEC))
                     .build());
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<MoonShieldData>> MOON_SHIELD =

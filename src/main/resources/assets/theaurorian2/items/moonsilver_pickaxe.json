@@ -1,1 +1,1 @@
-{"model":{"type":"minecraft:special","base":"theaurorian2:item/moonsilver_pickaxe","model":{"type":"geckolib:geckolib"}}}
+{"model":{"type":"minecraft:select","property":"minecraft:display_context","cases":[{"when":"gui","model":{"type":"minecraft:model","model":"theaurorian2:item/moonsilver_pickaxe_gui"}}],"fallback":{"type":"minecraft:special","base":"theaurorian2:item/moonsilver_pickaxe","model":{"type":"geckolib:geckolib"}}}}

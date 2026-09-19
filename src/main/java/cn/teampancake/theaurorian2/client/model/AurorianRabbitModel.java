@@ -8,29 +8,24 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.entity.state.RabbitRenderState;
-import net.minecraft.util.Mth;
+import cn.teampancake.theaurorian2.client.renderer.state.AurorianAnimalRenderState;
+import cn.teampancake.theaurorian2.client.animation.AnimalAnimationPlayer;
+import static cn.teampancake.theaurorian2.client.animation.AurorianRabbitAnimations.*;
 
-public final class AurorianRabbitModel extends EntityModel<RabbitRenderState> {
+public final class AurorianRabbitModel extends EntityModel<AurorianAnimalRenderState> {
     private final ModelPart head;
-    private final ModelPart rightRearFoot;
-    private final ModelPart leftRearFoot;
-    private final ModelPart rightFrontLeg;
-    private final ModelPart leftFrontLeg;
+    private final AnimalAnimationPlayer animations;
 
     public AurorianRabbitModel(ModelPart root) {
         super(root);
-        ModelPart body = root.getChild("all").getChild("body");
-        this.head = body.getChild("head");
-        this.rightFrontLeg = body.getChild("arm_right");
-        this.leftFrontLeg = body.getChild("arm_left");
-        this.rightRearFoot = body.getChild("leg_right");
-        this.leftRearFoot = body.getChild("leg_left");
+        head = root.getChild("motion_root").getChild("all").getChild("body").getChild("head");
+        animations = new AnimalAnimationPlayer(root, IDLE_BREATHE, IDLE_LISTEN, IDLE_SNIFF,
+                WALK_HOP, RUN_SCARED, STARTLE, 4.6F, 4.5F, 1.1F, 0.48F);
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition mesh = new MeshDefinition();
-        PartDefinition root = mesh.getRoot();
+        PartDefinition root = mesh.getRoot().addOrReplaceChild("motion_root", CubeListBuilder.create(), PartPose.ZERO);
         PartDefinition all = root.addOrReplaceChild("all", CubeListBuilder.create(), PartPose.offset(0.0F, 23.5F, 0.0F));
         PartDefinition body = all.addOrReplaceChild("body", CubeListBuilder.create()
                 .texOffs(0, 0).addBox(-3.0F, -5.5F, -4.0F, 6.0F, 5.0F, 8.0F, new CubeDeformation(0.0F))
@@ -52,14 +47,8 @@ public final class AurorianRabbitModel extends EntityModel<RabbitRenderState> {
     }
 
     @Override
-    public void setupAnim(RabbitRenderState state) {
+    public void setupAnim(AurorianAnimalRenderState state) {
         super.setupAnim(state);
-        this.head.xRot = state.xRot * Mth.DEG_TO_RAD;
-        this.head.yRot = state.yRot * Mth.DEG_TO_RAD;
-        float jump = Mth.sin(state.jumpCompletion * Mth.PI);
-        this.rightFrontLeg.xRot = (jump * -40.0F - 11.0F) * Mth.DEG_TO_RAD;
-        this.leftFrontLeg.xRot = this.rightFrontLeg.xRot;
-        this.rightRearFoot.xRot = jump * 50.0F * Mth.DEG_TO_RAD;
-        this.leftRearFoot.xRot = this.rightRearFoot.xRot;
+        animations.apply(state, head, true);
     }
 }

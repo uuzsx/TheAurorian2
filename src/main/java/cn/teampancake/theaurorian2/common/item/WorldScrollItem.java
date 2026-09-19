@@ -1,9 +1,9 @@
 package cn.teampancake.theaurorian2.common.item;
 
 import cn.teampancake.theaurorian2.common.world.AurorianTravel;
+import cn.teampancake.theaurorian2.common.entity.WorldScrollTeleportEntity;
 import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -41,6 +41,7 @@ public final class WorldScrollItem extends Item {
 
         player.startUsingItem(hand);
         if (level instanceof ServerLevel serverLevel) {
+            WorldScrollTeleportEntity.begin((ServerPlayer) player, false);
             serverLevel.playSound(null, player.getX(), player.getY(), player.getZ(),
                     SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS, 0.8F, 0.7F);
         }
@@ -59,41 +60,29 @@ public final class WorldScrollItem extends Item {
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int ticksRemaining) {
-        if (!(level instanceof ServerLevel serverLevel)) {
-            return;
-        }
-
-        int usedTicks = USE_DURATION - ticksRemaining;
-        if (usedTicks > 0 && usedTicks % 4 == 0) {
-            double progress = usedTicks / (double) USE_DURATION;
-            double radius = 1.4 - progress * 0.75;
-            for (int i = 0; i < 6; i++) {
-                double angle = i * Math.PI / 3.0 + usedTicks * 0.08;
-                serverLevel.sendParticles(
-                        i % 2 == 0 ? ParticleTypes.END_ROD : ParticleTypes.REVERSE_PORTAL,
-                        entity.getX() + Math.cos(angle) * radius,
-                        entity.getY() + 0.25 + progress * 1.4 + i % 3 * 0.18,
-                        entity.getZ() + Math.sin(angle) * radius,
-                        1, 0.0, 0.0, 0.0, 0.0);
-            }
-        }
-        if (usedTicks == 36) {
-            serverLevel.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
-                    SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 0.9F, 1.45F);
+        if (entity instanceof ServerPlayer player && !AurorianTravel.canBegin(player, false)) {
+            player.stopUsingItem();
+            cancelEffect(player);
         }
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if (entity instanceof ServerPlayer player) {
-            AurorianTravel.travel(player, stack);
+            if (!AurorianTravel.travel(player, stack)) cancelEffect(player);
         }
         return stack;
     }
 
     @Override
     public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int remainingTime) {
+        if (entity instanceof ServerPlayer player) cancelEffect(player);
         return true;
+    }
+
+    private static void cancelEffect(ServerPlayer player) {
+        WorldScrollTeleportEntity effect = WorldScrollTeleportEntity.active(player);
+        if (effect != null && !effect.isArrival()) effect.cancel();
     }
 
     @Override

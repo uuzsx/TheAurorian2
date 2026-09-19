@@ -1,0 +1,1 @@
+{"type":"neoforge:add_spawns","biomes":"#theaurorian2:has_forest_allays","spawners":{"type":"minecraft:allay","weight":1,"minCount":1,"maxCount":1}}

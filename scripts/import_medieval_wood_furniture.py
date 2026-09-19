@@ -11,6 +11,7 @@ import math
 import uuid
 from pathlib import Path
 
+from furniture_palette import apply_furniture_palette
 from PIL import Image, ImageDraw, ImageFont
 import export_wood_chests as renderer
 
@@ -96,6 +97,7 @@ def main(kinds=('stool','long_table')):
         mapping={c:palette[round(i*6/(len(source_colors)-1))] for i,c in enumerate(source_colors)}
         atlas=Image.new('RGBA',original.size)
         atlas.putdata([(*mapping.get(p[:3],p[:3]),p[3]) for p in original.getdata()])
+        atlas=apply_furniture_palette(atlas,key)
         texpath=A/f'textures/block/{key}_medieval_furniture.png';atlas.save(texpath);png=texpath.read_bytes()
         for kind in kinds:
             name=key+'_'+kind;folder=ROOT/('exports/wood_stools/'+name if kind=='stool' else 'exports/wood_furniture/'+key)

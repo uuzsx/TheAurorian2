@@ -1,0 +1,1 @@
+{"format_version":"1.8.0","animations":{"swim":{"loop":true,"animation_length":2,"bones":{"root":{"rotation":[0.0,"math.sin(query.anim_time*180)*7",0.0]},"body_front":{"rotation":[0.0,0.0,"math.cos(query.anim_time*180)*3.5"]},"tail":{"rotation":[0.0,"math.cos(query.anim_time*180)*17",0.0]},"tail2":{"rotation":[0.0,"math.sin(query.anim_time*180)*-15",0.0]}}}}}

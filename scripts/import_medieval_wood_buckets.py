@@ -3,6 +3,7 @@ import copy
 import json
 import math
 from pathlib import Path
+from furniture_palette import apply_furniture_palette
 from PIL import Image, ImageDraw, ImageFont
 from import_medieval_wood_furniture import ROOT, A, SOURCE, WOODS, bbmodel
 import export_wood_chests as renderer
@@ -48,6 +49,7 @@ def main():
         atlas.putdata([(*mapping.get(p[:3], p[:3]), p[3]) for p in original.get_flattened_data()])
         folder = OUT / key
         folder.mkdir(parents=True, exist_ok=True)
+        atlas=apply_furniture_palette(atlas,key)
         atlas.save(folder / 'medieval_furniture.png')
         atlas.save(A / f'textures/block/{name}.png')
         png = (folder / 'medieval_furniture.png').read_bytes()

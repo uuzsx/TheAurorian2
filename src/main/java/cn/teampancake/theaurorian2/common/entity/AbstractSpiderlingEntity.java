@@ -1,5 +1,6 @@
 package cn.teampancake.theaurorian2.common.entity;
 
+import cn.teampancake.theaurorian2.common.world.SpiderBroodData;
 import com.geckolib.animatable.GeoEntity;
 import com.geckolib.animatable.instance.AnimatableInstanceCache;
 import com.geckolib.animatable.manager.AnimatableManager;
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
@@ -40,6 +42,14 @@ public abstract class AbstractSpiderlingEntity extends Monster implements GeoEnt
 
     private static final EntityDataAccessor<Integer> ATTACK_ANIMATION_TICKS =
             SynchedEntityData.defineId(AbstractSpiderlingEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Byte> AMBIENT_ACTION =
+            SynchedEntityData.defineId(AbstractSpiderlingEntity.class, EntityDataSerializers.BYTE);
+    private static final RawAnimation LOOK = RawAnimation.begin().thenPlay("misc.curious_look");
+    private static final RawAnimation CLEAN = RawAnimation.begin().thenPlay("misc.clean_front_leg");
+    private static final RawAnimation STRETCH = RawAnimation.begin().thenPlay("misc.stretch_settle");
+    private int ambientCooldown = 100;
+    private int ambientTicks;
+    private int lastAmbientAction;
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("misc.idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("move.walk");
     private static final RawAnimation BITE = RawAnimation.begin().thenPlay("attack.bite");
@@ -85,9 +95,10 @@ public abstract class AbstractSpiderlingEntity extends Monster implements GeoEnt
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.15, true));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.8));
-        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new AmbientGoal());
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.8));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new MotherTargetGoal());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
@@ -97,6 +108,7 @@ public abstract class AbstractSpiderlingEntity extends Monster implements GeoEnt
     protected void defineSynchedData(SynchedEntityData.Builder entityData) {
         super.defineSynchedData(entityData);
         entityData.define(ATTACK_ANIMATION_TICKS, 0);
+        entityData.define(AMBIENT_ACTION, (byte)0);
     }
 
     @Override
@@ -107,6 +119,7 @@ public abstract class AbstractSpiderlingEntity extends Monster implements GeoEnt
         }
         super.tick();
         if (!this.level().isClientSide()) {
+            if (this.ambientCooldown > 0) this.ambientCooldown--;
             int attackTicks = this.entityData.get(ATTACK_ANIMATION_TICKS);
             if (attackTicks > 0) {
                 this.entityData.set(ATTACK_ANIMATION_TICKS, attackTicks - 1);
@@ -140,6 +153,31 @@ public abstract class AbstractSpiderlingEntity extends Monster implements GeoEnt
 
     public void setMother(@Nullable UUID motherId) {
         this.motherId = motherId;
+        if (this.isAddedToLevel() && this.level() instanceof ServerLevel level) {
+            if (motherId == null) {
+                SpiderBroodData.get(level).remove(this.getUUID());
+            } else {
+                SpiderBroodData.get(level).add(this.getUUID(), motherId);
+            }
+        }
+    }
+
+    @Override
+    public void onAddedToLevel() {
+        super.onAddedToLevel();
+        // Also imports offspring from saves created before the brood ledger existed.
+        if (this.motherId != null && this.level() instanceof ServerLevel level) {
+            SpiderBroodData.get(level).add(this.getUUID(), this.motherId);
+        }
+    }
+
+    @Override
+    public void onRemovedFromLevel() {
+        if (this.level() instanceof ServerLevel level
+                && this.getRemovalReason() != null && this.getRemovalReason().shouldDestroy()) {
+            SpiderBroodData.get(level).remove(this.getUUID());
+        }
+        super.onRemovedFromLevel();
     }
 
     public @Nullable UUID getMotherId() {
@@ -188,6 +226,9 @@ public abstract class AbstractSpiderlingEntity extends Monster implements GeoEnt
             if (this.entityData.get(ATTACK_ANIMATION_TICKS) > 0) {
                 return state.setAndContinue(BITE);
             }
+            if (this.entityData.get(AMBIENT_ACTION) != 0 && !state.isMoving()) {
+                return state.setAndContinue(this.ambientAnimation());
+            }
             return state.setAndContinue(state.isMoving() ? WALK : IDLE);
         }));
     }
@@ -195,6 +236,52 @@ public abstract class AbstractSpiderlingEntity extends Monster implements GeoEnt
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.animationCache;
+    }
+
+    protected final RawAnimation ambientAnimation() {
+        if (!this.isAlive() || this.onClimbable()) return IDLE;
+        return switch (this.entityData.get(AMBIENT_ACTION)) {
+            case 1 -> LOOK;
+            case 2 -> CLEAN;
+            case 3 -> STRETCH;
+            default -> IDLE;
+        };
+    }
+
+    protected double ambientDurationScale() { return 1.0; }
+
+    private boolean canPerformAmbient() {
+        LivingEntity target = this.getTarget();
+        return this.isAlive() && (target == null || !target.isAlive())
+                && this.hurtTime == 0 && this.entityData.get(ATTACK_ANIMATION_TICKS) == 0
+                && this.onGround() && !this.onClimbable() && !this.horizontalCollision
+                && !this.isInWater() && !this.isInLava() && this.getNavigation().isDone()
+                && this.getDeltaMovement().horizontalDistanceSqr() < 0.0025;
+    }
+
+    private final class AmbientGoal extends Goal {
+        private AmbientGoal() { this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK)); }
+        @Override public boolean canUse() {
+            return ambientCooldown == 0 && canPerformAmbient();
+        }
+        @Override public boolean canContinueToUse() {
+            return ambientTicks > 0 && canPerformAmbient();
+        }
+        @Override public boolean requiresUpdateEveryTick() { return true; }
+        @Override public void start() {
+            int choice = random.nextInt(lastAmbientAction == 0 ? 3 : 2) + 1;
+            if (lastAmbientAction != 0 && choice >= lastAmbientAction) choice++;
+            lastAmbientAction = choice;
+            ambientTicks = (int)Math.ceil((choice == 1 ? 88 : choice == 2 ? 96 : 92) * ambientDurationScale());
+            getNavigation().stop();
+            entityData.set(AMBIENT_ACTION, (byte)choice);
+        }
+        @Override public void tick() { ambientTicks--; }
+        @Override public void stop() {
+            entityData.set(AMBIENT_ACTION, (byte)0);
+            ambientTicks = 0;
+            ambientCooldown = 120 + random.nextInt(161);
+        }
     }
 
     private final class MotherTargetGoal extends TargetGoal {

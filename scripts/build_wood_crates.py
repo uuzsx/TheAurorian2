@@ -5,6 +5,7 @@ Models are ordinary baked blocks: no inventory, block entity, tick or packets.
 """
 import base64, copy, importlib.util, json, math, uuid
 from pathlib import Path
+from furniture_palette import apply_furniture_palette
 from PIL import Image, ImageDraw, ImageFont
 from wood_bark_palette import bark_trim
 
@@ -75,6 +76,7 @@ for row,(key,label,english,plank) in enumerate(WOODS):
  dark=bark_trim(wood,plank);atlas.paste(dark,(16,0))
  inner=wood.point(lambda v:round(v*.26));atlas.paste(inner,(32,0))
  nail=Image.new('RGB',(16,16),(92,95,99));atlas.paste(nail,(48,0))
+ atlas=apply_furniture_palette(atlas,key,'crate')
  atlas.save(folder/'crate.png');atlas.save(ASSETS/f'textures/block/{name}.png')
  model={'meta':{'format_version':'4.10','model_format':'bedrock','box_uv':False},'name':label+'板条箱','resolution':{'width':64,'height':64},'elements':copy.deepcopy(elements),
   'outliner':[{'name':'body','origin':[8,0,8],'uuid':str(uuid.uuid5(uuid.NAMESPACE_URL,'aurorian/crate/body')),'children':[e['uuid'] for e in elements]}],

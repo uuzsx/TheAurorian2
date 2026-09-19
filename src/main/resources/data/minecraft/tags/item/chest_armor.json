@@ -1,12 +1,1 @@
-{
-  "replace": false,
-  "values": [
-    "theaurorian2:starlight_ranger_chestplate",
-    "theaurorian2:dawnlight_ranger_chestplate",
-    "theaurorian2:forestshade_ranger_chestplate",
-    "theaurorian2:duskflame_ranger_chestplate",
-    "theaurorian2:starforged_knight_chestplate",
-    "theaurorian2:dawnforged_knight_chestplate",
-    "theaurorian2:moonforged_knight_chestplate"
-  ]
-}
+{"replace":false,"values":["theaurorian2:starlight_ranger_chestplate","theaurorian2:dawnlight_ranger_chestplate","theaurorian2:forestshade_ranger_chestplate","theaurorian2:duskflame_ranger_chestplate","theaurorian2:starforged_knight_chestplate","theaurorian2:dawnforged_knight_chestplate","theaurorian2:moonforged_knight_chestplate","theaurorian2:mistveil_assassin_chestplate","theaurorian2:gloamgold_assassin_chestplate","theaurorian2:startrace_assassin_chestplate","theaurorian2:embershade_assassin_chestplate","theaurorian2:frostmoon_assassin_chestplate","theaurorian2:cerulean_chestplate","theaurorian2:crystal_rune_chestplate","theaurorian2:knight_chestplate","theaurorian2:moonsilver_chestplate","theaurorian2:mysterium_wool_chestplate","theaurorian2:spectral_chestplate","theaurorian2:holy_knight_chestplate","theaurorian2:spiked_chestplate"]}

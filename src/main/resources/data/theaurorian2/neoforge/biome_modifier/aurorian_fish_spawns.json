@@ -1,0 +1,1 @@
+{"type":"neoforge:add_spawns","biomes":"#theaurorian2:has_surface_fish","spawners":[{"type":"theaurorian2:moon_fish","weight":12,"minCount":3,"maxCount":4},{"type":"theaurorian2:aurorian_winged_fish","weight":8,"minCount":2,"maxCount":4},{"type":"theaurorian2:frostfin","weight":6,"minCount":2,"maxCount":4}]}

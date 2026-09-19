@@ -1,6 +1,7 @@
 package cn.teampancake.theaurorian2.client;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import cn.teampancake.theaurorian2.client.animation.GreatSwordViewModel;
 import cn.teampancake.theaurorian2.client.color.AurorianGrassTintSource;
 import cn.teampancake.theaurorian2.client.hud.AurorianNightHud;
 import cn.teampancake.theaurorian2.client.hud.MoonShieldHud;
@@ -10,6 +11,9 @@ import cn.teampancake.theaurorian2.client.model.AurorianRabbitModel;
 import cn.teampancake.theaurorian2.client.model.AurorianPigModel;
 import cn.teampancake.theaurorian2.client.model.AurorianSheepModel;
 import cn.teampancake.theaurorian2.client.model.AurorianCowModel;
+import cn.teampancake.theaurorian2.client.model.AurorianWingedFishModel;
+import cn.teampancake.theaurorian2.client.model.MoonFishModel;
+import cn.teampancake.theaurorian2.client.renderer.AurorianFishRenderer;
 import cn.teampancake.theaurorian2.client.particle.BlueFallingSporeBlossomParticle;
 import cn.teampancake.theaurorian2.client.particle.BlueSporeBlossomAirParticle;
 import cn.teampancake.theaurorian2.client.particle.AurorianFireflyParticle;
@@ -22,15 +26,18 @@ import cn.teampancake.theaurorian2.client.renderer.DamageNumberRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianChestRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianChestMinecartRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianFurnaceRenderer;
-import cn.teampancake.theaurorian2.client.renderer.AurorianTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AstrologyTableRenderer;
 import cn.teampancake.theaurorian2.client.renderer.ArcaneMagicCircleRenderer;
 import cn.teampancake.theaurorian2.client.renderer.PurificationAltarRenderer;
 import cn.teampancake.theaurorian2.client.renderer.CrystallineSwordPedestalRenderer;
 import cn.teampancake.theaurorian2.client.renderer.ModelledBlockRenderer;
 import cn.teampancake.theaurorian2.client.renderer.WindChimesRenderer;
+import cn.teampancake.theaurorian2.client.renderer.WorldScrollTeleportRenderer;
 import cn.teampancake.theaurorian2.client.renderer.TrainingDummyRenderer;
 import cn.teampancake.theaurorian2.client.renderer.SimpleGeoMobRenderer;
+import cn.teampancake.theaurorian2.client.renderer.FrostfinRenderer;
+import cn.teampancake.theaurorian2.client.renderer.MoonreaverSkeletonRenderer;
+import cn.teampancake.theaurorian2.client.renderer.SpiderMotherRenderer;
 import cn.teampancake.theaurorian2.client.renderer.WallClimberSpiderlingRenderer;
 import cn.teampancake.theaurorian2.client.renderer.SpiderVenomProjectileRenderer;
 import cn.teampancake.theaurorian2.client.renderer.AurorianRabbitRenderer;
@@ -93,9 +100,16 @@ import org.joml.Vector4f;
 @EventBusSubscriber(modid = TheAurorian2.MOD_ID, value = Dist.CLIENT)
 public final class ClientModEvents {
     @SubscribeEvent
+    public static void registerAlchemyScreen(net.neoforged.neoforge.client.event.RegisterMenuScreensEvent event) {
+        event.register(cn.teampancake.theaurorian2.common.registry.ModAlchemy.MENU.get(),
+                cn.teampancake.theaurorian2.client.screen.AlchemyTableScreen::new);
+    }
+
+    @SubscribeEvent
     public static void registerWindChimesPipeline(
             net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent event) {
         event.registerPipeline(WindChimesRenderer.EMISSIVE_CULL);
+        event.registerPipeline(WorldScrollTeleportRenderer.PIPELINE);
     }
 
 
@@ -104,7 +118,18 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.WORLD_SCROLL_TELEPORT.get(), WorldScrollTeleportRenderer::new);
+        event.registerEntityRenderer(ModEntities.MOONREAVER_SKELETON.get(), MoonreaverSkeletonRenderer::new);
+        event.registerEntityRenderer(ModEntities.MOONREAVER_SKELETON_SWORDSMAN.get(), MoonreaverSkeletonRenderer::new);
+        event.registerEntityRenderer(ModEntities.MOONREAVER_SKELETON_CAPTAIN.get(), context -> new MoonreaverSkeletonRenderer(context, true));
+        event.registerEntityRenderer(ModEntities.FROSTFIN.get(), FrostfinRenderer::new);
+        event.registerEntityRenderer(ModEntities.AZURE_WARBLER.get(),
+                context -> new SimpleGeoMobRenderer<>(context, TheAurorian2.id("azure_warbler"), 0.2F));
         event.registerEntityRenderer(ModEntities.AURORIAN_RABBIT.get(), AurorianRabbitRenderer::new);
+        event.registerEntityRenderer(ModEntities.MOON_FISH.get(), context -> new AurorianFishRenderer(
+                context, AurorianFishRenderer.MOON_LAYER, "all", "moon_fish"));
+        event.registerEntityRenderer(ModEntities.AURORIAN_WINGED_FISH.get(), context -> new AurorianFishRenderer(
+                context, AurorianFishRenderer.WINGED_LAYER, "body_front", "aurorian_winged_fish"));
         event.registerEntityRenderer(ModEntities.AURORIAN_PIG.get(), AurorianPigRenderer::new);
         event.registerEntityRenderer(ModEntities.AURORIAN_SHEEP.get(), AurorianSheepRenderer::new);
         event.registerEntityRenderer(ModEntities.AURORIAN_COW.get(), AurorianCowRenderer::new);
@@ -112,7 +137,7 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntities.TRAINING_DUMMY.get(), TrainingDummyRenderer::new);
         event.registerEntityRenderer(
                 ModEntities.SPIDER_MOTHER.get(),
-                context -> new SimpleGeoMobRenderer<>(context, TheAurorian2.id("spider_mother"), 1.4F));
+                SpiderMotherRenderer::new);
         event.registerEntityRenderer(
                 ModEntities.SPIDERLING.get(),
                 context -> new SimpleGeoMobRenderer<>(context, TheAurorian2.id("spiderling"), 0.35F));
@@ -137,6 +162,14 @@ public final class ClientModEvents {
         event.registerEntityRenderer(
                 ModEntities.PURIFICATION_RITUAL_ZOMBIE.get(), ZombieRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ASTROLOGY_TABLE.get(), AstrologyTableRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.STUPID_CAT.get(),
+                cn.teampancake.theaurorian2.client.renderer.StupidCatRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.NEKO.get(),
+                context -> new cn.teampancake.theaurorian2.client.renderer.StupidCatRenderer(context, "neko"));
+        event.registerBlockEntityRenderer(ModBlockEntities.YOUYOUZI.get(),
+                context -> new cn.teampancake.theaurorian2.client.renderer.StupidCatRenderer(context, "youyouzi"));
+        event.registerBlockEntityRenderer(ModBlockEntities.BEIDOU_YUHUI.get(),
+                context -> new cn.teampancake.theaurorian2.client.renderer.StupidCatRenderer(context, "beidou_yuhui"));
         event.registerBlockEntityRenderer(ModBlockEntities.AMETHYST_WIND_CHIMES.get(),
                 context -> new WindChimesRenderer(context, TheAurorian2.id("amethyst_wind_chimes"), true));
         event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_WIND_CHIMES.get(),
@@ -151,11 +184,11 @@ public final class ClientModEvents {
         event.registerBlockEntityRenderer(
                 ModBlockEntities.CRYSTALLINE_SWORD_PEDESTAL.get(),
                 CrystallineSwordPedestalRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.MOON_CHEST.get(), cn.teampancake.theaurorian2.client.renderer.MoonChestRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SILENT_WOOD_CHEST.get(), AurorianChestRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.LONG_MIRROR.get(),
                 cn.teampancake.theaurorian2.client.renderer.mirror.LongMirrorRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_FURNACE.get(), AurorianFurnaceRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_TABLE.get(), AurorianTableRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_SIGN.get(), StandingSignRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.AURORIAN_HANGING_SIGN.get(), HangingSignRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SILENT_CAMPFIRE.get(), CampfireRenderer::new);
@@ -186,6 +219,12 @@ public final class ClientModEvents {
     }
 
     @SubscribeEvent
+    public static void registerDimensionTransitions(net.neoforged.neoforge.client.event.RegisterDimensionTransitionScreenEvent event) {
+        event.registerConditionalEffect(TheAurorian2.AURORIAN_LEVEL, net.minecraft.world.level.Level.OVERWORLD,
+                cn.teampancake.theaurorian2.client.screen.AurorianLoadingScreen::create);
+    }
+
+    @SubscribeEvent
     public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(ModParticles.WICK.get(), WickParticle.Provider::new);
         event.registerSpriteSet(ModParticles.PHANTOM_BUTTERFLY_BLUE.get(), PhantomButterflyParticle.Provider::new);
@@ -202,6 +241,8 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(AurorianRabbitRenderer.LAYER, AurorianRabbitModel::createBodyLayer);
+        event.registerLayerDefinition(AurorianFishRenderer.MOON_LAYER, MoonFishModel::createBodyLayer);
+        event.registerLayerDefinition(AurorianFishRenderer.WINGED_LAYER, AurorianWingedFishModel::createBodyLayer);
         event.registerLayerDefinition(AurorianPigRenderer.LAYER, AurorianPigModel::createBodyLayer);
         event.registerLayerDefinition(AurorianSheepRenderer.LAYER, AurorianSheepModel::createBodyLayer);
         event.registerLayerDefinition(AurorianCowRenderer.LAYER, AurorianCowModel::createBodyLayer);
@@ -294,6 +335,8 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void addClientReloadListeners(AddClientReloadListenersEvent event) {
         event.addListener(TheAurorian2.id("aurorian_grass_colormap"), new AurorianGrassColorReloadListener());
+        event.addListener(TheAurorian2.id("great_sword_view"),
+                new GreatSwordViewModel());
     }
 
     @SubscribeEvent

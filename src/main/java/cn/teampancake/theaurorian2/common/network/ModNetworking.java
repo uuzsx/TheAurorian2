@@ -6,13 +6,17 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public final class ModNetworking {
 
-    private static final String NETWORK_VERSION = "5";
+    private static final String NETWORK_VERSION = "10";
 
     private ModNetworking() {
     }
 
     public static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(NETWORK_VERSION);
+        registrar.playToServer(WorldScrollReadyPayload.TYPE, WorldScrollReadyPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (context.player() instanceof ServerPlayer player) WorldScrollReadyPayload.handle(player, payload.effectId());
+                }));
         registrar.playToClient(AstrologyForecastPayload.TYPE, AstrologyForecastPayload.STREAM_CODEC);
         registrar.playToClient(PurificationRitualPromptPayload.TYPE, PurificationRitualPromptPayload.STREAM_CODEC);
         registrar.playToClient(PurificationRitualMusicPayload.TYPE, PurificationRitualMusicPayload.STREAM_CODEC);

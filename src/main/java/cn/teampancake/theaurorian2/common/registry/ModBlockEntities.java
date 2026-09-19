@@ -7,7 +7,6 @@ import cn.teampancake.theaurorian2.common.block.entity.PurificationAltarBlockEnt
 import cn.teampancake.theaurorian2.common.block.entity.AurorianChestBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianFurnaceBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.FireplaceBlockEntity;
-import cn.teampancake.theaurorian2.common.block.entity.AurorianTableBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianHangingSignBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.AurorianSignBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.CrystallineSwordPedestalBlockEntity;
@@ -19,6 +18,7 @@ import cn.teampancake.theaurorian2.common.block.entity.LongMirrorBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.WindChimesBlockEntity;
 import cn.teampancake.theaurorian2.common.block.entity.DoubleStorageCrateBlockEntity;
 import java.util.Set;
+import cn.teampancake.theaurorian2.common.block.entity.MoonChestBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -29,6 +29,10 @@ public final class ModBlockEntities {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, TheAurorian2.MOD_ID);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<cn.teampancake.theaurorian2.common.block.entity.AlchemyTableBlockEntity>> ALCHEMY_TABLE =
+            BLOCK_ENTITY_TYPES.register("alchemy_table", () -> new BlockEntityType<>(
+                    cn.teampancake.theaurorian2.common.block.entity.AlchemyTableBlockEntity::new, Set.of(ModBlocks.ALCHEMY_TABLE.get())));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DoubleStorageCrateBlockEntity>> DOUBLE_STORAGE_CRATE =
             BLOCK_ENTITY_TYPES.register("double_storage_crate", () -> new BlockEntityType<>(
@@ -43,6 +47,19 @@ public final class ModBlockEntities {
                     Set.of(ModBlocks.SILENT_WOOD_LONG_MIRROR.get(), ModBlocks.WEEPING_WILLOW_LONG_MIRROR.get(),
                             ModBlocks.CURTAIN_WOOD_LONG_MIRROR.get(), ModBlocks.CURSED_FROST_WOOD_LONG_MIRROR.get(),
                             ModBlocks.FILTHY_WOOD_LONG_MIRROR.get())));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<cn.teampancake.theaurorian2.common.block.entity.StupidCatBlockEntity>> STUPID_CAT =
+            BLOCK_ENTITY_TYPES.register("stupid_cat", () -> new BlockEntityType<>(
+                    cn.teampancake.theaurorian2.common.block.entity.StupidCatBlockEntity::new, Set.of(ModBlocks.STUPID_CAT.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<cn.teampancake.theaurorian2.common.block.entity.StupidCatBlockEntity>> NEKO =
+            BLOCK_ENTITY_TYPES.register("neko", () -> new BlockEntityType<>(
+                    cn.teampancake.theaurorian2.common.block.entity.StupidCatBlockEntity::new, Set.of(ModBlocks.NEKO.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<cn.teampancake.theaurorian2.common.block.entity.StupidCatBlockEntity>> YOUYOUZI =
+            BLOCK_ENTITY_TYPES.register("youyouzi", () -> new BlockEntityType<>(
+                    cn.teampancake.theaurorian2.common.block.entity.StupidCatBlockEntity::new, Set.of(ModBlocks.YOUYOUZI.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<cn.teampancake.theaurorian2.common.block.entity.StupidCatBlockEntity>> BEIDOU_YUHUI =
+            BLOCK_ENTITY_TYPES.register("beidou_yuhui", () -> new BlockEntityType<>(
+                    cn.teampancake.theaurorian2.common.block.entity.StupidCatBlockEntity::new, Set.of(ModBlocks.BEIDOU_YUHUI.get())));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WindChimesBlockEntity>> AMETHYST_WIND_CHIMES =
             BLOCK_ENTITY_TYPES.register("amethyst_wind_chimes", () -> new BlockEntityType<>(
@@ -93,6 +110,8 @@ public final class ModBlockEntities {
                     () -> new BlockEntityType<>(
                             FireplaceBlockEntity::new,
                             Set.of(ModBlocks.FIREPLACE.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MoonChestBlockEntity>> MOON_CHEST =
+            BLOCK_ENTITY_TYPES.register("moon_chest", () -> new BlockEntityType<>(MoonChestBlockEntity::new, Set.of(ModBlocks.TREASURE_CHEST_2.get(), ModBlocks.MOON_CHEST.get(), ModBlocks.TREASURE_CHEST_4.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianChestBlockEntity>> SILENT_WOOD_CHEST =
             BLOCK_ENTITY_TYPES.register(
                     "silent_wood_chest",
@@ -101,15 +120,6 @@ public final class ModBlockEntities {
                             Set.of(ModBlocks.SILENT_WOOD_CHEST.get(), ModBlocks.WEEPING_WILLOW_CHEST.get(),
                                     ModBlocks.CURTAIN_WOOD_CHEST.get(), ModBlocks.CURSED_FROST_WOOD_CHEST.get(),
                                     ModBlocks.FILTHY_WOOD_CHEST.get())));
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianTableBlockEntity>> AURORIAN_TABLE =
-            BLOCK_ENTITY_TYPES.register(
-                    "aurorian_table",
-                    () -> new BlockEntityType<>(
-                            AurorianTableBlockEntity::new,
-                            Set.of(
-                                    ModBlocks.SILENT_WOOD_TABLE.get(),
-                                    ModBlocks.CURTAIN_WOOD_TABLE.get(),
-                                    ModBlocks.CURSED_FROST_WOOD_TABLE.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AurorianSignBlockEntity>> AURORIAN_SIGN =
             BLOCK_ENTITY_TYPES.register(
                     "aurorian_sign",
@@ -165,6 +175,7 @@ public final class ModBlockEntities {
                 event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.Item.BLOCK,
                         DOUBLE_STORAGE_CRATE.get(), (container, side) ->
                                 net.neoforged.neoforge.transfer.item.VanillaContainerWrapper.of(container)));
+        BLOCK_ENTITY_TYPES.addAlias(TheAurorian2.id("aurorian_table"), TheAurorian2.id("silent_wood_chest"));
         BLOCK_ENTITY_TYPES.addAlias(TheAurorian2.id("aurorian_chest"), TheAurorian2.id("silent_wood_chest"));
         // Public NeoForge hook: reuse all vanilla barrel storage/automation behavior for our BarrelBlock subclasses.
         modEventBus.addListener((net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent event) ->

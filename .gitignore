@@ -50,3 +50,7 @@ repo/
 /logs/
 __pycache__/
 *.pyc
+
+# Personal design notes and experiments; keep local only.
+/docs/
+/exports/

@@ -1,12 +1,1 @@
-{
-  "replace": false,
-  "values": [
-    "theaurorian2:starlight_ranger_helmet",
-    "theaurorian2:dawnlight_ranger_helmet",
-    "theaurorian2:forestshade_ranger_helmet",
-    "theaurorian2:duskflame_ranger_helmet",
-    "theaurorian2:starforged_knight_helmet",
-    "theaurorian2:dawnforged_knight_helmet",
-    "theaurorian2:moonforged_knight_helmet"
-  ]
-}
+{"replace":false,"values":["theaurorian2:starlight_ranger_helmet","theaurorian2:dawnlight_ranger_helmet","theaurorian2:forestshade_ranger_helmet","theaurorian2:duskflame_ranger_helmet","theaurorian2:starforged_knight_helmet","theaurorian2:dawnforged_knight_helmet","theaurorian2:moonforged_knight_helmet","theaurorian2:mistveil_assassin_helmet","theaurorian2:gloamgold_assassin_helmet","theaurorian2:startrace_assassin_helmet","theaurorian2:embershade_assassin_helmet","theaurorian2:frostmoon_assassin_helmet","theaurorian2:cerulean_helmet","theaurorian2:crystal_rune_helmet","theaurorian2:knight_helmet","theaurorian2:moonsilver_helmet","theaurorian2:mysterium_wool_helmet","theaurorian2:spectral_helmet","theaurorian2:holy_knight_helmet"]}

@@ -11,6 +11,8 @@ public final class ModTreeGrowers {
 
     private static final ResourceKey<ConfiguredFeature<?, ?>> SILENT_TREE_FEATURE = ResourceKey.create(
             Registries.CONFIGURED_FEATURE, TheAurorian2.id("silent_tree"));
+    private static final ResourceKey<ConfiguredFeature<?, ?>> WEEPING_WILLOW_TREE_FEATURE = ResourceKey.create(
+            Registries.CONFIGURED_FEATURE, TheAurorian2.id("weeping_willow_tree"));
     private static final ResourceKey<ConfiguredFeature<?, ?>> CURTAIN_TREE_FEATURE = ResourceKey.create(
             Registries.CONFIGURED_FEATURE, TheAurorian2.id("curtain_tree"));
     private static final ResourceKey<ConfiguredFeature<?, ?>> CURSED_FROST_TREE_FEATURE = ResourceKey.create(
@@ -20,6 +22,8 @@ public final class ModTreeGrowers {
 
     public static final TreeGrower SILENT_TREE = new TreeGrower(
             "theaurorian2:silent_tree", Optional.empty(), Optional.of(SILENT_TREE_FEATURE), Optional.empty());
+    public static final TreeGrower WEEPING_WILLOW_TREE = new TreeGrower(
+            "theaurorian2:weeping_willow_tree", Optional.empty(), Optional.of(WEEPING_WILLOW_TREE_FEATURE), Optional.empty());
     public static final TreeGrower CURTAIN_TREE = new TreeGrower(
             "theaurorian2:curtain_tree", Optional.empty(), Optional.of(CURTAIN_TREE_FEATURE), Optional.empty());
     public static final TreeGrower CURSED_FROST_TREE = new TreeGrower(

@@ -1,9 +1,7 @@
 package cn.teampancake.theaurorian2.common.entity;
 
 import cn.teampancake.theaurorian2.common.block.AurorianStoolBlock;
-import cn.teampancake.theaurorian2.common.block.AurorianChairBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianBenchBlock;
-import cn.teampancake.theaurorian2.common.block.PairedFurnitureBlock;
 import cn.teampancake.theaurorian2.TheAurorian2;
 import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -22,7 +20,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-/** Invisible, immobile mount that exists only while a stool, chair or bench seat is occupied. */
+/** Invisible, immobile mount that exists only while a stool or bench seat is occupied. */
 @EventBusSubscriber(modid = TheAurorian2.MOD_ID)
 public final class StoolSeatEntity extends Entity {
     public StoolSeatEntity(EntityType<? extends StoolSeatEntity> type, Level level) {
@@ -45,8 +43,7 @@ public final class StoolSeatEntity extends Entity {
     private boolean hasSeatBlock() {
         var state = level().getBlockState(blockPosition());
         return state.getBlock() instanceof AurorianStoolBlock
-                || state.getBlock() instanceof AurorianBenchBlock
-                || state.getBlock() instanceof AurorianChairBlock && !state.getValue(PairedFurnitureBlock.SECOND);
+                || state.getBlock() instanceof AurorianBenchBlock;
     }
 
     @SubscribeEvent

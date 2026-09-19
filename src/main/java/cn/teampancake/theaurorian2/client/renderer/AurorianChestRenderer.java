@@ -21,8 +21,6 @@ public final class AurorianChestRenderer extends ChestRenderer<AurorianChestBloc
     public static final SpriteId TEXTURE = new SpriteId(
             Sheets.CHEST_SHEET, TheAurorian2.id("entity/chest/aurorian_chest"));
     private final AurorianChestModel single = new AurorianChestModel("single");
-    private final AurorianChestModel left = new AurorianChestModel("left");
-    private final AurorianChestModel right = new AurorianChestModel("right");
     private final SpriteGetter sprites;
     private final Map<Block, SpriteId> woodTextures = Map.of(
             ModBlocks.WEEPING_WILLOW_CHEST.get(), texture("weeping_willow_chest"),
@@ -50,13 +48,7 @@ public final class AurorianChestRenderer extends ChestRenderer<AurorianChestBloc
         poseStack.pushPose();
         poseStack.mulPose(modelTransformation(state.facing));
         float closed = 1.0F - state.open;
-        // Vanilla LEFT occupies the positive-X half of the south-facing model.
-        AurorianChestModel model = switch (state.type) {
-            case LEFT -> right;
-            case RIGHT -> left;
-            case SINGLE -> single;
-        };
-        collector.submitModel(model, 1.0F - closed * closed * closed, poseStack,
+        collector.submitModel(single, 1.0F - closed * closed * closed, poseStack,
                 state.lightCoords, OverlayTexture.NO_OVERLAY, -1, state.customSprite != null ? state.customSprite : TEXTURE,
                 this.sprites, 0, state.breakProgress);
         poseStack.popPose();

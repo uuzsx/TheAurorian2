@@ -19,6 +19,12 @@ import cn.teampancake.theaurorian2.common.entity.AurorianRabbitEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianPigEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianSheepEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianCowEntity;
+import cn.teampancake.theaurorian2.common.entity.AurorianFishEntity;
+import cn.teampancake.theaurorian2.common.entity.MoonFishEntity;
+import cn.teampancake.theaurorian2.common.entity.AurorianWingedFishEntity;
+import cn.teampancake.theaurorian2.common.entity.FrostfinEntity;
+import cn.teampancake.theaurorian2.common.entity.MoonreaverSkeletonEntity;
+import cn.teampancake.theaurorian2.common.entity.AzureWarblerEntity;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Animal;
@@ -39,6 +45,16 @@ public final class ModEntities {
 
     public static final DeferredRegister.Entities ENTITIES = DeferredRegister.createEntities(TheAurorian2.MOD_ID);
 
+    public static final DeferredHolder<EntityType<?>, EntityType<MoonreaverSkeletonEntity>> MOONREAVER_SKELETON_CAPTAIN =
+            ENTITIES.registerEntityType("moonreaver_skeleton_captain", MoonreaverSkeletonEntity::new, MobCategory.MONSTER,
+                    builder -> builder.sized(0.6F, 2.0625F).eyeHeight(1.74F).clientTrackingRange(8));
+    public static final DeferredHolder<EntityType<?>, EntityType<MoonreaverSkeletonEntity>> MOONREAVER_SKELETON =
+            ENTITIES.registerEntityType("moonreaver_skeleton", MoonreaverSkeletonEntity::new, MobCategory.MONSTER,
+                    builder -> builder.sized(0.6F, 2.0625F).eyeHeight(1.74F).clientTrackingRange(8));
+    public static final DeferredHolder<EntityType<?>, EntityType<MoonreaverSkeletonEntity>> MOONREAVER_SKELETON_SWORDSMAN =
+            ENTITIES.registerEntityType("moonreaver_skeleton_swordsman", MoonreaverSkeletonEntity::new, MobCategory.MONSTER,
+                    builder -> builder.sized(0.6F, 2.0625F).eyeHeight(1.74F).clientTrackingRange(8));
+
     // Keep the type serializable: vanilla refuses to mount noSave entity types.
     // Seats are not saved as world entities; player autosaves can preserve their
     // mount for crash recovery. Normal logout dismounts before saving the player.
@@ -51,6 +67,18 @@ public final class ModEntities {
             ENTITIES.registerEntityType(
                     "aurorian_rabbit", AurorianRabbitEntity::new, MobCategory.CREATURE,
                     builder -> builder.sized(0.4F, 0.5F).clientTrackingRange(8));
+    public static final DeferredHolder<EntityType<?>, EntityType<MoonFishEntity>> MOON_FISH =
+            ENTITIES.registerEntityType("moon_fish", MoonFishEntity::new, MobCategory.WATER_AMBIENT,
+                    builder -> builder.sized(0.8F, 0.5F).clientTrackingRange(6));
+    public static final DeferredHolder<EntityType<?>, EntityType<AurorianWingedFishEntity>> AURORIAN_WINGED_FISH =
+            ENTITIES.registerEntityType("aurorian_winged_fish", AurorianWingedFishEntity::new, MobCategory.WATER_AMBIENT,
+                    builder -> builder.sized(0.8F, 0.5F).clientTrackingRange(6));
+    public static final DeferredHolder<EntityType<?>, EntityType<FrostfinEntity>> FROSTFIN =
+            ENTITIES.registerEntityType("frostfin", FrostfinEntity::new, MobCategory.WATER_AMBIENT,
+                    builder -> builder.sized(0.8F, 0.6F).clientTrackingRange(6));
+    public static final DeferredHolder<EntityType<?>, EntityType<AzureWarblerEntity>> AZURE_WARBLER =
+            ENTITIES.registerEntityType("azure_warbler", AzureWarblerEntity::new, MobCategory.CREATURE,
+                    builder -> builder.sized(0.5F, 0.65F).eyeHeight(0.5F).clientTrackingRange(8));
     public static final DeferredHolder<EntityType<?>, EntityType<AurorianPigEntity>> AURORIAN_PIG =
             ENTITIES.registerEntityType(
                     "aurorian_pig", AurorianPigEntity::new, MobCategory.CREATURE,
@@ -171,6 +199,12 @@ public final class ModEntities {
                             .updateInterval(1)
                             .noLootTable());
 
+    public static final DeferredHolder<EntityType<?>, EntityType<cn.teampancake.theaurorian2.common.entity.WorldScrollTeleportEntity>> WORLD_SCROLL_TELEPORT =
+            ENTITIES.registerEntityType("world_scroll_teleport",
+                    cn.teampancake.theaurorian2.common.entity.WorldScrollTeleportEntity::new, MobCategory.MISC,
+                    builder -> builder.sized(0.1F, 0.1F).clientTrackingRange(8).updateInterval(2)
+                            .noSave().noSummon().noLootTable());
+
     public static final DeferredHolder<EntityType<?>, EntityType<PurificationRiftEntity>> PURIFICATION_RIFT =
             ENTITIES.registerEntityType(
                     "purification_rift",
@@ -211,12 +245,19 @@ public final class ModEntities {
     }
 
     public static void register(IEventBus modEventBus) {
+        // Resolve existing saved skeletons to their renamed types without registering duplicate entities.
+        ENTITIES.addAlias(TheAurorian2.id("frostbound_skeleton"), MOONREAVER_SKELETON.getId());
+        ENTITIES.addAlias(TheAurorian2.id("frostbound_skeleton_swordsman"), MOONREAVER_SKELETON_SWORDSMAN.getId());
+        ENTITIES.addAlias(TheAurorian2.id("frostbound_skeleton_captain"), MOONREAVER_SKELETON_CAPTAIN.getId());
         ENTITIES.register(modEventBus);
         modEventBus.addListener(ModEntities::registerAttributes);
         modEventBus.addListener(ModEntities::registerSpawnPlacements);
     }
 
     private static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(MOONREAVER_SKELETON.get(), MoonreaverSkeletonEntity.createAttributes().build());
+        event.put(MOONREAVER_SKELETON_SWORDSMAN.get(), MoonreaverSkeletonEntity.createAttributes().build());
+        event.put(MOONREAVER_SKELETON_CAPTAIN.get(), MoonreaverSkeletonEntity.createCaptainAttributes().build());
         event.put(TRAINING_DUMMY.get(), TrainingDummyEntity.createAttributes().build());
         event.put(SPIDER_MOTHER.get(), SpiderMotherEntity.createAttributes().build());
         event.put(SPIDERLING.get(), SpiderlingEntity.createAttributes().build());
@@ -224,6 +265,10 @@ public final class ModEntities {
         event.put(SPIDERLING_WALL_CLIMBER.get(), WallClimberSpiderlingEntity.createAttributes().build());
         event.put(SPIDER_EGG.get(), SpiderEggEntity.createAttributes().build());
         event.put(AURORIAN_RABBIT.get(), Rabbit.createAttributes().build());
+        event.put(MOON_FISH.get(), AurorianFishEntity.createAttributes().build());
+        event.put(AURORIAN_WINGED_FISH.get(), AurorianFishEntity.createAttributes().build());
+        event.put(FROSTFIN.get(), FrostfinEntity.createAttributes().build());
+        event.put(AZURE_WARBLER.get(), AzureWarblerEntity.createAttributes().build());
         event.put(AURORIAN_PIG.get(), Pig.createAttributes().build());
         event.put(AURORIAN_SHEEP.get(), Sheep.createAttributes().build());
         event.put(AURORIAN_COW.get(), AbstractCow.createAttributes().build());
@@ -233,10 +278,22 @@ public final class ModEntities {
     }
 
     private static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
+        event.register(AZURE_WARBLER.get(), AzureWarblerEntity.SPAWN_PLACEMENT,
+                Heightmap.Types.MOTION_BLOCKING, AzureWarblerEntity::checkSpawnRules,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE);
         registerAnimalSpawn(event, AURORIAN_RABBIT.get());
         registerAnimalSpawn(event, AURORIAN_PIG.get());
         registerAnimalSpawn(event, AURORIAN_SHEEP.get());
         registerAnimalSpawn(event, AURORIAN_COW.get());
+        event.register(MOON_FISH.get(), SpawnPlacementTypes.IN_WATER,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AurorianFishEntity::checkSpawnRules,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(AURORIAN_WINGED_FISH.get(), SpawnPlacementTypes.IN_WATER,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AurorianFishEntity::checkSpawnRules,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(FROSTFIN.get(), SpawnPlacementTypes.IN_WATER,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AurorianFishEntity::checkSpawnRules,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 
     private static <T extends Animal> void registerAnimalSpawn(

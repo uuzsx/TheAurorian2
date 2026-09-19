@@ -5,6 +5,7 @@ import itertools
 import json
 import math
 from pathlib import Path
+from furniture_palette import apply_furniture_palette
 from PIL import Image, ImageDraw, ImageFont
 from import_blacksmith_storage_barrels import ROOT, SOURCE, A, D
 from import_medieval_wood_furniture import shift
@@ -48,6 +49,7 @@ def main():
     atlas = Image.new('RGBA', original.size)
     atlas.putdata([(*mapping.get(p[:3],p[:3]),p[3]) for p in original.getdata()])
     assert atlas.getchannel('A').tobytes() == original.getchannel('A').tobytes()
+    atlas=apply_furniture_palette(atlas,'silent_wood','carpenter')
     texture = A/f'textures/block/{NAME}.png';atlas.save(texture)
     atlas.save(OUT/f'{NAME}.png')
     model = copy.deepcopy(source)

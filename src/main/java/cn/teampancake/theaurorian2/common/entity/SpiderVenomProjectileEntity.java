@@ -1,6 +1,7 @@
 package cn.teampancake.theaurorian2.common.entity;
 
 import cn.teampancake.theaurorian2.common.registry.ModEntities;
+import cn.teampancake.theaurorian2.common.effect.SpiderSilkGrounding;
 import cn.teampancake.theaurorian2.common.registry.ModMobEffects;
 import com.geckolib.animatable.GeoEntity;
 import com.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -59,6 +60,10 @@ public final class SpiderVenomProjectileEntity extends ThrowableItemProjectile i
 
     public static void shootPool(ServerLevel level, SpiderMotherEntity owner, LivingEntity target) {
         shoot(level, owner, target, 0.0F, true, false);
+    }
+
+    public static void shootPool(ServerLevel level, SpiderMotherEntity owner, Vec3 targetPosition) {
+        shoot(level, owner, targetPosition, 0.0F, true, false);
     }
 
     private static void shoot(
@@ -130,6 +135,7 @@ public final class SpiderVenomProjectileEntity extends ThrowableItemProjectile i
                 }
             }
             if (this.createsWebOnHit) {
+                if (owner instanceof SpiderMotherEntity) SpiderSilkGrounding.apply(living);
                 this.placeWeb(level, living);
             }
         }

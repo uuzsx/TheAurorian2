@@ -8,29 +8,24 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.entity.state.PigRenderState;
-import net.minecraft.util.Mth;
+import cn.teampancake.theaurorian2.client.renderer.state.AurorianAnimalRenderState;
+import cn.teampancake.theaurorian2.client.animation.AnimalAnimationPlayer;
+import static cn.teampancake.theaurorian2.client.animation.AurorianPigAnimations.*;
 
-public final class AurorianPigModel extends EntityModel<PigRenderState> {
+public final class AurorianPigModel extends EntityModel<AurorianAnimalRenderState> {
     private final ModelPart head;
-    private final ModelPart frontLeft;
-    private final ModelPart frontRight;
-    private final ModelPart backLeft;
-    private final ModelPart backRight;
+    private final AnimalAnimationPlayer animations;
 
     public AurorianPigModel(ModelPart root) {
         super(root);
-        ModelPart body = root.getChild("all").getChild("body");
-        this.head = body.getChild("bone13").getChild("head");
-        this.frontLeft = body.getChild("bone");
-        this.frontRight = body.getChild("bone7");
-        this.backLeft = body.getChild("bone10");
-        this.backRight = body.getChild("bone4");
+        head = root.getChild("motion_root").getChild("all").getChild("body").getChild("bone13").getChild("head");
+        animations = new AnimalAnimationPlayer(root, IDLE_BREATHE, IDLE_SNUFFLE, IDLE_EAR_FLICK,
+                WALK_RELAXED, RUN_SCARED, STARTLE, 5.6F, 3.4F, 1.1F, 0.5F);
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition mesh = new MeshDefinition();
-        PartDefinition root = mesh.getRoot();
+        PartDefinition root = mesh.getRoot().addOrReplaceChild("motion_root", CubeListBuilder.create(), PartPose.ZERO);
         PartDefinition all = root.addOrReplaceChild("all", CubeListBuilder.create(), PartPose.offset(0.0F, 16.5F, 0.0F));
         PartDefinition body = all.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
         PartDefinition torso = body.addOrReplaceChild("bone13", CubeListBuilder.create()
@@ -74,13 +69,8 @@ public final class AurorianPigModel extends EntityModel<PigRenderState> {
     }
 
     @Override
-    public void setupAnim(PigRenderState state) {
+    public void setupAnim(AurorianAnimalRenderState state) {
         super.setupAnim(state);
-        this.head.xRot = state.xRot * Mth.DEG_TO_RAD;
-        this.head.yRot = state.yRot * Mth.DEG_TO_RAD;
-        this.frontRight.xRot = Mth.cos(state.walkAnimationPos * 0.6662F) * 1.1F * state.walkAnimationSpeed;
-        this.frontLeft.xRot = Mth.cos(state.walkAnimationPos * 0.6662F + Mth.PI) * 1.1F * state.walkAnimationSpeed;
-        this.backLeft.xRot = this.frontRight.xRot;
-        this.backRight.xRot = this.frontLeft.xRot;
+        animations.apply(state, head, false);
     }
 }

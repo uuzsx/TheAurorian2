@@ -1,6 +1,8 @@
 package cn.teampancake.theaurorian2.common.worldgen.structure;
 
 import cn.teampancake.theaurorian2.common.registry.ModStructures;
+import cn.teampancake.theaurorian2.common.worldgen.LakeIslandBiomeSource;
+import cn.teampancake.theaurorian2.common.worldgen.LakeIslandLayout;
 import com.mojang.serialization.MapCodec;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
@@ -23,6 +25,21 @@ public final class UmbraDarkMazeStructure extends Structure {
         ChunkPos chunkPos = context.chunkPos();
         int centerX = chunkPos.getMiddleBlockX();
         int centerZ = chunkPos.getMiddleBlockZ();
+        if (context.biomeSource() instanceof LakeIslandBiomeSource source) {
+            LakeIslandLayout layout = source.layout(context.randomState().sampler());
+            int step = 8;
+            int radius = ((UmbraDarkMazePiece.FOOTPRINT / 2 + 16 + step - 1) / step) * step;
+            // Check the whole footprint in two dimensions: a forest or underground
+            // start biome must not let this wide maze extend beneath the lake or island.
+            for (int x = centerX - radius; x <= centerX + radius; x += step) {
+                for (int z = centerZ - radius; z <= centerZ + radius; z += step) {
+                    LakeIslandLayout.Zone zone = layout.sample(x, z).zone();
+                    if (zone == LakeIslandLayout.Zone.ISLAND || zone == LakeIslandLayout.Zone.LAKE) {
+                        return Optional.empty();
+                    }
+                }
+            }
+        }
         int surfaceY = context.chunkGenerator().getFirstOccupiedHeight(
                 centerX,
                 centerZ,

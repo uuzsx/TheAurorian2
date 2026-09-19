@@ -5,6 +5,7 @@ import io
 import json
 import math
 from pathlib import Path
+from furniture_palette import apply_furniture_palette
 from PIL import Image, ImageDraw, ImageFont
 import export_wood_chests as renderer
 
@@ -65,6 +66,7 @@ def main():
         tex=Image.new('RGBA',source_tex.size);tex.putdata([(*mapping.get(p[:3],p[:3]),p[3]) for p in source_tex.getdata()])
         assert tex.getchannel('A').tobytes()==source_tex.getchannel('A').tobytes()
         folder=OUT/key;folder.mkdir(exist_ok=True)
+        tex=apply_furniture_palette(tex,key,'storage_barrel')
         tex.save(folder/'barrel.png');tex.save(A/f'textures/block/{key}_storage_barrel.png')
         stream=io.BytesIO();tex.save(stream,format='PNG');embedded='data:image/png;base64,'+base64.b64encode(stream.getvalue()).decode()
         y=135+row*306;draw.rounded_rectangle((22,y,1538,y+289),18,fill='#1f2c3a')
