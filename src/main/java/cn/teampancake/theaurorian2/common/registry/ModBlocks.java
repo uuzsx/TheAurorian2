@@ -1,6 +1,8 @@
 package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import cn.teampancake.theaurorian2.common.block.DungeonDecorationBlock;
+import cn.teampancake.theaurorian2.common.block.DungeonDecorationType;
 import cn.teampancake.theaurorian2.common.block.MoonChestBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianDoublePlantBlock;
 import cn.teampancake.theaurorian2.common.block.AurorianFireflyBushBlock;
@@ -51,6 +53,7 @@ import cn.teampancake.theaurorian2.common.block.PurificationAltarUpperBlock;
 import cn.teampancake.theaurorian2.common.block.SnowfieldTallPlantBlock;
 import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
 import cn.teampancake.theaurorian2.common.block.TallAurorianWaterGrassBlock;
+import cn.teampancake.theaurorian2.common.block.VioletdewBerryCropBlock;
 import cn.teampancake.theaurorian2.common.block.WallMushroomBlock;
 import cn.teampancake.theaurorian2.common.item.AstrologyTableItem;
 import cn.teampancake.theaurorian2.common.item.PurificationAltarItem;
@@ -318,6 +321,9 @@ public final class ModBlocks {
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
     public static final DeferredBlock<FrostgrainCropBlock> FROSTGRAIN_CROP = BLOCKS.registerBlock(
             "frostgrain_crop", FrostgrainCropBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS));
+    public static final DeferredBlock<VioletdewBerryCropBlock> VIOLETDEW_BERRY_CROP = BLOCKS.registerBlock(
+            "violetdew_berry_crop", VioletdewBerryCropBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS));
     public static final DeferredBlock<AurorianFireflyBushBlock> AURORIAN_FIREFLY_BUSH = BLOCKS.registerBlock(
             "aurorian_firefly_bush", AurorianFireflyBushBlock::new,
@@ -674,6 +680,14 @@ public final class ModBlocks {
     public static final DeferredBlock<DropExperienceBlock> EROSIVE_CERULEAN_ORE = ore("erosive_cerulean_ore", Blocks.DEEPSLATE_IRON_ORE, ConstantInt.ZERO);
     public static final DeferredBlock<DropExperienceBlock> EROSIVE_GEODE_ORE = ore("erosive_geode_ore", Blocks.DEEPSLATE_DIAMOND_ORE, ConstantInt.ZERO);
 
+    public static final java.util.List<DeferredBlock<DungeonDecorationBlock>> DUNGEON_DECORATIONS =
+            java.util.Arrays.stream(DungeonDecorationType.values()).map(type -> BLOCKS.registerBlock(
+                    type.getSerializedName(), properties -> DungeonDecorationBlock.create(type, properties),
+                    () -> BlockBehaviour.Properties.of().noOcclusion().strength(type.cage() ? 3.0F : 0.7F)
+                            .sound(type.cage() ? SoundType.METAL : SoundType.BONE_BLOCK)
+                            .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK)
+                            .isValidSpawn((state, level, pos, entityType) -> false))).toList();
+
     public static final DeferredItem<BlockItem> AURORIAN_STONE_ITEM = ITEMS.registerSimpleBlockItem(AURORIAN_STONE);
     public static final DeferredItem<BlockItem> AURORIAN_EROSIVE_ITEM = ITEMS.registerSimpleBlockItem(AURORIAN_EROSIVE);
     public static final DeferredItem<BlockItem> AURORIAN_DIRT_ITEM = ITEMS.registerSimpleBlockItem(AURORIAN_DIRT);
@@ -753,6 +767,7 @@ public final class ModBlocks {
                         && block != TREASURE_CHEST_2 && block != MOON_CHEST && block != TREASURE_CHEST_4 && block != STUPID_CAT && block != NEKO && block != YOUYOUZI && block != BEIDOU_YUHUI
                         && block != MOON_SAND_RIVER && block != MOON_DEW_BLOCK
                         && block != BLUEBERRY_BUSH && block != FROSTGRAIN_CROP
+                        && block != VIOLETDEW_BERRY_CROP
                         && block != AURORIAN_FIREFLY_BUSH
                         && block != PEBBLE && block != SILENT_TREE_LEAF_LITTER
                         && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM

@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-/** Four-stage edible crop grown from its own fruit on Aurorian farmland. */
+/** Four-stage crop planted with seeds on Aurorian farmland. */
 public final class FrostgrainCropBlock extends BeetrootBlock {
     public static final MapCodec<BeetrootBlock> CODEC = simpleCodec(FrostgrainCropBlock::new);
     private static final VoxelShape[] SHAPES = {
@@ -43,7 +43,7 @@ public final class FrostgrainCropBlock extends BeetrootBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return ModItems.FROSTGRAIN.get();
+        return ModItems.FROSTGRAIN_SEEDS.get();
     }
 
     @Override

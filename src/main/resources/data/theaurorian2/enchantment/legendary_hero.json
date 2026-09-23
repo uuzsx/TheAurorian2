@@ -1,0 +1,1 @@
+{"description":{"translate":"enchantment.theaurorian2.legendary_hero"},"supported_items":"#minecraft:swords","weight":2,"max_level":1,"min_cost":{"base":10,"per_level_above_first":8},"max_cost":{"base":45,"per_level_above_first":8},"anvil_cost":4,"slots":["mainhand"],"effects":{}}

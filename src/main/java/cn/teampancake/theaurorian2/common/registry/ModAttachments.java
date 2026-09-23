@@ -1,6 +1,8 @@
 package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import cn.teampancake.theaurorian2.common.enchantment.ReturningAxeData;
+import cn.teampancake.theaurorian2.common.enchantment.EnchantmentState;
 import cn.teampancake.theaurorian2.common.effect.CorruptionData;
 import cn.teampancake.theaurorian2.common.item.PhantomBlossomMark;
 import cn.teampancake.theaurorian2.common.inventory.AccessoryInventory;
@@ -22,6 +24,37 @@ public final class ModAttachments {
 
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS =
             DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, TheAurorian2.MOD_ID);
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<ReturningAxeData>> RETURNING_AXE =
+            ATTACHMENTS.register("returning_axe", () -> AttachmentType.builder(ReturningAxeData::new)
+                    .serialize(new IAttachmentSerializer<ReturningAxeData>() {
+                        @Override
+                        public ReturningAxeData read(IAttachmentHolder holder, ValueInput input) {
+                            return ReturningAxeData.read(input);
+                        }
+                        @Override
+                        public boolean write(ReturningAxeData data, ValueOutput output) {
+                            return data.write(output);
+                        }
+                    }).build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<String>> TERRA_CHEST_ID =
+            ATTACHMENTS.register("terra_chest_id", () -> AttachmentType.builder(() -> java.util.UUID.randomUUID().toString())
+                    .serialize(Codec.STRING.fieldOf("value")).build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<EnchantmentState>> ENCHANTMENT_STATE =
+            ATTACHMENTS.register("enchantment_state", () -> AttachmentType.builder(EnchantmentState::new)
+                    .serialize(new IAttachmentSerializer<EnchantmentState>() {
+                        @Override
+                        public EnchantmentState read(IAttachmentHolder holder, ValueInput input) {
+                            return EnchantmentState.read(input);
+                        }
+                        @Override
+                        public boolean write(EnchantmentState state, ValueOutput output) {
+                            state.write(output);
+                            return true;
+                        }
+                    }).build());
 
     // A transient visual entity id; no serialized state or copy-on-death.
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> WORLD_SCROLL_EFFECT =

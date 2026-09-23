@@ -1,5 +1,6 @@
 package cn.teampancake.theaurorian2.common.worldgen;
 
+import cn.teampancake.theaurorian2.common.registry.ModBiomeTags;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.stream.Stream;
@@ -50,12 +51,14 @@ public final class LakeIslandBiomeSource extends BiomeSource {
 
     @Override
     public Holder<Biome> getNoiseBiome(int quartX, int quartY, int quartZ, Climate.Sampler sampler) {
-        if (quartY < 0) {
-            return this.delegate.getNoiseBiome(quartX, quartY, quartZ, sampler);
+        Holder<Biome> biome = this.delegate.getNoiseBiome(quartX, quartY, quartZ, sampler);
+        // Caves can extend above Y=0; the lake's surface biome must not erase them.
+        if (quartY < 0 || biome.is(ModBiomeTags.IS_AURORIAN_CAVE)) {
+            return biome;
         }
         LakeIslandLayout.Sample sample = this.layout(sampler).sample(QuartPos.toBlock(quartX), QuartPos.toBlock(quartZ));
         return switch (sample.zone()) {
-            case NONE -> this.delegate.getNoiseBiome(quartX, quartY, quartZ, sampler);
+            case NONE -> biome;
             case ISLAND -> this.island;
             case LAKE -> this.lake;
             case FOREST -> sample.site().curtainForest() ? this.curtainForest : this.silentForest;

@@ -61,6 +61,13 @@ public final class EnchantmentTooltips {
                     translationKey,
                     highlightedNumber(level * 4),
                     highlightedNumber(level * 4 - 1));
+            case "lightning_damage" -> Component.translatable(translationKey, highlightedNumber(level * 2));
+            case "savage" -> Component.translatable(translationKey, highlightedNumber(level * 2), highlightedNumber(level * 5));
+            case "sunder_armor_slash", "clear_mind", "lightning_resistance" -> Component.translatable(translationKey, highlightedNumber(level * 10));
+            case "roundabout_throw" -> Component.translatable(translationKey, highlightedNumber(EnchantmentRules.throwRange(level)));
+            case "molten_core", "reflect_aura", "virtualization" -> Component.translatable(translationKey, highlightedNumber(level));
+            case "amnesia_curse" -> Component.translatable(translationKey, highlightedNumber(level * 6));
+            case "experience_ore" -> Component.translatable(translationKey, highlightedNumber(level * 8));
             default -> Component.translatable(translationKey);
         };
         event.getToolTip().add(description.copy().withStyle(style -> style.withColor(DESCRIPTION_COLOR)));

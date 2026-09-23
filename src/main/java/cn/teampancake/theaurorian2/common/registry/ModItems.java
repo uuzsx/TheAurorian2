@@ -53,6 +53,10 @@ public final class ModItems {
     public static final DeferredItem<Item> TREASURE_CHEST_4_KEY = ITEMS.registerSimpleItem("treasure_chest_4_key");
     public static final DeferredItem<Item> MOON_CHEST_KEY = ITEMS.registerSimpleItem("moon_chest_key");
     public static final DeferredItem<Item> SPIDER_EGG = ITEMS.registerSimpleItem("spider_egg");
+    public static final DeferredItem<SpawnEggItem> SPIRIT_SPAWN_EGG = ITEMS.registerItem(
+            "spirit_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.SPIRIT.get())));
+    public static final DeferredItem<SpawnEggItem> BLUE_TAIL_WOLF_SPAWN_EGG = ITEMS.registerItem(
+            "blue_tail_wolf_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.BLUE_TAIL_WOLF.get())));
     public static final DeferredItem<SpawnEggItem> MOON_FISH_SPAWN_EGG = ITEMS.registerItem(
             "moon_fish_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.MOON_FISH.get())));
     public static final DeferredItem<SpawnEggItem> AURORIAN_WINGED_FISH_SPAWN_EGG = ITEMS.registerItem(
@@ -188,9 +192,14 @@ public final class ModItems {
     public static final DeferredItem<Item> SILK_BERRY = food("silk_berry", 1, 0.1F);
     public static final DeferredItem<Item> AURORIAN_BERRY = vanillaFood("aurorian_berry", Foods.APPLE);
     public static final DeferredItem<Item> DEW_FRUIT = food("dew_fruit", 2, 0.1F);
-    public static final DeferredItem<BlockItem> FROSTGRAIN = ITEMS.registerItem(
-            "frostgrain", properties -> new BlockItem(ModBlocks.FROSTGRAIN_CROP.get(),
-                    properties.useItemDescriptionPrefix().food(foodProperties(3, 0.4F, false))));
+    public static final DeferredItem<Item> FROSTGRAIN = food("frostgrain", 3, 0.4F);
+    public static final DeferredItem<BlockItem> FROSTGRAIN_SEEDS = ITEMS.registerItem(
+            "frostgrain_seeds", properties -> new BlockItem(ModBlocks.FROSTGRAIN_CROP.get(),
+                    properties.useItemDescriptionPrefix()));
+    public static final DeferredItem<Item> VIOLETDEW_BERRY = food("violetdew_berry", 3, 0.4F);
+    public static final DeferredItem<BlockItem> VIOLETDEW_BERRY_SEEDS = ITEMS.registerItem(
+            "violetdew_berry_seeds", properties -> new BlockItem(ModBlocks.VIOLETDEW_BERRY_CROP.get(),
+                    properties.useItemDescriptionPrefix()));
     public static final DeferredItem<Item> CANDY = food("candy", 4, 0.2F);
     public static final DeferredItem<Item> CANDY_CANE = effectFood(
             "candy_cane", 4, 0.4F, MobEffects.LUCK, 300, 0);

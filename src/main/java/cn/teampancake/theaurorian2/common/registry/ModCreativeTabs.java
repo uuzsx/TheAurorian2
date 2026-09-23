@@ -394,6 +394,7 @@ public final class ModCreativeTabs {
     }
 
     private static void addFunctionalItems(CreativeModeTab.Output output) {
+        ModBlocks.DUNGEON_DECORATIONS.forEach(block -> output.accept(block.get()));
         output.accept(ModItems.PURIFICATION_TEST_ITEM.get());
         output.accept(ModBlocks.ASTROLOGY_TABLE_ITEM.get());
         output.accept(ModBlocks.ALCHEMY_TABLE.get());
@@ -609,6 +610,8 @@ public final class ModCreativeTabs {
     }
 
     private static void addCombatItems(CreativeModeTab.Output output) {
+        output.accept(ModItems.SPIRIT_SPAWN_EGG.get());
+        output.accept(ModItems.BLUE_TAIL_WOLF_SPAWN_EGG.get());
         output.accept(ModItems.MOON_FISH_SPAWN_EGG.get());
         output.accept(ModItems.AURORIAN_WINGED_FISH_SPAWN_EGG.get());
         output.accept(ModItems.FROSTFIN_SPAWN_EGG.get());
@@ -707,11 +710,7 @@ public final class ModCreativeTabs {
         output.accept(ModItems.AURORIAN_LEATHER.get());
         ModLegacyItems.forEachIngredients(output::accept);
         parameters.holders().lookup(Registries.ENCHANTMENT).ifPresent(enchantments -> {
-            addEnchantmentBooks(output, enchantments, ModEnchantments.IMPALE);
-            addEnchantmentBooks(output, enchantments, ModEnchantments.OVERLOAD);
-            addEnchantmentBooks(output, enchantments, ModEnchantments.SOUL_SLASH);
-            addEnchantmentBooks(output, enchantments, ModEnchantments.NIGHT_WALKER);
-            addEnchantmentBooks(output, enchantments, ModEnchantments.FREEZE_ASPECT);
+            for (var key : ModEnchantments.ALL) addEnchantmentBooks(output, enchantments, key);
         });
     }
 
@@ -758,6 +757,9 @@ public final class ModCreativeTabs {
         output.accept(ModItems.AURORIAN_BERRY.get());
         output.accept(ModItems.DEW_FRUIT.get());
         output.accept(ModItems.FROSTGRAIN.get());
+        output.accept(ModItems.FROSTGRAIN_SEEDS.get());
+        output.accept(ModItems.VIOLETDEW_BERRY.get());
+        output.accept(ModItems.VIOLETDEW_BERRY_SEEDS.get());
         output.accept(ModItems.CANDY.get());
         output.accept(ModItems.CANDY_CANE.get());
         output.accept(ModItems.GINGERBREAD_MAN.get());

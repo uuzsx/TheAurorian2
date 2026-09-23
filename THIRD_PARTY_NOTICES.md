@@ -201,6 +201,17 @@ are not imported. These
 third-party assets remain subject to their original terms and are not relicensed
 by this project's license.
 
+## ShizuArt dungeon skeleton decorations
+
+The fourteen dungeon props use the project owner's supplied ShizuArt
+`2036地下城骷髅` pack (ItemsAdder `dungeon_skeletons_props` models and texture).
+The original texture bytes, geometry, signed inner faces, UVs, rotations and
+item display transforms are retained. World geometry and pivots are translated
+into occupied block cells without rescaling; the overhanging skeleton retains
+its lowered head and arms. Original plugin configuration is replaced by native
+placement and loot rules. These assets remain subject to their original terms;
+the project license does not relicense them.
+
 ## World Scroll teleport animation
 
 The World Scroll uses the blue model, two animation clips and tp2.ogg from the

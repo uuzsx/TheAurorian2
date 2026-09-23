@@ -8,9 +8,21 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import net.minecraft.world.item.Item;
+import java.util.function.Consumer;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackDurabilityMixin {
+
+    // PlayerDestroyItemEvent does not cover worn armor on all living entities. Observe the
+    // final durability decision without replacing damage handling or the break callback.
+    @Inject(method = "applyDamage(ILnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V", at = @At("HEAD"))
+    private void theaurorian2$forgettingEcho(int newDamage, LivingEntity owner, Consumer<Item> onBreak, CallbackInfo ci) {
+        ItemStack stack = (ItemStack) (Object) this;
+        if (!stack.isEmpty() && stack.isDamageableItem() && newDamage >= stack.getMaxDamage())
+            cn.teampancake.theaurorian2.common.enchantment.ArmorEnchantmentEvents.armorBreaking(stack, owner);
+    }
 
     @Inject(
             method = "processDurabilityChange(ILnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)I",

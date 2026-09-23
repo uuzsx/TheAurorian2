@@ -1,0 +1,1 @@
+{"parent":"minecraft:block/block","render_type":"minecraft:cutout","gui_light":"front","textures":{"0":"theaurorian2:block/dungeon_skeletons_props","particle":"minecraft:block/iron_block"},"elements":[]}

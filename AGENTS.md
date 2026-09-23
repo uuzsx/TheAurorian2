@@ -11,6 +11,13 @@ These rules apply to the entire repository. They are persistent project requirem
 
 Never change, omit, weaken, or approximate a requested result merely to reduce code or file size. A complete implementation may be large when the feature genuinely requires it.
 
+## Daily Development Workflow
+
+- For feature development and bug fixes, follow this sequence: define player-visible acceptance criteria, inspect the current implementation and existing changes, implement the complete behavior, run the applicable verification below, and report results and remaining risks.
+- For bugs, establish reproducible steps or other concrete failure evidence before choosing a fix, then verify the affected behavior after the change.
+- Read `docs/DEVELOPMENT_WORKFLOW.md` when it is available locally for the detailed process and reusable task template. It is local-only; do not add or upload it. If it is absent in another checkout, follow the sequence and requirements in this file.
+- Keep small tasks lightweight: record scope and verification in the conversation instead of requiring a separate document. Routine steps within the authorized task do not require separate approval; clarify missing information when it materially changes the requested result.
+
 ## Legacy Source Reference
 
 - The user-designated legacy source is `D:/TheAurorian-NeoForge-1.21`.

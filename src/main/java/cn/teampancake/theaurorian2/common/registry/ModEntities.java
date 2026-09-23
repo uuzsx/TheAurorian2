@@ -1,6 +1,7 @@
 package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import cn.teampancake.theaurorian2.common.entity.ReturningAxeEntity;
 import cn.teampancake.theaurorian2.common.entity.DamageNumberEntity;
 import cn.teampancake.theaurorian2.common.entity.StoolSeatEntity;
 import cn.teampancake.theaurorian2.common.entity.AurorianChestMinecartEntity;
@@ -25,6 +26,8 @@ import cn.teampancake.theaurorian2.common.entity.AurorianWingedFishEntity;
 import cn.teampancake.theaurorian2.common.entity.FrostfinEntity;
 import cn.teampancake.theaurorian2.common.entity.MoonreaverSkeletonEntity;
 import cn.teampancake.theaurorian2.common.entity.AzureWarblerEntity;
+import cn.teampancake.theaurorian2.common.entity.SpiritEntity;
+import cn.teampancake.theaurorian2.common.entity.BlueTailWolfEntity;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Animal;
@@ -44,6 +47,20 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModEntities {
 
     public static final DeferredRegister.Entities ENTITIES = DeferredRegister.createEntities(TheAurorian2.MOD_ID);
+
+    // Egg-only until the encounter has been approved in game.
+    public static final DeferredHolder<EntityType<?>, EntityType<BlueTailWolfEntity>> BLUE_TAIL_WOLF =
+            ENTITIES.registerEntityType("blue_tail_wolf", BlueTailWolfEntity::new, MobCategory.CREATURE,
+                    builder -> builder.sized(1.2F, 1.0F).eyeHeight(0.8F).clientTrackingRange(10).updateInterval(2));
+
+    // Deliberately absent from biome spawns, structure spawners and spawn modifiers.
+    public static final DeferredHolder<EntityType<?>, EntityType<SpiritEntity>> SPIRIT =
+            ENTITIES.registerEntityType("spirit", SpiritEntity::new, MobCategory.MONSTER,
+                    builder -> builder.sized(0.6F, 1.95F).eyeHeight(1.65F).clientTrackingRange(8).updateInterval(2));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ReturningAxeEntity>> RETURNING_AXE =
+            ENTITIES.registerEntityType("returning_axe", ReturningAxeEntity::new, MobCategory.MISC,
+                    builder -> builder.sized(0.35F, 0.35F).clientTrackingRange(6).updateInterval(1).noSave().noSummon().noLootTable());
 
     public static final DeferredHolder<EntityType<?>, EntityType<MoonreaverSkeletonEntity>> MOONREAVER_SKELETON_CAPTAIN =
             ENTITIES.registerEntityType("moonreaver_skeleton_captain", MoonreaverSkeletonEntity::new, MobCategory.MONSTER,
@@ -255,6 +272,8 @@ public final class ModEntities {
     }
 
     private static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(SPIRIT.get(), SpiritEntity.createAttributes().build());
+        event.put(BLUE_TAIL_WOLF.get(), BlueTailWolfEntity.createAttributes().build());
         event.put(MOONREAVER_SKELETON.get(), MoonreaverSkeletonEntity.createAttributes().build());
         event.put(MOONREAVER_SKELETON_SWORDSMAN.get(), MoonreaverSkeletonEntity.createAttributes().build());
         event.put(MOONREAVER_SKELETON_CAPTAIN.get(), MoonreaverSkeletonEntity.createCaptainAttributes().build());

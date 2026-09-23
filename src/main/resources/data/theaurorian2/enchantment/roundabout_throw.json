@@ -1,0 +1,1 @@
+{"description":{"translate":"enchantment.theaurorian2.roundabout_throw"},"supported_items":"#minecraft:axes","weight":2,"max_level":3,"min_cost":{"base":10,"per_level_above_first":8},"max_cost":{"base":45,"per_level_above_first":8},"anvil_cost":4,"slots":["mainhand"],"effects":{}}

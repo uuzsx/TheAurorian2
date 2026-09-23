@@ -7,6 +7,9 @@ import net.minecraft.world.entity.EntityType;
 
 public final class ModEntityTypeTags {
 
+    public static final TagKey<EntityType<?>> BLUE_TAIL_WOLF_PREY =
+            TagKey.create(Registries.ENTITY_TYPE, TheAurorian2.id("blue_tail_wolf_prey"));
+
     public static final TagKey<EntityType<?>> PHANTOM_BLOSSOM_EXECUTION_IMMUNE =
             TagKey.create(Registries.ENTITY_TYPE, TheAurorian2.id("phantom_blossom_execution_immune"));
 

@@ -1,0 +1,1 @@
+{"description":{"translate":"enchantment.theaurorian2.guardian"},"supported_items":"#minecraft:enchantable/chest_armor","weight":5,"max_level":1,"min_cost":{"base":10,"per_level_above_first":8},"max_cost":{"base":45,"per_level_above_first":8},"anvil_cost":4,"slots":["chest"],"effects":{},"exclusive_set":"#theaurorian2:exclusive_set/rescue"}

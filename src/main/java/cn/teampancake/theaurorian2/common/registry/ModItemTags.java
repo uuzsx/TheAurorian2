@@ -7,6 +7,9 @@ import net.minecraft.world.item.Item;
 
 public final class ModItemTags {
 
+    public static final TagKey<Item> BLUE_TAIL_WOLF_FOOD =
+            TagKey.create(Registries.ITEM, TheAurorian2.id("blue_tail_wolf_food"));
+
     public static final TagKey<Item> ACCESSORIES_AND_ARTIFACTS =
             TagKey.create(Registries.ITEM, TheAurorian2.id("accessories_and_artifacts"));
 

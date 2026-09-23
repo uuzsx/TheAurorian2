@@ -63,6 +63,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.List;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.FluidModel;
@@ -100,6 +101,12 @@ import org.joml.Vector4f;
 @EventBusSubscriber(modid = TheAurorian2.MOD_ID, value = Dist.CLIENT)
 public final class ClientModEvents {
     @SubscribeEvent
+    public static void registerSpiritAnimationQueries(FMLClientSetupEvent event) {
+        event.enqueueWork(cn.teampancake.theaurorian2.client.renderer.SpiritRenderer::registerAnimationQueries);
+        event.enqueueWork(cn.teampancake.theaurorian2.client.renderer.BlueTailWolfRenderer::registerAnimationQueries);
+    }
+
+    @SubscribeEvent
     public static void registerAlchemyScreen(net.neoforged.neoforge.client.event.RegisterMenuScreensEvent event) {
         event.register(cn.teampancake.theaurorian2.common.registry.ModAlchemy.MENU.get(),
                 cn.teampancake.theaurorian2.client.screen.AlchemyTableScreen::new);
@@ -118,6 +125,9 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.SPIRIT.get(), cn.teampancake.theaurorian2.client.renderer.SpiritRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLUE_TAIL_WOLF.get(), cn.teampancake.theaurorian2.client.renderer.BlueTailWolfRenderer::new);
+        event.registerEntityRenderer(ModEntities.RETURNING_AXE.get(), cn.teampancake.theaurorian2.client.renderer.ReturningAxeRenderer::new);
         event.registerEntityRenderer(ModEntities.WORLD_SCROLL_TELEPORT.get(), WorldScrollTeleportRenderer::new);
         event.registerEntityRenderer(ModEntities.MOONREAVER_SKELETON.get(), MoonreaverSkeletonRenderer::new);
         event.registerEntityRenderer(ModEntities.MOONREAVER_SKELETON_SWORDSMAN.get(), MoonreaverSkeletonRenderer::new);
@@ -341,9 +351,10 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerBlockTintSources(RegisterColorHandlersEvent.BlockTintSources event) {
+        // Grass blocks display their original texture color in every biome.
+        event.register(List.of(BlockTintSources.constant(-1)), ModBlocks.AURORIAN_GRASS_BLOCK.get());
         event.register(
                 List.of(AurorianGrassTintSource.INSTANCE),
-                ModBlocks.AURORIAN_GRASS_BLOCK.get(),
                 ModBlocks.AURORIAN_GRASS.get(),
                 ModBlocks.AURORIAN_GRASS_LIGHT.get(),
                 ModBlocks.TALL_AURORIAN_GRASS.get(),

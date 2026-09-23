@@ -22,6 +22,7 @@ public final class EnchantmentAccess {
 
     public static int itemLevel(
             ItemStack stack, RegistryAccess registryAccess, ResourceKey<Enchantment> key) {
+        if (stack.isEmpty()) return 0;
         return find(registryAccess, key)
                 .map(stack::getEnchantmentLevel)
                 .orElse(0);
