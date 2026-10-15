@@ -1,0 +1,1 @@
+{"render_type":"minecraft:cutout","ambientocclusion":false,"elements":[{"to":[16,0.25,16],"faces":{"down":{"uv":[0,16,16,0],"texture":"#texture"},"up":{"uv":[0,0,16,16],"texture":"#texture"}},"from":[0,0.25,0]}],"textures":{"particle":"theaurorian2:block/starblight_lily_pad","texture":"theaurorian2:block/starblight_lily_pad"}}

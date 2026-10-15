@@ -1,5 +1,6 @@
 package cn.teampancake.theaurorian2.common.worldgen.feature;
 
+import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -27,7 +28,8 @@ public final class AurorianKelpFeature extends Feature<NoneFeatureConfiguration>
         int oceanFloorY = level.getHeight(Heightmap.Types.OCEAN_FLOOR, origin.getX(), origin.getZ());
         BlockPos kelpPos = new BlockPos(origin.getX(), oceanFloorY, origin.getZ());
 
-        if (!level.getBlockState(kelpPos).is(Blocks.WATER)) {
+        if (level.getBiome(kelpPos).is(TheAurorian2.id("starblight_swamp"))
+                || !level.getBlockState(kelpPos).is(Blocks.WATER)) {
             return false;
         }
 

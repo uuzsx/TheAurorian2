@@ -28,6 +28,13 @@ import cn.teampancake.theaurorian2.common.entity.MoonreaverSkeletonEntity;
 import cn.teampancake.theaurorian2.common.entity.AzureWarblerEntity;
 import cn.teampancake.theaurorian2.common.entity.SpiritEntity;
 import cn.teampancake.theaurorian2.common.entity.BlueTailWolfEntity;
+import cn.teampancake.theaurorian2.common.entity.ClockRaptorEntity;
+import cn.teampancake.theaurorian2.common.entity.SeaDrifterEntity;
+import cn.teampancake.theaurorian2.common.entity.CrystalWormEntity;
+import cn.teampancake.theaurorian2.common.entity.StarblightEntEntity;
+import cn.teampancake.theaurorian2.common.entity.MoonQueenEntity;
+import cn.teampancake.theaurorian2.common.entity.RisingClockOracleEntity;
+import cn.teampancake.theaurorian2.common.entity.OracleSpellEntity;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Animal;
@@ -47,6 +54,53 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModEntities {
 
     public static final DeferredRegister.Entities ENTITIES = DeferredRegister.createEntities(TheAurorian2.MOD_ID);
+
+    public static final DeferredHolder<EntityType<?>, EntityType<StarblightEntEntity>> STARBLIGHT_ENT =
+            ENTITIES.registerEntityType("starblight_ent", StarblightEntEntity::new, MobCategory.MONSTER,
+                    builder -> builder.sized(1,1.5F).eyeHeight(1.05F).clientTrackingRange(10).updateInterval(2));
+    public static final DeferredHolder<EntityType<?>, EntityType<StarblightEntEntity>> SILENT_WOOD_ENT =
+            ENTITIES.registerEntityType("silent_wood_ent", StarblightEntEntity::new, MobCategory.MONSTER,
+                    builder -> builder.sized(1,1.5F).eyeHeight(1.05F).clientTrackingRange(10).updateInterval(2));
+    public static final DeferredHolder<EntityType<?>, EntityType<StarblightEntEntity>> CURTAIN_TREE_ENT =
+            ENTITIES.registerEntityType("curtain_tree_ent", StarblightEntEntity::new, MobCategory.MONSTER,
+                    builder -> builder.sized(1,1.5F).eyeHeight(1.05F).clientTrackingRange(10).updateInterval(2));
+    public static final DeferredHolder<EntityType<?>, EntityType<StarblightEntEntity>> CURSED_FROST_ENT =
+            ENTITIES.registerEntityType("cursed_frost_ent", StarblightEntEntity::new, MobCategory.MONSTER,
+                    builder -> builder.sized(1,1.5F).eyeHeight(1.05F).clientTrackingRange(10).updateInterval(2));
+
+    // Passive, egg-only animation preview. Combat remains undesigned.
+    public static final DeferredHolder<EntityType<?>, EntityType<MoonQueenEntity>> MOON_QUEEN =
+            ENTITIES.registerEntityType("moon_queen", MoonQueenEntity::new, MobCategory.CREATURE,
+                    builder -> builder.sized(.5F, 2.0F).eyeHeight(1.75F).clientTrackingRange(10)
+                            .updateInterval(2).noLootTable());
+    public static final DeferredHolder<EntityType<?>, EntityType<cn.teampancake.theaurorian2.common.entity.MoonQueenSwordEntity>> MOON_QUEEN_SWORD =
+            ENTITIES.registerEntityType("moon_queen_sword", cn.teampancake.theaurorian2.common.entity.MoonQueenSwordEntity::new, MobCategory.MISC,
+                    builder -> builder.sized(.1F, .1F).clientTrackingRange(1).noSave().noSummon().noLootTable());
+
+    public static final DeferredHolder<EntityType<?>, EntityType<RisingClockOracleEntity>> RISING_CLOCK_ORACLE =
+            ENTITIES.registerEntityType("rising_clock_oracle", RisingClockOracleEntity::new, MobCategory.MONSTER,
+                    builder -> builder.fireImmune().sized(1.4F, 3.5F).eyeHeight(2.7F).clientTrackingRange(12).updateInterval(2));
+    public static final DeferredHolder<EntityType<?>, EntityType<OracleSpellEntity>> ORACLE_SPELL =
+            ENTITIES.registerEntityType("oracle_spell", OracleSpellEntity::new, MobCategory.MISC,
+                    builder -> builder.sized(.1F,.1F).clientTrackingRange(12).updateInterval(Integer.MAX_VALUE).noSave().noSummon().noLootTable());
+    public static final DeferredHolder<EntityType<?>, EntityType<cn.teampancake.theaurorian2.common.entity.OracleCoffinEntity>> ORACLE_COFFIN =
+            ENTITIES.registerEntityType("oracle_black_coffin", cn.teampancake.theaurorian2.common.entity.OracleCoffinEntity::new, MobCategory.MISC,
+                    builder -> builder.sized(10F,20F).clientTrackingRange(12).updateInterval(Integer.MAX_VALUE).noSave().noSummon().noLootTable());
+    public static final DeferredHolder<EntityType<?>, EntityType<cn.teampancake.theaurorian2.common.entity.OracleArcaneEntity>> ORACLE_ARCANE =
+            ENTITIES.registerEntityType("oracle_arcane", cn.teampancake.theaurorian2.common.entity.OracleArcaneEntity::new, MobCategory.MISC,
+                    builder -> builder.sized(.2F,.2F).clientTrackingRange(8).updateInterval(2).noSave().noSummon().noLootTable());
+
+    public static final DeferredHolder<EntityType<?>, EntityType<SeaDrifterEntity>> SEA_DRIFTER =
+            ENTITIES.registerEntityType("sea_drifter", SeaDrifterEntity::new, MobCategory.CREATURE,
+                    builder -> builder.sized(.9F, .65F).eyeHeight(.3F).clientTrackingRange(10).updateInterval(2));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<CrystalWormEntity>> CRYSTAL_WORM =
+            ENTITIES.registerEntityType("crystal_worm", CrystalWormEntity::new, MobCategory.MONSTER,
+                    builder -> builder.sized(.7F, .7F).eyeHeight(.4F).clientTrackingRange(10).updateInterval(2));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ClockRaptorEntity>> CLOCK_RAPTOR_OF_FALLEN =
+            ENTITIES.registerEntityType("clock_raptor_of_fallen", ClockRaptorEntity::new, MobCategory.CREATURE,
+                    builder -> builder.sized(0.9F, 1.65F).eyeHeight(1.35F).clientTrackingRange(10).updateInterval(2));
 
     // Egg-only until the encounter has been approved in game.
     public static final DeferredHolder<EntityType<?>, EntityType<BlueTailWolfEntity>> BLUE_TAIL_WOLF =
@@ -272,6 +326,15 @@ public final class ModEntities {
     }
 
     private static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(STARBLIGHT_ENT.get(), StarblightEntEntity.createAttributes().build());
+        event.put(SILENT_WOOD_ENT.get(), StarblightEntEntity.createAttributes().build());
+        event.put(CURTAIN_TREE_ENT.get(), StarblightEntEntity.createAttributes().build());
+        event.put(CURSED_FROST_ENT.get(), StarblightEntEntity.createAttributes().build());
+        event.put(CRYSTAL_WORM.get(), CrystalWormEntity.createAttributes().build());
+        event.put(MOON_QUEEN.get(), MoonQueenEntity.createAttributes().build());
+        event.put(SEA_DRIFTER.get(), SeaDrifterEntity.createAttributes().build());
+        event.put(RISING_CLOCK_ORACLE.get(), RisingClockOracleEntity.createAttributes().build());
+        event.put(CLOCK_RAPTOR_OF_FALLEN.get(), ClockRaptorEntity.createAttributes().build());
         event.put(SPIRIT.get(), SpiritEntity.createAttributes().build());
         event.put(BLUE_TAIL_WOLF.get(), BlueTailWolfEntity.createAttributes().build());
         event.put(MOONREAVER_SKELETON.get(), MoonreaverSkeletonEntity.createAttributes().build());
@@ -297,8 +360,25 @@ public final class ModEntities {
     }
 
     private static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
+        event.register(STARBLIGHT_ENT.get(), SpawnPlacementTypes.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, StarblightEntEntity::checkNaturalSpawn,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        for (var type : java.util.List.of(SILENT_WOOD_ENT.get(),CURTAIN_TREE_ENT.get(),CURSED_FROST_ENT.get())) {
+            event.register(type, SpawnPlacementTypes.ON_GROUND,
+                    Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, StarblightEntEntity::checkNaturalSpawn,
+                    RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        }
+        event.register(CRYSTAL_WORM.get(), SpawnPlacementTypes.NO_RESTRICTIONS,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CrystalWormEntity::checkNaturalSpawn,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(SEA_DRIFTER.get(), SpawnPlacementTypes.NO_RESTRICTIONS,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SeaDrifterEntity::checkSpawnRules,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(AZURE_WARBLER.get(), AzureWarblerEntity.SPAWN_PLACEMENT,
                 Heightmap.Types.MOTION_BLOCKING, AzureWarblerEntity::checkSpawnRules,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(CLOCK_RAPTOR_OF_FALLEN.get(), SpawnPlacementTypes.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ClockRaptorEntity::checkSpawnRules,
                 RegisterSpawnPlacementsEvent.Operation.REPLACE);
         registerAnimalSpawn(event, AURORIAN_RABBIT.get());
         registerAnimalSpawn(event, AURORIAN_PIG.get());

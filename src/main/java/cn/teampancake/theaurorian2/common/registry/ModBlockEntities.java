@@ -30,6 +30,10 @@ public final class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, TheAurorian2.MOD_ID);
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<cn.teampancake.theaurorian2.common.block.entity.OracleDisplacedTerrainBlockEntity>> ORACLE_DISPLACED_TERRAIN =
+            BLOCK_ENTITY_TYPES.register("oracle_displaced_terrain", () -> new BlockEntityType<>(
+                    cn.teampancake.theaurorian2.common.block.entity.OracleDisplacedTerrainBlockEntity::new, Set.of(ModBlocks.ORACLE_DISPLACED_TERRAIN.get())));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<cn.teampancake.theaurorian2.common.block.entity.AlchemyTableBlockEntity>> ALCHEMY_TABLE =
             BLOCK_ENTITY_TYPES.register("alchemy_table", () -> new BlockEntityType<>(
                     cn.teampancake.theaurorian2.common.block.entity.AlchemyTableBlockEntity::new, Set.of(ModBlocks.ALCHEMY_TABLE.get())));

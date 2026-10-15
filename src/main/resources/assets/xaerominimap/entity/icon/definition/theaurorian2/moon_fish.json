@@ -1,0 +1,1 @@
+{"variants":{"default":"model:0"},"modelConfigs":[{"baseScale":1.2,"modelMainPartFieldAliases":["net.minecraft.client.model.Model;root"],"modelPartsFields":["net.minecraft.client.model.Model;root"],"renderingFullModel":false,"modelPartsRotationReset":false,"layersAllowed":false}]}

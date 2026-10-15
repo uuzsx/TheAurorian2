@@ -5,8 +5,10 @@ import cn.teampancake.theaurorian2.common.enchantment.ReturningAxeData;
 import cn.teampancake.theaurorian2.common.enchantment.EnchantmentState;
 import cn.teampancake.theaurorian2.common.effect.CorruptionData;
 import cn.teampancake.theaurorian2.common.item.PhantomBlossomMark;
+import cn.teampancake.theaurorian2.common.item.ArcanePrismChannel;
 import cn.teampancake.theaurorian2.common.inventory.AccessoryInventory;
 import cn.teampancake.theaurorian2.common.world.AurorianTravelData;
+import cn.teampancake.theaurorian2.common.world.CrystalWormExposure;
 import cn.teampancake.theaurorian2.common.world.MoonShieldData;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -24,6 +26,10 @@ public final class ModAttachments {
 
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS =
             DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, TheAurorian2.MOD_ID);
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<CrystalWormExposure>> CRYSTAL_WORM_EXPOSURE =
+            ATTACHMENTS.register("crystal_worm_exposure", () -> AttachmentType.builder(() -> CrystalWormExposure.EMPTY)
+                    .serialize(CrystalWormExposure.CODEC.fieldOf("value")).build());
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<ReturningAxeData>> RETURNING_AXE =
             ATTACHMENTS.register("returning_axe", () -> AttachmentType.builder(ReturningAxeData::new)
@@ -137,6 +143,14 @@ public final class ModAttachments {
             ATTACHMENTS.register("moon_shield_recovery_at", () -> AttachmentType.builder(() -> 0L)
                     .sync((holder, player) -> holder == player, ByteBufCodecs.VAR_LONG)
                     .build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Long>> ARCANE_PRISM_READY_AT =
+            ATTACHMENTS.register("arcane_prism_ready_at", () -> AttachmentType.builder(() -> 0L)
+                    .serialize(Codec.LONG.fieldOf("value")).copyOnDeath().build());
+
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<ArcanePrismChannel>> ARCANE_PRISM_CHANNEL =
+            ATTACHMENTS.register("arcane_prism_channel", () -> AttachmentType.builder(() -> ArcanePrismChannel.IDLE)
+                    .sync((holder, player) -> holder == player, ArcanePrismChannel.STREAM_CODEC).build());
 
     private ModAttachments() {
     }

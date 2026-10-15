@@ -1,0 +1,1 @@
+{"type":"minecraft:entity","pools":[{"entries":[{"type":"minecraft:item","name":"theaurorian2:silent_tree_log"}],"rolls":1},{"rolls":1,"functions":[{"count":{"min":0,"max":2,"type":"minecraft:uniform"},"function":"minecraft:set_count"}],"entries":[{"type":"minecraft:item","name":"minecraft:stick"}]}]}

@@ -15,6 +15,8 @@ public final class ModParticles {
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WICK =
             PARTICLES.register("wick", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> ORACLE_MAGIC =
+            PARTICLES.register("oracle_magic", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PHANTOM_BUTTERFLY_BLUE =
             PARTICLES.register("phantom_butterfly_blue", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PHANTOM_BUTTERFLY_PINK =

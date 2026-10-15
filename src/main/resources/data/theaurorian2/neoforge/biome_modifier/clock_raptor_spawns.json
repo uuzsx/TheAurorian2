@@ -1,0 +1,1 @@
+{"type":"neoforge:add_spawns","biomes":"#theaurorian2:has_clock_raptor","spawners":{"type":"theaurorian2:clock_raptor_of_fallen","weight":3,"minCount":1,"maxCount":2}}

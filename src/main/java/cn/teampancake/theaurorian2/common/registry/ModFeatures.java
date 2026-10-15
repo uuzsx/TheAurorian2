@@ -15,6 +15,7 @@ import cn.teampancake.theaurorian2.common.worldgen.feature.CursedFrostTreeFeatur
 import cn.teampancake.theaurorian2.common.worldgen.feature.FallenLogFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.IndigoMushroomTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.SilentTreeFeature;
+import cn.teampancake.theaurorian2.common.worldgen.feature.SwampSilentTreeFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.SmallRuinFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.TombstoneFeature;
 import cn.teampancake.theaurorian2.common.worldgen.feature.WallMushroomPatchFeature;
@@ -34,6 +35,8 @@ public final class ModFeatures {
             FEATURES.register("curtain_tree", CurtainTreeFeature::new);
     public static final DeferredHolder<Feature<?>, SilentTreeFeature> SILENT_TREE =
             FEATURES.register("silent_tree", SilentTreeFeature::new);
+    public static final DeferredHolder<Feature<?>, SwampSilentTreeFeature> SWAMP_SILENT_TREE =
+            FEATURES.register("swamp_silent_tree", SwampSilentTreeFeature::new);
     public static final DeferredHolder<Feature<?>, WeepingWillowTreeFeature> WEEPING_WILLOW_TREE =
             FEATURES.register("weeping_willow_tree", WeepingWillowTreeFeature::new);
     public static final DeferredHolder<Feature<?>, CursedFrostTreeFeature> CURSED_FROST_TREE =

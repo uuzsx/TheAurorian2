@@ -1253,11 +1253,12 @@ public final class SpiderMotherEntity extends Monster implements GeoEntity {
         return level.getEntitiesOfClass(LivingEntity.class, area, this::isCombatTarget);
     }
 
-    private boolean isCombatTarget(LivingEntity target) {
+    boolean isCombatTarget(LivingEntity target) {
         if (target instanceof Player player) {
             return !player.isCreative() && !player.isSpectator();
         }
-        return !BuiltInRegistries.ENTITY_TYPE
+        // Include the Oracle and its mirror while retaining other Aurorian exclusions.
+        return target instanceof RisingClockOracleEntity || !BuiltInRegistries.ENTITY_TYPE
                 .getKey(target.getType())
                 .getNamespace()
                 .equals(TheAurorian2.MOD_ID);

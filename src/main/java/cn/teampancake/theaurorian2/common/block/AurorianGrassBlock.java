@@ -42,6 +42,10 @@ public class AurorianGrassBlock extends SpreadingSnowyBlock implements Bonemeala
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         boolean filthy = state.is(ModBlocks.FILTHY_GRASS_BLOCK.get());
         boolean island = level.getBiome(pos).is(EQUINOX_FLOWER_ISLAND);
+        if (!filthy && AurorianSoilSpread.isStarblight(level, pos)) {
+            level.setBlockAndUpdate(pos, ModBlocks.STARBLIGHT_SOIL.get().defaultBlockState());
+            return;
+        }
         boolean neighboringIsland = hasNeighborBiome(level, pos, true);
 
         if (filthy) {
@@ -58,7 +62,7 @@ public class AurorianGrassBlock extends SpreadingSnowyBlock implements Bonemeala
             }
         }
 
-        super.randomTick(state, level, pos, random);
+        AurorianSoilSpread.tick(state, level, pos, random, false);
     }
 
     private static boolean hasNeighborBiome(LevelReader level, BlockPos pos, boolean island) {

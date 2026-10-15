@@ -1,6 +1,7 @@
 package cn.teampancake.theaurorian2.client;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
+import cn.teampancake.theaurorian2.client.renderer.StarblightEntRenderer;
 import cn.teampancake.theaurorian2.client.animation.GreatSwordViewModel;
 import cn.teampancake.theaurorian2.client.color.AurorianGrassTintSource;
 import cn.teampancake.theaurorian2.client.hud.AurorianNightHud;
@@ -104,6 +105,8 @@ public final class ClientModEvents {
     public static void registerSpiritAnimationQueries(FMLClientSetupEvent event) {
         event.enqueueWork(cn.teampancake.theaurorian2.client.renderer.SpiritRenderer::registerAnimationQueries);
         event.enqueueWork(cn.teampancake.theaurorian2.client.renderer.BlueTailWolfRenderer::registerAnimationQueries);
+        event.enqueueWork(cn.teampancake.theaurorian2.client.renderer.SeaDrifterRenderer::registerAnimationQueries);
+        event.enqueueWork(cn.teampancake.theaurorian2.client.renderer.CrystalWormRenderer::registerAnimationQueries);
     }
 
     @SubscribeEvent
@@ -117,6 +120,10 @@ public final class ClientModEvents {
             net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent event) {
         event.registerPipeline(WindChimesRenderer.EMISSIVE_CULL);
         event.registerPipeline(WorldScrollTeleportRenderer.PIPELINE);
+        event.registerPipeline(cn.teampancake.theaurorian2.client.renderer.OracleArcaneRenderer.PIPELINE);
+        event.registerPipeline(cn.teampancake.theaurorian2.client.renderer.OracleArcaneRenderer.BEAM_PIPELINE);
+        event.registerPipeline(cn.teampancake.theaurorian2.client.renderer.OracleCoffinRenderer.PIPELINE);
+        event.registerPipeline(cn.teampancake.theaurorian2.client.renderer.OracleCoffinRenderer.GLOW_PIPELINE);
     }
 
 
@@ -125,6 +132,10 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.RISING_CLOCK_ORACLE.get(), cn.teampancake.theaurorian2.client.renderer.RisingClockOracleRenderer::new);
+        event.registerEntityRenderer(ModEntities.ORACLE_SPELL.get(), cn.teampancake.theaurorian2.client.renderer.OracleSpellRenderer::new);
+        event.registerEntityRenderer(ModEntities.ORACLE_ARCANE.get(), cn.teampancake.theaurorian2.client.renderer.OracleArcaneRenderer::new);
+        event.registerEntityRenderer(ModEntities.ORACLE_COFFIN.get(), cn.teampancake.theaurorian2.client.renderer.OracleCoffinRenderer::new);
         event.registerEntityRenderer(ModEntities.SPIRIT.get(), cn.teampancake.theaurorian2.client.renderer.SpiritRenderer::new);
         event.registerEntityRenderer(ModEntities.BLUE_TAIL_WOLF.get(), cn.teampancake.theaurorian2.client.renderer.BlueTailWolfRenderer::new);
         event.registerEntityRenderer(ModEntities.RETURNING_AXE.get(), cn.teampancake.theaurorian2.client.renderer.ReturningAxeRenderer::new);
@@ -133,6 +144,23 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntities.MOONREAVER_SKELETON_SWORDSMAN.get(), MoonreaverSkeletonRenderer::new);
         event.registerEntityRenderer(ModEntities.MOONREAVER_SKELETON_CAPTAIN.get(), context -> new MoonreaverSkeletonRenderer(context, true));
         event.registerEntityRenderer(ModEntities.FROSTFIN.get(), FrostfinRenderer::new);
+        event.registerEntityRenderer(ModEntities.CLOCK_RAPTOR_OF_FALLEN.get(),
+                context -> new SimpleGeoMobRenderer<>(context, TheAurorian2.id("clock_raptor_of_fallen"), 0.45F));
+        event.registerEntityRenderer(ModEntities.SEA_DRIFTER.get(),
+                cn.teampancake.theaurorian2.client.renderer.SeaDrifterRenderer::new);
+        event.registerEntityRenderer(ModEntities.CRYSTAL_WORM.get(),
+                cn.teampancake.theaurorian2.client.renderer.CrystalWormRenderer::new);
+        event.registerEntityRenderer(ModEntities.STARBLIGHT_ENT.get(), StarblightEntRenderer::new);
+        event.registerEntityRenderer(ModEntities.SILENT_WOOD_ENT.get(),
+                context -> new StarblightEntRenderer(context, cn.teampancake.theaurorian2.common.entity.StarblightEntEntity.Wood.SILENT_WOOD));
+        event.registerEntityRenderer(ModEntities.CURTAIN_TREE_ENT.get(),
+                context -> new StarblightEntRenderer(context, cn.teampancake.theaurorian2.common.entity.StarblightEntEntity.Wood.CURTAIN_TREE));
+        event.registerEntityRenderer(ModEntities.CURSED_FROST_ENT.get(),
+                context -> new StarblightEntRenderer(context, cn.teampancake.theaurorian2.common.entity.StarblightEntEntity.Wood.CURSED_FROST));
+        event.registerEntityRenderer(ModEntities.MOON_QUEEN.get(),
+                cn.teampancake.theaurorian2.client.renderer.MoonQueenRenderer::new);
+        event.registerEntityRenderer(ModEntities.MOON_QUEEN_SWORD.get(),
+                net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.AZURE_WARBLER.get(),
                 context -> new SimpleGeoMobRenderer<>(context, TheAurorian2.id("azure_warbler"), 0.2F));
         event.registerEntityRenderer(ModEntities.AURORIAN_RABBIT.get(), AurorianRabbitRenderer::new);
@@ -209,6 +237,7 @@ public final class ClientModEvents {
         event.enqueueWork(() -> {
             NeoForge.EVENT_BUS.addListener(PurificationRitualBossBar::render);
             NeoForge.EVENT_BUS.addListener(SpiderMotherBossBar::render);
+            NeoForge.EVENT_BUS.addListener(cn.teampancake.theaurorian2.client.hud.OracleBossBar::render);
             NeoForge.EVENT_BUS.addListener(PurificationRitualMusic::tick);
             NeoForge.EVENT_BUS.addListener(PurificationRitualMusic::onLogout);
             Sheets.addWoodType(ModStructureBlocks.SILENT_WOOD_TYPE);
@@ -220,6 +249,8 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerClientPayloadHandlers(RegisterClientPayloadHandlersEvent event) {
+        event.register(cn.teampancake.theaurorian2.common.network.OracleGravityMotionPayload.TYPE, (payload, context) ->
+                context.enqueueWork(() -> OracleGravityMotionClient.handle(payload)));
         event.register(AstrologyForecastPayload.TYPE, (payload, context) ->
                 Minecraft.getInstance().setScreen(new AstrologyForecastScreen(payload.forecast())));
         event.register(PurificationRitualPromptPayload.TYPE, (payload, context) ->
@@ -236,6 +267,8 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+        // Keep the published particle ID valid for old commands/saves without emitting retired sprites.
+        event.registerSpecial(ModParticles.ORACLE_MAGIC.get(), (type, level, x, y, z, dx, dy, dz, random) -> null);
         event.registerSpriteSet(ModParticles.WICK.get(), WickParticle.Provider::new);
         event.registerSpriteSet(ModParticles.PHANTOM_BUTTERFLY_BLUE.get(), PhantomButterflyParticle.Provider::new);
         event.registerSpriteSet(ModParticles.PHANTOM_BUTTERFLY_PINK.get(), PhantomButterflyParticle.Provider::new);

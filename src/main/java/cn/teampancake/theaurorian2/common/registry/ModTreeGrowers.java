@@ -30,6 +30,11 @@ public final class ModTreeGrowers {
             "theaurorian2:cursed_frost_tree", Optional.of(MEGA_CURSED_FROST_TREE_FEATURE),
             Optional.of(CURSED_FROST_TREE_FEATURE), Optional.empty());
 
+    public static final TreeGrower STARBLIGHT = new TreeGrower(
+            "theaurorian2:starblight", Optional.empty(),
+            Optional.of(ResourceKey.create(Registries.CONFIGURED_FEATURE, TheAurorian2.id("starblight_tree"))),
+            Optional.empty());
+
     private ModTreeGrowers() {
     }
 }

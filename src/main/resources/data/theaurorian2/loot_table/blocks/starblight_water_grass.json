@@ -1,0 +1,1 @@
+{"type":"minecraft:block","pools":[{"bonus_rolls":0.0,"conditions":[{"condition":"minecraft:match_tool","predicate":{"items":"minecraft:shears"}}],"entries":[{"type":"minecraft:item","name":"theaurorian2:starblight_water_grass"}],"rolls":1.0}],"random_sequence":"theaurorian2:blocks/starblight_water_grass"}

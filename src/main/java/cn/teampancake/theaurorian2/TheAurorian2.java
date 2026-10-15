@@ -20,6 +20,7 @@ import cn.teampancake.theaurorian2.common.registry.ModLootModifiers;
 import cn.teampancake.theaurorian2.common.registry.ModMobEffects;
 import cn.teampancake.theaurorian2.common.network.ModNetworking;
 import cn.teampancake.theaurorian2.common.registry.ModParticles;
+import cn.teampancake.theaurorian2.common.registry.ModEnvironmentAttributes;
 import cn.teampancake.theaurorian2.common.registry.ModPlacementModifiers;
 import cn.teampancake.theaurorian2.common.registry.ModStats;
 import cn.teampancake.theaurorian2.common.registry.ModStructureBlocks;
@@ -36,6 +37,7 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.core.dispenser.MinecartDispenseItemBehavior;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -80,6 +82,7 @@ public final class TheAurorian2 {
         ModPlacementModifiers.register(modEventBus);
         ModStructures.register(modEventBus);
         ModWorldgen.register(modEventBus);
+        ModEnvironmentAttributes.register(modEventBus);
         ModParticles.register(modEventBus);
         ModStats.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
@@ -125,6 +128,16 @@ public final class TheAurorian2 {
         fire.theaurorian2$setFlammable(ModBlocks.CURTAIN_TREE_SAPLING.get(), 60, 100);
         fire.theaurorian2$setFlammable(ModBlocks.CURSED_FROST_TREE_SAPLING.get(), 60, 100);
         registerWeepingWillowWood(fire);
+        for (Block block : new Block[]{ModBlocks.STARBLIGHT_LOG.get(), ModBlocks.STRIPPED_STARBLIGHT_LOG.get(),
+                ModBlocks.STARBLIGHT_WOOD.get(), ModBlocks.STRIPPED_STARBLIGHT_WOOD.get(), ModBlocks.STARBLIGHT_ROOTS.get()}) {
+            fire.theaurorian2$setFlammable(block, 5, 5);
+        }
+        for (Block block : new Block[]{ModBlocks.STARBLIGHT_PLANKS.get(), ModBlocks.STARBLIGHT_STAIRS.get(),
+                ModBlocks.STARBLIGHT_SLAB.get(), ModBlocks.STARBLIGHT_FENCE.get(), ModBlocks.STARBLIGHT_FENCE_GATE.get()}) {
+            fire.theaurorian2$setFlammable(block, 5, 20);
+        }
+        fire.theaurorian2$setFlammable(ModBlocks.STARBLIGHT_LEAVES.get(), 30, 60);
+        fire.theaurorian2$setFlammable(ModBlocks.STARBLIGHT_SAPLING.get(), 60, 100);
         fire.theaurorian2$setFlammable(ModStructureBlocks.EQUINOX_FLOWER.get(), 60, 100);
         fire.theaurorian2$setFlammable(ModStructureBlocks.FILTHY_EQUINOX_FLOWER.get(), 60, 100);
     }

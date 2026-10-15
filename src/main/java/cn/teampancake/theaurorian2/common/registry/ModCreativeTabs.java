@@ -152,6 +152,15 @@ public final class ModCreativeTabs {
         addWoodSet(items, ModBlocks.SILENT_WOOD);
         addWoodSet(items, ModBlocks.CURTAIN_WOOD);
         addWoodSet(items, ModBlocks.CURSED_FROST_WOOD);
+        addBuildingBlock(items, ModBlocks.STARBLIGHT_LOG.get());
+        addBuildingBlock(items, ModBlocks.STRIPPED_STARBLIGHT_LOG.get());
+        addBuildingBlock(items, ModBlocks.STARBLIGHT_WOOD.get());
+        addBuildingBlock(items, ModBlocks.STRIPPED_STARBLIGHT_WOOD.get());
+        addBuildingBlock(items, ModBlocks.STARBLIGHT_PLANKS.get());
+        addBuildingBlock(items, ModBlocks.STARBLIGHT_STAIRS.get());
+        addBuildingBlock(items, ModBlocks.STARBLIGHT_SLAB.get());
+        addBuildingBlock(items, ModBlocks.STARBLIGHT_FENCE.get());
+        addBuildingBlock(items, ModBlocks.STARBLIGHT_FENCE_GATE.get());
         ModStructureBlocks.buildingBlocks().forEach(block -> addBuildingBlock(items, block.get()));
         ModStructureBlocks.decorativeBlocks().forEach(block -> addBuildingBlock(items, block.get()));
 
@@ -216,6 +225,9 @@ public final class ModCreativeTabs {
             }
             if (path.contains("weeping_willow_")) {
                 return 3;
+            }
+            if (path.contains("starblight_")) {
+                return 4;
             }
             return 100;
         }
@@ -370,7 +382,8 @@ public final class ModCreativeTabs {
                 || path.contains("curtain_wood_")
                 || path.contains("cursed_frost_tree_")
                 || path.contains("cursed_frost_wood_")
-                || path.contains("weeping_willow_");
+                || path.contains("weeping_willow_")
+                || path.contains("starblight_");
     }
 
     private static boolean isOtherBuildingBlock(String path) {
@@ -569,6 +582,17 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.EROSIVE_GEODE_ORE.get());
 
         output.accept(ModBlocks.SILENT_TREE_LEAVES.get());
+        output.accept(ModBlocks.STARBLIGHT_SOIL.get());
+        output.accept(ModBlocks.STARBLIGHT_ROOTS.get());
+        output.accept(ModBlocks.MUDDY_STARBLIGHT_ROOTS.get());
+        output.accept(ModBlocks.STARBLIGHT_LEAVES.get());
+        output.accept(ModBlocks.STARBLIGHT_SAPLING.get());
+        output.accept(ModBlocks.STARBLIGHT_TUFT.get());
+        output.accept(ModBlocks.STARBLIGHT_SHOOT.get());
+        output.accept(ModBlocks.STARBLIGHT_FLOWER.get());
+        output.accept(ModBlocks.STARBLIGHT_SHELF_FUNGUS.get());
+        output.accept(ModBlocks.STARBLIGHT_WATER_GRASS.get());
+        output.accept(ModBlocks.STARBLIGHT_LILY_PAD_ITEM.get());
         output.accept(ModBlocks.FRUITING_SILENT_TREE_LEAVES.get());
         output.accept(ModBlocks.SILENT_TREE_SAPLING.get());
         output.accept(ModBlocks.WEEPING_WILLOW_SAPLING.get());
@@ -610,6 +634,10 @@ public final class ModCreativeTabs {
     }
 
     private static void addCombatItems(CreativeModeTab.Output output) {
+        output.accept(ModItems.STARBLIGHT_ENT_SPAWN_EGG.get());
+        output.accept(ModItems.SILENT_WOOD_ENT_SPAWN_EGG.get());
+        output.accept(ModItems.CURTAIN_TREE_ENT_SPAWN_EGG.get());
+        output.accept(ModItems.CURSED_FROST_ENT_SPAWN_EGG.get());
         output.accept(ModItems.SPIRIT_SPAWN_EGG.get());
         output.accept(ModItems.BLUE_TAIL_WOLF_SPAWN_EGG.get());
         output.accept(ModItems.MOON_FISH_SPAWN_EGG.get());
@@ -619,11 +647,17 @@ public final class ModCreativeTabs {
         output.accept(ModItems.MOONREAVER_SKELETON_SWORDSMAN_SPAWN_EGG.get());
         output.accept(ModItems.MOONREAVER_SKELETON_CAPTAIN_SPAWN_EGG.get());
         output.accept(ModItems.AZURE_WARBLER_SPAWN_EGG.get());
+        output.accept(ModItems.CLOCK_RAPTOR_OF_FALLEN_SPAWN_EGG.get());
+        output.accept(ModItems.SEA_DRIFTER_SPAWN_EGG.get());
+        output.accept(ModItems.CRYSTAL_WORM_SPAWN_EGG.get());
+        output.accept(ModItems.MOON_QUEEN_SPAWN_EGG.get());
+        output.accept(ModItems.RISING_CLOCK_ORACLE_SPAWN_EGG.get());
         output.accept(ModItems.SPIDER_MOTHER_SPAWN_EGG.get());
         output.accept(ModItems.SPIDERLING_SPAWN_EGG.get());
         output.accept(ModItems.SPIDERLING_CRYSTAL_SHELL_SPAWN_EGG.get());
         output.accept(ModItems.SPIDERLING_WALL_CLIMBER_SPAWN_EGG.get());
         output.accept(ModItems.PHANTOM_BLOSSOM_REQUIEM.get());
+        output.accept(ModItems.ARCANE_PRISM.get());
         output.accept(ModItems.SILENT_WOOD_SWORD.get());
         output.accept(ModItems.AURORIAN_STONE_SWORD.get());
 

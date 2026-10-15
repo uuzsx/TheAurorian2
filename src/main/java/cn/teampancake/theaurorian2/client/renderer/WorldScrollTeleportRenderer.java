@@ -21,7 +21,9 @@ import net.minecraft.world.phys.AABB;
 public final class WorldScrollTeleportRenderer extends GeoEntityRenderer<WorldScrollTeleportEntity, EntityRenderState> {
     // Back-face culling preserves the author's negative-size inverted hulls.
     // The source diffuse/emissive atlases are identical: one emissive pass is sufficient.
-    public static final RenderPipeline PIPELINE = RenderPipeline.builder(RenderPipelines.ENTITY_EMISSIVE_SNIPPET)
+    // Copy the unlit vanilla pipeline so Iris inherits its main and shadow mappings.
+    // A fresh emissive snippet is unmapped and disappears with shader packs enabled.
+    public static final RenderPipeline PIPELINE = RenderPipelines.EYES.toBuilder()
             .withLocation(TheAurorian2.id("pipeline/world_scroll_teleport"))
             .withShaderDefine("NO_OVERLAY").withShaderDefine("NO_CARDINAL_LIGHTING")
             .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
@@ -41,6 +43,7 @@ public final class WorldScrollTeleportRenderer extends GeoEntityRenderer<WorldSc
 
     @Override public int getRenderColor(WorldScrollTeleportEntity entity, Void related, float partialTick) {
         float alpha = entity.opacity(partialTick);
+        int color = 0xFFFFFF;
         var mc = Minecraft.getInstance();
         var viewer = mc.getCameraEntity();
         // Looking from inside an inverted beam shell must not turn first-person
@@ -50,8 +53,11 @@ public final class WorldScrollTeleportRenderer extends GeoEntityRenderer<WorldSc
                 && Math.abs(viewer.getZ() - entity.getZ()) < 0.85
                 && viewer.getEyeY() > entity.getY() && viewer.getEyeY() < entity.getY() + 3) {
             alpha *= 0.12F;
+            // Shader packs may amplify emissive RGB independently of alpha.
+            // Attenuate the light inside the shell as well, keeping the view readable.
+            color = 0x4D4D4D;
         }
-        return ((int) (255 * alpha) << 24) | 0xFFFFFF;
+        return ((int) (255 * alpha) << 24) | color;
     }
 
     @Override protected AABB getBoundingBoxForCulling(WorldScrollTeleportEntity entity) {

@@ -1,9 +1,7 @@
 package cn.teampancake.theaurorian2.common.entity;
 
 import cn.teampancake.theaurorian2.common.registry.ModEntities;
-import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.effect.SpiderSilkGrounding;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -73,12 +71,10 @@ public final class SpiderSilkProjectileEntity extends ThrowableItemProjectile {
         super.onHitEntity(hitResult);
         Entity hit = hitResult.getEntity();
         Entity owner = this.getOwner();
-        boolean validTarget = !hit.isSpectator()
-                && !BuiltInRegistries.ENTITY_TYPE.getKey(hit.getType()).getNamespace().equals(TheAurorian2.MOD_ID);
         if (this.level() instanceof ServerLevel level
                 && owner instanceof SpiderMotherEntity mother
                 && hit instanceof LivingEntity living
-                && living.isAlive() && validTarget) {
+                && living.isAlive() && !living.isSpectator() && mother.isCombatTarget(living)) {
             living.hurtServer(level, this.damageSources().thrown(this, owner), 4.0F);
             SpiderSilkGrounding.apply(living);
             mother.bindWithSilk(living);

@@ -19,7 +19,8 @@ public abstract class AurorianCarverSurfaceMixin {
             "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z"))
     private boolean theaurorian2$exposedSoil(BlockState state, Object block, Operation<Boolean> original) {
         return original.call(state, block)
-                || (block == Blocks.GRASS_BLOCK && state.is(ModBlockTags.AURORIAN_GRASS_BLOCKS))
+                || (block == Blocks.GRASS_BLOCK && (state.is(ModBlockTags.AURORIAN_GRASS_BLOCKS)
+                        || state.is(ModBlocks.STARBLIGHT_SOIL.get())))
                 || (block == Blocks.DIRT && state.is(ModBlocks.AURORIAN_DIRT.get()));
     }
 }

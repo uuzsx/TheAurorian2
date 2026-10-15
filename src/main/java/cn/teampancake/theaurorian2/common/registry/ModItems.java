@@ -2,6 +2,7 @@ package cn.teampancake.theaurorian2.common.registry;
 
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.item.ArcherArmorItem;
+import cn.teampancake.theaurorian2.common.item.ArcanePrismItem;
 import cn.teampancake.theaurorian2.common.item.AssassinArmorItem;
 import cn.teampancake.theaurorian2.common.item.KnightArmorItem;
 import cn.teampancake.theaurorian2.common.item.KnightGreatswordItem;
@@ -45,6 +46,15 @@ public final class ModItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TheAurorian2.MOD_ID);
 
+    public static final DeferredItem<SpawnEggItem> STARBLIGHT_ENT_SPAWN_EGG = ITEMS.registerItem(
+            "starblight_ent_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.STARBLIGHT_ENT.get())));
+    public static final DeferredItem<SpawnEggItem> SILENT_WOOD_ENT_SPAWN_EGG = ITEMS.registerItem(
+            "silent_wood_ent_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.SILENT_WOOD_ENT.get())));
+    public static final DeferredItem<SpawnEggItem> CURTAIN_TREE_ENT_SPAWN_EGG = ITEMS.registerItem(
+            "curtain_tree_ent_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.CURTAIN_TREE_ENT.get())));
+    public static final DeferredItem<SpawnEggItem> CURSED_FROST_ENT_SPAWN_EGG = ITEMS.registerItem(
+            "cursed_frost_ent_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.CURSED_FROST_ENT.get())));
+
     public static final DeferredItem<PurificationTestItem> PURIFICATION_TEST_ITEM = ITEMS.registerItem(
             "purification_test_item", PurificationTestItem::new);
     public static final DeferredItem<TrainingDummyItem> TRAINING_DUMMY = ITEMS.registerItem(
@@ -53,6 +63,18 @@ public final class ModItems {
     public static final DeferredItem<Item> TREASURE_CHEST_4_KEY = ITEMS.registerSimpleItem("treasure_chest_4_key");
     public static final DeferredItem<Item> MOON_CHEST_KEY = ITEMS.registerSimpleItem("moon_chest_key");
     public static final DeferredItem<Item> SPIDER_EGG = ITEMS.registerSimpleItem("spider_egg");
+    public static final DeferredItem<ArcanePrismItem> ARCANE_PRISM = ITEMS.registerItem(
+            "arcane_prism", properties -> new ArcanePrismItem(properties.stacksTo(1).rarity(Rarity.EPIC)));
+    public static final DeferredItem<SpawnEggItem> SEA_DRIFTER_SPAWN_EGG = ITEMS.registerItem(
+            "sea_drifter_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.SEA_DRIFTER.get())));
+    public static final DeferredItem<SpawnEggItem> CRYSTAL_WORM_SPAWN_EGG = ITEMS.registerItem(
+            "crystal_worm_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.CRYSTAL_WORM.get())));
+    public static final DeferredItem<SpawnEggItem> MOON_QUEEN_SPAWN_EGG = ITEMS.registerItem(
+            "moon_queen_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.MOON_QUEEN.get())));
+    public static final DeferredItem<SpawnEggItem> CLOCK_RAPTOR_OF_FALLEN_SPAWN_EGG = ITEMS.registerItem(
+            "clock_raptor_of_fallen_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.CLOCK_RAPTOR_OF_FALLEN.get())));
+    public static final DeferredItem<SpawnEggItem> RISING_CLOCK_ORACLE_SPAWN_EGG = ITEMS.registerItem(
+            "rising_clock_oracle_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.RISING_CLOCK_ORACLE.get())));
     public static final DeferredItem<SpawnEggItem> SPIRIT_SPAWN_EGG = ITEMS.registerItem(
             "spirit_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.SPIRIT.get())));
     public static final DeferredItem<SpawnEggItem> BLUE_TAIL_WOLF_SPAWN_EGG = ITEMS.registerItem(

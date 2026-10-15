@@ -224,3 +224,42 @@ timelines without shifting pitch; their tails fade with the remaining particles.
 The identical diffuse/emissive texture is rendered with a single emissive pass.
 These supplied assets remain subject to their original terms and are not
 relicensed by this project's license.
+
+## Moon Queen
+
+The Moon Queen uses the project owner's supplied `SK_皎月女王_03.bbmodel`,
+with their approved two standing idles, locomotion transitions and blink added
+in the local working project. All 65 bones, 245 cubes and embedded texture
+pixels are retained; the two textures share a lossless atlas. Original walking
+motion is retained and retimed to actual travel distance. The supplied model
+and textures remain subject to their original terms and are not relicensed
+by this project.
+
+The project owner's supplied `Toro_Ezekiel_pack` includes the Torotoro
+`ezekiel.bbmodel` ModelEngine blueprint. Its action concepts were used as a
+reference for 29 newly authored animation previews on the Moon Queen's own rig,
+with her existing long sword, proportions, clothing and foot contacts. The
+earlier direct retarget is not used. Ezekiel's geometry, textures, combat scripts,
+sounds and arena are not packaged; its three tail actions are omitted. Scythe
+action concepts are redesigned for the queen's existing sword. Supplied source
+assets remain subject to their original terms and are not relicensed by this
+project.
+
+## Clock Raptor of Fallen
+
+This bird uses the project owner's supplied `clock_raptor_of_fallen.bbmodel`.
+Its geometry, UVs and embedded texture are retained, with new animation helper
+bones and eight authored movement clips. The editor preview's vertical lift is
+replaced by physical entity movement in game. The supplied model and texture
+remain subject to their original terms and are not relicensed by this project.
+
+## Oracle Artificer spell visuals
+
+The Rising Clock Oracle uses the project owner's supplied SamusDev / samus2002
+Artificer v1.2 shield, arcane blast, trail, impact, clockwork and repulsor models and animations.
+The signed inner hulls, face UV rotations, pivots and texture pixels are retained;
+the blast's two textures are packed without resampling. Identical emissive copies
+use one culled emissive pass. The repulsor beam is used independently of its original
+mecha; mecha bodies and turret assets are not imported. Native
+server-authoritative boss abilities replace the plugin scripts. These supplied
+assets remain subject to their original terms and are not relicensed by this project.

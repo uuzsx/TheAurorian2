@@ -3,6 +3,8 @@ package cn.teampancake.theaurorian2.common.registry;
 import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.worldgen.feature.AurorianTrunkVineDecorator;
 import cn.teampancake.theaurorian2.common.worldgen.feature.TrunkMushroomDecorator;
+import cn.teampancake.theaurorian2.common.worldgen.feature.StarblightTrunkFungusDecorator;
+import cn.teampancake.theaurorian2.common.worldgen.feature.StarblightLeafSupportDecorator;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.neoforged.bus.api.IEventBus;
@@ -20,6 +22,14 @@ public final class ModTreeDecorators {
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<AurorianTrunkVineDecorator>>
             TRUNK_VINES = TREE_DECORATORS.register(
                     "trunk_vines", () -> new TreeDecoratorType<>(AurorianTrunkVineDecorator.CODEC));
+
+    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<StarblightTrunkFungusDecorator>>
+            STARBLIGHT_TRUNK_FUNGUS = TREE_DECORATORS.register(
+                    "starblight_trunk_fungus", () -> new TreeDecoratorType<>(StarblightTrunkFungusDecorator.CODEC));
+
+    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<StarblightLeafSupportDecorator>>
+            STARBLIGHT_LEAF_SUPPORT = TREE_DECORATORS.register(
+                    "starblight_leaf_support", () -> new TreeDecoratorType<>(StarblightLeafSupportDecorator.CODEC));
 
     private ModTreeDecorators() {
     }

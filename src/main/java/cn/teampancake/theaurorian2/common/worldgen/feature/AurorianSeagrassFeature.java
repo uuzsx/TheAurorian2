@@ -1,5 +1,6 @@
 package cn.teampancake.theaurorian2.common.worldgen.feature;
 
+import cn.teampancake.theaurorian2.TheAurorian2;
 import cn.teampancake.theaurorian2.common.block.TallAurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -29,7 +30,9 @@ public final class AurorianSeagrassFeature extends Feature<ProbabilityFeatureCon
         int y = level.getHeight(Heightmap.Types.OCEAN_FLOOR, x, z);
         BlockPos grassPos = new BlockPos(x, y, z);
 
-        if (!level.getBlockState(grassPos).is(Blocks.WATER)) {
+        // The internal offset can cross a biome boundary after the placed-feature biome filter.
+        if (level.getBiome(grassPos).is(TheAurorian2.id("starblight_swamp"))
+                || !level.getBlockState(grassPos).is(Blocks.WATER)) {
             return false;
         }
 

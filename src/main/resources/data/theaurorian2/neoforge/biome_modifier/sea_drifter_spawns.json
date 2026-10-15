@@ -1,0 +1,1 @@
+{"type":"neoforge:add_spawns","biomes":"#theaurorian2:has_sea_drifter","spawners":{"type":"theaurorian2:sea_drifter","weight":2,"minCount":3,"maxCount":4}}

@@ -6,9 +6,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.stream.Stream;
 import net.minecraft.core.Holder;
 import net.minecraft.core.QuartPos;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
+import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
+import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterLists;
+import java.util.Map;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
 
@@ -19,8 +23,20 @@ public final class LakeIslandBiomeSource extends BiomeSource {
             Biome.CODEC.fieldOf("island").forGetter(source -> source.island),
             Biome.CODEC.fieldOf("lake").forGetter(source -> source.lake),
             Biome.CODEC.fieldOf("silent_forest").forGetter(source -> source.silentForest),
-            Biome.CODEC.fieldOf("curtain_forest").forGetter(source -> source.curtainForest)
-    ).apply(instance, LakeIslandBiomeSource::new));
+            Biome.CODEC.fieldOf("curtain_forest").forGetter(source -> source.curtainForest),
+            RegistryOps.retrieveElement(MultiNoiseBiomeSourceParameterLists.OVERWORLD),
+            RegistryOps.retrieveElement(AurorianClimateBiomeSource.SWAMP),
+            RegistryOps.retrieveElement(AurorianClimateBiomeSource.STARBLIGHT_SWAMP)
+    ).apply(instance, (delegate, island, lake, silent, curtain, vanilla, swamp, starblight) -> {
+        // The early Aurorian-only preset saved a direct climate list instead of a mapped source.
+        // Preserve that list for every other climate, and never reinterpret a foreign biome source.
+        if (delegate instanceof MultiNoiseBiomeSource land && land.possibleBiomes().stream().allMatch(
+                biome -> biome.unwrapKey().map(key -> key.identifier().getNamespace().equals("theaurorian2")).orElse(false))) {
+            delegate = AurorianClimateBiomeSource.withSwamps(MultiNoiseBiomeSource.createFromPreset(vanilla),
+                    land, Map.of(), swamp, starblight);
+        }
+        return new LakeIslandBiomeSource(delegate, island, lake, silent, curtain);
+    }));
 
     private final BiomeSource delegate;
     private final Holder<Biome> island;

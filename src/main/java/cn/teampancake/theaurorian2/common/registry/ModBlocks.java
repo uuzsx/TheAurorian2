@@ -55,6 +55,12 @@ import cn.teampancake.theaurorian2.common.block.TallWickGrassBlock;
 import cn.teampancake.theaurorian2.common.block.TallAurorianWaterGrassBlock;
 import cn.teampancake.theaurorian2.common.block.VioletdewBerryCropBlock;
 import cn.teampancake.theaurorian2.common.block.WallMushroomBlock;
+import cn.teampancake.theaurorian2.common.block.StarblightSoilBlock;
+import cn.teampancake.theaurorian2.common.block.StarblightPlantBlock;
+import cn.teampancake.theaurorian2.common.block.StarblightFungusBlock;
+import cn.teampancake.theaurorian2.common.block.StarblightWaterGrassBlock;
+import net.minecraft.world.level.block.LilyPadBlock;
+import net.minecraft.world.level.block.MangroveRootsBlock;
 import cn.teampancake.theaurorian2.common.item.AstrologyTableItem;
 import cn.teampancake.theaurorian2.common.item.PurificationAltarItem;
 import net.minecraft.util.ColorRGBA;
@@ -126,6 +132,11 @@ import java.util.function.Supplier;
 public final class ModBlocks {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(TheAurorian2.MOD_ID);
+
+    public static final DeferredBlock<cn.teampancake.theaurorian2.common.block.OracleDisplacedTerrainBlock> ORACLE_DISPLACED_TERRAIN =
+            BLOCKS.registerBlock("oracle_displaced_terrain", cn.teampancake.theaurorian2.common.block.OracleDisplacedTerrainBlock::new,
+                    () -> BlockBehaviour.Properties.of().strength(-1, 3600000).noLootTable().noOcclusion()
+                            .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK));
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TheAurorian2.MOD_ID);
 
     public static final DeferredBlock<cn.teampancake.theaurorian2.common.block.AlchemyTableBlock> ALCHEMY_TABLE =
@@ -437,6 +448,62 @@ public final class ModBlocks {
                     .noLootTable()
                     .pushReaction(PushReaction.BLOCK));
 
+    public static final DeferredBlock<StarblightSoilBlock> STARBLIGHT_SOIL = BLOCKS.registerBlock(
+            "starblight_soil", StarblightSoilBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK));
+    public static final DeferredBlock<RotatedPillarBlock> STARBLIGHT_LOG = BLOCKS.registerBlock(
+            "starblight_log", RotatedPillarBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_LOG));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_STARBLIGHT_LOG = BLOCKS.registerBlock(
+            "stripped_starblight_log", RotatedPillarBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_MANGROVE_LOG));
+    public static final DeferredBlock<RotatedPillarBlock> STARBLIGHT_WOOD = BLOCKS.registerBlock(
+            "starblight_wood", RotatedPillarBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_WOOD));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_STARBLIGHT_WOOD = BLOCKS.registerBlock(
+            "stripped_starblight_wood", RotatedPillarBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_MANGROVE_WOOD));
+    public static final DeferredBlock<Block> STARBLIGHT_PLANKS = BLOCKS.registerBlock(
+            "starblight_planks", Block::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS));
+    public static final DeferredBlock<StairBlock> STARBLIGHT_STAIRS = BLOCKS.registerBlock(
+            "starblight_stairs", properties -> new StairBlock(STARBLIGHT_PLANKS.get().defaultBlockState(), properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_STAIRS));
+    public static final DeferredBlock<SlabBlock> STARBLIGHT_SLAB = BLOCKS.registerBlock(
+            "starblight_slab", SlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_SLAB));
+    public static final DeferredBlock<FenceBlock> STARBLIGHT_FENCE = BLOCKS.registerBlock(
+            "starblight_fence", FenceBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_FENCE));
+    public static final DeferredBlock<FenceGateBlock> STARBLIGHT_FENCE_GATE = BLOCKS.registerBlock(
+            "starblight_fence_gate", properties -> new FenceGateBlock(WoodType.MANGROVE, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_FENCE_GATE));
+    public static final DeferredBlock<ColoredParticleLeavesBlock> STARBLIGHT_LEAVES = BLOCKS.registerBlock(
+            "starblight_leaves", properties -> new ColoredParticleLeavesBlock(0.01F, 0xFFBD97FF, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_LEAVES));
+    public static final DeferredBlock<SaplingBlock> STARBLIGHT_SAPLING = BLOCKS.registerBlock(
+            "starblight_sapling", properties -> new SaplingBlock(ModTreeGrowers.STARBLIGHT, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<MangroveRootsBlock> STARBLIGHT_ROOTS = BLOCKS.registerBlock(
+            "starblight_roots", MangroveRootsBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_ROOTS));
+    public static final DeferredBlock<RotatedPillarBlock> MUDDY_STARBLIGHT_ROOTS = BLOCKS.registerBlock(
+            "muddy_starblight_roots", RotatedPillarBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.MUDDY_MANGROVE_ROOTS));
+    public static final DeferredBlock<StarblightPlantBlock> STARBLIGHT_TUFT = BLOCKS.registerBlock(
+            "starblight_tuft", StarblightPlantBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).lightLevel(state -> 1));
+    public static final DeferredBlock<StarblightPlantBlock> STARBLIGHT_SHOOT = BLOCKS.registerBlock(
+            "starblight_shoot", StarblightPlantBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).lightLevel(state -> 1));
+    public static final DeferredBlock<StarblightPlantBlock> STARBLIGHT_FLOWER = BLOCKS.registerBlock(
+            "starblight_flower", StarblightPlantBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DANDELION).lightLevel(state -> 3));
+    public static final DeferredBlock<StarblightFungusBlock> STARBLIGHT_SHELF_FUNGUS = BLOCKS.registerBlock(
+            "starblight_shelf_fungus", StarblightFungusBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 3));
+    public static final DeferredBlock<StarblightWaterGrassBlock> STARBLIGHT_WATER_GRASS = BLOCKS.registerBlock(
+            "starblight_water_grass", StarblightWaterGrassBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SEAGRASS));
+    public static final DeferredBlock<LilyPadBlock> STARBLIGHT_LILY_PAD = BLOCKS.registerBlock(
+            "starblight_lily_pad", LilyPadBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD));
+
     public static final DeferredBlock<RotatedPillarBlock> SILENT_TREE_LOG = BLOCKS.registerBlock(
             "silent_tree_log", RotatedPillarBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG));
@@ -706,6 +773,9 @@ public final class ModBlocks {
     public static final DeferredItem<PlaceOnWaterBlockItem> AURORIAN_LILY_PAD_ITEM = ITEMS.registerItem(
             "aurorian_lily_pad",
             properties -> new PlaceOnWaterBlockItem(AURORIAN_LILY_PAD.get(), properties));
+    public static final DeferredItem<PlaceOnWaterBlockItem> STARBLIGHT_LILY_PAD_ITEM = ITEMS.registerItem(
+            "starblight_lily_pad",
+            properties -> new PlaceOnWaterBlockItem(STARBLIGHT_LILY_PAD.get(), properties));
     public static final DeferredItem<PlaceOnWaterBlockItem> AURORIAN_WATER_MUSHROOM_ITEM = ITEMS.registerItem(
             "aurorian_water_mushroom",
             properties -> new PlaceOnWaterBlockItem(AURORIAN_WATER_MUSHROOM.get(), properties));
@@ -752,6 +822,9 @@ public final class ModBlocks {
                     properties.useBlockDescriptionPrefix()));
 
     static {
+        // Old placed blocks and inventory stacks resolve to the shared Aurorian soil.
+        BLOCKS.addAlias(TheAurorian2.id("starblight_dirt"), TheAurorian2.id("aurorian_dirt"));
+        ITEMS.addAlias(TheAurorian2.id("starblight_dirt"), TheAurorian2.id("aurorian_dirt"));
         ITEMS.registerItem("stupid_cat", cn.teampancake.theaurorian2.common.item.StupidCatItem::new);
         ITEMS.registerItem("neko", properties -> new cn.teampancake.theaurorian2.common.item.StupidCatItem(NEKO.get(), "neko", properties));
         ITEMS.registerItem("youyouzi", properties -> new cn.teampancake.theaurorian2.common.item.StupidCatItem(YOUYOUZI.get(), "youyouzi", properties));
@@ -762,6 +835,7 @@ public final class ModBlocks {
         }
         BLOCKS.getEntries().stream()
                 .filter(block -> block != AURORIAN_STONE && block != AURORIAN_EROSIVE
+                        && block != ORACLE_DISPLACED_TERRAIN
                         && block != AURORIAN_DIRT && block != AURORIAN_GRASS_BLOCK
                         && block != FILTHY_GRASS_BLOCK
                         && block != TREASURE_CHEST_2 && block != MOON_CHEST && block != TREASURE_CHEST_4 && block != STUPID_CAT && block != NEKO && block != YOUYOUZI && block != BEIDOU_YUHUI
@@ -772,6 +846,7 @@ public final class ModBlocks {
                         && block != PEBBLE && block != SILENT_TREE_LEAF_LITTER
                         && block != WHITE_GROUND_MUSHROOM && block != BLUE_GROUND_MUSHROOM
                         && block != AURORIAN_LILY_PAD && block != AURORIAN_WATER_MUSHROOM
+                        && block != STARBLIGHT_LILY_PAD
                         && block != ASTROLOGY_TABLE
                         && block != PURIFICATION_ALTAR_BASE
                         && block != PURIFICATION_ALTAR
@@ -897,6 +972,11 @@ public final class ModBlocks {
     }
 
     public static Optional<BlockState> getStrippedState(BlockState state) {
+        if (state.is(STARBLIGHT_LOG.get()) || state.is(STARBLIGHT_WOOD.get())) {
+            return Optional.of((state.is(STARBLIGHT_LOG.get()) ? STRIPPED_STARBLIGHT_LOG.get()
+                    : STRIPPED_STARBLIGHT_WOOD.get()).defaultBlockState()
+                    .setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
+        }
         return SILENT_WOOD.getStrippedState(state)
                 .or(() -> CURTAIN_WOOD.getStrippedState(state))
                 .or(() -> CURSED_FROST_WOOD.getStrippedState(state))
